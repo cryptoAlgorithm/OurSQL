@@ -1,0 +1,45 @@
+@import "base.css";
+
+/* Styles for the clusters sidebar */
+.sidebar {
+    -fx-pref-width: 200px;
+    -fx-background-color: -fx-control-inner-background;
+    -fx-background-radius: 7;
+}
+.sidebar > .label {
+    -fx-padding: 8 12;
+    -fx-text-fill: -fx-accent-desaturated;
+    -fx-font-weight: 700;
+}
+
+.accordion > .titled-pane > .title {
+    -fx-font-size: 1.25em;
+}
+
+.appBar {
+    -fx-background-color: -fx-control-inner-background;
+    -fx-background-radius: 7;
+    -fx-padding: 8 10;
+}
+
+.button.addClusterAction {
+    -fx-padding: 4 16; /* Less vertical margin */
+    -fx-font-size: 1em;
+    -fx-background-radius: 200; /* Pill-shaped */
+    -fx-max-width: Infinity;
+}
+
+.queryContainer {
+    -fx-background-color: -fx-control-inner-background;
+    -fx-background-radius: 200;
+    -fx-padding: 8;
+}
+.queryContainer > .text-field {
+    -fx-border-radius: 200 0 0 200;
+    -fx-background-radius: 200 0 0 200;
+}
+.queryContainer > .button {
+    -fx-border-radius: 0 200 200 0;
+    -fx-background-radius: 0 200 200 0;
+    -fx-padding: 8 16;
+}

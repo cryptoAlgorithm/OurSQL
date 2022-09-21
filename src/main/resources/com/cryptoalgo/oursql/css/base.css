@@ -1,0 +1,228 @@
+@import "typography.css";
+
+/*
+ * Must be imported into all other CSS for constant styles
+ * By Vincent Kwok 2022
+ */
+
+/**
+ * .keyboardNav is a class programmatically added/removed from
+ * the root element by listening for mouse and keyboard events,
+ * so that focus indicators won't appear and ruin the UI for
+ * mouse users, but clearly indicate focus for keyboard users.
+ */
+
+.button, .menu-button, .toggle-button {
+    -fx-accent: -fx-accent-desaturated;
+    -fx-background-radius: 7;
+    -fx-padding: 8 16;
+    -fx-font-size: 1.2em;
+    -fx-text-fill: #fff;
+    -fx-cursor: hand;
+    -fx-background-insets: 0!important; /* Fixes the small background change on focus */
+}
+.button, .menu-button, .toggle-button:selected { -fx-background-color: -fx-accent }
+.button:pressed, .menu-button:pressed, .toggle-button:pressed:selected,
+.keyboardNav .button:focused, .keyboardNav .menu-button:focused, toggle-button:selected:focused {
+    -fx-background-color: derive(-fx-accent, -20%) !important;
+}
+.button:hover, .menu-button:hover, .toggle-button:selected:hover { -fx-background-color: derive(-fx-accent, -10%) }
+.button.outlined, .menu-button.outlined, .toggle-button {
+    -fx-border-width: 1;
+    -fx-border-radius: 7;
+    -fx-background-color: #0000;
+    -fx-border-color: derive(-fx-accent, -10%);
+    -fx-text-fill: #fff;
+}
+.button.outlined:hover, .menu-button.outlined:hover, .toggle-button:hover { -fx-background-color: rgba(16, 107, 255, .15) }
+.button.outlined:pressed, .keyboardNav .button.outlined:focused, .menu-button.outlined:pressed, .toggle-button:pressed {
+    -fx-background-color: rgba(16, 107, 255, .3) !important;
+    -fx-border-color: -fx-accent;
+}
+.button.icon {
+    -fx-padding: 6 10;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+/* Only tested on a limited subset of elements, for now */
+.keyboardNav .button:focused, .keyboardNav .menu-button:focused, .keyboardNav .text-field:focused,
+.keyboardNav .slider:focused > .thumb {
+    -fx-effect: dropshadow(gaussian, -fx-accent, 16, .4, 0, 0);
+}
+
+/* Menus */
+.menu-button { -fx-padding: 3 6 }
+.menu-button.icon { -fx-padding: 3 0 }
+.menu-item {
+    -fx-background-radius: 7;
+}
+.context-menu {
+    -fx-background-color: derive(-fx-control-inner-background, 10%);
+    -fx-background-radius: 7;
+    -fx-padding: 0;
+}
+
+.combo-box {
+    -fx-background-color: #171717;
+    -fx-background-radius: 7px;
+}
+
+.root {
+    -fx-background-color: #262626;
+    -fx-base: -fx-control-inner-background;
+
+    -fx-accent: rgb(0, 163, 92);
+    -fx-accent-desaturated: rgb(0, 104, 74);
+    -fx-selection-bar: -fx-accent;
+    -fx-control-inner-background: #1E1E1E;
+    -fx-selection-bar-non-focused: derive(-fx-control-inner-background, 30%);
+    -fx-text-base-color: #ccc;
+    -fx-mark-highlight-color: black;
+    -fx-mark-color: -fx-accent;
+    -fx-focus-color: #0000;
+    -fx-outer-border: #383838;
+    -fx-inner-border: #383838;
+}
+
+.radio-button, .check-box { -fx-text-fill: #ccc }
+.radio-button > .radio {
+    -fx-background-color: #171717;
+}
+.text-field {
+    -fx-background-color: #171717;
+    -fx-background-radius: 7;
+    -fx-prompt-text-fill: #5f5f5f;
+    -fx-padding: 8;
+    -fx-border-width: 1;
+    -fx-border-color: #0000;
+    -fx-border-radius: 7;
+}
+.text-field:focused {
+    -fx-border-color: -fx-accent;
+}
+.combo-box .list-cell {
+    -fx-background-radius: 4;
+}
+.combo-box .combo-box-popup .list-view { -fx-border-color: #000 }
+.check-box > .box { -fx-background-color: #171717 }
+.check-box > .box > .mark {
+    -fx-shape: "M9 16.17L5.53 12.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L9 16.17z"
+}
+
+.label { -fx-text-fill: #fff }
+
+.separator *.line { -fx-border-color: #393939 }
+
+.scroll-pane, .scroll-pane > .viewport, .list-view { -fx-background-color: #0000 }
+
+/* Style scrollbar to look less like a Windows 95 one */
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: #262626;
+    -fx-border-color: #0000;
+    -fx-background-radius: 0;
+    -fx-border-radius: 2em;
+}
+
+.scroll-bar:horizontal .increment-button ,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color: #0000;
+    -fx-background-radius: 0;
+    -fx-padding: 0.0 0.0 10.0 0.0;
+}
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: #0000;
+    -fx-background-radius: 0;
+    -fx-padding: 0 10 0 0;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow{
+    -fx-shape: "";
+    -fx-padding: .12em 0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
+    -fx-shape: "";
+    -fx-padding: 0 .12em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: derive(#000, 90%);
+    -fx-background-insets: 3, 0, 0;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: derive(#000, 110%);
+}
+
+/* List */
+.list-cell {
+    -fx-background-insets: 0;
+    -fx-background-radius: 5;
+    -fx-padding: 5 8;
+    -fx-background-color: transparent;
+}
+.list-cell:selected {
+    -fx-background-color: -fx-accent;
+}
+
+/* Make the separator actually 1px wide */
+.separator > .line {
+    -fx-border-width: 1 0 0 0;
+}
+
+/* Slider */
+.slider > .track {
+    -fx-background-color: -fx-outer-border;
+    -fx-background-insets: 0;
+    -fx-padding: 2;
+}
+.slider > .thumb {
+    -fx-background-insets: 0;
+    -fx-background-color: derive(-fx-outer-border, 75%);
+    -fx-padding: 10;
+}
+.slider > .thumb:pressed {
+    -fx-background-color: derive(-fx-outer-border, 90%);
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * TitledPane                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+.titled-pane > .title > .arrow-button > .arrow {
+    -fx-mark-color: derive(-fx-text-base-color, -5%);
+}
+.titled-pane:expanded > .title > .arrow-button > .arrow {
+    -fx-mark-color: -fx-accent;
+}
+.titled-pane > *.content {
+    -fx-background-color: derive(-fx-control-inner-background, 10%), #0000;
+    -fx-background-radius: 0 0 10 10;
+    -fx-background-insets: 0, 0
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Accordion                                                                   *
+ *                                                                             *
+ ******************************************************************************/
+.accordion > .titled-pane > .title {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: #0000;
+}
+.accordion > .titled-pane:hover > .title {
+    -fx-background-color: derive(-fx-base, 10%);
+}
+.accordion > .titled-pane:expanded > .title {
+    -fx-background-color: derive(-fx-base, 15%);
+}

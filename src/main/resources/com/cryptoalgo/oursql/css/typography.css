@@ -1,0 +1,18 @@
+.label.h1 {
+    -fx-font-size: 32;
+}
+.label.h2 {
+    -fx-font-size: 24;
+}
+.label.h3 {
+    -fx-font-size: 20;
+}
+.label.h4 {
+    -fx-font-size: 16;
+}
+.label.h5 {
+    -fx-font-size: 14;
+}
+.label.h6 {
+    -fx-font-size: 12;
+}

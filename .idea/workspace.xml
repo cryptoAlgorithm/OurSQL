@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/HelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/dal/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/dal/mongoDB/MongoCluster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/dal/unified/Cluster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/dal/unified/ConnectionException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/dal/unified/Database.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/dal/unified/QueryResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/Context.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/I18N.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/typography.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/hello-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/SpaceMono-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="CSS File" />
+        <option value="Interface" />
+        <option value="Record" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2EpaOHNgqpAeTWmGg6TmP4RimTS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/vinkwok/IdeaProjects/ourSQL/OurSQL/src/main/resources/fonts",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/fonts" />
+      <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/oursql/css" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/oursql/view" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.cryptoalgo.oursql.oursql.controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.com.cryptoalgo.oursql.OurSQL">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.oursql.HelloApplication" />
+      <module name="OurSQL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cryptoalgo.oursql.oursql.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OurSQL" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.oursql.OurSQL" />
+      <module name="OurSQL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cryptoalgo.oursql.oursql.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.cryptoalgo.oursql.OurSQL" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.OurSQL" />
+      <module name="OurSQL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cryptoalgo.oursql.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.com.cryptoalgo.oursql.OurSQL" />
+        <item itemvalue="Application.OurSQL" />
+        <item itemvalue="Application.HelloApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="" />
+      <created>1663294946177</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1663294946177</updated>
+      <workItem from="1663294947353" duration="237000" />
+      <workItem from="1663295678040" duration="30797000" />
+      <workItem from="1663563646720" duration="689000" />
+      <workItem from="1663732135163" duration="943000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
