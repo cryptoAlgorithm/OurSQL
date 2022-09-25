@@ -12,4 +12,5 @@ public abstract class Codable<T extends Enum<T>> extends Decodable<T> implements
     protected Codable(Decoder<T> decoder) {
         super(decoder);
     }
+    protected Codable() {}
 }

@@ -19,7 +19,7 @@ public abstract class Cluster extends Codable<Cluster.CodingKeys> {
     }
 
     public Cluster(String path, int port) {
-        super(null);
+        super();
         this.path = path;
         this.port = port;
     }

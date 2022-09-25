@@ -25,5 +25,5 @@ public abstract class Decodable<T extends Enum<T>> {
     /**
      * Default no-arg constructor
      */
-    private Decodable() {}
+    protected Decodable() {}
 }

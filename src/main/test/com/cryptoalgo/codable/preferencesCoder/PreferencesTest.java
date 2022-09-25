@@ -14,12 +14,12 @@ import java.util.prefs.Preferences;
 
 class CodableTest extends Codable<CodableTest.CodingKeys> {
     // These are public to facilitate testing
-    private String str;
-    private Boolean bool;
-    private Integer integer;
+    private final String str;
+    private final Boolean bool;
+    private final Integer integer;
 
     public CodableTest(String str, Boolean bool, Integer integer) {
-        super(null);
+        super();
         this.str = str;
         this.bool = bool;
         this.integer = integer;
