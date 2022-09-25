@@ -6,13 +6,12 @@ import com.cryptoalgo.oursql.model.Context;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public abstract class Cluster extends Codable {
+public abstract class Cluster extends Codable<Cluster.CodingKeys> {
     protected String path;
     protected int port;
-
     public abstract String getConnectionURI();
 
-    public Cluster(Decoder decoder) throws DecodingException, NoSuchElementException {
+    public Cluster(Decoder<CodingKeys> decoder) throws DecodingException, NoSuchElementException {
         super(decoder);
         KeyedDecodingContainer<CodingKeys> container = decoder.container();
         port = container.decodeInteger(CodingKeys.port);
@@ -20,7 +19,7 @@ public abstract class Cluster extends Codable {
     }
 
     public Cluster(String path, int port) {
-        super();
+        super(null);
         this.path = path;
         this.port = port;
     }
@@ -39,11 +38,11 @@ public abstract class Cluster extends Codable {
         );
     }
 
-    private enum CodingKeys {
+    public enum CodingKeys {
         path, port
     }
 
-    public void encode(Encoder encoder) throws EncodingException {
+    public void encode(Encoder<CodingKeys> encoder) throws EncodingException {
         KeyedEncodingContainer<CodingKeys> container = encoder.container();
         container.encode(path, CodingKeys.path);
         container.encode(port, CodingKeys.port);

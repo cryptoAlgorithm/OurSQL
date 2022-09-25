@@ -1,6 +1,8 @@
 package com.cryptoalgo.codable.preferencesCoder;
 
+import com.cryptoalgo.codable.Encodable;
 import com.cryptoalgo.codable.Encoder;
+import com.cryptoalgo.codable.EncodingException;
 import com.cryptoalgo.codable.KeyedEncodingContainer;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,12 +24,16 @@ public final class PreferencesEncoder<T extends Enum<T>> implements Encoder<T>, 
     private final Preferences prefsNode;
 
     /**
-     * Creates an instance of an encoder which can be used to serialise
+     * Creates an instance of an encoder which can be used to serialize
      * {@link com.cryptoalgo.codable.Encodable Encodable} classes to Java's {@link Preferences}
      * @param node Path of {@link Preferences} node to write values to
      */
     PreferencesEncoder(String node) {
         prefsNode = Preferences.userRoot().node(node);
+    }
+
+    <E extends Encodable> void encode(E encoding) throws EncodingException {
+        encoding.encode(this);
     }
 
     // Encoder conformance

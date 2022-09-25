@@ -20,10 +20,10 @@ public abstract class Decodable<T extends Enum<T>> {
      * @param decoder Instance of a decoder to be used for decoding
      * @throws DecodingException If decoding failed for whatever reason
      */
-    protected Decodable(Decoder<T> decoder) throws DecodingException {}
+    protected Decodable(Decoder<T> decoder) {}
 
     /**
      * Default no-arg constructor
      */
-    protected Decodable() {}
+    private Decodable() {}
 }
