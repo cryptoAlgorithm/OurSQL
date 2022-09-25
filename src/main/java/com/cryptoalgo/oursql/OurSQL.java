@@ -2,8 +2,10 @@ package com.cryptoalgo.oursql;
 
 import com.cryptoalgo.oursql.support.I18N;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +20,11 @@ import java.util.ResourceBundle;
  * files contained herein were created and edited fully by hand.
  */
 public class OurSQL extends Application {
+    @Override
+    public void init() {
+        Font.loadFont(OurSQL.class.getResourceAsStream("fonts/SpaceMono-Regular.ttf"), 10);
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(

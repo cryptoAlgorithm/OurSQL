@@ -1,8 +1,6 @@
-package com.cryptoalgo.oursql.dal.mongoDB;
+package com.cryptoalgo.dal.mongoDB;
 
-import com.cryptoalgo.oursql.dal.unified.Cluster;
-
-import java.net.URI;
+import com.cryptoalgo.dal.unified.Cluster;
 
 public class MongoCluster extends Cluster {
     String username, password;

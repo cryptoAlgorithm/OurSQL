@@ -1,8 +1,7 @@
-package com.cryptoalgo.oursql.dal.unified;
+package com.cryptoalgo.dal.unified;
 
 import javafx.beans.property.ReadOnlyBooleanProperty;
 
-import java.net.URI;
 import java.util.List;
 
 public abstract class Database {

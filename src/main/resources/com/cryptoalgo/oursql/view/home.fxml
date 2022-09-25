@@ -63,6 +63,7 @@
     </left>
     <center>
         <VBox>
+            <BorderPane.margin><Insets top="8" right="8" bottom="8" /></BorderPane.margin>
             <HBox styleClass="queryContainer">
                 <TextField fx:id="queryField" promptText="%prompt.query" HBox.hgrow="ALWAYS" />
                 <Button text="%action.run" />

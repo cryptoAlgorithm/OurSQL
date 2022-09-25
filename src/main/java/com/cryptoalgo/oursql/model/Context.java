@@ -1,11 +1,10 @@
 package com.cryptoalgo.oursql.model;
 
-import com.cryptoalgo.oursql.dal.unified.Cluster;
+import com.cryptoalgo.dal.unified.Cluster;
 
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 

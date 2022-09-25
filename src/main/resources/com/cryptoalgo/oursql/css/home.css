@@ -32,14 +32,18 @@
 .queryContainer {
     -fx-background-color: -fx-control-inner-background;
     -fx-background-radius: 200;
-    -fx-padding: 8;
+    -fx-padding: 10;
 }
 .queryContainer > .text-field {
     -fx-border-radius: 200 0 0 200;
     -fx-background-radius: 200 0 0 200;
+    -fx-padding: 0 10 0 14;
+    -fx-font-size: 1.2em;
+    -fx-font-family: 'Space Mono';
+    -fx-min-height: 35;
 }
 .queryContainer > .button {
     -fx-border-radius: 0 200 200 0;
     -fx-background-radius: 0 200 200 0;
-    -fx-padding: 8 16;
+    -fx-padding: 8 12 8 10;
 }
