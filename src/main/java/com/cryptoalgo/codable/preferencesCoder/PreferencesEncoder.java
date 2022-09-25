@@ -8,15 +8,24 @@ import java.util.prefs.Preferences;
 
 /**
  * Built-in encoder implementation which writes data to non-volatile
- * storage through Java's Preferences module. <br><br>
- * <b>Implications:</b><br>
- * Limitations to Java's Preferences module also apply here, most notably
- * that large amounts of data shouldn't be written with it.
- * @param <T> - Enum of codingKeys to be used during encoding
+ * storage through Java's Preferences module.
+ * <p>
+ *     <b>Implications:</b>
+ *     Limitations to Java's Preferences module also apply here, most notably
+ *     that large amounts of data shouldn't be written to nodes. Doing so
+ *     leads to significant performance penalties and might cause OOM
+ *     errors when attempting to retrieve those keys.
+ * </p>
+ * @param <T> Type of enum of codingKeys to be used during encoding
  */
-public class PreferencesEncoder<T extends Enum<T>> implements Encoder<T>, KeyedEncodingContainer<T> {
+public final class PreferencesEncoder<T extends Enum<T>> implements Encoder<T>, KeyedEncodingContainer<T> {
     private final Preferences prefsNode;
 
+    /**
+     * Creates an instance of an encoder which can be used to serialise
+     * {@link com.cryptoalgo.codable.Encodable Encodable} classes to Java's {@link Preferences}
+     * @param node Path of {@link Preferences} node to write values to
+     */
     PreferencesEncoder(String node) {
         prefsNode = Preferences.userRoot().node(node);
     }
