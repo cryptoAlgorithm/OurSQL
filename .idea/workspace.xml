@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (codable): expose no-arg constructor in Decodable">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (home): Read clusters from Preferences in initialization&#10;patch (codable): make constructors and encode/decode methods public">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/DecodingException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/DecodingException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/preferencesCoder/PreferencesDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/preferencesCoder/PreferencesDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/preferencesCoder/PreferencesEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/preferencesCoder/PreferencesEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/mongoDB/MongoCluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/mongoDB/MongoCluster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/unified/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/unified/Cluster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/codable/preferencesCoder/PreferencesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/codable/preferencesCoder/PreferencesTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +188,7 @@
       <workItem from="1663895063864" duration="601000" />
       <workItem from="1664007908455" duration="2408000" />
       <workItem from="1664010332311" duration="8053000" />
-      <workItem from="1664028735169" duration="22267000" />
+      <workItem from="1664028735169" duration="23968000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -232,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664085715867</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat (home): Read clusters from Preferences in initialization&#10;patch (codable): make constructors and encode/decode methods public">
+      <created>1664095122618</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1664095122618</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,7 +255,8 @@
     <MESSAGE value="chore (codable): refactor Decodable interface to allow decoding optionals, update and add JavaDoc" />
     <MESSAGE value="fix (PreferencesCodable): full encoding/decoding implementations&#10;chore (codable): Write round-trip tests" />
     <MESSAGE value="patch (codable): expose no-arg constructor in Decodable" />
-    <option name="LAST_COMMIT_MESSAGE" value="patch (codable): expose no-arg constructor in Decodable" />
+    <MESSAGE value="feat (home): Read clusters from Preferences in initialization&#10;patch (codable): make constructors and encode/decode methods public" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat (home): Read clusters from Preferences in initialization&#10;patch (codable): make constructors and encode/decode methods public" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
