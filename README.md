@@ -42,8 +42,12 @@ bazillion other crappy Java UI frameworks anywhere close?
 Java: Develop once, tear out your hair everywhere.
 
 ## Releases
-Want to level up your database experience? Head over to releases
-to download the latest prebuilt JAR! (Coming soon!)
+Want to level up your database experience? Download one of these
+builds now!
+
+### Bleeding Edge [![Java CI with Maven](https://github.com/cryptoAlgorithm/OurSQL/actions/workflows/maven.yml/badge.svg)](https://nightly.link/cryptoAlgorithm/OurSQL/workflows/maven/main/OurSQL.jar.zip)
+These builds are hot from the oven, built from the latest commit on
+the `main` branch.
 
 ## Documentation
 Coming soon! For the time being, you can read the JavaDoc in the
