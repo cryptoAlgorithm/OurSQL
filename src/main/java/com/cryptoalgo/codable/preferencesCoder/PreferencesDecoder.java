@@ -31,7 +31,7 @@ public final class PreferencesDecoder<T extends Enum<T>> implements Decoder<T>, 
      * Java's {@link Preferences}
      * @param node Path of {@link Preferences} node to read values from
      */
-    PreferencesDecoder(String node) {
+    public PreferencesDecoder(String node) {
         prefsNode = Preferences.userRoot().node(node);
     }
 
@@ -39,11 +39,12 @@ public final class PreferencesDecoder<T extends Enum<T>> implements Decoder<T>, 
      * Create an instance of a {@link com.cryptoalgo.codable.Decodable Decodable}
      * class by decoding values from Preferences
      */
-    <D extends Decodable> D decode(Class<D> decoding) throws NoSuchMethodException,
-        InvocationTargetException,
-        InstantiationException,
-        IllegalAccessException {
-        return decoding.getDeclaredConstructor(Decoder.class).newInstance(this);
+    public <D extends Decodable> D decode(Class<D> decoding) throws DecodingException, NoSuchElementException {
+        try {
+            return decoding.getDeclaredConstructor(Decoder.class).newInstance(this);
+        } catch (Exception e) {
+            throw new DecodingException("/", "root");
+        }
     }
 
     // KeyedDecodingContainer conformance

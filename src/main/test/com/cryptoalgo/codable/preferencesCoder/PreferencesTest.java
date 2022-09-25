@@ -60,9 +60,8 @@ public class PreferencesTest {
             true,
             new Random().nextInt()
         );
-        new PreferencesEncoder(TESTING_PREF_NODE).encode(original);
-        CodableTest decoded =
-            (CodableTest) new PreferencesDecoder(TESTING_PREF_NODE).decode(CodableTest.class);
+        new PreferencesEncoder<>(TESTING_PREF_NODE).encode(original);
+        CodableTest decoded = new PreferencesDecoder<>(TESTING_PREF_NODE).decode(CodableTest.class);
 
         assertEquals(decoded.getString(), original.getString());
         assertEquals(decoded.getBoolean(), original.getBoolean());

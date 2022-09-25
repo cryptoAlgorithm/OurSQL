@@ -28,11 +28,11 @@ public final class PreferencesEncoder<T extends Enum<T>> implements Encoder<T>, 
      * {@link com.cryptoalgo.codable.Encodable Encodable} classes to Java's {@link Preferences}
      * @param node Path of {@link Preferences} node to write values to
      */
-    PreferencesEncoder(String node) {
+    public PreferencesEncoder(String node) {
         prefsNode = Preferences.userRoot().node(node);
     }
 
-    <E extends Encodable> void encode(E encoding) throws EncodingException {
+    public <E extends Encodable> void encode(E encoding) throws EncodingException {
         encoding.encode(this);
     }
 
