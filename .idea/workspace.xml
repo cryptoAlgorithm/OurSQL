@@ -7,12 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="chore (build): bump JavaFX ver to 20-ea+3">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch: update README with new workflow name and download badge">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +63,11 @@
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "configurable.group.appearance",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mongo"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -217,7 +219,7 @@
       <workItem from="1664007908455" duration="2408000" />
       <workItem from="1664010332311" duration="8053000" />
       <workItem from="1664028735169" duration="37192000" />
-      <workItem from="1664161564726" duration="5629000" />
+      <workItem from="1664161564726" duration="9016000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -296,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664106874688</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="patch: update README with new workflow name and download badge">
+      <created>1664240019629</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1664240019629</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,7 +334,8 @@
     <MESSAGE value="fix (build): explicitly include javafx-graphics deps for all platforms" />
     <MESSAGE value="fix (build): include javafx-graphics for aarch64 too" />
     <MESSAGE value="chore (build): bump JavaFX ver to 20-ea+3" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore (build): bump JavaFX ver to 20-ea+3" />
+    <MESSAGE value="patch: update README with new workflow name and download badge" />
+    <option name="LAST_COMMIT_MESSAGE" value="patch: update README with new workflow name and download badge" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
