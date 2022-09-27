@@ -45,9 +45,38 @@ Java: Develop once, tear out your hair everywhere.
 Want to level up your database experience? Download one of these
 builds now!
 
-### Bleeding Edge [![Java CI with Maven](https://github.com/cryptoAlgorithm/OurSQL/actions/workflows/maven.yml/badge.svg)](https://nightly.link/cryptoAlgorithm/OurSQL/workflows/maven/main/OurSQL.jar.zip)
+### Bleeding Edge
+[![](https://img.shields.io/github/workflow/status/cryptoAlgorithm/OurSQL/build?style=for-the-badge)](https://nightly.link/cryptoAlgorithm/OurSQL/workflows/build.yaml/main/OurSQL.jar.zip)
+
 These builds are hot from the oven, built from the latest commit on
 the `main` branch.
+
+### Releases
+Stable releases will be available soon.
+
+---
+### Running
+Requires Java >= 18 installed on your system.
+
+#### Windows
+If a compatible version of Java is installed system-wide, you'll
+simply need to double-click the downloaded JAR to open it.
+
+#### macOS
+Due to licencing issues, macOS will launch the JAR with Java 8
+or earlier when double-clicked. Instead, run the command below
+in Terminal.app to launch the JAR: 
+```zsh
+java -jar "[path to downloaded JAR]"
+```
+_Substitute the actual path of the JAR in the command_
+
+Check your installed Java version with `java --version` - Only
+Java 17 and above is supported.
+
+#### Linux
+Untested, but running the same command as macOS should also start
+the app without much fuss.
 
 ## Documentation
 Coming soon! For the time being, you can read the JavaDoc in the

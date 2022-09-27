@@ -7,10 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="fix (build): include javafx-graphics for aarch64 too">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="chore (build): bump JavaFX ver to 20-ea+3">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +64,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -104,8 +106,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OurSQL" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.oursql.OurSQL" />
+    <configuration name="OurSQL" type="Application" factoryName="Application" temporary="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="liberica-18" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.OurSQL" />
       <module name="OurSQL" />
       <extension name="coverage">
         <pattern>
@@ -118,7 +122,7 @@
       </method>
     </configuration>
     <configuration name="OurSQL" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="liberica-18" />
+      <option name="ALTERNATIVE_JRE_PATH" value="17 (2)" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.OurSQL" />
       <module name="OurSQL" />
@@ -189,11 +193,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PreferencesTest.testRoundTrip" />
+        <item itemvalue="Application.OurSQL" />
         <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.PreferencesTest" />
-        <item itemvalue="JUnit.PreferencesTest.testRoundTrip" />
         <item itemvalue="JUnit.PreferencesTest.test" />
-        <item itemvalue="Application.OurSQL" />
       </list>
     </recent_temporary>
   </component>
@@ -212,7 +216,8 @@
       <workItem from="1663895063864" duration="601000" />
       <workItem from="1664007908455" duration="2408000" />
       <workItem from="1664010332311" duration="8053000" />
-      <workItem from="1664028735169" duration="32811000" />
+      <workItem from="1664028735169" duration="37192000" />
+      <workItem from="1664161564726" duration="5629000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -284,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664104358687</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="chore (build): bump JavaFX ver to 20-ea+3">
+      <created>1664106874688</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1664106874688</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,7 +324,8 @@
     <MESSAGE value="chore (build): fixed building jar&#10;chore (build): partially working JavaDoc build" />
     <MESSAGE value="fix (build): explicitly include javafx-graphics deps for all platforms" />
     <MESSAGE value="fix (build): include javafx-graphics for aarch64 too" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix (build): include javafx-graphics for aarch64 too" />
+    <MESSAGE value="chore (build): bump JavaFX ver to 20-ea+3" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore (build): bump JavaFX ver to 20-ea+3" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

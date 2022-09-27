@@ -1,7 +1,6 @@
 package com.cryptoalgo.oursql.controller;
 
 import com.cryptoalgo.codable.DecodingException;
-import com.cryptoalgo.codable.preferencesCoder.PreferencesDecoder;
 import com.cryptoalgo.dal.unified.Cluster;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;

@@ -13,6 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.2</junit.version>
         <javafxVer>20-ea+3</javafxVer>
+        <javaTarget>18</javaTarget>
     </properties>
 
     <dependencies>
@@ -138,8 +139,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
-                    <source>18</source>
-                    <target>18</target>
+                    <source>${javaTarget}</source>
+                    <target>${javaTarget}</target>
                 </configuration>
             </plugin>
         </plugins>
