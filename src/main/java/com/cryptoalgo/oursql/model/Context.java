@@ -1,6 +1,6 @@
 package com.cryptoalgo.oursql.model;
 
-import com.cryptoalgo.dal.unified.Cluster;
+import com.cryptoalgo.db.Cluster;
 
 import java.io.IOException;
 import java.security.MessageDigest;

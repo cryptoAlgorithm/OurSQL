@@ -1,34 +1,48 @@
-package com.cryptoalgo.dal.unified;
+package com.cryptoalgo.db;
 
 import com.cryptoalgo.codable.*;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesDecoder;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
 import com.cryptoalgo.oursql.model.Context;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.regex.Pattern;
 
-public abstract class Cluster extends Codable<Cluster.CodingKeys> {
-    protected final String path, id;
-    protected String name;
-    protected final int port;
-    public abstract String getConnectionURI();
+public final class Cluster extends Codable<Cluster.CodingKeys> {
+    private final String host, database, username, id;
+    private String name;
+    private final int port;
+
+    /**
+     * Ensure host isn't invalid to prevent causing problems down the line
+     * @param host Raw host
+     * @return Purified host
+     */
+    private static String purifyHost(String host) {
+        return Pattern.compile("/+$").matcher(host).replaceAll("");
+    }
 
     public Cluster(Decoder<CodingKeys> decoder) throws DecodingException, NoSuchElementException {
         super(decoder);
         KeyedDecodingContainer<CodingKeys> container = decoder.container();
         port = container.decodeInteger(CodingKeys.port);
-        path = container.decodeString(CodingKeys.path);
+        host = purifyHost(container.decodeString(CodingKeys.host));
         name = container.decodeString(CodingKeys.name);
-        id = computeID(path);
+        database = container.decodeString(CodingKeys.database);
+        username = container.decodeString(CodingKeys.username);
+        id = computeID(host);
     }
 
-    public Cluster(String path, int port, String name) {
+    public Cluster(String host, String database, String username, int port, String name) {
         super();
-        this.path = path;
+        this.username = username;
+        this.database = database;
+        this.host = purifyHost(host);
         this.port = port;
         this.name = name;
-        id = computeID(path); // Better to calculate value once during initialization
+        id = computeID(host); // Better to calculate value once during initialization
     }
 
     private static String computeID(String connURI) {
@@ -39,6 +53,16 @@ public abstract class Cluster extends Codable<Cluster.CodingKeys> {
                 .digest(connURI.getBytes())
         );
     }
+
+    /**
+     * @return Database host
+     */
+    public String getHost() { return host; }
+
+    /**
+     * @return The database path
+     */
+    public String getDatabase() { return database; }
 
     /**
      * Get an ID unique to this database cluster. Not guaranteed
@@ -54,9 +78,14 @@ public abstract class Cluster extends Codable<Cluster.CodingKeys> {
      */
     public String getName() { return name; }
 
+    /**
+     * @return Username for authenticating with database
+     */
+    public @Nullable String getUsername() { return username; }
+
     // Codable conformance
     public enum CodingKeys {
-        path, port, name
+        host, database, port, name, username
     }
 
     /**
@@ -82,7 +111,7 @@ public abstract class Cluster extends Codable<Cluster.CodingKeys> {
 
     public void encode(Encoder<CodingKeys> encoder) throws EncodingException {
         KeyedEncodingContainer<CodingKeys> container = encoder.container();
-        container.encode(path, CodingKeys.path);
+        container.encode(host, CodingKeys.host);
         container.encode(port, CodingKeys.port);
     }
 }

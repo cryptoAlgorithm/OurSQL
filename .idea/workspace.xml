@@ -7,9 +7,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch: update README with new workflow name and download badge">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="chore (db): add Atlas cluster to IntelliJ DB viewer">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/DatabaseUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/SpecificDBUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/mongoDB/MongoCluster.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/mongoDB/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/unified/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/Cluster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/unified/ConnectionException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/unified/Database.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/unified/QueryResult.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/unified/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/package-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/Context.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/Context.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,10 +35,10 @@
         <option value="FxmlFile" />
         <option value="CSS File" />
         <option value="Record" />
-        <option value="Interface" />
         <option value="JUnit5 Test Class" />
         <option value="package-info" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -42,34 +55,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "create.test.in.the.same.root": "true",
-    "last_opened_file_path": "/Users/vinkwok/IdeaProjects/ourSQL/OurSQL/src/main/java/com/cryptoalgo/dal/mongoDB",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "configurable.group.appearance",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/vinkwok/IdeaProjects/ourSQL/OurSQL/src/main/java/com/cryptoalgo/dal/mongoDB&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mongo"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mongo&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/mongoDB" />
@@ -94,7 +107,7 @@
       <recent name="com.cryptoalgo.oursql.oursql.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.OurSQL">
+  <component name="RunManager" selected="JUnit.PreferencesTest">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.Launcher" />
       <module name="OurSQL" />
@@ -195,10 +208,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PreferencesTest" />
         <item itemvalue="JUnit.PreferencesTest.testRoundTrip" />
         <item itemvalue="Application.OurSQL" />
         <item itemvalue="Application.Launcher" />
-        <item itemvalue="JUnit.PreferencesTest" />
         <item itemvalue="JUnit.PreferencesTest.test" />
       </list>
     </recent_temporary>
@@ -220,6 +233,7 @@
       <workItem from="1664010332311" duration="8053000" />
       <workItem from="1664028735169" duration="37192000" />
       <workItem from="1664161564726" duration="9016000" />
+      <workItem from="1664255790038" duration="7582000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -305,7 +319,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664240019629</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="chore (db): add Atlas cluster to IntelliJ DB viewer">
+      <created>1664255872427</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1664255872427</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,7 +356,8 @@
     <MESSAGE value="fix (build): include javafx-graphics for aarch64 too" />
     <MESSAGE value="chore (build): bump JavaFX ver to 20-ea+3" />
     <MESSAGE value="patch: update README with new workflow name and download badge" />
-    <option name="LAST_COMMIT_MESSAGE" value="patch: update README with new workflow name and download badge" />
+    <MESSAGE value="chore (db): add Atlas cluster to IntelliJ DB viewer" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore (db): add Atlas cluster to IntelliJ DB viewer" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
