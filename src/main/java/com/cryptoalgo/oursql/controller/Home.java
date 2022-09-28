@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -33,12 +34,9 @@ public class Home {
 
     @FXML
     private void addCluster() {
-        // create a text input dialog
-        TextInputDialog td = new TextInputDialog("enter any text");
-        td.initStyle(StageStyle.TRANSPARENT);
-
-        td.setHeaderText("Enter Cluster URI");
-        td.show();
+        try { AddClusterDialog.show(); } catch (IOException e) {
+            log.severe("IOException when showing add cluster dialog!");
+        }
     }
 
 

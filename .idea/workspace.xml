@@ -7,22 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="chore (db): add Atlas cluster to IntelliJ DB viewer">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/DatabaseUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/SpecificDBUtils.java" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (db): fix jdbc connection URI construction">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/add-cluster.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/mongoDB/MongoCluster.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/mongoDB/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/unified/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/Cluster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/unified/ConnectionException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/unified/Database.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/unified/QueryResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/unified/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/package-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/Launcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/Context.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/Context.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/hello-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,13 +22,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="CSS File" />
         <option value="Record" />
         <option value="JUnit5 Test Class" />
         <option value="package-info" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -107,7 +97,7 @@
       <recent name="com.cryptoalgo.oursql.oursql.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PreferencesTest">
+  <component name="RunManager" selected="Application.OurSQL">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.Launcher" />
       <module name="OurSQL" />
@@ -208,9 +198,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.OurSQL" />
         <item itemvalue="JUnit.PreferencesTest" />
         <item itemvalue="JUnit.PreferencesTest.testRoundTrip" />
-        <item itemvalue="Application.OurSQL" />
         <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.PreferencesTest.test" />
       </list>
@@ -233,7 +223,7 @@
       <workItem from="1664010332311" duration="8053000" />
       <workItem from="1664028735169" duration="37192000" />
       <workItem from="1664161564726" duration="9016000" />
-      <workItem from="1664255790038" duration="7582000" />
+      <workItem from="1664255790038" duration="12758000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -326,7 +316,21 @@
       <option name="project" value="LOCAL" />
       <updated>1664255872427</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="patch (db): re-architect project to use JDBC instead of reinventing the wheel">
+      <created>1664265018191</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1664265018191</updated>
+    </task>
+    <task id="LOCAL-00015" summary="patch (db): fix jdbc connection URI construction">
+      <created>1664332459654</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1664332459654</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,7 +361,9 @@
     <MESSAGE value="chore (build): bump JavaFX ver to 20-ea+3" />
     <MESSAGE value="patch: update README with new workflow name and download badge" />
     <MESSAGE value="chore (db): add Atlas cluster to IntelliJ DB viewer" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore (db): add Atlas cluster to IntelliJ DB viewer" />
+    <MESSAGE value="patch (db): re-architect project to use JDBC instead of reinventing the wheel" />
+    <MESSAGE value="patch (db): fix jdbc connection URI construction" />
+    <option name="LAST_COMMIT_MESSAGE" value="patch (db): fix jdbc connection URI construction" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
