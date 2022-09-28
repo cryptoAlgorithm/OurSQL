@@ -48,13 +48,16 @@ public class DatabaseUtils {
      */
     public URI getConnectionURI(@NotNull Cluster cluster, @Nullable String password) throws URISyntaxException {
         return new URI(
-            utils.getScheme(),
+            "jdbc:" + utils.getScheme(),
+            null,
             cluster.getUsername() == null
                 ? "" // Cannot be null, else // after scheme will be missing
                 : cluster.getUsername() + ":" + (password == null ? "[password]" : password),
+            cluster.getPort(),
             // Combine host and database into a path without double slashes and similar issues
             // that naive string concatenation could cause
             Paths.get(cluster.getHost(), cluster.getDatabase()).toString(),
+            null,
             null
         );
     }

@@ -21,7 +21,9 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
      * @return Purified host
      */
     private static String purifyHost(String host) {
-        return Pattern.compile("/+$").matcher(host).replaceAll("");
+        return Pattern.compile("/+$")
+            .matcher(host)
+            .replaceAll("");
     }
 
     public Cluster(Decoder<CodingKeys> decoder) throws DecodingException, NoSuchElementException {
@@ -53,6 +55,11 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
                 .digest(connURI.getBytes())
         );
     }
+
+    /**
+     * @return Database connection port
+     */
+    public int getPort() { return port; }
 
     /**
      * @return Database host
