@@ -1,0 +1,22 @@
+@import "base.css";
+
+Text {
+    -fx-font-size: 1.1em;
+}
+Text.header {
+    -fx-font-size: 1.5em;
+}
+
+.separator {
+    -fx-padding: 0 -16;
+}
+
+.text-field {
+    -fx-padding: 4;
+}
+
+.text-field, .combo-box {
+    -fx-max-width: Infinity;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+}

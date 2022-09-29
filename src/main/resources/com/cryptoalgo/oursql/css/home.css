@@ -46,4 +46,5 @@
     -fx-border-radius: 0 200 200 0;
     -fx-background-radius: 0 200 200 0;
     -fx-padding: 8 12 8 10;
+    -fx-min-width: 0;
 }

@@ -1,11 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Separator?>
 
-<GridPane xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:controller="com.cryptoalgo.oursql.controller.AddClusterDialog"
-          stylesheets="@../css/base.css"
-          prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.cryptoalgo.oursql.controller.AddClusterDialog"
+      stylesheets="@../css/model.css"
+      prefHeight="400.0" prefWidth="600.0" spacing="12">
+    <padding><Insets topRightBottomLeft="12" /></padding>
+    <Text styleClass="header" text="%action.addCluster" />
 
-</GridPane>
+    <GridPane vgap="8" hgap="10">
+        <Text text="%label.name" />
+        <TextField GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" fx:id="name" />
+    </GridPane>
+
+    <Separator />
+
+    <GridPane vgap="8" hgap="10" VBox.vgrow="ALWAYS">
+        <Text text="%label.host" />
+        <TextField GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" fx:id="host" />
+        <Text text="%label.port" GridPane.columnIndex="3" />
+        <TextField minWidth="100" prefWidth="100" GridPane.columnIndex="4" fx:id="port" />
+
+        <Text text="%label.auth" GridPane.rowIndex="2" />
+        <ComboBox GridPane.rowIndex="2" GridPane.columnIndex="1"
+                  value="User &amp; Password" fx:id="authType" />
+
+        <Text text="%label.user" GridPane.rowIndex="3" />
+        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="authUser" />
+
+        <Text text="%label.pw" GridPane.rowIndex="4" />
+        <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="authPW" />
+
+        <Text text="%label.path" GridPane.rowIndex="6" />
+        <TextField GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="6" fx:id="path" />
+
+        <Text text="%label.finalURI" GridPane.rowIndex="8" />
+        <TextField GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="8" fx:id="uri" />
+    </GridPane>
+
+    <HBox alignment="CENTER_LEFT">
+        <Hyperlink text="%action.testConn" onAction="#testConn" />
+    </HBox>
+    <Separator />
+    <HBox alignment="CENTER_RIGHT">
+        <Button text="%action.ok" onAction="#add" />
+    </HBox>
+</VBox>

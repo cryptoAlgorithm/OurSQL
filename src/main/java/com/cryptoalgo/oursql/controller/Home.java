@@ -35,7 +35,8 @@ public class Home {
     @FXML
     private void addCluster() {
         try { AddClusterDialog.show(); } catch (IOException e) {
-            log.severe("IOException when showing add cluster dialog!");
+            log.severe("IOException when showing add cluster dialog: " + e.getLocalizedMessage());
+            e.printStackTrace();
         }
     }
 

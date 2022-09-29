@@ -21,7 +21,7 @@
     <top>
         <HBox styleClass="appBar" alignment="CENTER">
             <BorderPane.margin><Insets top="8" left="8" right="8" /></BorderPane.margin>
-            <Label text="OurSQL" styleClass="h2"/>
+            <Label text="%app.title" styleClass="h2"/>
             <Pane HBox.hgrow="ALWAYS" />
             <Button minWidth="-Infinity" styleClass="icon, outlined">
                 <graphic>

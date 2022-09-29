@@ -4,9 +4,11 @@ import com.cryptoalgo.codable.*;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesDecoder;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
 import com.cryptoalgo.oursql.model.Context;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
 
@@ -26,6 +28,20 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
             .replaceAll("");
     }
 
+    /**
+     * Generate a unique ID for this cluster. Used internally as an
+     * identifier for cluster storage and lookup.
+     * @return A unique ID for this cluster
+     */
+    private static String computeID(String host, String path, String user, int port) {
+        return new String(Base64.getEncoder().encode(
+            Context
+                .getInstance()
+                .hashInstance
+                .digest((host + path + user + port).getBytes())
+        ));
+    }
+
     public Cluster(Decoder<CodingKeys> decoder) throws DecodingException, NoSuchElementException {
         super(decoder);
         KeyedDecodingContainer<CodingKeys> container = decoder.container();
@@ -34,56 +50,53 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
         name = container.decodeString(CodingKeys.name);
         database = container.decodeString(CodingKeys.database);
         username = container.decodeString(CodingKeys.username);
-        id = computeID(host);
+        id = computeID(host, database, username, port);
     }
 
-    public Cluster(String host, String database, String username, int port, String name) {
+    public Cluster(
+        @NotNull String host,
+        @NotNull String database,
+        @Nullable String username,
+        @NotNull Integer port,
+        @NotNull String name
+    ) {
         super();
         this.username = username;
         this.database = database;
         this.host = purifyHost(host);
         this.port = port;
         this.name = name;
-        id = computeID(host); // Better to calculate value once during initialization
-    }
-
-    private static String computeID(String connURI) {
-        return Arrays.toString(
-            Context
-                .getInstance()
-                .hashInstance
-                .digest(connURI.getBytes())
-        );
+        id = computeID(host, database, username, port); // Better to calculate value once during initialization
     }
 
     /**
      * @return Database connection port
      */
-    public int getPort() { return port; }
+    public @NotNull Integer getPort() { return port; }
 
     /**
      * @return Database host
      */
-    public String getHost() { return host; }
+    public @NotNull String getHost() { return host; }
 
     /**
      * @return The database path
      */
-    public String getDatabase() { return database; }
+    public @NotNull String getDatabase() { return database; }
 
     /**
      * Get an ID unique to this database cluster. Not guaranteed
      * to be unique across clusters with the same URL.
      * @return A unique hash of the cluster's connection URL
      */
-    public String getID() { return id; }
+    public @NotNull String getID() { return id; }
 
     /**
      * Get the user-facing name of this cluster. This name can be
      * modified by the user after the creation of this Cluster.
      * @return The user-facing name of this cluster
      */
-    public String getName() { return name; }
+    public @NotNull String getName() { return name; }
 
     /**
      * @return Username for authenticating with database

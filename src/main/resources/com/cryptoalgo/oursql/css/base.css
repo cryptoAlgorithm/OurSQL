@@ -12,19 +12,25 @@
  * mouse users, but clearly indicate focus for keyboard users.
  */
 
-.button, .menu-button, .toggle-button {
+.button, .menu-button, .toggle-button, .hyperlink {
     -fx-accent: -fx-accent-desaturated;
-    -fx-background-radius: 7;
-    -fx-padding: 8 16;
-    -fx-font-size: 1.2em;
+}
+.button, .menu-button, .toggle-button {
+    -fx-background-radius: 4;
+    -fx-padding: 4 16;
+    -fx-font-size: 1.1em;
     -fx-text-fill: #fff;
     -fx-cursor: hand;
     -fx-background-insets: 0!important; /* Fixes the small background change on focus */
+    -fx-min-width: 84;
 }
 .button, .menu-button, .toggle-button:selected { -fx-background-color: -fx-accent }
 .button:pressed, .menu-button:pressed, .toggle-button:pressed:selected,
 .keyboardNav .button:focused, .keyboardNav .menu-button:focused, toggle-button:selected:focused {
     -fx-background-color: derive(-fx-accent, -20%) !important;
+}
+.hyperlink:pressed {
+    -fx-text-fill: derive(-fx-accent, -20%) !important;
 }
 .button:hover, .menu-button:hover, .toggle-button:selected:hover { -fx-background-color: derive(-fx-accent, -10%) }
 .button.outlined, .menu-button.outlined, .toggle-button {
@@ -43,6 +49,7 @@
     -fx-padding: 6 10;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
+    -fx-min-width: 0;
 }
 /* Only tested on a limited subset of elements, for now */
 .keyboardNav .button:focused, .keyboardNav .menu-button:focused, .keyboardNav .text-field:focused,
@@ -77,7 +84,7 @@
     -fx-control-inner-background: #1E1E1E;
     -fx-selection-bar-non-focused: derive(-fx-control-inner-background, 30%);
     -fx-text-base-color: #ccc;
-    -fx-mark-highlight-color: black;
+    -fx-mark-highlight-color: #000;
     -fx-mark-color: -fx-accent;
     -fx-focus-color: #0000;
     -fx-outer-border: #383838;
@@ -94,7 +101,7 @@
     -fx-prompt-text-fill: #5f5f5f;
     -fx-padding: 8;
     -fx-border-width: 1;
-    -fx-border-color: #0000;
+    -fx-border-color: -fx-outer-border;
     -fx-border-radius: 7;
 }
 .text-field:focused {
@@ -109,9 +116,9 @@
     -fx-shape: "M9 16.17L5.53 12.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L9 16.17z"
 }
 
-.label { -fx-text-fill: #fff }
+.label, Text { -fx-text-fill: #fff; -fx-fill: -fx-text-fill }
 
-.separator *.line { -fx-border-color: #393939 }
+.separator *.line { -fx-border-color: -fx-outer-border }
 
 .scroll-pane, .scroll-pane > .viewport, .list-view { -fx-background-color: #0000 }
 
