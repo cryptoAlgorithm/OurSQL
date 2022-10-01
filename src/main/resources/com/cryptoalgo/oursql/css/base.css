@@ -12,9 +12,6 @@
  * mouse users, but clearly indicate focus for keyboard users.
  */
 
-.button, .menu-button, .toggle-button, .hyperlink {
-    -fx-accent: -fx-accent-desaturated;
-}
 .button, .menu-button, .toggle-button {
     -fx-background-radius: 4;
     -fx-padding: 4 16;
@@ -73,8 +70,8 @@
     -fx-background-color: #262626;
     -fx-base: -fx-control-inner-background;
 
-    -fx-accent: rgb(0, 163, 92);
-    -fx-accent-desaturated: rgb(0, 104, 74);
+    -fx-accent-bright: rgb(0, 163, 92);
+    -fx-accent: rgb(0, 104, 74);
     -fx-selection-bar: -fx-accent;
     -fx-control-inner-background: #1E1E1E;
     -fx-selection-bar-non-focused: derive(-fx-control-inner-background, 30%);
@@ -100,10 +97,15 @@
     -fx-border-radius: 7;
 }
 .text-field:focused {
-    -fx-border-color: -fx-accent;
+    -fx-border-color: -fx-accent-bright;
 }
 
 .label, Text { -fx-text-fill: #fff; -fx-fill: -fx-text-fill }
+.label.accentedHeader {
+    -fx-text-fill: -fx-accent-bright;
+    -fx-padding: 8 12;
+    -fx-font-weight: 700;
+}
 
 .separator *.line { -fx-border-color: -fx-outer-border }
 

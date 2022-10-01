@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -115,6 +116,7 @@ public class AddClusterDialog {
         // Loop through built in DBMS implementations
         for (DBMSUtils d : BuiltInDBs.impls) {
             HBox dbOpt = new HBox(6);
+            dbOpt.setAlignment(Pos.CENTER_LEFT);
             if (d.iconRes() != null) {
                 URL icnSrc = OurSQL.class.getResource("img/db/" + d.iconRes());
                 if (icnSrc != null) {
@@ -145,6 +147,8 @@ public class AddClusterDialog {
                 ? getDBUtils().defaultDB()
                 : ""
             );
+            // Set default db as prompt text to remind the user
+            database.setPromptText(getDBUtils().defaultDB());
             fieldsUpdated();
         };
         dbTypeList.getSelectionModel().selectedIndexProperty().addListener((b, o, n) -> handleNewDBMS.run());
@@ -203,6 +207,7 @@ public class AddClusterDialog {
 
     @FXML
     private void testConn() {
+        testButton.setDisable(true);
         String dbName, dbVer, driverName, driverVer, driverSpec;
         try {
             DatabaseMetaData dbMeta = DatabaseUtils
@@ -224,9 +229,7 @@ public class AddClusterDialog {
             dbVer = dbMeta.getDatabaseProductVersion();
             driverName = dbMeta.getDriverName();
             driverVer = dbMeta.getDriverVersion();
-            driverSpec = dbMeta.getJDBCMajorVersion()
-                + "."
-                + dbMeta.getJDBCMinorVersion();
+            driverSpec = dbMeta.getJDBCMajorVersion() + "." + dbMeta.getJDBCMinorVersion();
         } catch (URISyntaxException | SQLException ex) {
             Alert e = new Alert(Alert.AlertType.ERROR);
             e.setTitle(I18N.getString("dialog.dbTestFail.title"));
@@ -234,7 +237,10 @@ public class AddClusterDialog {
             e.setContentText(ex.getLocalizedMessage());
             e.show();
             return;
+        } finally {
+            testButton.setDisable(false);
         }
+        // Show db test succeeded alert
         Alert i = new Alert(Alert.AlertType.INFORMATION);
         i.setTitle(I18N.getString("dialog.dbTestOk.title"));
         i.setHeaderText(I18N.getString("dialog.dbTestOk.header"));

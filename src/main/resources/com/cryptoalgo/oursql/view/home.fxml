@@ -49,7 +49,7 @@
     <left>
         <VBox prefWidth="300" styleClass="sidebar">
             <BorderPane.margin><Insets topRightBottomLeft="8" /></BorderPane.margin>
-            <Label text="%header.clusters" />
+            <Label text="%header.clusters" styleClass="accentedHeader" />
             <Separator />
             <!-- DB/cluster list -->
             <ScrollPane maxHeight="Infinity" VBox.vgrow="ALWAYS" fitToWidth="true">

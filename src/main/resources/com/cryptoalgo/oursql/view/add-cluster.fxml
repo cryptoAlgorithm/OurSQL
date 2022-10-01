@@ -18,9 +18,7 @@
       stylesheets="@../css/model.css"
       prefHeight="500.0" prefWidth="800.0">
     <VBox prefWidth="200" maxWidth="-Infinity" minWidth="-Infinity" styleClass="sidebar">
-        <Label text="%header.dbTypes">
-            <padding><Insets topRightBottomLeft="8" /></padding>
-        </Label>
+        <Label text="%header.dbTypes" styleClass="accentedHeader" />
         <ScrollPane fitToWidth="true" fitToHeight="true">
             <padding><Insets left="8" right="8" /></padding>
             <ListView fx:id="dbTypeList" />
