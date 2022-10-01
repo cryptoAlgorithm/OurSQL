@@ -2,16 +2,19 @@ package com.cryptoalgo.oursql.controller;
 
 import com.cryptoalgo.db.Cluster;
 import com.cryptoalgo.db.DatabaseUtils;
-import com.cryptoalgo.db.SpecificDBUtils;
-import com.cryptoalgo.db.mongo.MongoUtils;
+import com.cryptoalgo.db.DBMSUtils;
+import com.cryptoalgo.db.impl.BuiltInDBs;
 import com.cryptoalgo.oursql.OurSQL;
 import com.cryptoalgo.oursql.support.I18N;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -20,6 +23,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Objects;
@@ -34,9 +39,11 @@ public class AddClusterDialog {
     @FXML
     private ComboBox<String> authType; // Using private visibility and FXML modifier - best practices
     @FXML
-    private TextField name, host, port, authUser, authPW, path, uri;
+    private TextField name, host, port, authUser, authPW, database, uri;
     @FXML
     private Button addButton, testButton;
+    @FXML
+    private ListView<HBox> dbTypeList;
 
     private static final Logger log = Logger.getLogger(AddClusterDialog.class.getName());
 
@@ -49,13 +56,13 @@ public class AddClusterDialog {
             Objects.requireNonNull(OurSQL.class.getResource("view/add-cluster.fxml")),
             ResourceBundle.getBundle("locales/strings", new Locale("en"))
         )));
-        stage.setMinWidth(430);
+        stage.setMinWidth(630);
         stage.setMinHeight(250);
         stage.show();
     }
 
-    private SpecificDBUtils getDBUtils() {
-        return new MongoUtils();
+    private DBMSUtils getDBUtils() {
+        return BuiltInDBs.impls[dbTypeList.getSelectionModel().getSelectedIndex()];
     }
 
     private void setStatus(@Nullable String URIError, boolean ok) {
@@ -79,7 +86,6 @@ public class AddClusterDialog {
     private boolean verifyFields(boolean connectionOnly) {
         return (connectionOnly || !name.getText().isBlank())
             && !host.getText().isBlank()
-            && !port.getText().isBlank()
             && (authType.getSelectionModel().getSelectedIndex() == 1 || (
                 !authUser.getText().isBlank() && !authPW.getText().isEmpty()
             )); // Note the use of isEmpty for the password to allow leading/trailing spaces
@@ -90,10 +96,10 @@ public class AddClusterDialog {
      */
     private void fieldsUpdated() {
         try {
-            uri.setText(DatabaseUtils.db(new MongoUtils()).getConnectionURI(
+            uri.setText(DatabaseUtils.db(getDBUtils()).getConnectionURI(
                 port.getText().isEmpty() ? -1 : Integer.parseInt(port.getText()),
                 host.getText().trim(),
-                path.getText(),
+                database.getText(),
                 false
             ).toString());
             setStatus(null, verifyFields(false));
@@ -104,14 +110,50 @@ public class AddClusterDialog {
         } catch (NumberFormatException ignored) {} // Will never happen, but just to be 100% sure
     }
 
+    private void loadDrivers() {
+        ObservableList<HBox> drivers = FXCollections.observableArrayList();
+        // Loop through built in DBMS implementations
+        for (DBMSUtils d : BuiltInDBs.impls) {
+            HBox dbOpt = new HBox(6);
+            if (d.iconRes() != null) {
+                URL icnSrc = OurSQL.class.getResource("img/db/" + d.iconRes());
+                if (icnSrc != null) {
+                    ImageView icn = new ImageView(icnSrc.toExternalForm());
+                    icn.setFitHeight(20);
+                    icn.setFitWidth(20);
+                    icn.setSmooth(true);
+                    dbOpt.getChildren().add(icn);
+                } else {
+                    log.warning(
+                        "Could not get image resource for DBMS "
+                        + d.name()
+                        + " although an icon name was specified"
+                    );
+                }
+            }
+            dbOpt.getChildren().add(new Label(d.name()));
+            drivers.add(dbOpt);
+        }
+        dbTypeList.setItems(drivers);
+        dbTypeList.getSelectionModel().select(0);
+
+        Runnable handleNewDBMS = () -> {
+            // Update port hint
+            port.setPromptText(getDBUtils().defaultPort().toString());
+            // Update path to default database if it exists
+            database.setText(getDBUtils().defaultDB() != null
+                ? getDBUtils().defaultDB()
+                : ""
+            );
+            fieldsUpdated();
+        };
+        dbTypeList.getSelectionModel().selectedIndexProperty().addListener((b, o, n) -> handleNewDBMS.run());
+        handleNewDBMS.run(); // Run for the first time to populate fields
+    }
+
     @FXML
     private void initialize() {
-        /*try {
-            Class.forName("mongodb.jdbc.MongoDriver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("ERROR: Unable to load SQLServer JDBC Driver");
-            e.printStackTrace();
-        }*/
+        loadDrivers();
 
         authType.setItems(FXCollections.observableArrayList(
             I18N.getString("opt.auth.user"),
@@ -119,6 +161,7 @@ public class AddClusterDialog {
         ));
         authType.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             boolean useAuth = newValue.intValue() == 0;
+            // Make auth fields invisible and remove them from the layout
             authUser.setVisible(useAuth);
             authPW.setVisible(useAuth);
             userLabel.setVisible(useAuth);
@@ -128,10 +171,8 @@ public class AddClusterDialog {
             userLabel.setManaged(useAuth);
             pwLabel.setManaged(useAuth);
         });
-        authType.getSelectionModel().select(0);
+        authType.getSelectionModel().select(0); // Select user & PW auth by default
 
-        // Prepopulate with some default values
-        port.setText(getDBUtils().defaultPort().toString());
         // Restrict port to +ve numeric input only
         port.setTextFormatter(new TextFormatter<>(c -> {
             String t = c.getControlNewText();
@@ -147,13 +188,11 @@ public class AddClusterDialog {
         // Connection param update listeners
         authUser.textProperty().addListener((b, o, n) -> fieldsUpdated());
         authPW.textProperty().addListener((b, o, n) -> fieldsUpdated());
-        path.textProperty().addListener((b, o, n) -> fieldsUpdated());
+        database.textProperty().addListener((b, o, n) -> fieldsUpdated());
         host.textProperty().addListener((b, o, n) -> fieldsUpdated());
         port.textProperty().addListener((b, o, n) -> fieldsUpdated());
         name.textProperty().addListener((b, o, n) -> fieldsUpdated());
         authType.getSelectionModel().selectedIndexProperty().addListener((b, o, n) -> fieldsUpdated());
-        // Populate URL field initially
-        fieldsUpdated();
     }
 
     @FXML
@@ -163,25 +202,50 @@ public class AddClusterDialog {
     }
 
     @FXML
-    private void testConn() throws SQLException, URISyntaxException {
-        DatabaseUtils.db(getDBUtils()).getConnection(
-            new Cluster(
-                host.getText(),
-                path.getText(),
-                authUser.getText().isBlank() ? null : authUser.getText(),
-                Integer.parseInt(port.getText()),
-                name.getText()
-            ),
-            authPW.getText().isBlank() ? null : authPW.getText()
-        ).createStatement().execute("""
-SELECT
-    db.name AS DBName,
-    type_desc AS FileType,
-    Physical_Name AS Location
-FROM
-    sys.master_files mf
-INNER JOIN
-    sys.databases db ON db.database_id = mf.database_id
-""");
+    private void testConn() {
+        String dbName, dbVer, driverName, driverVer, driverSpec;
+        try {
+            DatabaseMetaData dbMeta = DatabaseUtils
+                .db(getDBUtils())
+                .getConnection(
+                    new Cluster(
+                        host.getText(),
+                        database.getText(),
+                        authUser.getText().isBlank() ? null : authUser.getText(),
+                        port.getText().isEmpty()
+                            ? getDBUtils().defaultPort()
+                            : Integer.parseInt(port.getText()),
+                        name.getText()
+                    ),
+                    authPW.getText().isBlank() ? null : authPW.getText()
+                )
+                .getMetaData();
+            dbName = dbMeta.getDatabaseProductName();
+            dbVer = dbMeta.getDatabaseProductVersion();
+            driverName = dbMeta.getDriverName();
+            driverVer = dbMeta.getDriverVersion();
+            driverSpec = dbMeta.getJDBCMajorVersion()
+                + "."
+                + dbMeta.getJDBCMinorVersion();
+        } catch (URISyntaxException | SQLException ex) {
+            Alert e = new Alert(Alert.AlertType.ERROR);
+            e.setTitle(I18N.getString("dialog.dbTestFail.title"));
+            e.setHeaderText(I18N.getString("dialog.dbTestFail.header"));
+            e.setContentText(ex.getLocalizedMessage());
+            e.show();
+            return;
+        }
+        Alert i = new Alert(Alert.AlertType.INFORMATION);
+        i.setTitle(I18N.getString("dialog.dbTestOk.title"));
+        i.setHeaderText(I18N.getString("dialog.dbTestOk.header"));
+        i.setContentText(I18N.getString(
+            "dialog.dbTestOk.body",
+            dbName,
+            dbVer,
+            driverName,
+            driverVer,
+            driverSpec
+        ));
+        i.show();
     }
 }

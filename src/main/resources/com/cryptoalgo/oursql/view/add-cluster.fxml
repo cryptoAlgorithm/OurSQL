@@ -11,55 +11,67 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 
-<VBox xmlns="http://javafx.com/javafx"
+<?import javafx.scene.control.ListView?>
+<HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.cryptoalgo.oursql.controller.AddClusterDialog"
       stylesheets="@../css/model.css"
-      prefHeight="400.0" prefWidth="600.0" spacing="12">
-    <padding><Insets topRightBottomLeft="12" /></padding>
-    <Text styleClass="header" text="%action.addCluster" />
+      prefHeight="500.0" prefWidth="800.0">
+    <VBox prefWidth="200" maxWidth="-Infinity" minWidth="-Infinity" styleClass="sidebar">
+        <Label text="%header.dbTypes">
+            <padding><Insets topRightBottomLeft="8" /></padding>
+        </Label>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <padding><Insets left="8" right="8" /></padding>
+            <ListView fx:id="dbTypeList" />
+        </ScrollPane>
+    </VBox>
+    <VBox spacing="12" HBox.hgrow="ALWAYS">
+        <padding><Insets topRightBottomLeft="12" /></padding>
+        <Text styleClass="header" text="%action.addCluster" />
 
-    <GridPane vgap="8" hgap="10">
-        <Text text="%label.name" />
-        <TextField GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" fx:id="name" />
-    </GridPane>
-
-    <Separator />
-
-    <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true">
-        <padding><Insets topRightBottomLeft="-12" /></padding>
         <GridPane vgap="8" hgap="10">
-            <padding><Insets topRightBottomLeft="12" /></padding>
-            <Text text="%label.host" />
-            <TextField GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" fx:id="host" text="localhost" />
-            <Text text="%label.port" GridPane.columnIndex="3" />
-            <TextField minWidth="100" prefWidth="100" GridPane.columnIndex="4" fx:id="port" />
-
-            <Text text="%label.auth" GridPane.rowIndex="2" />
-            <ComboBox GridPane.rowIndex="2" GridPane.columnIndex="1"
-                      value="User &amp; Password" fx:id="authType" />
-
-            <Text text="%label.user" GridPane.rowIndex="3" fx:id="userLabel" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="authUser" />
-
-            <Text text="%label.pw" GridPane.rowIndex="4" fx:id="pwLabel" />
-            <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="authPW" />
-
-            <Text text="%label.path" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="6" fx:id="path" />
-
-            <Text text="%label.finalURI" GridPane.rowIndex="8" />
-            <VBox GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="8" spacing="2">
-                <TextField fx:id="uri" editable="false" />
-                <Label styleClass="error" fx:id="uriConstructError" />
-            </VBox>
+            <Text text="%label.name" />
+            <TextField GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" fx:id="name" />
         </GridPane>
-    </ScrollPane>
 
-    <Separator />
-    <HBox alignment="CENTER">
-        <Button text="%action.testConn" onAction="#testConn" styleClass="outlined" fx:id="testButton" />
-        <Pane HBox.hgrow="ALWAYS" />
-        <Button text="%action.ok" onAction="#add" fx:id="addButton" />
-    </HBox>
-</VBox>
+        <Separator />
+
+        <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true">
+            <padding><Insets topRightBottomLeft="-12" /></padding>
+            <GridPane vgap="8" hgap="10">
+                <padding><Insets topRightBottomLeft="12" /></padding>
+                <Text text="%label.host" />
+                <TextField GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" fx:id="host" text="localhost" />
+                <Text text="%label.port" GridPane.columnIndex="3" />
+                <TextField minWidth="100" prefWidth="100" GridPane.columnIndex="4" fx:id="port" />
+
+                <Text text="%label.auth" GridPane.rowIndex="2" />
+                <ComboBox GridPane.rowIndex="2" GridPane.columnIndex="1"
+                          value="User &amp; Password" fx:id="authType" />
+
+                <Text text="%label.user" GridPane.rowIndex="3" fx:id="userLabel" />
+                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="authUser" />
+
+                <Text text="%label.pw" GridPane.rowIndex="4" fx:id="pwLabel" />
+                <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="authPW" />
+
+                <Text text="%label.path" GridPane.rowIndex="6" />
+                <TextField GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="6" fx:id="database" />
+
+                <Text text="%label.finalURI" GridPane.rowIndex="8" />
+                <VBox GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="8" spacing="2">
+                    <TextField fx:id="uri" editable="false" />
+                    <Label styleClass="error" fx:id="uriConstructError" />
+                </VBox>
+            </GridPane>
+        </ScrollPane>
+
+        <Separator />
+        <HBox alignment="CENTER">
+            <Button text="%action.testConn" onAction="#testConn" styleClass="outlined" fx:id="testButton" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button text="%action.ok" onAction="#add" fx:id="addButton" />
+        </HBox>
+    </VBox>
+</HBox>

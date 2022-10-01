@@ -2,7 +2,6 @@ package com.cryptoalgo.oursql;
 
 import com.cryptoalgo.oursql.support.I18N;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
@@ -31,7 +30,7 @@ public class OurSQL extends Application {
             OurSQL.class.getResource("view/home.fxml"),
             ResourceBundle.getBundle("locales/strings", new Locale("en"))
         );
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle(I18N.getString("app.title"));
         stage.setScene(scene);
         stage.show();

@@ -11,9 +11,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseUtils {
-    SpecificDBUtils utils;
+    DBMSUtils utils;
 
-    public DatabaseUtils(SpecificDBUtils utils) {
+    public DatabaseUtils(DBMSUtils utils) {
         this.utils = utils;
     }
 
@@ -23,11 +23,11 @@ public class DatabaseUtils {
      * constructor as further optimisation might be added in the
      * future to cache instances.
      * @implNote Currently equivalent to simply calling
-     *           {@link DatabaseUtils#DatabaseUtils(SpecificDBUtils)},
+     *           {@link DatabaseUtils#DatabaseUtils(DBMSUtils)},
      *           might change in the future.
      * @return An instance of {@link DatabaseUtils}
      */
-    public static DatabaseUtils db(SpecificDBUtils utils) {
+    public static DatabaseUtils db(DBMSUtils utils) {
         return new DatabaseUtils(utils);
     }
 
@@ -89,11 +89,10 @@ public class DatabaseUtils {
         @NotNull Cluster cluster,
         @Nullable String password
     ) throws URISyntaxException, SQLException {
-        DriverManager.getConnection(
+        return DriverManager.getConnection(
             getConnectionURI(cluster).toString(),
             cluster.getUsername(),
             password
         );
-        return null;
     }
 }

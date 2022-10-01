@@ -10,8 +10,13 @@ Text.header {
     -fx-text-fill: #FC2B2D;
 }
 
-.separator {
-    -fx-padding: 0 -16;
+.sidebar {
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: -fx-outer-border;
+}
+
+.separator:horizontal {
+    -fx-padding: 0 -12;
 }
 
 .text-field {
