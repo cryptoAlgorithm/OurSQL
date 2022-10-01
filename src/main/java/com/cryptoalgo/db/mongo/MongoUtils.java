@@ -5,7 +5,7 @@ import com.cryptoalgo.db.SpecificDBUtils;
 public class MongoUtils implements SpecificDBUtils {
     @Override
     public String scheme() {
-        return "mongodb";
+        return "mongodb+srv";
     }
 
     @Override

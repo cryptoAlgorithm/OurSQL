@@ -7,20 +7,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (AddCluster): use new stage instead of TextInputDialog for add cluster dialog">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/mongo/MongoUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/model.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/db/DatabaseUtilsTest.java" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (AddCluster): validate fields and add test connection&#10;Note: Testing mongoDB connection doesn't work yet">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/Cluster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/DatabaseUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/DatabaseUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/SpecificDBUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/SpecificDBUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/mongo/MongoUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/mongo/MongoUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/model.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/model.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/add-cluster.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/add-cluster.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,8 +75,8 @@
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
-      "synapse",
-      "mongo"
+      "mongo",
+      "synapse"
     ]
   }
 }]]></component>
@@ -235,7 +232,8 @@
       <workItem from="1664028735169" duration="37192000" />
       <workItem from="1664161564726" duration="9016000" />
       <workItem from="1664255790038" duration="17897000" />
-      <workItem from="1664351636325" duration="15311000" />
+      <workItem from="1664351636325" duration="21985000" />
+      <workItem from="1664507113433" duration="12742000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -349,7 +347,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664333634498</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="feat (AddCluster): partial Controller implementation">
+      <created>1664452310085</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1664452310085</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,7 +388,9 @@
     <MESSAGE value="patch (db): re-architect project to use JDBC instead of reinventing the wheel" />
     <MESSAGE value="patch (db): fix jdbc connection URI construction" />
     <MESSAGE value="feat (AddCluster): use new stage instead of TextInputDialog for add cluster dialog" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat (AddCluster): use new stage instead of TextInputDialog for add cluster dialog" />
+    <MESSAGE value="feat (AddCluster): partial Controller implementation" />
+    <MESSAGE value="feat (AddCluster): validate fields and add test connection&#10;Note: Testing mongoDB connection doesn't work yet" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat (AddCluster): validate fields and add test connection&#10;Note: Testing mongoDB connection doesn't work yet" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

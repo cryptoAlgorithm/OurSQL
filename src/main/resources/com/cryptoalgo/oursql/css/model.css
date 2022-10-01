@@ -6,6 +6,9 @@ Text {
 Text.header {
     -fx-font-size: 1.5em;
 }
+.label.error {
+    -fx-text-fill: #FC2B2D;
+}
 
 .separator {
     -fx-padding: 0 -16;

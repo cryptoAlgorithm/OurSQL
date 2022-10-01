@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DatabaseUtils {
     SpecificDBUtils utils;
@@ -34,26 +33,22 @@ public class DatabaseUtils {
 
     /**
      * Generates a database connection URI given a {@link Cluster} and a password.
-     * Calls {@link #getConnectionURI(String user, String password, Integer port, String host, String path)}
+     * Calls {@link #getConnectionURI(Integer port, String host, String path, boolean includeJDBC)}
      * internally.
      * @param cluster Cluster to get connection URI from
-     * @param password Connection password, falls back to [password] if null
-     *                 and username is not null (e.g. for displaying in the UI)
      * @return A connection URI for the provided {@link Cluster}, not valid for
      *         connection if <code>password</code> is <code>null</code> and
      * @throws URISyntaxException If non-permitted characters were present in constructed URI
-     * @see #getConnectionURI(String user, String password, Integer port, String host, String path)
+     * @see #getConnectionURI(Integer port, String host, String path, boolean includeJDBC)
      */
     public URI getConnectionURI(
-        @NotNull Cluster cluster,
-        @Nullable String password
+        @NotNull Cluster cluster
     ) throws URISyntaxException {
         return getConnectionURI(
-            cluster.getUsername(),
-            password,
             cluster.getPort(),
             cluster.getHost(),
-            cluster.getDatabase()
+            cluster.getDatabase(),
+            true
         );
     }
 
@@ -64,9 +59,6 @@ public class DatabaseUtils {
      *     If the password argument is <code>null</code>, a placeholder is used.
      *     Useful for display in uncensored UI.
      * </p>
-     * @param user User to authenticate with (null if no authentication)
-     * @param password Connection password, falls back to [password] if null
-     *                 and username is not null (e.g. for displaying in the UI)
      * @param port Database connection port
      * @param host Database host
      * @param path Database path (relative to <code>host</code>)
@@ -75,17 +67,14 @@ public class DatabaseUtils {
      * {@link Cluster#getUsername()} is not null.
      */
     public URI getConnectionURI(
-        @Nullable String user,
-        @Nullable String password,
         @NotNull Integer port,
         @NotNull String host,
-        @NotNull String path
+        @NotNull String path,
+        boolean includeJDBC
     ) throws URISyntaxException {
         return new URI(
-            "jdbc:" + utils.scheme(),
-            user == null
-                ? "" // Cannot be null, else // after scheme will be missing
-                : user + ":" + (password == null ? "<password>" : password),
+            (includeJDBC ? "jdbc:" : "") + utils.scheme(),
+            null,
             host,
             port,
             // Combine host and database into a path without double slashes and similar issues
@@ -98,11 +87,13 @@ public class DatabaseUtils {
 
     public Connection getConnection(
         @NotNull Cluster cluster,
-        @NotNull String password
+        @Nullable String password
     ) throws URISyntaxException, SQLException {
-        Properties connProps = new Properties();
-        connProps.put("username", cluster);
-        DriverManager.getConnection(getConnectionURI(cluster, password).toString(), connProps);
+        DriverManager.getConnection(
+            getConnectionURI(cluster).toString(),
+            cluster.getUsername(),
+            password
+        );
         return null;
     }
 }
