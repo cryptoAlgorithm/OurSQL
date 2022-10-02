@@ -7,11 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch: sprinkle more comments">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/build.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (build): downgrade build target to Java 17">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/SecretsStore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/oursql/support/SecretsStoreTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +24,9 @@
         <option value="Record" />
         <option value="package-info" />
         <option value="Interface" />
-        <option value="JUnit5 Test Class" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -95,6 +94,7 @@
       <recent name="com.cryptoalgo" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.cryptoalgo.oursql.support" />
       <recent name="com.cryptoalgo.db" />
       <recent name="com.cryptoalgo.codable.preferencesCoder" />
     </key>
@@ -103,19 +103,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.OurSQL">
-    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.Launcher" />
-      <module name="OurSQL" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.oursql.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OurSQL" type="Application" factoryName="Application" temporary="true">
       <option name="ALTERNATIVE_JRE_PATH" value="liberica-17-full" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -146,49 +133,64 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DatabaseUtilsTest.testPostgreSQL" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SecretsStoreTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OurSQL" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.db.*" />
+          <option name="PATTERN" value="com.cryptoalgo.oursql.support.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.cryptoalgo.db" />
-      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.db.DatabaseUtilsTest" />
-      <option name="METHOD_NAME" value="testPostgreSQL" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PreferencesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="OurSQL" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.codable.preferencesCoder.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.cryptoalgo.codable.preferencesCoder" />
-      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.codable.preferencesCoder.PreferencesTest" />
-      <option name="METHOD_NAME" value="" />
+      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.support" />
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.support.SecretsStoreTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PreferencesTest.testRoundTrip" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SecretsStoreTest.cipherKitchenSink" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OurSQL" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.codable.preferencesCoder.*" />
+          <option name="PATTERN" value="com.cryptoalgo.oursql.support.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.cryptoalgo.codable.preferencesCoder" />
-      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.codable.preferencesCoder.PreferencesTest" />
-      <option name="METHOD_NAME" value="testRoundTrip" />
+      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.support" />
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.support.SecretsStoreTest" />
+      <option name="METHOD_NAME" value="cipherKitchenSink" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SecretsStoreTest.cryptRoundTrip" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OurSQL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cryptoalgo.oursql.support.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.support" />
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.support.SecretsStoreTest" />
+      <option name="METHOD_NAME" value="cryptRoundTrip" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SecretsStoreTest.plainTextStore" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OurSQL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cryptoalgo.oursql.support.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.support" />
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.support.SecretsStoreTest" />
+      <option name="METHOD_NAME" value="plainTextStore" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -196,18 +198,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.OurSQL" />
-      <item itemvalue="Application.Launcher" />
-      <item itemvalue="JUnit.DatabaseUtilsTest.testPostgreSQL" />
-      <item itemvalue="JUnit.PreferencesTest" />
-      <item itemvalue="JUnit.PreferencesTest.testRoundTrip" />
+      <item itemvalue="JUnit.SecretsStoreTest" />
+      <item itemvalue="JUnit.SecretsStoreTest.cipherKitchenSink" />
+      <item itemvalue="JUnit.SecretsStoreTest.cryptRoundTrip" />
+      <item itemvalue="JUnit.SecretsStoreTest.plainTextStore" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.OurSQL" />
-        <item itemvalue="JUnit.DatabaseUtilsTest.testPostgreSQL" />
-        <item itemvalue="JUnit.PreferencesTest" />
-        <item itemvalue="JUnit.PreferencesTest.testRoundTrip" />
-        <item itemvalue="Application.Launcher" />
+        <item itemvalue="JUnit.SecretsStoreTest" />
+        <item itemvalue="JUnit.SecretsStoreTest.plainTextStore" />
+        <item itemvalue="JUnit.SecretsStoreTest.cipherKitchenSink" />
+        <item itemvalue="JUnit.SecretsStoreTest.cryptRoundTrip" />
       </list>
     </recent_temporary>
   </component>
@@ -231,7 +233,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="8619000" />
+      <workItem from="1664633271631" duration="12683000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -394,7 +396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664676226379</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="patch (build): downgrade build target to Java 17">
+      <created>1664690576617</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1664690576617</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,7 +444,8 @@
     <MESSAGE value="fix (Cluster): use hex encoding for ID generation to fix preferences issues&#10;/ is a valid char in base64, which sometimes screwed up preferences encoding&#10;&#10;patch (PreferencesCodable): more useful exceptions when a key is not present" />
     <MESSAGE value="patch: sprinkle comments" />
     <MESSAGE value="patch: sprinkle more comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="patch: sprinkle more comments" />
+    <MESSAGE value="patch (build): downgrade build target to Java 17" />
+    <option name="LAST_COMMIT_MESSAGE" value="patch (build): downgrade build target to Java 17" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
