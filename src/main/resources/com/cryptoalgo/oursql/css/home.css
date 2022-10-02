@@ -10,6 +10,19 @@
 .sidebar {
     -fx-pref-width: 200px;
 }
+.sidebar > #addClusterTip {
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 12 12 0 0;
+    -fx-padding: 8;
+    -fx-alignment: CENTER;
+}
+.sidebar > #addClusterTip > .label {
+    -fx-text-alignment: center;
+}
+.sidebar > #addClusterTip > .svgIcon {
+    -fx-scale-x: 1.2;
+    -fx-scale-y: -fx-scale-x;
+}
 
 .accordion > .titled-pane > .title {
     -fx-font-size: 1.25em;

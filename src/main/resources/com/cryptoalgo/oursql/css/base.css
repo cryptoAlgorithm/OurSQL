@@ -83,7 +83,8 @@
     -fx-selection-bar: -fx-accent;
     -fx-control-inner-background: #1E1E1E;
     -fx-selection-bar-non-focused: derive(-fx-control-inner-background, 30%);
-    -fx-text-base-color: #ccc;
+    -fx-text-base-color: #eee;
+    -fx-text-contrast-color: #fff;
     -fx-mark-highlight-color: #000;
     -fx-mark-color: -fx-accent;
     -fx-focus-color: #0000;
@@ -108,13 +109,16 @@
     -fx-border-color: -fx-accent-bright;
 }
 
-.label, Text { -fx-text-fill: #fff; -fx-fill: -fx-text-fill }
+.label, Text { -fx-text-fill: -fx-text-base-color; -fx-fill: -fx-text-fill }
 .accentedHeader, .accentedHeader > .label {
     -fx-text-fill: -fx-accent-bright;
 }
 .label.accentedHeader {
     -fx-padding: 8 12;
     -fx-font-weight: 700;
+}
+.svgIcon {
+    -fx-fill: -fx-text-contrast-color;;
 }
 
 .separator *.line { -fx-border-color: -fx-outer-border }

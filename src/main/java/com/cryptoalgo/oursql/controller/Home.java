@@ -11,6 +11,7 @@ import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -27,6 +28,8 @@ public class Home {
 
     @FXML
     private Accordion categoryList;
+    @FXML
+    private VBox addClusterTip;
 
     private final ObservableMap<String, Cluster> clusters = FXCollections.observableMap(new HashMap<>());
 
@@ -44,6 +47,11 @@ public class Home {
      * Initialization
      *
      ===================================================*/
+
+    private void showHideAddClusterTip() {
+        addClusterTip.setVisible(clusters.isEmpty());
+        addClusterTip.setManaged(clusters.isEmpty());
+    }
 
     /**
      * Populates the cluster list on the left in the <code>BorderPane</code> and
@@ -91,11 +99,13 @@ public class Home {
                         return;
                     }
                     categoryList.getPanes().remove(p);
+                    showHideAddClusterTip();
                 });
 
                 m.getItems().addAll(header, del);
                 p.setContextMenu(m);
                 categoryList.getPanes().add(p);
+                showHideAddClusterTip();
             }
         });
 
