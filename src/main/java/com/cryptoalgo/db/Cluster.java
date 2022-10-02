@@ -4,11 +4,11 @@ import com.cryptoalgo.codable.*;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesDecoder;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
 import com.cryptoalgo.oursql.model.Context;
+import com.cryptoalgo.oursql.support.HexEncoder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.Base64;
+import java.lang.reflect.InvocationTargetException;
 import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
 
@@ -33,13 +33,13 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
      * identifier for cluster storage and lookup.
      * @return A unique ID for this cluster
      */
-    private static String computeID(String host, String path, String user, int port) {
-        return new String(Base64.getEncoder().encode(
+    private static String computeID(String host, String path, int port) {
+        return HexEncoder.bytesToHex(
             Context
                 .getInstance()
                 .hashInstance
-                .digest((host + path + user + port).getBytes())
-        ));
+                .digest((host + path + port).getBytes())
+        );
     }
 
     public Cluster(Decoder<CodingKeys> decoder) throws DecodingException, NoSuchElementException {
@@ -49,8 +49,8 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
         host = purifyHost(container.decodeString(CodingKeys.host));
         name = container.decodeString(CodingKeys.name);
         database = container.decodeString(CodingKeys.database);
-        username = container.decodeString(CodingKeys.username);
-        id = computeID(host, database, username, port);
+        username = container.decodeStringIfPresent(CodingKeys.username).orElse(null);
+        id = computeID(host, database, port);
     }
 
     public Cluster(
@@ -66,7 +66,7 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
         this.host = purifyHost(host);
         this.port = port;
         this.name = name;
-        id = computeID(host, database, username, port); // Better to calculate value once during initialization
+        id = computeID(host, database, port); // Better to calculate value once during initialization
     }
 
     /**
@@ -110,10 +110,11 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
 
     /**
      * Convenience method that wraps {@link Decoder}, allows
-     * deserializing the cluster with the requested ID from {@link java.util.prefs.Preferences Preferences}
+     * deserializing the cluster with the requested ID from
+     * {@link java.util.prefs.Preferences Preferences}
      */
-    public static Cluster decode(String ofID) throws DecodingException, NoSuchElementException {
-        return new PreferencesDecoder<>("clusters/" + ofID).decode(Cluster.class);
+    public static Cluster decode(String ofID) throws DecodingException, InvocationTargetException {
+        return new PreferencesDecoder<CodingKeys>("clusters/" + ofID).decode(Cluster.class);
     }
 
     /**
@@ -126,12 +127,21 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
      * </p>
      */
     public void persist() throws EncodingException {
-        new PreferencesEncoder<>("clusters/" + id).encode(this);
+        new PreferencesEncoder<CodingKeys>("clusters/" + id).encode(this);
+    }
+
+    public boolean alreadyExists() {
+        try {
+            return PreferencesEncoder.rootNode.nodeExists("clusters/" + id);
+        } catch (Exception e) { return false; }
     }
 
     public void encode(Encoder<CodingKeys> encoder) throws EncodingException {
         KeyedEncodingContainer<CodingKeys> container = encoder.container();
         container.encode(host, CodingKeys.host);
         container.encode(port, CodingKeys.port);
+        container.encode(name, CodingKeys.name);
+        container.encode(database, CodingKeys.database);
+        container.encode(username, CodingKeys.username);
     }
 }

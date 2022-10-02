@@ -4,7 +4,7 @@ import com.cryptoalgo.codable.Encodable;
 import com.cryptoalgo.codable.Encoder;
 import com.cryptoalgo.codable.EncodingException;
 import com.cryptoalgo.codable.KeyedEncodingContainer;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.prefs.Preferences;
 
@@ -22,6 +22,7 @@ import java.util.prefs.Preferences;
  */
 public final class PreferencesEncoder<T extends Enum<T>> implements Encoder<T>, KeyedEncodingContainer<T> {
     private final Preferences prefsNode;
+    public static final Preferences rootNode = Preferences.userNodeForPackage(PreferencesEncoder.class);
 
     /**
      * Creates an instance of an encoder which can be used to serialize
@@ -29,10 +30,10 @@ public final class PreferencesEncoder<T extends Enum<T>> implements Encoder<T>, 
      * @param node Path of {@link Preferences} node to write values to
      */
     public PreferencesEncoder(String node) {
-        prefsNode = Preferences.userRoot().node(node);
+        prefsNode = rootNode.node(node);
     }
 
-    public <E extends Encodable> void encode(E encoding) throws EncodingException {
+    public <E extends Encodable<T>> void encode(E encoding) throws EncodingException {
         encoding.encode(this);
     }
 
@@ -42,15 +43,15 @@ public final class PreferencesEncoder<T extends Enum<T>> implements Encoder<T>, 
     }
 
     // EncodingContainer conformance
-    public void encode(@NotNull Integer value, T forKey) {
-        prefsNode.putInt(forKey.name(), value);
+    public void encode(@Nullable Integer value, T forKey) {
+        if (value != null) prefsNode.putInt(forKey.name(), value);
     }
 
-    public void encode(@NotNull Boolean value, T forKey) {
-        prefsNode.putBoolean(forKey.name(), value);
+    public void encode(@Nullable Boolean value, T forKey) {
+        if (value != null) prefsNode.putBoolean(forKey.name(), value);
     }
 
-    public void encode(@NotNull String value, T forKey) {
-        prefsNode.put(forKey.name(), value);
+    public void encode(@Nullable String value, T forKey) {
+        if (value != null) prefsNode.put(forKey.name(), value);
     }
 }

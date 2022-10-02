@@ -1,5 +1,6 @@
 package com.cryptoalgo.oursql.controller;
 
+import com.cryptoalgo.codable.EncodingException;
 import com.cryptoalgo.db.Cluster;
 import com.cryptoalgo.db.DatabaseUtils;
 import com.cryptoalgo.db.DBMSUtils;
@@ -111,6 +112,23 @@ public class AddClusterDialog {
         } catch (NumberFormatException ignored) {} // Will never happen, but just to be 100% sure
     }
 
+    /**
+     * Construct a cluster from the values currently populated in the fields.
+     * Doesn't do any sanity checking!
+     * @return an instance database cluster object
+     */
+    private Cluster constructCluster() {
+        return new Cluster(
+            host.getText(),
+            database.getText(),
+            authUser.getText().isBlank() ? null : authUser.getText(),
+            port.getText().isEmpty()
+                ? getDBUtils().defaultPort()
+                : Integer.parseInt(port.getText()),
+            name.getText()
+        );
+    }
+
     private void loadDrivers() {
         ObservableList<HBox> drivers = FXCollections.observableArrayList();
         // Loop through built in DBMS implementations
@@ -201,6 +219,19 @@ public class AddClusterDialog {
 
     @FXML
     private void add(ActionEvent evt) {
+        Cluster c = constructCluster();
+        if (c.alreadyExists()) {
+            Alert e = new Alert(Alert.AlertType.ERROR);
+            e.setTitle("Db already exists, delete it first");
+            e.show();
+            return;
+        }
+        try {
+            c.persist();
+        } catch (EncodingException e) {
+            log.severe("Failed to persist cluster!");
+            return;
+        }
         // Just look at the amount of explicit casts it takes to get the current stage!
         ((Stage) ((Button) evt.getSource()).getScene().getWindow()).close();
     }
@@ -213,15 +244,7 @@ public class AddClusterDialog {
             DatabaseMetaData dbMeta = DatabaseUtils
                 .db(getDBUtils())
                 .getConnection(
-                    new Cluster(
-                        host.getText(),
-                        database.getText(),
-                        authUser.getText().isBlank() ? null : authUser.getText(),
-                        port.getText().isEmpty()
-                            ? getDBUtils().defaultPort()
-                            : Integer.parseInt(port.getText()),
-                        name.getText()
-                    ),
+                    constructCluster(),
                     authPW.getText().isBlank() ? null : authPW.getText()
                 )
                 .getMetaData();

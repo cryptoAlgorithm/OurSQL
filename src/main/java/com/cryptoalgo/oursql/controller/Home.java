@@ -1,23 +1,21 @@
 package com.cryptoalgo.oursql.controller;
 
 import com.cryptoalgo.codable.DecodingException;
+import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
 import com.cryptoalgo.db.Cluster;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.logging.Logger;
-import java.util.prefs.BackingStoreException;
-import java.util.prefs.NodeChangeEvent;
-import java.util.prefs.NodeChangeListener;
-import java.util.prefs.Preferences;
+import java.util.prefs.*;
 
 /**
  * Controller for the homepage of OurSQL. Corresponding
@@ -53,12 +51,22 @@ public class Home {
      * {@link #initialize()} method.
      */
     private void initClusterList() {
-        Preferences.userRoot().node("clusters").addNodeChangeListener(new NodeChangeListener() {
+        PreferencesEncoder.rootNode.node("clusters").addNodeChangeListener(new NodeChangeListener() {
             public void childAdded(NodeChangeEvent evt) {
+                // A hack to allow serialization to complete first - race condition
+                try { Thread.sleep(100); } catch (InterruptedException ignored) {}
                 try {
                     Cluster newCluster = Cluster.decode(evt.getChild().name());
-                    clusters.put(newCluster.getID(), newCluster);
-                } catch (DecodingException | NoSuchElementException ignored) {}
+                    Platform.runLater(() ->
+                        clusters.put(newCluster.getID(), newCluster)
+                    );
+                } catch (DecodingException | InvocationTargetException e) {
+                    e.printStackTrace();
+                    log.warning(
+                        "Failed to deserialize added cluster with id "
+                        + evt.getChild().name()
+                    );
+                }
             }
 
             public void childRemoved(NodeChangeEvent evt) {
@@ -82,16 +90,18 @@ public class Home {
 
         // Populate clusters map
         try {
-            for (String clusterID : Preferences.userRoot().node("clusters").childrenNames()) {
+            for (String clusterID : PreferencesEncoder.rootNode.node("clusters").childrenNames()) {
                 try {
                     Cluster c = Cluster.decode(clusterID);
                     clusters.put(c.getID(), c);
-                } catch (DecodingException | NoSuchElementException e) {
+                } catch (DecodingException | InvocationTargetException e) {
                     log.warning(String.format(
-                        "Could not decode cluster with ID %s due to exception: %s, skipping...",
+                        "Could not decode cluster with ID %s due to exception: %s, removing node",
                         clusterID,
                         e.getMessage()
                     ));
+                    e.printStackTrace();
+                    PreferencesEncoder.rootNode.node("clusters/" + clusterID).removeNode();
                 }
             }
         } catch (BackingStoreException | IllegalStateException ignored) {}

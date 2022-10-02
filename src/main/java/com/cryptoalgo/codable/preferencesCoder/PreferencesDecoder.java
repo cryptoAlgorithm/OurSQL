@@ -32,23 +32,31 @@ public final class PreferencesDecoder<T extends Enum<T>> implements Decoder<T>, 
      * @param node Path of {@link Preferences} node to read values from
      */
     public PreferencesDecoder(String node) {
-        prefsNode = Preferences.userRoot().node(node);
+        prefsNode = PreferencesEncoder.rootNode.node(node);
     }
 
     /**
      * Create an instance of a {@link com.cryptoalgo.codable.Decodable Decodable}
      * class by decoding values from Preferences
      */
-    public <D extends Decodable> D decode(Class<D> decoding) throws DecodingException, NoSuchElementException {
+    public <D extends Decodable<T>> D decode(Class<D> decoding) throws DecodingException, InvocationTargetException {
         try {
             return decoding.getDeclaredConstructor(Decoder.class).newInstance(this);
-        } catch (Exception e) {
+        } catch (
+            NoSuchMethodException
+            | SecurityException
+            | InstantiationException
+            | IllegalAccessException
+            | IllegalArgumentException
+             e
+        ) {
+            e.printStackTrace();
             throw new DecodingException("/", "root");
         }
     }
 
     // KeyedDecodingContainer conformance
-    public Optional<Boolean> decodeBooleanIfPresent(T forKey) throws DecodingException {
+    public Optional<Boolean> decodeBooleanIfPresent(T forKey) {
         String v = decodeStringIfPresent(forKey).orElse(null);
         if (v == null) return Optional.empty();
         return Optional.ofNullable(
@@ -58,27 +66,43 @@ public final class PreferencesDecoder<T extends Enum<T>> implements Decoder<T>, 
         );
     }
     public Boolean decodeBoolean(T forKey) throws DecodingException, NoSuchElementException {
-        return decodeBooleanIfPresent(forKey).orElseThrow();
+        try {
+            return decodeBooleanIfPresent(forKey).orElseThrow();
+        } catch (NoSuchElementException e) {
+            throw new DecodingException(forKey.name(), "Boolean");
+        }
     }
 
-    public Optional<Integer> decodeIntegerIfPresent(T forKey) throws DecodingException {
+    public Optional<Integer> decodeIntegerIfPresent(T forKey) {
         String v = decodeStringIfPresent(forKey).orElse(null);
-        if (v == null) return Optional.empty();
+        if (v == null){
+            System.out.println("port empty!");
+            return Optional.empty();
+        }
         try {
             return Optional.of(Integer.valueOf(v));
         } catch (NumberFormatException e) {
+            System.out.println(v);
             return Optional.empty();
         }
     }
     public Integer decodeInteger(T forKey) throws DecodingException, NoSuchElementException {
-        return decodeIntegerIfPresent(forKey).orElseThrow();
+        try {
+            return decodeIntegerIfPresent(forKey).orElseThrow();
+        } catch (NoSuchElementException e) {
+            throw new DecodingException(forKey.name(), "Integer");
+        }
     }
 
-    public Optional<String> decodeStringIfPresent(T forKey) throws DecodingException {
+    public Optional<String> decodeStringIfPresent(T forKey) {
         return Optional.ofNullable(prefsNode.get(forKey.name(), null));
     }
     public String decodeString(T forKey) throws DecodingException, NoSuchElementException {
-        return decodeStringIfPresent(forKey).orElseThrow();
+        try {
+            return decodeStringIfPresent(forKey).orElseThrow();
+        } catch (NoSuchElementException e) {
+            throw new DecodingException(forKey.name(), "String");
+        }
     }
 
     // Decoder conformance
