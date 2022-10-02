@@ -1,10 +1,14 @@
 @import "base.css";
 
+/* Common to all sections */
+.sidebar, .appBar, .queryContainer, .statusContainer, .table {
+    -fx-background-radius: 12;
+    -fx-background-color: -fx-control-inner-background;
+}
+
 /* Styles for the clusters sidebar */
 .sidebar {
     -fx-pref-width: 200px;
-    -fx-background-color: -fx-control-inner-background;
-    -fx-background-radius: 7;
 }
 
 .accordion > .titled-pane > .title {
@@ -12,8 +16,6 @@
 }
 
 .appBar {
-    -fx-background-color: -fx-control-inner-background;
-    -fx-background-radius: 7;
     -fx-padding: 8 10;
 }
 
@@ -25,21 +27,27 @@
 }
 
 .queryContainer {
-    -fx-background-color: -fx-control-inner-background;
-    -fx-background-radius: 200;
-    -fx-padding: 10;
+    -fx-background-radius: 12 12 4 4;
+    -fx-padding: 8;
 }
 .queryContainer > .text-field {
-    -fx-border-radius: 200 0 0 200;
-    -fx-background-radius: 200 0 0 200;
-    -fx-padding: 0 10 0 14;
+    -fx-border-radius: 7 0 0 7;
+    -fx-background-radius: 7 0 0 7;
+    -fx-padding: 0 8;
     -fx-font-size: 1.2em;
     -fx-font-family: 'Space Mono';
-    -fx-min-height: 35;
+    -fx-min-height: 34;
 }
 .queryContainer > .button {
-    -fx-border-radius: 0 200 200 0;
-    -fx-background-radius: 0 200 200 0;
+    -fx-background-radius: 0 7 7 0;
     -fx-padding: 8 12 8 10;
     -fx-min-width: 0;
+}
+
+.table {
+    -fx-background-radius: 4;
+}
+.statusContainer {
+    -fx-background-radius: 4 4 12 12;
+    -fx-padding: 6 8;
 }

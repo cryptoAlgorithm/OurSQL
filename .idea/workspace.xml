@@ -7,10 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (ui): UI refresh before tables implementation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/Cluster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +108,7 @@
   </component>
   <component name="RunManager" selected="Application.OurSQL">
     <configuration name="OurSQL" type="Application" factoryName="Application" temporary="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="liberica-17-full" />
+      <option name="ALTERNATIVE_JRE_PATH" value="liberica-18" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.OurSQL" />
       <module name="OurSQL" />
@@ -234,7 +237,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="13923000" />
+      <workItem from="1664633271631" duration="16979000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -411,7 +414,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664694691207</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="feat: allow removing clusters by right-clicking">
+      <created>1664695907371</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1664695907371</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -429,8 +439,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initial commit" />
-    <MESSAGE value="feat (codable): partial codable interfaces and implementations" />
     <MESSAGE value="chore (codable): refactor Decodable interface to allow decoding optionals, update and add JavaDoc" />
     <MESSAGE value="fix (PreferencesCodable): full encoding/decoding implementations&#10;chore (codable): Write round-trip tests" />
     <MESSAGE value="patch (codable): expose no-arg constructor in Decodable" />
@@ -454,7 +462,9 @@
     <MESSAGE value="patch: sprinkle more comments" />
     <MESSAGE value="patch (build): downgrade build target to Java 17" />
     <MESSAGE value="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage" />
+    <MESSAGE value="feat: allow removing clusters by right-clicking" />
+    <MESSAGE value="patch (ui): UI refresh before tables implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="patch (ui): UI refresh before tables implementation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

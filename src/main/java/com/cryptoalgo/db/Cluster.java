@@ -104,6 +104,13 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
      */
     public @Nullable String getUsername() { return username; }
 
+    /**
+     * Update the name of the current cluster. Call {@link #persist()}
+     * to persist the updated cluster info
+     * @param newName New name to update cluster with
+     */
+    public void setName(@NotNull String newName) { name = newName; }
+
     // Codable conformance
     public enum CodingKeys {
         host, database, port, name, username

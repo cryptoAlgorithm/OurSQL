@@ -3,7 +3,6 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Label?>
 
 <?import javafx.geometry.Insets?>
@@ -12,6 +11,7 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableView?>
 <BorderPane
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
@@ -62,11 +62,17 @@
         </VBox>
     </left>
     <center>
-        <VBox>
+        <VBox spacing="4">
             <BorderPane.margin><Insets top="8" right="8" bottom="8" /></BorderPane.margin>
             <HBox styleClass="queryContainer">
                 <TextField fx:id="queryField" promptText="%prompt.query" HBox.hgrow="ALWAYS" />
                 <Button text="%action.run" />
+            </HBox>
+            <TableView VBox.vgrow="ALWAYS" styleClass="table">
+
+            </TableView>
+            <HBox styleClass="statusContainer">
+                <Label>Ready</Label>
             </HBox>
         </VBox>
     </center>

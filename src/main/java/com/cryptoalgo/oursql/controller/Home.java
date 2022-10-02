@@ -57,9 +57,7 @@ public class Home {
                 try { Thread.sleep(100); } catch (InterruptedException ignored) {}
                 try {
                     Cluster newCluster = Cluster.decode(evt.getChild().name());
-                    Platform.runLater(() ->
-                        clusters.put(newCluster.getID(), newCluster)
-                    );
+                    Platform.runLater(() -> clusters.put(newCluster.getID(), newCluster));
                 } catch (DecodingException | InvocationTargetException e) {
                     e.printStackTrace();
                     log.warning(
@@ -79,9 +77,14 @@ public class Home {
                 // Add cluster to sidebar
                 TitledPane p = new TitledPane();
                 p.setText(c.getName());
+
                 // Allow deleting cluster on right click
                 ContextMenu m = new ContextMenu();
-                MenuItem del = new MenuItem(I18N.getString("action.delCluster"));
+                MenuItem
+                    header = new MenuItem(I18N.getString("actions")),
+                    del = new MenuItem(I18N.getString("action.delCluster"));
+                header.getStyleClass().add("accentedHeader");
+                header.setDisable(true);
                 del.setOnAction((ActionEvent ev) -> {
                     try { c.remove(); } catch (BackingStoreException e) {
                         log.severe("Failed to remove cluster");
@@ -89,7 +92,8 @@ public class Home {
                     }
                     categoryList.getPanes().remove(p);
                 });
-                m.getItems().add(del);
+
+                m.getItems().addAll(header, del);
                 p.setContextMenu(m);
                 categoryList.getPanes().add(p);
             }

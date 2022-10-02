@@ -57,13 +57,21 @@
 /* Menus */
 .menu-button { -fx-padding: 3 6 }
 .menu-button.icon { -fx-padding: 3 0 }
-.menu-item {
+.menu-item, .context-menu {
     -fx-background-radius: 7;
 }
 .context-menu {
     -fx-background-color: derive(-fx-control-inner-background, 10%);
-    -fx-background-radius: 7;
-    -fx-padding: 0;
+    -fx-padding: 4;
+    -fx-min-width: 180;
+}
+.context-menu .menu-item {
+    -fx-background-radius: 4;
+}
+.context-menu .menu-item.accentedHeader:disabled {
+    -fx-text-fill: -fx-accent;
+    -fx-opacity: 1;
+    -fx-background-color: #0000!important;
 }
 
 .root {
@@ -101,8 +109,10 @@
 }
 
 .label, Text { -fx-text-fill: #fff; -fx-fill: -fx-text-fill }
-.label.accentedHeader {
+.accentedHeader, .accentedHeader > .label {
     -fx-text-fill: -fx-accent-bright;
+}
+.label.accentedHeader {
     -fx-padding: 8 12;
     -fx-font-weight: 700;
 }
@@ -240,4 +250,14 @@
 .check-box > .box { -fx-background-color: #171717 }
 .check-box > .box > .mark {
     -fx-shape: "M9 16.17L5.53 12.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L9 16.17z"
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * TableView                                                                   *
+ *                                                                             *
+ ******************************************************************************/
+.table-view {
+    -fx-padding: 0;
+    -fx-background-insets: 0; /* Get rid of the ugly focus outline */
 }
