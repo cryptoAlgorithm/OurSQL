@@ -5,6 +5,8 @@ import com.cryptoalgo.oursql.support.I18N;
 import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -12,9 +14,10 @@ public class PasswordDialog extends Dialog<String> {
     private final PasswordField passwordField;
 
     public PasswordDialog(
-        String title,
-        String header,
-        String body
+        @NotNull String title,
+        @NotNull String header,
+        @Nullable String body,
+        @Nullable String caption
     ) {
         super();
         getDialogPane().getStylesheets().add(
@@ -37,10 +40,12 @@ public class PasswordDialog extends Dialog<String> {
         passwordField.setPromptText("Password");
         VBox c = new VBox(8);
         Label b = new Label(body);
+        b.getStyleClass().add("h5");
         b.setWrapText(true);
-        c.getChildren().add(b);
-        c.getChildren().add(passwordField);
+        c.getChildren().addAll(b, passwordField);
         c.getStyleClass().add("content");
+        if (caption != null) c.getChildren().add(new Label(caption));
+
         getDialogPane().setContent(c);
         Platform.runLater(passwordField::requestFocus);
 

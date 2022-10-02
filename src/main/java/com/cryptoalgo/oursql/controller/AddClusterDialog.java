@@ -237,8 +237,9 @@ public class AddClusterDialog {
         if (c.alreadyExists()) {
             new StyledAlert(
                 Alert.AlertType.ERROR,
-                "Db already exists, delete it first",
-                null, null
+                I18N.getString("dialog.dbDupe.title"),
+                I18N.getString("dialog.dbDupe.title"),
+                I18N.getString("dialog.dbDupe.body")
             ).show();
             return;
         }
@@ -246,9 +247,10 @@ public class AddClusterDialog {
             if (authType.getSelectionModel().isSelected(0)) {
                 if (storeType.getSelectionModel().isSelected(0)) {
                     String pw = new PasswordDialog(
-                        "Enter a password",
-                        "Credentials Password",
-                        "Authentication credential encryption password:"
+                        I18N.getString("dialog.encPw.title"),
+                        I18N.getString("dialog.encPw.header"),
+                        I18N.getString("dialog.encPw.body"),
+                        I18N.getString("dialog.encPw.caption")
                     ).showAndWait().orElse(null);
                     if (pw == null) return; // User clicked cancel
                     SecretsStore.encrypt(authPW.getText(), pw, c.getID());
