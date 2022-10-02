@@ -7,6 +7,7 @@ import com.cryptoalgo.db.DBMSUtils;
 import com.cryptoalgo.db.impl.BuiltInDBs;
 import com.cryptoalgo.oursql.OurSQL;
 import com.cryptoalgo.oursql.component.StyledAlert;
+import com.cryptoalgo.oursql.component.PasswordDialog;
 import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.SecretsStore;
 import javafx.collections.FXCollections;
@@ -242,9 +243,22 @@ public class AddClusterDialog {
             return;
         }
         try {
+            if (authType.getSelectionModel().isSelected(0)) {
+                if (storeType.getSelectionModel().isSelected(0)) {
+                    String pw = new PasswordDialog(
+                        "Enter a password",
+                        "Credentials Password",
+                        "Authentication credential encryption password:"
+                    ).showAndWait().orElse(null);
+                    if (pw == null) return; // User clicked cancel
+                    SecretsStore.encrypt(authPW.getText(), pw, c.getID());
+                } else if (storeType.getSelectionModel().isSelected(1))
+                    SecretsStore.encrypt(authPW.getText(), c.getID());
+            }
             c.persist();
-            /*if (authType.getSelectionModel().isSelected(0))
-                SecretsStore.encrypt(authPW.getText(),  c.getID());*/
+        } catch (SecretsStore.StoreException e) {
+            log.severe("Failed to add password to secrets store!");
+            return;
         } catch (EncodingException e) {
             // This shouldn't happen during normal operation, so it's
             // fairly safe to just log a warning without showing the user anything

@@ -20,7 +20,7 @@ public class SecretsStore {
     private static final Preferences prefsRoot = Preferences.userNodeForPackage(SecretsStore.class);
     private static final String algo = "AES/GCM/NoPadding";
 
-    static class StoreException extends Exception {
+    public static class StoreException extends Exception {
         public StoreException(String reason) { super(reason); }
     }
 
