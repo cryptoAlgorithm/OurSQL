@@ -7,10 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (build): downgrade build target to Java 17">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/SecretsStore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/oursql/support/SecretsStoreTest.java" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/Cluster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +234,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="12683000" />
+      <workItem from="1664633271631" duration="13923000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -403,7 +404,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664690576617</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage">
+      <created>1664694691207</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1664694691207</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -445,7 +453,8 @@
     <MESSAGE value="patch: sprinkle comments" />
     <MESSAGE value="patch: sprinkle more comments" />
     <MESSAGE value="patch (build): downgrade build target to Java 17" />
-    <option name="LAST_COMMIT_MESSAGE" value="patch (build): downgrade build target to Java 17" />
+    <MESSAGE value="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

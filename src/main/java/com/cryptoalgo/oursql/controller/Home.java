@@ -3,17 +3,18 @@ package com.cryptoalgo.oursql.controller;
 import com.cryptoalgo.codable.DecodingException;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
 import com.cryptoalgo.db.Cluster;
+import com.cryptoalgo.oursql.support.I18N;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.HashMap;
 import java.util.logging.Logger;
 import java.util.prefs.*;
 
@@ -27,8 +28,7 @@ public class Home {
     @FXML
     private Accordion categoryList;
 
-    private final LinkedHashMap<String, Cluster> linkedClusterMap = new LinkedHashMap<>();
-    private final ObservableMap<String, Cluster> clusters = FXCollections.observableMap(linkedClusterMap);
+    private final ObservableMap<String, Cluster> clusters = FXCollections.observableMap(new HashMap<>());
 
     @FXML
     private void addCluster() {
@@ -69,22 +69,29 @@ public class Home {
                 }
             }
 
-            public void childRemoved(NodeChangeEvent evt) {
-                clusters.remove(evt.getChild().name());
-            }
+            public void childRemoved(NodeChangeEvent evt) { clusters.remove(evt.getChild().name()); }
         });
 
         // Listen to cluster changes for single source of truth
         clusters.addListener((MapChangeListener<String, Cluster>) evt -> {
             if (evt.wasAdded()) {
+                Cluster c = evt.getValueAdded();
                 // Add cluster to sidebar
                 TitledPane p = new TitledPane();
-                p.setText(evt.getValueAdded().getName());
+                p.setText(c.getName());
+                // Allow deleting cluster on right click
+                ContextMenu m = new ContextMenu();
+                MenuItem del = new MenuItem(I18N.getString("action.delCluster"));
+                del.setOnAction((ActionEvent ev) -> {
+                    try { c.remove(); } catch (BackingStoreException e) {
+                        log.severe("Failed to remove cluster");
+                        return;
+                    }
+                    categoryList.getPanes().remove(p);
+                });
+                m.getItems().add(del);
+                p.setContextMenu(m);
                 categoryList.getPanes().add(p);
-            } else {
-                categoryList
-                    .getPanes()
-                    .remove(List.of(evt.getMap().keySet().toArray()).indexOf(evt.getKey()));
             }
         });
 

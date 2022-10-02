@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.NoSuchElementException;
+import java.util.prefs.BackingStoreException;
 import java.util.regex.Pattern;
 
 public final class Cluster extends Codable<Cluster.CodingKeys> {
@@ -128,6 +129,13 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
      */
     public void persist() throws EncodingException {
         new PreferencesEncoder<CodingKeys>("clusters/" + id).encode(this);
+    }
+
+    /**
+     * Removes a cluster from non-volatile storage.
+     */
+    public void remove() throws BackingStoreException {
+        PreferencesEncoder.rootNode.node("clusters/" + id).removeNode();
     }
 
     /**
