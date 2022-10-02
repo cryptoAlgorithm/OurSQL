@@ -130,6 +130,11 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
         new PreferencesEncoder<CodingKeys>("clusters/" + id).encode(this);
     }
 
+    /**
+     * Check if a cluster with the same ID was already persisted
+     * @return <code>true</code> if the node with this cluster's ID already exists
+     * @implNote Does not validate if persisted cluster is actually valid
+     */
     public boolean alreadyExists() {
         try {
             return PreferencesEncoder.rootNode.nodeExists("clusters/" + id);

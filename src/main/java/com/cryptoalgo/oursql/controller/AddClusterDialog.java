@@ -33,13 +33,17 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * Controller for the add cluster flow
+ */
 public class AddClusterDialog {
+    // Using private visibility and FXML modifier - best practices
     @FXML
     private Label uriConstructError;
     @FXML
     private Text userLabel, pwLabel;
     @FXML
-    private ComboBox<String> authType; // Using private visibility and FXML modifier - best practices
+    private ComboBox<String> authType;
     @FXML
     private TextField name, host, port, authUser, authPW, database, uri;
     @FXML
@@ -177,6 +181,7 @@ public class AddClusterDialog {
     private void initialize() {
         loadDrivers();
 
+        // Add comboBox options
         authType.setItems(FXCollections.observableArrayList(
             I18N.getString("opt.auth.user"),
             I18N.getString("opt.auth.none")
@@ -220,6 +225,7 @@ public class AddClusterDialog {
     @FXML
     private void add(ActionEvent evt) {
         Cluster c = constructCluster();
+        // Ensure cluster with same id doesn't already exist, otherwise bad things will happen
         if (c.alreadyExists()) {
             Alert e = new Alert(Alert.AlertType.ERROR);
             e.setTitle("Db already exists, delete it first");
@@ -229,9 +235,12 @@ public class AddClusterDialog {
         try {
             c.persist();
         } catch (EncodingException e) {
+            // This shouldn't happen during normal operation, so it's
+            // fairly safe to just log a warning without showing the user anything
             log.severe("Failed to persist cluster!");
             return;
         }
+        // If all is good, close the model's window
         // Just look at the amount of explicit casts it takes to get the current stage!
         ((Stage) ((Button) evt.getSource()).getScene().getWindow()).close();
     }
@@ -248,6 +257,7 @@ public class AddClusterDialog {
                     authPW.getText().isBlank() ? null : authPW.getText()
                 )
                 .getMetaData();
+            // Populate hoisted vars
             dbName = dbMeta.getDatabaseProductName();
             dbVer = dbMeta.getDatabaseProductVersion();
             driverName = dbMeta.getDriverName();
@@ -261,6 +271,7 @@ public class AddClusterDialog {
             e.show();
             return;
         } finally {
+            // Always re-enable button
             testButton.setDisable(false);
         }
         // Show db test succeeded alert

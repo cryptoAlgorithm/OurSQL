@@ -8,15 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="fix (Cluster): use hex encoding for ID generation to fix preferences issues&#10;/ is a valid char in base64, which sometimes screwed up preferences encoding&#10;&#10;patch (PreferencesCodable): more useful exceptions when a key is not present">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/HexEncoder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/KeyedEncodingContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/KeyedEncodingContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/preferencesCoder/PreferencesDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/preferencesCoder/PreferencesDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/preferencesCoder/PreferencesEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/preferencesCoder/PreferencesEncoder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/Cluster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/codable/preferencesCoder/PreferencesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/codable/preferencesCoder/PreferencesTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +230,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="5580000" />
+      <workItem from="1664633271631" duration="6533000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -378,7 +372,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664632517237</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fix (Cluster): use hex encoding for ID generation to fix preferences issues&#10;/ is a valid char in base64, which sometimes screwed up preferences encoding&#10;&#10;patch (PreferencesCodable): more useful exceptions when a key is not present">
+      <created>1664673103756</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1664673103756</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
