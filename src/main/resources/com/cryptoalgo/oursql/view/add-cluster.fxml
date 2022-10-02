@@ -42,7 +42,7 @@
                 <Text text="%label.host" />
                 <TextField GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" fx:id="host" text="localhost" />
                 <Text text="%label.port" GridPane.columnIndex="3" />
-                <TextField minWidth="100" prefWidth="100" GridPane.columnIndex="4" fx:id="port" />
+                <TextField minWidth="-Infinity" prefWidth="100" GridPane.columnIndex="4" fx:id="port" />
 
                 <Text text="%label.auth" GridPane.rowIndex="2" />
                 <ComboBox GridPane.rowIndex="2" GridPane.columnIndex="1"
@@ -53,6 +53,10 @@
 
                 <Text text="%label.pw" GridPane.rowIndex="4" fx:id="pwLabel" />
                 <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="authPW" />
+
+                <Text text="%label.store" GridPane.rowIndex="4" GridPane.columnIndex="3" fx:id="storeLabel" />
+                <ComboBox GridPane.rowIndex="4" GridPane.columnIndex="4" fx:id="storeType"
+                          minWidth="-Infinity" prefWidth="110" />
 
                 <Text text="%label.path" GridPane.rowIndex="6" />
                 <TextField GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="6" fx:id="database" />

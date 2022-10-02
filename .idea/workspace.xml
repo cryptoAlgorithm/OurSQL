@@ -7,14 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (ui): UI refresh before tables implementation">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (ui): add better looking styled alert">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledAlert.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/DBManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/dialog.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/typography.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/typography.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/add-cluster.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/add-cluster.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,13 +25,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="Record" />
         <option value="package-info" />
         <option value="Interface" />
         <option value="FxmlFile" />
         <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -72,11 +72,11 @@
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
-      "synapse",
       "sqlite",
       "postgresql",
+      "mysql",
       "mongo",
-      "mysql"
+      "hive"
     ]
   }
 }]]></component>
@@ -238,7 +238,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="18399000" />
+      <workItem from="1664633271631" duration="22387000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -429,7 +429,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664701507582</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="feat (ui): show tip if no clusters are added">
+      <created>1664702990992</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1664702990992</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,8 +454,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore (codable): refactor Decodable interface to allow decoding optionals, update and add JavaDoc" />
-    <MESSAGE value="fix (PreferencesCodable): full encoding/decoding implementations&#10;chore (codable): Write round-trip tests" />
     <MESSAGE value="patch (codable): expose no-arg constructor in Decodable" />
     <MESSAGE value="feat (home): Read clusters from Preferences in initialization&#10;patch (codable): make constructors and encode/decode methods public" />
     <MESSAGE value="patch: Update README" />
@@ -472,7 +477,9 @@
     <MESSAGE value="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage" />
     <MESSAGE value="feat: allow removing clusters by right-clicking" />
     <MESSAGE value="patch (ui): UI refresh before tables implementation" />
-    <option name="LAST_COMMIT_MESSAGE" value="patch (ui): UI refresh before tables implementation" />
+    <MESSAGE value="feat (ui): show tip if no clusters are added" />
+    <MESSAGE value="feat (ui): add better looking styled alert" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat (ui): add better looking styled alert" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

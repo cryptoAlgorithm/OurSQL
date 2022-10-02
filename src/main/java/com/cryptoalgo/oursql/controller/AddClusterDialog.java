@@ -6,7 +6,9 @@ import com.cryptoalgo.db.DatabaseUtils;
 import com.cryptoalgo.db.DBMSUtils;
 import com.cryptoalgo.db.impl.BuiltInDBs;
 import com.cryptoalgo.oursql.OurSQL;
+import com.cryptoalgo.oursql.component.StyledAlert;
 import com.cryptoalgo.oursql.support.I18N;
+import com.cryptoalgo.oursql.support.SecretsStore;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,9 +43,9 @@ public class AddClusterDialog {
     @FXML
     private Label uriConstructError;
     @FXML
-    private Text userLabel, pwLabel;
+    private Text userLabel, pwLabel, storeLabel;
     @FXML
-    private ComboBox<String> authType;
+    private ComboBox<String> authType, storeType;
     @FXML
     private TextField name, host, port, authUser, authPW, database, uri;
     @FXML
@@ -62,7 +64,7 @@ public class AddClusterDialog {
             Objects.requireNonNull(OurSQL.class.getResource("view/add-cluster.fxml")),
             ResourceBundle.getBundle("locales/strings", new Locale("en"))
         )));
-        stage.setMinWidth(630);
+        stage.setMinWidth(640);
         stage.setMinHeight(250);
         stage.show();
     }
@@ -186,19 +188,24 @@ public class AddClusterDialog {
             I18N.getString("opt.auth.user"),
             I18N.getString("opt.auth.none")
         ));
+        storeType.setItems(FXCollections.observableArrayList(
+            I18N.getString("opt.store.enc"),
+            I18N.getString("opt.store.plain"),
+            I18N.getString("opt.store.none")
+        ));
         authType.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             boolean useAuth = newValue.intValue() == 0;
             // Make auth fields invisible and remove them from the layout
-            authUser.setVisible(useAuth);
-            authPW.setVisible(useAuth);
-            userLabel.setVisible(useAuth);
-            pwLabel.setVisible(useAuth);
-            authUser.setManaged(useAuth);
-            authPW.setManaged(useAuth);
-            userLabel.setManaged(useAuth);
-            pwLabel.setManaged(useAuth);
+            authUser.setVisible(useAuth); authUser.setManaged(useAuth);
+            authPW.setVisible(useAuth); authPW.setManaged(useAuth);
+            userLabel.setVisible(useAuth); userLabel.setManaged(useAuth);
+            pwLabel.setVisible(useAuth); pwLabel.setManaged(useAuth);
+            storeLabel.setVisible(useAuth); storeLabel.setManaged(useAuth);
+            storeType.setVisible(useAuth); storeType.setManaged(useAuth);
         });
-        authType.getSelectionModel().select(0); // Select user & PW auth by default
+        // Ensure combobox has an initial value
+        storeType.getSelectionModel().select(0);
+        authType.getSelectionModel().select(0);
 
         // Restrict port to +ve numeric input only
         port.setTextFormatter(new TextFormatter<>(c -> {
@@ -227,13 +234,17 @@ public class AddClusterDialog {
         Cluster c = constructCluster();
         // Ensure cluster with same id doesn't already exist, otherwise bad things will happen
         if (c.alreadyExists()) {
-            Alert e = new Alert(Alert.AlertType.ERROR);
-            e.setTitle("Db already exists, delete it first");
-            e.show();
+            new StyledAlert(
+                Alert.AlertType.ERROR,
+                "Db already exists, delete it first",
+                null, null
+            ).show();
             return;
         }
         try {
             c.persist();
+            /*if (authType.getSelectionModel().isSelected(0))
+                SecretsStore.encrypt(authPW.getText(),  c.getID());*/
         } catch (EncodingException e) {
             // This shouldn't happen during normal operation, so it's
             // fairly safe to just log a warning without showing the user anything
@@ -264,28 +275,30 @@ public class AddClusterDialog {
             driverVer = dbMeta.getDriverVersion();
             driverSpec = dbMeta.getJDBCMajorVersion() + "." + dbMeta.getJDBCMinorVersion();
         } catch (URISyntaxException | SQLException ex) {
-            Alert e = new Alert(Alert.AlertType.ERROR);
-            e.setTitle(I18N.getString("dialog.dbTestFail.title"));
-            e.setHeaderText(I18N.getString("dialog.dbTestFail.header"));
-            e.setContentText(ex.getLocalizedMessage());
-            e.show();
+            new StyledAlert(
+                Alert.AlertType.ERROR,
+                I18N.getString("dialog.dbTestFail.title"),
+                I18N.getString("dialog.dbTestFail.header"),
+                ex.getLocalizedMessage()
+            ).show();
             return;
         } finally {
             // Always re-enable button
             testButton.setDisable(false);
         }
         // Show db test succeeded alert
-        Alert i = new Alert(Alert.AlertType.INFORMATION);
-        i.setTitle(I18N.getString("dialog.dbTestOk.title"));
-        i.setHeaderText(I18N.getString("dialog.dbTestOk.header"));
-        i.setContentText(I18N.getString(
-            "dialog.dbTestOk.body",
-            dbName,
-            dbVer,
-            driverName,
-            driverVer,
-            driverSpec
-        ));
-        i.show();
+        new StyledAlert(
+            Alert.AlertType.INFORMATION,
+            I18N.getString("dialog.dbTestOk.title"),
+            I18N.getString("dialog.dbTestOk.header"),
+            I18N.getString(
+                "dialog.dbTestOk.body",
+                dbName,
+                dbVer,
+                driverName,
+                driverVer,
+                driverSpec
+            )
+        ).show();
     }
 }

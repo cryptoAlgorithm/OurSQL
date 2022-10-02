@@ -75,7 +75,7 @@
 }
 
 .root {
-    -fx-background-color: #262626;
+    -fx-background: #262626;
     -fx-base: -fx-control-inner-background;
 
     -fx-accent-bright: rgb(0, 163, 92);
@@ -118,7 +118,7 @@
     -fx-font-weight: 700;
 }
 .svgIcon {
-    -fx-fill: -fx-text-contrast-color;;
+    -fx-fill: -fx-text-contrast-color;
 }
 
 .separator *.line { -fx-border-color: -fx-outer-border }
