@@ -14,9 +14,14 @@ import java.util.prefs.BackingStoreException;
 import java.util.regex.Pattern;
 
 public final class Cluster extends Codable<Cluster.CodingKeys> {
-    private final String host, database, username, id;
+    @NotNull
+    private final String host, database, id;
+    @Nullable
+    private final String username;
+    @NotNull
     private String name;
-    private final int port;
+    @NotNull
+    private final Integer port;
 
     /**
      * Ensure host isn't invalid to prevent causing problems down the line
@@ -163,5 +168,10 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
         container.encode(name, CodingKeys.name);
         container.encode(database, CodingKeys.database);
         container.encode(username, CodingKeys.username);
+    }
+
+    @Override
+    public boolean equals(Object c) {
+        return c instanceof Cluster ? ((Cluster) c).id.equals(id) : c.equals(this);
     }
 }

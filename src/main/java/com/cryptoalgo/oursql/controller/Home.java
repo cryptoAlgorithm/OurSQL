@@ -3,11 +3,9 @@ package com.cryptoalgo.oursql.controller;
 import com.cryptoalgo.codable.DecodingException;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
 import com.cryptoalgo.db.Cluster;
+import com.cryptoalgo.oursql.model.DBManager;
 import com.cryptoalgo.oursql.support.I18N;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,7 +13,6 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.logging.Logger;
 import java.util.prefs.*;
 
@@ -26,12 +23,12 @@ import java.util.prefs.*;
 public class Home {
     private static final Logger log = Logger.getLogger(Home.class.getName());
 
+    private static final DBManager viewModel = new DBManager();
+
     @FXML
     private Accordion categoryList;
     @FXML
     private VBox addClusterTip;
-
-    private final ObservableMap<String, Cluster> clusters = FXCollections.observableMap(new HashMap<>());
 
     @FXML
     private void addCluster() {
@@ -49,8 +46,8 @@ public class Home {
      ===================================================*/
 
     private void showHideAddClusterTip() {
-        addClusterTip.setVisible(clusters.isEmpty());
-        addClusterTip.setManaged(clusters.isEmpty());
+        addClusterTip.setVisible(!viewModel.hasClusters());
+        addClusterTip.setManaged(!viewModel.hasClusters());
     }
 
     /**
@@ -65,7 +62,7 @@ public class Home {
                 try { Thread.sleep(100); } catch (InterruptedException ignored) {}
                 try {
                     Cluster newCluster = Cluster.decode(evt.getChild().name());
-                    Platform.runLater(() -> clusters.put(newCluster.getID(), newCluster));
+                    Platform.runLater(() -> viewModel.addCluster(newCluster));
                 } catch (DecodingException | InvocationTargetException e) {
                     e.printStackTrace();
                     log.warning(
@@ -75,57 +72,43 @@ public class Home {
                 }
             }
 
-            public void childRemoved(NodeChangeEvent evt) { clusters.remove(evt.getChild().name()); }
+            public void childRemoved(NodeChangeEvent evt) { viewModel.removeCluster(evt.getChild().name()); }
         });
 
         // Listen to cluster changes for single source of truth
-        clusters.addListener((MapChangeListener<String, Cluster>) evt -> {
-            if (evt.wasAdded()) {
-                Cluster c = evt.getValueAdded();
-                // Add cluster to sidebar
-                TitledPane p = new TitledPane();
-                p.setText(c.getName());
+        viewModel.setOnNewCluster((Cluster c, Integer idx) -> {
+            // Add cluster to sidebar
+            TitledPane p = new TitledPane();
+            p.setText(c.getName());
+            p.setOnMouseClicked(ev -> {
+            });
 
-                // Allow deleting cluster on right click
-                ContextMenu m = new ContextMenu();
-                MenuItem
-                    header = new MenuItem(I18N.getString("actions")),
-                    del = new MenuItem(I18N.getString("action.delCluster"));
-                header.getStyleClass().add("accentedHeader");
-                header.setDisable(true);
-                del.setOnAction((ActionEvent ev) -> {
-                    try { c.remove(); } catch (BackingStoreException e) {
-                        log.severe("Failed to remove cluster");
-                        return;
-                    }
-                    categoryList.getPanes().remove(p);
-                    showHideAddClusterTip();
-                });
+            // Allow deleting cluster on right click
+            ContextMenu m = new ContextMenu();
+            MenuItem
+                header = new MenuItem(I18N.getString("actions")),
+                del = new MenuItem(I18N.getString("action.delCluster"));
+            header.getStyleClass().add("accentedHeader");
+            header.setDisable(true);
+            del.setOnAction((ActionEvent ev) -> {
+                try { c.remove(); } catch (BackingStoreException e) {
+                    log.severe("Failed to remove cluster");
+                }
+            });
 
-                m.getItems().addAll(header, del);
-                p.setContextMenu(m);
-                categoryList.getPanes().add(p);
-                showHideAddClusterTip();
-            }
+            m.getItems().addAll(header, del);
+            p.setContextMenu(m);
+            categoryList.getPanes().add(idx, p);
+            showHideAddClusterTip();
         });
 
+        viewModel.setOnRemoveCluster(i -> Platform.runLater(() -> {
+            categoryList.getPanes().remove(i.intValue());
+            showHideAddClusterTip();
+        }));
+
         // Populate clusters map
-        try {
-            for (String clusterID : PreferencesEncoder.rootNode.node("clusters").childrenNames()) {
-                try {
-                    Cluster c = Cluster.decode(clusterID);
-                    clusters.put(c.getID(), c);
-                } catch (DecodingException | InvocationTargetException e) {
-                    log.warning(String.format(
-                        "Could not decode cluster with ID %s due to exception: %s, removing node",
-                        clusterID,
-                        e.getMessage()
-                    ));
-                    e.printStackTrace();
-                    PreferencesEncoder.rootNode.node("clusters/" + clusterID).removeNode();
-                }
-            }
-        } catch (BackingStoreException | IllegalStateException ignored) {}
+        viewModel.loadClusters();
     }
 
     @FXML
