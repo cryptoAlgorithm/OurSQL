@@ -22,8 +22,8 @@ import java.util.prefs.BackingStoreException;
  * Over-engineered database connection, loading and updating class.
  * Serves as a view model for {@link com.cryptoalgo.oursql.controller.Home}
  */
-public class DBManager {
-    private static final Logger log = Logger.getLogger(DBManager.class.getName());
+public class HomeViewModel {
+    private static final Logger log = Logger.getLogger(HomeViewModel.class.getName());
 
     private final ObservableList<Cluster> clusters = FXCollections.observableArrayList(new ArrayList<>());
     public final ObservableMap<String, ObservableList<String>> tables =

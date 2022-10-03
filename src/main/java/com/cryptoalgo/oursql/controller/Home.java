@@ -3,7 +3,7 @@ package com.cryptoalgo.oursql.controller;
 import com.cryptoalgo.codable.DecodingException;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
 import com.cryptoalgo.db.Cluster;
-import com.cryptoalgo.oursql.model.DBManager;
+import com.cryptoalgo.oursql.model.HomeViewModel;
 import com.cryptoalgo.oursql.support.I18N;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -23,7 +23,7 @@ import java.util.prefs.*;
 public class Home {
     private static final Logger log = Logger.getLogger(Home.class.getName());
 
-    private static final DBManager viewModel = new DBManager();
+    private static final HomeViewModel viewModel = new HomeViewModel();
 
     @FXML
     private Accordion categoryList;
@@ -59,7 +59,7 @@ public class Home {
         PreferencesEncoder.rootNode.node("clusters").addNodeChangeListener(new NodeChangeListener() {
             public void childAdded(NodeChangeEvent evt) {
                 // A hack to allow serialization to complete first - race condition
-                try { Thread.sleep(100); } catch (InterruptedException ignored) {}
+                try { Thread.sleep(10); } catch (InterruptedException ignored) {}
                 try {
                     Cluster newCluster = Cluster.decode(evt.getChild().name());
                     Platform.runLater(() -> viewModel.addCluster(newCluster));
