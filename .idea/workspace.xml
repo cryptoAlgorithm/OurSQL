@@ -7,11 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat: ask for password and decrypt credentials when attempting db connection">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="fix: cluster passwords stored in plaintext are now retrieved properly during connection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/SecretsStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/SecretsStore.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +232,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="56305000" />
+      <workItem from="1664633271631" duration="57964000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -488,7 +486,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664796738261</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="fix: cluster passwords stored in plaintext are now retrieved properly during connection">
+      <created>1664797480434</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1664797480434</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,7 +511,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="patch: update README with new workflow name and download badge" />
     <MESSAGE value="chore (db): add Atlas cluster to IntelliJ DB viewer" />
     <MESSAGE value="patch (db): re-architect project to use JDBC instead of reinventing the wheel" />
     <MESSAGE value="patch (db): fix jdbc connection URI construction" />
@@ -531,7 +535,8 @@
     <MESSAGE value="chore (home): rename viewModel following naming convention" />
     <MESSAGE value="feat (home): bad table lazy-loading working" />
     <MESSAGE value="feat: ask for password and decrypt credentials when attempting db connection" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: ask for password and decrypt credentials when attempting db connection" />
+    <MESSAGE value="fix: cluster passwords stored in plaintext are now retrieved properly during connection" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: cluster passwords stored in plaintext are now retrieved properly during connection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

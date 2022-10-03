@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 
@@ -75,6 +74,14 @@ public class Home {
                     t.setItems(tables);
                     t.setPrefHeight(tables.size() * 28);
                     p.setContent(t);
+                    t.getSelectionModel().selectedIndexProperty().addListener((o, ov, nv) -> {
+                        if (nv.intValue() < 0) return;
+                        log.info("navigating to cluster ID "
+                            + c.getID()
+                            + " and table "
+                            + tables.get(nv.intValue()));
+                    });
+                    t.getSelectionModel().select(0);
                 } else p.setExpanded(false);
             });
         });
@@ -115,10 +122,19 @@ public class Home {
             p.setContent(new Label("Loading tables..."));
 
             // Tables are lazy-loaded the first time the titled pane is opened
-            p.setOnMouseClicked(ev -> {
-                // Only respond to right clicks
-                // Return immediately if tables are already loaded into cache
-                if (ev.getButton() != MouseButton.PRIMARY || viewModel.tablesCached(c.getID())) return;
+            p.expandedProperty().addListener((ch, o, newVal) -> {
+                // If titledPane is collapsed, clear table selection
+                if (!newVal) {
+                    if (p.getContent() instanceof ListView<?>)
+                        ((ListView<?>) p.getContent()).getSelectionModel().clearSelection();
+                    return;
+                }
+                // Return if tables are already loaded into cache
+                if (viewModel.tablesCached(c.getID())) {
+                    if (p.getContent() instanceof ListView<?>)
+                        ((ListView<?>) p.getContent()).getSelectionModel().select(0);
+                    return;
+                }
 
                 loadTables(c, p);
             });
