@@ -6,10 +6,10 @@ class DatabaseUtilsTest {
     @Test
     void testPostgreSQL() throws Exception {
         DatabaseUtils
-            .db(new com.cryptoalgo.db.impl.postgresql.Utils())
             .getConnection(
                 new Cluster(
-                    "localhost",
+                    "postgresql",
+                    "postgres",
                     "postgres",
                     null,
                     5432,

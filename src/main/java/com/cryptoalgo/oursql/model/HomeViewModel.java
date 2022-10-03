@@ -3,6 +3,9 @@ package com.cryptoalgo.oursql.model;
 import com.cryptoalgo.codable.DecodingException;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
 import com.cryptoalgo.db.Cluster;
+import com.cryptoalgo.db.DatabaseUtils;
+import com.cryptoalgo.oursql.component.PasswordDialog;
+import com.cryptoalgo.oursql.support.AsyncUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -10,6 +13,10 @@ import javafx.collections.ObservableMap;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -29,15 +36,51 @@ public class HomeViewModel {
     public final ObservableMap<String, ObservableList<String>> tables =
         FXCollections.observableMap(new HashMap<>());
 
+    public final ObservableMap<String, String> cachedPasswords =
+        FXCollections.observableMap(new HashMap<>());
+
     /**
      * Request to load the tables of a particular database cluster.
-     * Repeated calls for the same cluster ID will have no effect.
+     * Call again with the same cluster ID to refresh clusters
      * @param cluster Cluster to fetch tables of
      * @throws NoSuchElementException If the cluster ID doesn't exist
      */
-    public void requestTable(Cluster cluster) throws NoSuchElementException {
+    public ObservableList<String> requestTable(Cluster cluster) throws NoSuchElementException, SQLException {
+        String id = cluster.getID(); // Shorter code since id is used in many places
         int idx = clusters.indexOf(cluster);
         if (idx < 0) throw new NoSuchElementException("Requested cluster doesn't exist in clusters array");
+
+        if (cluster.getUsername() != null) {
+            if (cachedPasswords.getOrDefault(id, null) == null) {
+                AsyncUtils.runLaterAndWait(() -> cachedPasswords.put(id, new PasswordDialog(
+                    "Cluster Authentication",
+                    "Enter the password for the cluster",
+                    "",
+                    null
+                ).showAndWait().orElse(null)));
+            }
+            // If it still isn't populated, the user clicked cancel
+            if (cachedPasswords.getOrDefault(id, null) == null) return null;
+        }
+
+        try {
+            Connection conn = DatabaseUtils.getConnection(
+                cluster,
+                cluster.getUsername() != null ? cachedPasswords.get(id) : null
+            );
+            ResultSet r = conn
+                .getMetaData()
+                .getTables(null, null, "%", new String[]{"TABLE"});
+            if (!tables.containsKey(id)) tables.put(id, FXCollections.observableArrayList());
+            else tables.get(id).clear();
+            while (r.next()) tables.get(id).add(r.getString(3));
+        } catch (URISyntaxException ignored) {}
+
+        return tables.get(id);
+    }
+
+    public boolean tablesCached(String forCluster) {
+        return tables.containsKey(forCluster);
     }
 
     /**

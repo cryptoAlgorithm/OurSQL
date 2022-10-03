@@ -1,5 +1,6 @@
 package com.cryptoalgo.db;
 
+import com.cryptoalgo.db.impl.BuiltInDBs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,43 +12,24 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseUtils {
-    DBMSUtils utils;
-
-    public DatabaseUtils(DBMSUtils utils) {
-        this.utils = utils;
-    }
-
-    /**
-     * Convenience method to get an instance of {@link DatabaseUtils}.
-     * It's recommended to use this method instead of calling the
-     * constructor as further optimisation might be added in the
-     * future to cache instances.
-     * @implNote Currently equivalent to simply calling
-     *           {@link DatabaseUtils#DatabaseUtils(DBMSUtils)},
-     *           might change in the future.
-     * @return An instance of {@link DatabaseUtils}
-     */
-    public static DatabaseUtils db(DBMSUtils utils) {
-        return new DatabaseUtils(utils);
-    }
-
     /**
      * Generates a database connection URI given a {@link Cluster} and a password.
-     * Calls {@link #getConnectionURI(Integer port, String host, String path, boolean includeJDBC)}
+     * @implNote Calls {@link #getConnectionURI(Integer, String, String, DBMSUtils, boolean)}
      * internally.
      * @param cluster Cluster to get connection URI from
      * @return A connection URI for the provided {@link Cluster}, not valid for
      *         connection if <code>password</code> is <code>null</code> and
      * @throws URISyntaxException If non-permitted characters were present in constructed URI
-     * @see #getConnectionURI(Integer port, String host, String path, boolean includeJDBC)
+     * @see #getConnectionURI(Integer, String, String, DBMSUtils, boolean)
      */
-    public URI getConnectionURI(
+    public static URI getConnectionURI(
         @NotNull Cluster cluster
     ) throws URISyntaxException {
         return getConnectionURI(
             cluster.getPort(),
             cluster.getHost(),
             cluster.getDatabase(),
+            BuiltInDBs.lookupImpl(cluster.getDBMS()),
             true
         );
     }
@@ -62,14 +44,18 @@ public class DatabaseUtils {
      * @param port Database connection port
      * @param host Database host
      * @param path Database path (relative to <code>host</code>)
+     * @param utils An instance of the database utils for the cluster's DBMS
+     * @param includeJDBC If jdbc: should be appended before the scheme.
+     *                    Set to false for user-facing UIs
      * @return A connection URI for the provided connection params, not valid for
      * connection if <code>password</code> is <code>null</code> and
      * {@link Cluster#getUsername()} is not null.
      */
-    public URI getConnectionURI(
+    public static URI getConnectionURI(
         @NotNull Integer port,
         @NotNull String host,
         @NotNull String path,
+        @NotNull DBMSUtils utils,
         boolean includeJDBC
     ) throws URISyntaxException {
         return new URI(
@@ -85,12 +71,28 @@ public class DatabaseUtils {
         );
     }
 
-    public Connection getConnection(
+    public static Connection getConnection(
         @NotNull Cluster cluster,
         @Nullable String password
     ) throws URISyntaxException, SQLException {
+        return getConnection(
+            getConnectionURI(cluster),
+            cluster,
+            password
+        );
+    }
+
+    /**
+     * Get a database connection
+     * @return The database connection object
+     */
+    public static Connection getConnection(
+        @NotNull URI connURI,
+        @NotNull Cluster cluster,
+        @Nullable String password
+    ) throws SQLException {
         return DriverManager.getConnection(
-            getConnectionURI(cluster).toString(),
+            connURI.toString(),
             cluster.getUsername(),
             password
         );

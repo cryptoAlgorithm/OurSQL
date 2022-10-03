@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 public final class Cluster extends Codable<Cluster.CodingKeys> {
     @NotNull
-    private final String host, database, id;
+    private final String dbms, host, database, id;
     @Nullable
     private final String username;
     @NotNull
@@ -54,12 +54,14 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
         port = container.decodeInteger(CodingKeys.port);
         host = purifyHost(container.decodeString(CodingKeys.host));
         name = container.decodeString(CodingKeys.name);
+        dbms = container.decodeString(CodingKeys.dbms);
         database = container.decodeString(CodingKeys.database);
         username = container.decodeStringIfPresent(CodingKeys.username).orElse(null);
         id = computeID(host, database, port);
     }
 
     public Cluster(
+        @NotNull String dbms,
         @NotNull String host,
         @NotNull String database,
         @Nullable String username,
@@ -67,6 +69,7 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
         @NotNull String name
     ) {
         super();
+        this.dbms = dbms;
         this.username = username;
         this.database = database;
         this.host = purifyHost(host);
@@ -110,6 +113,11 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
     public @Nullable String getUsername() { return username; }
 
     /**
+     * @return A string identifying the DBMS of this cluster
+     */
+    public @NotNull String getDBMS() { return dbms; }
+
+    /**
      * Update the name of the current cluster. Call {@link #persist()}
      * to persist the updated cluster info
      * @param newName New name to update cluster with
@@ -118,7 +126,7 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
 
     // Codable conformance
     public enum CodingKeys {
-        host, database, port, name, username
+        host, database, port, name, username, dbms
     }
 
     /**
@@ -168,6 +176,7 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
         container.encode(name, CodingKeys.name);
         container.encode(database, CodingKeys.database);
         container.encode(username, CodingKeys.username);
+        container.encode(dbms, CodingKeys.dbms);
     }
 
     @Override

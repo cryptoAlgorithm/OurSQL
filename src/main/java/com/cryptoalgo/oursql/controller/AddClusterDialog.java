@@ -105,10 +105,11 @@ public class AddClusterDialog {
      */
     private void fieldsUpdated() {
         try {
-            uri.setText(DatabaseUtils.db(getDBUtils()).getConnectionURI(
+            uri.setText(DatabaseUtils.getConnectionURI(
                 port.getText().isEmpty() ? -1 : Integer.parseInt(port.getText()),
                 host.getText().trim(),
                 database.getText(),
+                getDBUtils(),
                 false
             ).toString());
             setStatus(null, verifyFields(false));
@@ -126,6 +127,7 @@ public class AddClusterDialog {
      */
     private Cluster constructCluster() {
         return new Cluster(
+            getDBUtils().scheme(),
             host.getText(),
             database.getText(),
             authUser.getText().isBlank() ? null : authUser.getText(),
@@ -278,7 +280,6 @@ public class AddClusterDialog {
         String dbName, dbVer, driverName, driverVer, driverSpec;
         try {
             DatabaseMetaData dbMeta = DatabaseUtils
-                .db(getDBUtils())
                 .getConnection(
                     constructCluster(),
                     authPW.getText().isBlank() ? null : authPW.getText()

@@ -6,13 +6,17 @@ import com.cryptoalgo.db.Cluster;
 import com.cryptoalgo.oursql.model.HomeViewModel;
 import com.cryptoalgo.oursql.support.I18N;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextFlow;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.util.prefs.*;
 
@@ -37,7 +41,6 @@ public class Home {
             e.printStackTrace();
         }
     }
-
 
     /*==================================================
      *
@@ -80,7 +83,38 @@ public class Home {
             // Add cluster to sidebar
             TitledPane p = new TitledPane();
             p.setText(c.getName());
+            p.setContent(new Label("Loading tables..."));
+
+            // Tables are lazy-loaded the first time the titled pane is opened
             p.setOnMouseClicked(ev -> {
+                // Only respond to right clicks
+                // Return immediately if tables are already loaded into cache
+                if (ev.getButton() != MouseButton.PRIMARY || viewModel.tablesCached(c.getID())) return;
+
+                p.setDisable(true);
+                Thread fetchThread = new Thread(() -> {
+                    ObservableList<String> tables;
+                    try {
+                        tables = viewModel.requestTable(c);
+                    } catch (SQLException e) {
+                        Hyperlink retry = new Hyperlink("Retry");
+                        //retry.setOnAction();
+                        Platform.runLater(() -> p.setContent(new TextFlow(
+                            new Label("Fetch failed"),
+                            retry
+                        )));
+                        return;
+                    } finally { p.setDisable(false); }
+                    Platform.runLater(() -> {
+                        if (tables != null) {
+                            ListView<String> t = new ListView<>();
+                            t.setItems(tables);
+                            t.setPrefHeight(tables.size() * 28);
+                            p.setContent(t);
+                        } else p.setExpanded(false);
+                    });
+                });
+                fetchThread.start();
             });
 
             // Allow deleting cluster on right click

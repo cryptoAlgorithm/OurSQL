@@ -236,6 +236,9 @@
 .accordion > .titled-pane:expanded > .title {
     -fx-background-color: derive(-fx-base, 15%);
 }
+.titled-pane > .content {
+    -fx-border-width: 0;
+}
 
 /*******************************************************************************
  *                                                                             *

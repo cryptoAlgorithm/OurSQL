@@ -7,10 +7,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (home): re-architect Home controller to use ViewModel&#10;Controller was getting a little too large for my liking, moving logic to a separate class helped shrink the controller considerably">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (home): bad table lazy-loading working">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/AsyncUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/Cluster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/DatabaseUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/DatabaseUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/impl/BuiltInDBs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/db/impl/BuiltInDBs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/db/DatabaseUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/db/DatabaseUtilsTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +240,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="38103000" />
+      <workItem from="1664633271631" duration="52350000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -466,7 +473,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664771532356</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="chore (home): rename viewModel following naming convention">
+      <created>1664773591282</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1664773591282</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -484,8 +498,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix (build): explicitly include javafx-graphics deps for all platforms" />
-    <MESSAGE value="fix (build): include javafx-graphics for aarch64 too" />
     <MESSAGE value="chore (build): bump JavaFX ver to 20-ea+3" />
     <MESSAGE value="patch: update README with new workflow name and download badge" />
     <MESSAGE value="chore (db): add Atlas cluster to IntelliJ DB viewer" />
@@ -509,7 +521,9 @@
     <MESSAGE value="feat (AddDialog): persist password and encrypt if requested&#10;feat (PasswordDialog): Custom dialog implementation with password field" />
     <MESSAGE value="patch (AddCluster): localise dialogs" />
     <MESSAGE value="patch (home): re-architect Home controller to use ViewModel&#10;Controller was getting a little too large for my liking, moving logic to a separate class helped shrink the controller considerably" />
-    <option name="LAST_COMMIT_MESSAGE" value="patch (home): re-architect Home controller to use ViewModel&#10;Controller was getting a little too large for my liking, moving logic to a separate class helped shrink the controller considerably" />
+    <MESSAGE value="chore (home): rename viewModel following naming convention" />
+    <MESSAGE value="feat (home): bad table lazy-loading working" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat (home): bad table lazy-loading working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
