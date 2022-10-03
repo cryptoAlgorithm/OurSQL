@@ -57,12 +57,10 @@ public class HomeViewModel {
         if (cluster.getUsername() != null) {
             if (cachedPasswords.getOrDefault(id, null) == null) {
                 final boolean exists = SecretsStore.exists(id);
-                if (exists && SecretsStore.isEncrypted(id, false)) {
-                    try {
-                        cachedPasswords.put(id, SecretsStore.decrypt(id));
-                    } catch (SecretsStore.StoreException ignored) {
-
-                    }
+                if (exists && !SecretsStore.isEncrypted(id, false)) try {
+                    cachedPasswords.put(id, SecretsStore.decrypt(id));
+                } catch (SecretsStore.StoreException ignored) {
+                    assert false; // Cause immediate crash, should never happen
                 }
                 AsyncUtils.runLaterAndWait(() -> {
                     while (cachedPasswords.getOrDefault(id, null) == null) {

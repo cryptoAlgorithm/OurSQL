@@ -187,7 +187,9 @@ public class SecretsStore {
     }
     public static boolean isEncrypted(String storeKey, boolean def) {
         try { return isEncrypted(storeKey); }
-        catch (StoreException e) { return def; }
+        catch (StoreException e) {
+            e.printStackTrace();
+            return def; }
     }
 
     /**

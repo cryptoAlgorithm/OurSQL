@@ -110,6 +110,7 @@ public class Home {
         viewModel.setOnNewCluster((Cluster c, Integer idx) -> {
             // Add cluster to sidebar
             TitledPane p = new TitledPane();
+            p.setAnimated(false); // Having no animation is better than a buggy mess
             p.setText(c.getName());
             p.setContent(new Label("Loading tables..."));
 
