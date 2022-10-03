@@ -1,6 +1,6 @@
-package com.cryptoalgo.db.impl.postgresql;
+package com.cryptoalgo.oursql.model.db.impl.postgresql;
 
-import com.cryptoalgo.db.DBMSUtils;
+import com.cryptoalgo.oursql.model.db.DBMSUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

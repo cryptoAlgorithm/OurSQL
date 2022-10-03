@@ -2,9 +2,10 @@ package com.cryptoalgo.oursql.controller;
 
 import com.cryptoalgo.codable.DecodingException;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
-import com.cryptoalgo.db.Cluster;
+import com.cryptoalgo.oursql.model.db.Cluster;
 import com.cryptoalgo.oursql.model.HomeViewModel;
 import com.cryptoalgo.oursql.support.I18N;
+import com.cryptoalgo.oursql.support.SecretsStore;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,6 +54,33 @@ public class Home {
         addClusterTip.setManaged(!viewModel.hasClusters());
     }
 
+    private void loadTables(Cluster c, TitledPane p) {
+        p.setDisable(true);
+        Thread fetchThread = new Thread(() -> {
+            ObservableList<String> tables;
+            try {
+                tables = viewModel.requestTable(c);
+            } catch (SQLException e) {
+                Hyperlink retry = new Hyperlink("Retry");
+                retry.setOnAction((evt) -> loadTables(c, p));
+                Platform.runLater(() -> p.setContent(new TextFlow(
+                    new Label("Fetch failed"),
+                    retry
+                )));
+                return;
+            } finally { p.setDisable(false); }
+            Platform.runLater(() -> {
+                if (tables != null) {
+                    ListView<String> t = new ListView<>();
+                    t.setItems(tables);
+                    t.setPrefHeight(tables.size() * 28);
+                    p.setContent(t);
+                } else p.setExpanded(false);
+            });
+        });
+        fetchThread.start();
+    }
+
     /**
      * Populates the cluster list on the left in the <code>BorderPane</code> and
      * updates it should there be any changes. To be called in the
@@ -91,30 +119,7 @@ public class Home {
                 // Return immediately if tables are already loaded into cache
                 if (ev.getButton() != MouseButton.PRIMARY || viewModel.tablesCached(c.getID())) return;
 
-                p.setDisable(true);
-                Thread fetchThread = new Thread(() -> {
-                    ObservableList<String> tables;
-                    try {
-                        tables = viewModel.requestTable(c);
-                    } catch (SQLException e) {
-                        Hyperlink retry = new Hyperlink("Retry");
-                        //retry.setOnAction();
-                        Platform.runLater(() -> p.setContent(new TextFlow(
-                            new Label("Fetch failed"),
-                            retry
-                        )));
-                        return;
-                    } finally { p.setDisable(false); }
-                    Platform.runLater(() -> {
-                        if (tables != null) {
-                            ListView<String> t = new ListView<>();
-                            t.setItems(tables);
-                            t.setPrefHeight(tables.size() * 28);
-                            p.setContent(t);
-                        } else p.setExpanded(false);
-                    });
-                });
-                fetchThread.start();
+                loadTables(c, p);
             });
 
             // Allow deleting cluster on right click
@@ -125,7 +130,10 @@ public class Home {
             header.getStyleClass().add("accentedHeader");
             header.setDisable(true);
             del.setOnAction((ActionEvent ev) -> {
-                try { c.remove(); } catch (BackingStoreException e) {
+                try {
+                    c.remove();
+                    SecretsStore.remove(c.getID());
+                } catch (BackingStoreException e) {
                     log.severe("Failed to remove cluster");
                 }
             });

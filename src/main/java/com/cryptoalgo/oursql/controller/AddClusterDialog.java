@@ -1,10 +1,10 @@
 package com.cryptoalgo.oursql.controller;
 
 import com.cryptoalgo.codable.EncodingException;
-import com.cryptoalgo.db.Cluster;
-import com.cryptoalgo.db.DatabaseUtils;
-import com.cryptoalgo.db.DBMSUtils;
-import com.cryptoalgo.db.impl.BuiltInDBs;
+import com.cryptoalgo.oursql.model.db.Cluster;
+import com.cryptoalgo.oursql.model.db.DatabaseUtils;
+import com.cryptoalgo.oursql.model.db.DBMSUtils;
+import com.cryptoalgo.oursql.model.db.impl.BuiltInDBs;
 import com.cryptoalgo.oursql.OurSQL;
 import com.cryptoalgo.oursql.component.StyledAlert;
 import com.cryptoalgo.oursql.component.PasswordDialog;

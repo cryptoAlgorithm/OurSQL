@@ -136,7 +136,6 @@ public class SecretsStore {
         try {
             return new String(crypt(algo, cipher, deriveKey(password, salt), iv, Cipher.DECRYPT_MODE));
         } catch (Exception e) {
-            e.printStackTrace();
             throw new StoreException("Failed to decrypt plainText! Ensure password is valid");
         }
     }
@@ -185,5 +184,29 @@ public class SecretsStore {
             ) throw new StoreException("Required cipher parameters are missing!");
             return true;
         }
+    }
+    public static boolean isEncrypted(String storeKey, boolean def) {
+        try { return isEncrypted(storeKey); }
+        catch (StoreException e) { return def; }
+    }
+
+    /**
+     * Deletes a secret stored at a specified storeKey
+     * @param storeKey Key of secret to delete
+     */
+    public static void remove(String storeKey) throws BackingStoreException {
+        try { prefsRoot.node(storeKey).removeNode(); }
+        catch (IllegalStateException ignored) {}
+    }
+
+    /**
+     * Check if a secret  is present at the specified storeKey. Only checks for the
+     * existence, not the validity, of a secret.
+     * @param storeKey key to check
+     * @return True if data is present at the specified storeKey
+     */
+    public static boolean exists(String storeKey) {
+        try { return prefsRoot.nodeExists(storeKey); }
+        catch (BackingStoreException e) { return false; }
     }
 }

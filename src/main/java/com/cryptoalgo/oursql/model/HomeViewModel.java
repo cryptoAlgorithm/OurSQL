@@ -2,14 +2,18 @@ package com.cryptoalgo.oursql.model;
 
 import com.cryptoalgo.codable.DecodingException;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
-import com.cryptoalgo.db.Cluster;
-import com.cryptoalgo.db.DatabaseUtils;
+import com.cryptoalgo.oursql.component.StyledAlert;
+import com.cryptoalgo.oursql.model.db.Cluster;
+import com.cryptoalgo.oursql.model.db.DatabaseUtils;
 import com.cryptoalgo.oursql.component.PasswordDialog;
 import com.cryptoalgo.oursql.support.AsyncUtils;
+import com.cryptoalgo.oursql.support.I18N;
+import com.cryptoalgo.oursql.support.SecretsStore;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import javafx.scene.control.Alert;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
@@ -52,12 +56,36 @@ public class HomeViewModel {
 
         if (cluster.getUsername() != null) {
             if (cachedPasswords.getOrDefault(id, null) == null) {
-                AsyncUtils.runLaterAndWait(() -> cachedPasswords.put(id, new PasswordDialog(
-                    "Cluster Authentication",
-                    "Enter the password for the cluster",
-                    "",
-                    null
-                ).showAndWait().orElse(null)));
+                final boolean exists = SecretsStore.exists(id);
+                if (exists && SecretsStore.isEncrypted(id, false)) {
+                    try {
+                        cachedPasswords.put(id, SecretsStore.decrypt(id));
+                    } catch (SecretsStore.StoreException ignored) {
+
+                    }
+                }
+                AsyncUtils.runLaterAndWait(() -> {
+                    while (cachedPasswords.getOrDefault(id, null) == null) {
+                        String pw = new PasswordDialog(
+                            I18N.getString("dialog.connPw.title"),
+                            I18N.getString(exists ? "dialog.connPw.enc.header" : "dialog.connPw.pw.header"),
+                            I18N.getString(exists ? "dialog.connPw.enc.body" : "dialog.connPw.pw.body"),
+                            exists ? I18N.getString("dialog.connPw.enc.caption") : null
+                        ).showAndWait().orElse(null);
+                        if (pw == null) break;
+                        if (exists) try {
+                            cachedPasswords.put(id, SecretsStore.decrypt(pw, id));
+                        } catch (SecretsStore.StoreException ex) {
+                            new StyledAlert(
+                                Alert.AlertType.ERROR,
+                                I18N.getString("dialog.wrongConnPw.title"),
+                                I18N.getString("dialog.wrongConnPw.header"),
+                                I18N.getString("dialog.wrongConnPw.body")
+                            ).showAndWait();
+                        }
+                        else cachedPasswords.put(id, pw);
+                    }
+                });
             }
             // If it still isn't populated, the user clicked cancel
             if (cachedPasswords.getOrDefault(id, null) == null) return null;

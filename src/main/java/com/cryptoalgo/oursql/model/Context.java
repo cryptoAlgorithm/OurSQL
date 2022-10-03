@@ -1,11 +1,7 @@
 package com.cryptoalgo.oursql.model;
 
-import com.cryptoalgo.db.Cluster;
-
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 /**
@@ -23,12 +19,5 @@ public class Context {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("SHA-256 is not supported on this platform!");
         }
-    }
-
-    public void storeCluster(Cluster cluster) throws IOException, BackingStoreException {
-
-    }
-    public Cluster[] getStoredClusters() throws BackingStoreException {
-        return null;
     }
 }

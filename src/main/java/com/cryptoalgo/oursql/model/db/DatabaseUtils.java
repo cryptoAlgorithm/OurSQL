@@ -1,6 +1,6 @@
-package com.cryptoalgo.db;
+package com.cryptoalgo.oursql.model.db;
 
-import com.cryptoalgo.db.impl.BuiltInDBs;
+import com.cryptoalgo.oursql.model.db.impl.BuiltInDBs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -1,4 +1,4 @@
-package com.cryptoalgo.db;
+package com.cryptoalgo.oursql.model.db;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

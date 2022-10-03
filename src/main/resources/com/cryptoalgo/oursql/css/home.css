@@ -8,7 +8,7 @@
 
 /* Styles for the clusters sidebar */
 .sidebar {
-    -fx-pref-width: 200px;
+    -fx-pref-width: 280px;
 }
 .sidebar > #addClusterTip {
     -fx-background-color: -fx-accent;
@@ -26,6 +26,9 @@
 
 .accordion > .titled-pane > .title {
     -fx-font-size: 1.25em;
+}
+.accordion > .titled-pane > .content {
+    -fx-padding: 8;
 }
 
 .appBar {

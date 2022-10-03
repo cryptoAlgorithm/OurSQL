@@ -1,6 +1,7 @@
-package com.cryptoalgo.db.impl;
+package com.cryptoalgo.oursql.model.db.impl;
 
-import com.cryptoalgo.db.DBMSUtils;
+import com.cryptoalgo.oursql.model.db.DBMSUtils;
+import com.cryptoalgo.oursql.model.db.impl.postgresql.Utils;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -10,8 +11,8 @@ import java.util.NoSuchElementException;
  */
 public class BuiltInDBs {
     static public final DBMSUtils[] impls = {
-        new com.cryptoalgo.db.impl.postgresql.Utils(),
-        new com.cryptoalgo.db.impl.mysql.Utils()
+        new Utils(),
+        new com.cryptoalgo.oursql.model.db.impl.mysql.Utils()
     };
 
     /**

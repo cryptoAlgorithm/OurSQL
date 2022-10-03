@@ -1,5 +1,7 @@
 package com.cryptoalgo.db;
 
+import com.cryptoalgo.oursql.model.db.Cluster;
+import com.cryptoalgo.oursql.model.db.DatabaseUtils;
 import org.junit.jupiter.api.Test;
 
 class DatabaseUtilsTest {

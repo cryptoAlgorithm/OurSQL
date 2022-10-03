@@ -1,4 +1,4 @@
-package com.cryptoalgo.db;
+package com.cryptoalgo.oursql.model.db;
 
 import com.cryptoalgo.codable.*;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesDecoder;
@@ -39,12 +39,13 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
      * identifier for cluster storage and lookup.
      * @return A unique ID for this cluster
      */
-    private static String computeID(String host, String path, int port) {
+    private static String computeID(String host, String path, String user, int port) {
+        if (user == null) user = "";
         return HexEncoder.bytesToHex(
             Context
                 .getInstance()
                 .hashInstance
-                .digest((host + path + port).getBytes())
+                .digest((host + path + user + port).getBytes())
         );
     }
 
@@ -57,7 +58,7 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
         dbms = container.decodeString(CodingKeys.dbms);
         database = container.decodeString(CodingKeys.database);
         username = container.decodeStringIfPresent(CodingKeys.username).orElse(null);
-        id = computeID(host, database, port);
+        id = computeID(host, database, username, port);
     }
 
     public Cluster(
@@ -75,7 +76,7 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
         this.host = purifyHost(host);
         this.port = port;
         this.name = name;
-        id = computeID(host, database, port); // Better to calculate value once during initialization
+        id = computeID(host, database, username, port); // Better to calculate value once during initialization
     }
 
     /**
