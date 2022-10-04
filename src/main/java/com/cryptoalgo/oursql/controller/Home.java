@@ -8,6 +8,7 @@ import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.SecretsStore;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -32,7 +33,13 @@ public class Home {
     @FXML
     private Accordion categoryList;
     @FXML
-    private VBox addClusterTip;
+    private VBox addClusterTip, tableTipContainer, mainContentContainer;
+    @FXML
+    private TableView<ObservableList<String>> dbTable;
+    @FXML
+    private Label statusLabel;
+    // @FXML
+    // private TextField queryField;
 
     @FXML
     private void addCluster() {
@@ -66,6 +73,8 @@ public class Home {
                     new Label("Fetch failed"),
                     retry
                 )));
+                log.warning("Failed to fetch tables");
+                e.printStackTrace();
                 return;
             } finally { p.setDisable(false); }
             Platform.runLater(() -> {
@@ -80,6 +89,7 @@ public class Home {
                             + c.getID()
                             + " and table "
                             + tables.get(nv.intValue()));
+                        viewModel.newTableSelection(c, tables.get(nv.intValue()));
                     });
                     t.getSelectionModel().select(0);
                 } else p.setExpanded(false);
@@ -170,8 +180,21 @@ public class Home {
         viewModel.loadClusters();
     }
 
+    private void initTableView() {
+        dbTable.setItems(viewModel.tableRows);
+    }
+
     @FXML
     private void initialize() {
         initClusterList();
+        initTableView();
+
+        viewModel.selectedTable.addListener((SetChangeListener<String>) change -> {
+            boolean showTip = viewModel.selectedTable.isEmpty();
+            tableTipContainer.setVisible(showTip);
+            tableTipContainer.setManaged(showTip);
+            mainContentContainer.setVisible(!showTip);
+            mainContentContainer.setManaged(!showTip);
+        });
     }
 }

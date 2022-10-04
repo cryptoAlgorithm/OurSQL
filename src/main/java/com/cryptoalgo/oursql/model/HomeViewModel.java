@@ -9,10 +9,7 @@ import com.cryptoalgo.oursql.component.PasswordDialog;
 import com.cryptoalgo.oursql.support.AsyncUtils;
 import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.SecretsStore;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
+import javafx.collections.*;
 import javafx.scene.control.Alert;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,8 +17,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.function.BiConsumer;
@@ -36,12 +33,62 @@ import java.util.prefs.BackingStoreException;
 public class HomeViewModel {
     private static final Logger log = Logger.getLogger(HomeViewModel.class.getName());
 
-    private final ObservableList<Cluster> clusters = FXCollections.observableArrayList(new ArrayList<>());
-    public final ObservableMap<String, ObservableList<String>> tables =
+    private final ObservableList<Cluster> clusters = FXCollections.observableArrayList();
+    private final ObservableMap<String, ObservableList<String>> tables =
         FXCollections.observableMap(new HashMap<>());
 
-    public final ObservableMap<String, String> cachedPasswords =
+    private static final ObservableMap<String, String> cachedPasswords =
         FXCollections.observableMap(new HashMap<>());
+
+    public final ObservableList<ObservableList<String>>
+        tableRows = FXCollections.observableArrayList(),
+        statuses = FXCollections.observableArrayList();
+
+    public final ObservableSet<String> selectedTable = FXCollections.observableSet();
+
+    /**
+     * Request the password of a specific ID from the user
+     * @param cluster Cluster to request password for
+     * @return True if sufficient credentials for connection is available
+     */
+    private boolean requestPassword(Cluster cluster) {
+        // Return immediately if cluster doesn't have a password
+        if (cluster.getUsername() == null) return true;
+
+        String id = cluster.getID();
+        if (cachedPasswords.getOrDefault(id, null) == null) {
+            final boolean exists = SecretsStore.exists(id);
+            if (exists && !SecretsStore.isEncrypted(id, false)) try {
+                cachedPasswords.put(id, SecretsStore.decrypt(id));
+            } catch (SecretsStore.StoreException ignored) {
+                assert false; // Cause immediate crash, should never happen
+            }
+            AsyncUtils.runLaterAndWait(() -> {
+                while (cachedPasswords.getOrDefault(id, null) == null) {
+                    String pw = new PasswordDialog(
+                        I18N.getString("dialog.connPw.title"),
+                        I18N.getString(exists ? "dialog.connPw.enc.header" : "dialog.connPw.pw.header"),
+                        I18N.getString(exists ? "dialog.connPw.enc.body" : "dialog.connPw.pw.body"),
+                        exists ? I18N.getString("dialog.connPw.enc.caption") : null
+                    ).showAndWait().orElse(null);
+                    if (pw == null) break;
+                    if (exists) try {
+                        cachedPasswords.put(id, SecretsStore.decrypt(pw, id));
+                    } catch (SecretsStore.StoreException ex) {
+                        new StyledAlert(
+                            Alert.AlertType.ERROR,
+                            I18N.getString("dialog.wrongConnPw.title"),
+                            I18N.getString("dialog.wrongConnPw.header"),
+                            I18N.getString("dialog.wrongConnPw.body")
+                        ).showAndWait();
+                    }
+                    else cachedPasswords.put(id, pw);
+                }
+            });
+        }
+
+        return cachedPasswords.getOrDefault(id, null) != null;
+    }
 
     /**
      * Request to load the tables of a particular database cluster.
@@ -54,40 +101,8 @@ public class HomeViewModel {
         int idx = clusters.indexOf(cluster);
         if (idx < 0) throw new NoSuchElementException("Requested cluster doesn't exist in clusters array");
 
-        if (cluster.getUsername() != null) {
-            if (cachedPasswords.getOrDefault(id, null) == null) {
-                final boolean exists = SecretsStore.exists(id);
-                if (exists && !SecretsStore.isEncrypted(id, false)) try {
-                    cachedPasswords.put(id, SecretsStore.decrypt(id));
-                } catch (SecretsStore.StoreException ignored) {
-                    assert false; // Cause immediate crash, should never happen
-                }
-                AsyncUtils.runLaterAndWait(() -> {
-                    while (cachedPasswords.getOrDefault(id, null) == null) {
-                        String pw = new PasswordDialog(
-                            I18N.getString("dialog.connPw.title"),
-                            I18N.getString(exists ? "dialog.connPw.enc.header" : "dialog.connPw.pw.header"),
-                            I18N.getString(exists ? "dialog.connPw.enc.body" : "dialog.connPw.pw.body"),
-                            exists ? I18N.getString("dialog.connPw.enc.caption") : null
-                        ).showAndWait().orElse(null);
-                        if (pw == null) break;
-                        if (exists) try {
-                            cachedPasswords.put(id, SecretsStore.decrypt(pw, id));
-                        } catch (SecretsStore.StoreException ex) {
-                            new StyledAlert(
-                                Alert.AlertType.ERROR,
-                                I18N.getString("dialog.wrongConnPw.title"),
-                                I18N.getString("dialog.wrongConnPw.header"),
-                                I18N.getString("dialog.wrongConnPw.body")
-                            ).showAndWait();
-                        }
-                        else cachedPasswords.put(id, pw);
-                    }
-                });
-            }
-            // If it still isn't populated, the user clicked cancel
-            if (cachedPasswords.getOrDefault(id, null) == null) return null;
-        }
+        // If we can't get the password, return and don't go further
+        if (!requestPassword(cluster)) return null;
 
         try {
             Connection conn = DatabaseUtils.getConnection(
@@ -100,6 +115,8 @@ public class HomeViewModel {
             if (!tables.containsKey(id)) tables.put(id, FXCollections.observableArrayList());
             else tables.get(id).clear();
             while (r.next()) tables.get(id).add(r.getString(3));
+            r.close();
+            conn.close();
         } catch (URISyntaxException ignored) {}
 
         return tables.get(id);
@@ -107,6 +124,38 @@ public class HomeViewModel {
 
     public boolean tablesCached(String forCluster) {
         return tables.containsKey(forCluster);
+    }
+
+    public void newTableSelection(Cluster cluster, String table) {
+        selectedTable.clear();
+        selectedTable.add(cluster.getID());
+        selectedTable.add(table);
+
+        // Credentials for cluster should already be populated
+        assert requestPassword(cluster);
+
+        tableRows.clear();
+        Connection conn;
+        try {
+            conn = DatabaseUtils.getConnection(
+                cluster,
+                cluster.getUsername() != null ? cachedPasswords.get(cluster.getID()) : null
+            );
+            ResultSet r = conn.createStatement().executeQuery("select * from " + table);
+            ResultSetMetaData meta = r.getMetaData();
+            for (int i = 1; i <= meta.getColumnCount(); i++) {
+                System.out.println("column title: " + meta.getColumnName(i));
+            }
+            while (r.next()) {
+                System.out.print("a row was returned.");
+            }
+            r.close();
+            conn.close();
+        } catch (SQLException | URISyntaxException e) {
+            e.printStackTrace();
+            log.warning("Failed to fetch rows " + e.getMessage());
+            return;
+        }
     }
 
     /**
@@ -182,10 +231,15 @@ public class HomeViewModel {
         removeCluster(idx);
     }
     public void removeCluster(@NotNull Integer idx) {
-        clusters.remove(idx.intValue());
+        Cluster removed = clusters.remove(idx.intValue());
+        tables.remove(removed.getID());
     }
 
     public boolean hasClusters() {
         return !clusters.isEmpty();
+    }
+
+    public static void addCachedPassword(String clusterID, String pw) {
+        cachedPasswords.put(clusterID, pw);
     }
 }

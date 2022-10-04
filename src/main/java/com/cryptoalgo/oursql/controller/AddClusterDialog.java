@@ -1,6 +1,7 @@
 package com.cryptoalgo.oursql.controller;
 
 import com.cryptoalgo.codable.EncodingException;
+import com.cryptoalgo.oursql.model.HomeViewModel;
 import com.cryptoalgo.oursql.model.db.Cluster;
 import com.cryptoalgo.oursql.model.db.DatabaseUtils;
 import com.cryptoalgo.oursql.model.db.DBMSUtils;
@@ -258,6 +259,8 @@ public class AddClusterDialog {
                     SecretsStore.encrypt(authPW.getText(), pw, c.getID());
                 } else if (storeType.getSelectionModel().isSelected(1))
                     SecretsStore.encrypt(authPW.getText(), c.getID());
+                // Cache connection password for this session
+                HomeViewModel.addCachedPassword(c.getID(), authPW.getText());
             }
             c.persist();
         } catch (SecretsStore.StoreException e) {

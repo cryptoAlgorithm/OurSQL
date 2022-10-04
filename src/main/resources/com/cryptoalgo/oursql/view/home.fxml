@@ -75,18 +75,29 @@
         </VBox>
     </left>
     <center>
-        <VBox spacing="4">
+        <VBox>
             <BorderPane.margin><Insets top="8" right="8" bottom="8" /></BorderPane.margin>
-            <HBox styleClass="queryContainer">
-                <TextField fx:id="queryField" promptText="%prompt.query" HBox.hgrow="ALWAYS" />
-                <Button text="%action.run" />
-            </HBox>
-            <TableView VBox.vgrow="ALWAYS" styleClass="table">
+            <VBox fx:id="mainContentContainer" visible="false" managed="false" VBox.vgrow="ALWAYS" spacing="4">
+                <HBox styleClass="queryContainer">
+                    <TextField fx:id="queryField" promptText="%prompt.query" HBox.hgrow="ALWAYS" />
+                    <Button text="%action.run" />
+                </HBox>
+                <TableView VBox.vgrow="ALWAYS" styleClass="table" fx:id="dbTable" />
+                <HBox styleClass="statusContainer">
+                    <Label fx:id="statusLabel" />
+                </HBox>
+            </VBox>
 
-            </TableView>
-            <HBox styleClass="statusContainer">
-                <Label>Ready</Label>
-            </HBox>
+            <VBox fx:id="tableTipContainer" VBox.vgrow="ALWAYS" spacing="8">
+                <padding><Insets topRightBottomLeft="16" /></padding>
+                <SVGPath
+                    styleClass="svgIcon"
+                    content="M39.15 39.15V31.6H8.85v7.55h30.3Zm0-11.2V20H8.85v7.95h30.3Zm0-11.6v-7.5H8.85v7.5h30.3ZM8.85
+                    42.8q-1.45 0-2.55-1.1-1.1-1.1-1.1-2.55V8.85q0-1.45 1.1-2.55 1.1-1.1 2.55-1.1h30.3q1.45 0 2.55 1.1
+                    1.1 1.1 1.1 2.55v30.3q0 1.45-1.1 2.55-1.1 1.1-2.55 1.1Z" />
+                <Label text="No table selected" styleClass="h2" />
+                <Label text="Select a table in a cluster from the sidebar or add a cluster!" />
+            </VBox>
         </VBox>
     </center>
 </BorderPane>
