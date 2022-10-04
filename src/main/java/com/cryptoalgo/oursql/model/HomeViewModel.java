@@ -6,9 +6,14 @@ import com.cryptoalgo.oursql.component.StyledAlert;
 import com.cryptoalgo.oursql.model.db.Cluster;
 import com.cryptoalgo.oursql.model.db.DatabaseUtils;
 import com.cryptoalgo.oursql.component.PasswordDialog;
+import com.cryptoalgo.oursql.model.db.data.Container;
+import com.cryptoalgo.oursql.model.db.data.PlaceholderContainer;
 import com.cryptoalgo.oursql.support.AsyncUtils;
 import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.SecretsStore;
+import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.*;
 import javafx.scene.control.Alert;
 import org.jetbrains.annotations.NotNull;
@@ -21,10 +26,12 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 
 /**
  * Over-engineered database connection, loading and updating class.
@@ -40,11 +47,18 @@ public class HomeViewModel {
     private static final ObservableMap<String, String> cachedPasswords =
         FXCollections.observableMap(new HashMap<>());
 
-    public final ObservableList<ObservableList<String>>
-        tableRows = FXCollections.observableArrayList(),
-        statuses = FXCollections.observableArrayList();
+    public final ObservableList<String> tableColumns = FXCollections.observableArrayList();
+    public final ObservableList<ObservableList<Container<?>>> rows = FXCollections.observableArrayList();
 
-    public final ObservableSet<String> selectedTable = FXCollections.observableSet();
+    private final ReadOnlyStringWrapper
+        status = new ReadOnlyStringWrapper(I18N.getString("status.ready")),
+        selectedTable = new ReadOnlyStringWrapper(null);
+
+    private Connection currConn = null;
+
+    // Public getters
+    public ReadOnlyStringProperty selectedTableProperty() { return selectedTable.getReadOnlyProperty(); }
+    public ReadOnlyStringProperty statusProperty() { return status.getReadOnlyProperty(); }
 
     /**
      * Request the password of a specific ID from the user
@@ -96,7 +110,7 @@ public class HomeViewModel {
      * @param cluster Cluster to fetch tables of
      * @throws NoSuchElementException If the cluster ID doesn't exist
      */
-    public ObservableList<String> requestTable(Cluster cluster) throws NoSuchElementException, SQLException {
+    public ObservableList<String> requestTables(Cluster cluster) throws NoSuchElementException, SQLException {
         String id = cluster.getID(); // Shorter code since id is used in many places
         int idx = clusters.indexOf(cluster);
         if (idx < 0) throw new NoSuchElementException("Requested cluster doesn't exist in clusters array");
@@ -104,11 +118,11 @@ public class HomeViewModel {
         // If we can't get the password, return and don't go further
         if (!requestPassword(cluster)) return null;
 
-        try {
-            Connection conn = DatabaseUtils.getConnection(
-                cluster,
-                cluster.getUsername() != null ? cachedPasswords.get(id) : null
-            );
+        setStatus(I18N.getString("status.fetchTables", cluster.getName()));
+        try (var conn = DatabaseUtils.getConnection(
+            cluster,
+            cluster.getUsername() != null ? cachedPasswords.get(id) : null
+        )) {
             ResultSet r = conn
                 .getMetaData()
                 .getTables(null, null, "%", new String[]{"TABLE"});
@@ -116,8 +130,9 @@ public class HomeViewModel {
             else tables.get(id).clear();
             while (r.next()) tables.get(id).add(r.getString(3));
             r.close();
-            conn.close();
-        } catch (URISyntaxException ignored) {}
+        }
+        catch (URISyntaxException ignored) {}
+        finally { resetStatus(); }
 
         return tables.get(id);
     }
@@ -127,35 +142,50 @@ public class HomeViewModel {
     }
 
     public void newTableSelection(Cluster cluster, String table) {
-        selectedTable.clear();
-        selectedTable.add(cluster.getID());
-        selectedTable.add(table);
+        selectedTable.set(table);
+        tableColumns.clear();
+        rows.clear();
 
         // Credentials for cluster should already be populated
         assert requestPassword(cluster);
 
-        tableRows.clear();
-        Connection conn;
-        try {
-            conn = DatabaseUtils.getConnection(
-                cluster,
-                cluster.getUsername() != null ? cachedPasswords.get(cluster.getID()) : null
-            );
-            ResultSet r = conn.createStatement().executeQuery("select * from " + table);
-            ResultSetMetaData meta = r.getMetaData();
-            for (int i = 1; i <= meta.getColumnCount(); i++) {
-                System.out.println("column title: " + meta.getColumnName(i));
-            }
+        setStatus(I18N.getString("status.fetchRows", table));
+        try (var conn = DatabaseUtils.getConnection(
+            cluster,
+            cluster.getUsername() != null ? cachedPasswords.get(cluster.getID()) : null
+        )) {
+            currConn = conn;
+            final ResultSet r = conn.createStatement().executeQuery("select * from " + table);
+            final ResultSetMetaData meta = r.getMetaData();
+
+            // Firstly add column names as first row
+            for (int i = 1; i <= meta.getColumnCount(); i++) tableColumns.add(meta.getColumnName(i));
+            // Then add all
             while (r.next()) {
-                System.out.print("a row was returned.");
+                final ObservableList<Container<?>> row = FXCollections.observableArrayList();
+                //meta.getColumnTypeName();
+                for (int c = 1; c <= meta.getColumnCount(); c++) {
+                    // TIL var exists
+                    final var cont = Container.getInstance(meta.getColumnTypeName(c));
+                    if (cont == null) {
+                        row.add(new PlaceholderContainer());
+                        continue;
+                    }
+                    try {
+                        row.add(
+                            Objects.requireNonNull(cont.getConstructor(String.class))
+                                .newInstance(r.getString(c))
+                        );
+                    } catch (Exception ignored) { row.add(new PlaceholderContainer()); }
+                }
+
+                rows.add(row);
             }
             r.close();
-            conn.close();
         } catch (SQLException | URISyntaxException e) {
             e.printStackTrace();
             log.warning("Failed to fetch rows " + e.getMessage());
-            return;
-        }
+        } finally { resetStatus(); }
     }
 
     /**
@@ -175,8 +205,11 @@ public class HomeViewModel {
         }
         for (String clusterID : clusterIDs) {
             try {
-                addCluster(Cluster.decode(clusterID));
-            } catch (DecodingException | InvocationTargetException e) {
+                Cluster c = Cluster.decode(clusterID);
+                if (!c.getID().equals(clusterID))
+                    throw new IllegalStateException("Deserialized cluster has different ID as node");
+                addCluster(c);
+            } catch (DecodingException | InvocationTargetException | IllegalStateException e) {
                 log.warning(String.format(
                     "Could not decode cluster with ID %s due to exception: %s, removing node",
                     clusterID,
@@ -184,7 +217,9 @@ public class HomeViewModel {
                 ));
                 e.printStackTrace();
                 try {
-                    PreferencesEncoder.rootNode.node("clusters/" + clusterID).removeNode();
+                    Preferences problem = PreferencesEncoder.rootNode.node("clusters/" + clusterID);
+                    problem.removeNode();
+                    problem.flush(); // Make sure that corrupted node is really gone
                 } catch (BackingStoreException ex) {
                     log.severe("Failed to remove corrupted cluster!");
                 }
@@ -237,6 +272,12 @@ public class HomeViewModel {
 
     public boolean hasClusters() {
         return !clusters.isEmpty();
+    }
+
+    // Status methods
+    public void resetStatus() { setStatus(I18N.getString("status.ready")); }
+    public void setStatus(String newStatus) {
+        Platform.runLater(() -> status.set(newStatus));
     }
 
     public static void addCachedPassword(String clusterID, String pw) {

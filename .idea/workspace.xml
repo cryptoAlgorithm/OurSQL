@@ -7,14 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (ui): fetch table rows when table selected&#10;patch (AddCluster): add new database password to cache so user doesn't have to re-enter it right after adding the cluster">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (ui): display table columns">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/PlaceholderContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/StringContainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,7 +237,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="66925000" />
+      <workItem from="1664633271631" duration="84864000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -505,7 +505,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664799835295</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="feat (ui): fetch table rows when table selected&#10;patch (AddCluster): add new database password to cache so user doesn't have to re-enter it right after adding the cluster">
+      <created>1664845324828</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1664845324828</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,7 +530,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat (AddCluster): use new stage instead of TextInputDialog for add cluster dialog" />
     <MESSAGE value="feat (AddCluster): partial Controller implementation" />
     <MESSAGE value="feat (AddCluster): validate fields and add test connection&#10;Note: Testing mongoDB connection doesn't work yet" />
     <MESSAGE value="feat (AddCluster): complete database testing&#10;Works for both PostgreSQL and MySQL (untested)" />
@@ -548,7 +554,8 @@
     <MESSAGE value="patch: use expanded property to handle collapsing/expanding of titledPanes" />
     <MESSAGE value="patch (ui): use expanded property to handle collapsing/expanding of titledPanes" />
     <MESSAGE value="feat (ui): fetch table rows when table selected&#10;patch (AddCluster): add new database password to cache so user doesn't have to re-enter it right after adding the cluster" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat (ui): fetch table rows when table selected&#10;patch (AddCluster): add new database password to cache so user doesn't have to re-enter it right after adding the cluster" />
+    <MESSAGE value="feat (ui): display table columns" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat (ui): display table columns" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

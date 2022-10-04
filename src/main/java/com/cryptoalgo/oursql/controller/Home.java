@@ -4,11 +4,13 @@ import com.cryptoalgo.codable.DecodingException;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
 import com.cryptoalgo.oursql.model.db.Cluster;
 import com.cryptoalgo.oursql.model.HomeViewModel;
+import com.cryptoalgo.oursql.model.db.data.Container;
 import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.SecretsStore;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -35,11 +37,9 @@ public class Home {
     @FXML
     private VBox addClusterTip, tableTipContainer, mainContentContainer;
     @FXML
-    private TableView<ObservableList<String>> dbTable;
+    private TableView<ObservableList<Container<?>>> dbTable;
     @FXML
     private Label statusLabel;
-    // @FXML
-    // private TextField queryField;
 
     @FXML
     private void addCluster() {
@@ -65,7 +65,7 @@ public class Home {
         Thread fetchThread = new Thread(() -> {
             ObservableList<String> tables;
             try {
-                tables = viewModel.requestTable(c);
+                tables = viewModel.requestTables(c);
             } catch (SQLException e) {
                 Hyperlink retry = new Hyperlink("Retry");
                 retry.setOnAction((evt) -> loadTables(c, p));
@@ -111,12 +111,15 @@ public class Home {
                 try {
                     Cluster newCluster = Cluster.decode(evt.getChild().name());
                     Platform.runLater(() -> viewModel.addCluster(newCluster));
-                } catch (DecodingException | InvocationTargetException e) {
-                    e.printStackTrace();
+                } catch (DecodingException | InvocationTargetException | IllegalStateException e) {
                     log.warning(
                         "Failed to deserialize added cluster with id "
-                        + evt.getChild().name()
+                        + evt.getChild().name() + ", removing node"
                     );
+                    try {
+                        evt.getChild().removeNode();
+                    } catch (BackingStoreException ignored) {}
+                    e.printStackTrace();
                 }
             }
 
@@ -126,7 +129,7 @@ public class Home {
         // Listen to cluster changes for single source of truth
         viewModel.setOnNewCluster((Cluster c, Integer idx) -> {
             // Add cluster to sidebar
-            TitledPane p = new TitledPane();
+            var p = new TitledPane();
             p.setAnimated(false); // Having no animation is better than a buggy mess
             p.setText(c.getName());
             p.setContent(new Label("Loading tables..."));
@@ -135,14 +138,16 @@ public class Home {
             p.expandedProperty().addListener((ch, o, newVal) -> {
                 // If titledPane is collapsed, clear table selection
                 if (!newVal) {
-                    if (p.getContent() instanceof ListView<?>)
+                    if (categoryList.getExpandedPane() != null && p.getContent() instanceof ListView<?>)
                         ((ListView<?>) p.getContent()).getSelectionModel().clearSelection();
                     return;
                 }
                 // Return if tables are already loaded into cache
                 if (viewModel.tablesCached(c.getID())) {
-                    if (p.getContent() instanceof ListView<?>)
-                        ((ListView<?>) p.getContent()).getSelectionModel().select(0);
+                    if (p.getContent() instanceof ListView<?>) {
+                        var ls = ((ListView<?>) p.getContent()).getSelectionModel();
+                        if (ls.isEmpty()) ls.select(0);
+                    }
                     return;
                 }
 
@@ -150,7 +155,7 @@ public class Home {
             });
 
             // Allow deleting cluster on right click
-            ContextMenu m = new ContextMenu();
+            var m = new ContextMenu();
             MenuItem
                 header = new MenuItem(I18N.getString("actions")),
                 del = new MenuItem(I18N.getString("action.delCluster"));
@@ -181,7 +186,25 @@ public class Home {
     }
 
     private void initTableView() {
-        dbTable.setItems(viewModel.tableRows);
+        dbTable.setItems(viewModel.rows);
+        viewModel.tableColumns.addListener((ListChangeListener<String>) c -> {
+            while (c.next()) {
+                for (int i = c.getFrom(); i < c.getTo(); ++i) {
+                    if (c.wasPermutated())
+                        dbTable.getColumns().get(i).setText(c.getList().get(i));
+                    else if (c.wasAdded()) {
+                        final int curCol = i;
+                        final TableColumn<ObservableList<Container<?>>, String> col
+                            = new TableColumn<>(c.getList().get(i));
+                        col.setCellValueFactory(
+                            param -> new ReadOnlyObjectWrapper<>(param.getValue().get(curCol).toString())
+                        );
+                        dbTable.getColumns().add(col);
+                    }
+                }
+                if (c.wasRemoved()) dbTable.getColumns().remove(c.getFrom());
+            }
+        });
     }
 
     @FXML
@@ -189,12 +212,12 @@ public class Home {
         initClusterList();
         initTableView();
 
-        viewModel.selectedTable.addListener((SetChangeListener<String>) change -> {
-            boolean showTip = viewModel.selectedTable.isEmpty();
-            tableTipContainer.setVisible(showTip);
-            tableTipContainer.setManaged(showTip);
-            mainContentContainer.setVisible(!showTip);
-            mainContentContainer.setManaged(!showTip);
-        });
+        // Bind visible and managed properties of main content and tip
+        tableTipContainer.visibleProperty().bind(viewModel.selectedTableProperty().isEmpty());
+        tableTipContainer.managedProperty().bind(viewModel.selectedTableProperty().isEmpty());
+        mainContentContainer.visibleProperty().bind(viewModel.selectedTableProperty().isEmpty().not());
+        mainContentContainer.managedProperty().bind(viewModel.selectedTableProperty().isEmpty().not());
+
+        statusLabel.textProperty().bind(viewModel.statusProperty());
     }
 }
