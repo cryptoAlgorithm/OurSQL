@@ -5,6 +5,7 @@ import com.cryptoalgo.oursql.support.I18N;
 import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,6 +26,7 @@ public class PasswordDialog extends Dialog<String> {
                 OurSQL.class.getResource("css/dialog.css")
             ).toExternalForm()
         );
+        getDialogPane().getScene().setFill(Color.TRANSPARENT); // Prevents flash of white when opening dialog
         setTitle(title);
         setHeaderText(header);
 

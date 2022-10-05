@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -55,11 +56,13 @@ public class AddClusterDialog {
     private static final Logger log = Logger.getLogger(AddClusterDialog.class.getName());
 
     public static void show() throws IOException {
-        Stage stage = new Stage();
+        final var stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UTILITY);
         stage.setTitle(I18N.getString("action.addCluster"));
-        stage.setScene(new Scene(UIUtils.loadFXML("add-cluster")));
+        final var scene = new Scene(UIUtils.loadFXML("add-cluster"));
+        scene.setFill(Color.TRANSPARENT);
+        stage.setScene(scene);
         stage.setMinWidth(640);
         stage.setMinHeight(250);
         stage.show();

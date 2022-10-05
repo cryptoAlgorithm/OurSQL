@@ -164,6 +164,7 @@ public class OurSQL extends Application {
                 e.printStackTrace();
                 return;
             }
+            scene.setFill(Color.TRANSPARENT);
             stage.setTitle(I18N.getString("app.title"));
 
             // Fade out old stage
