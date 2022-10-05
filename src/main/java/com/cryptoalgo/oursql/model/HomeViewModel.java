@@ -9,7 +9,7 @@ import com.cryptoalgo.oursql.component.PasswordDialog;
 import com.cryptoalgo.oursql.model.db.data.Container;
 import com.cryptoalgo.oursql.model.db.data.PlaceholderContainer;
 import com.cryptoalgo.oursql.support.AsyncUtils;
-import com.cryptoalgo.oursql.support.Colors;
+import com.cryptoalgo.oursql.support.ui.Colors;
 import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.SecretsStore;
 import javafx.application.Platform;

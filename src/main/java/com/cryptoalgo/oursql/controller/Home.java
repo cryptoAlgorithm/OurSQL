@@ -7,7 +7,7 @@ import com.cryptoalgo.oursql.model.HomeViewModel;
 import com.cryptoalgo.oursql.model.db.data.Container;
 import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.SecretsStore;
-import com.cryptoalgo.oursql.support.UIUtils;
+import com.cryptoalgo.oursql.support.ui.UIUtils;
 import javafx.animation.FillTransition;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;

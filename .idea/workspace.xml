@@ -7,16 +7,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (ui): revamped status system">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/Colors.java" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (splash): beautiful animated splash screen complete">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/SpringInterpolator.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img/splash/bareIcon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img/splash/hammer.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/Colors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/UIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/UIUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img/appicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img/appicon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_zh.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_zh.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +151,7 @@
       <module name="OurSQL" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.oursql.support.*" />
+          <option name="PATTERN" value="com.cryptoalgo.oursql.support.ui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -163,7 +166,7 @@
       <module name="OurSQL" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.oursql.support.*" />
+          <option name="PATTERN" value="com.cryptoalgo.oursql.support.ui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -179,7 +182,7 @@
       <module name="OurSQL" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.oursql.support.*" />
+          <option name="PATTERN" value="com.cryptoalgo.oursql.support.ui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -195,7 +198,7 @@
       <module name="OurSQL" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.oursql.support.*" />
+          <option name="PATTERN" value="com.cryptoalgo.oursql.support.ui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -244,7 +247,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="97344000" />
+      <workItem from="1664633271631" duration="104233000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -540,7 +543,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664949057289</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="feat (ui): background color and transitions for status">
+      <created>1664951864645</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1664951864645</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -559,8 +569,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix (Cluster): use hex encoding for ID generation to fix preferences issues&#10;/ is a valid char in base64, which sometimes screwed up preferences encoding&#10;&#10;patch (PreferencesCodable): more useful exceptions when a key is not present" />
-    <MESSAGE value="patch: sprinkle comments" />
     <MESSAGE value="patch: sprinkle more comments" />
     <MESSAGE value="patch (build): downgrade build target to Java 17" />
     <MESSAGE value="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage" />
@@ -584,7 +592,9 @@
     <MESSAGE value="patch (ui): set dock and stage icon, table UI improvements" />
     <MESSAGE value="feat (ui): revamped status system" />
     <MESSAGE value="patch (ui): revamped status system" />
-    <option name="LAST_COMMIT_MESSAGE" value="patch (ui): revamped status system" />
+    <MESSAGE value="feat (ui): background color and transitions for status" />
+    <MESSAGE value="feat (splash): beautiful animated splash screen complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat (splash): beautiful animated splash screen complete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

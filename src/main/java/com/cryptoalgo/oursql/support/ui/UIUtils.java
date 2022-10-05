@@ -1,4 +1,4 @@
-package com.cryptoalgo.oursql.support;
+package com.cryptoalgo.oursql.support.ui;
 
 import com.cryptoalgo.oursql.OurSQL;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +7,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -34,5 +36,12 @@ public class UIUtils {
             OurSQL.class.getResource("view/" + name + ".fxml"),
             ResourceBundle.getBundle("locales/strings", new Locale("en"))
         ).load();
+    }
+
+    public static URL getResourceURL(String res) {
+        return Objects.requireNonNull(OurSQL.class.getResource(res));
+    }
+    public static String getResourcePath(String res) {
+        return getResourceURL(res).toExternalForm();
     }
 }
