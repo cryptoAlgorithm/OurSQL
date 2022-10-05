@@ -27,6 +27,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
@@ -51,14 +52,17 @@ public class HomeViewModel {
     public final ObservableList<ObservableList<Container<?>>> rows = FXCollections.observableArrayList();
 
     private final ReadOnlyStringWrapper
-        status = new ReadOnlyStringWrapper(I18N.getString("status.ready")),
+        displayedStatus = new ReadOnlyStringWrapper(I18N.getString("status.ready")),
         selectedTable = new ReadOnlyStringWrapper(null);
+
+    private String status = null, statusID = null;
+    private long statusStart = 0;
 
     private Connection currConn = null;
 
     // Public getters
     public ReadOnlyStringProperty selectedTableProperty() { return selectedTable.getReadOnlyProperty(); }
-    public ReadOnlyStringProperty statusProperty() { return status.getReadOnlyProperty(); }
+    public ReadOnlyStringProperty displayedStatusProperty() { return displayedStatus.getReadOnlyProperty(); }
 
     /**
      * Request the password of a specific ID from the user
@@ -118,7 +122,7 @@ public class HomeViewModel {
         // If we can't get the password, return and don't go further
         if (!requestPassword(cluster)) return null;
 
-        setStatus(I18N.getString("status.fetchTables", cluster.getName()));
+        var st = setStatusJob(I18N.getString("status.fetchTables", cluster.getName()));
         try (var conn = DatabaseUtils.getConnection(
             cluster,
             cluster.getUsername() != null ? cachedPasswords.get(id) : null
@@ -130,9 +134,13 @@ public class HomeViewModel {
             else tables.get(id).clear();
             while (r.next()) tables.get(id).add(r.getString(3));
             r.close();
+            finishStatusJob(st);
         }
         catch (URISyntaxException ignored) {}
-        finally { resetStatus(); }
+        catch (NoSuchElementException | SQLException e) {
+            finishStatusJob(st, e.getLocalizedMessage());
+            throw e;
+        }
 
         return tables.get(id);
     }
@@ -149,7 +157,7 @@ public class HomeViewModel {
         // Credentials for cluster should already be populated
         assert requestPassword(cluster);
 
-        setStatus(I18N.getString("status.fetchRows", table));
+        final var stID = setStatusJob(I18N.getString("status.fetchRows", table));
         try (var conn = DatabaseUtils.getConnection(
             cluster,
             cluster.getUsername() != null ? cachedPasswords.get(cluster.getID()) : null
@@ -181,10 +189,12 @@ public class HomeViewModel {
                 rows.add(row);
             }
             r.close();
+            finishStatusJob(stID);
         } catch (SQLException | URISyntaxException e) {
             e.printStackTrace();
             log.warning("Failed to fetch rows " + e.getMessage());
-        } finally { resetStatus(); }
+            finishStatusJob(stID, e.getLocalizedMessage());
+        }
     }
 
     /**
@@ -274,9 +284,28 @@ public class HomeViewModel {
     }
 
     // Status methods
-    public void resetStatus() { setStatus(I18N.getString("status.ready")); }
-    public void setStatus(String newStatus) {
-        Platform.runLater(() -> status.set(newStatus));
+    public String setStatusJob(String newStatus) {
+        status = newStatus;
+        Platform.runLater(() -> displayedStatus.set(I18N.getString("status.progress", status)));
+        statusID = UUID.randomUUID().toString();
+        statusStart = System.currentTimeMillis();
+        return statusID;
+    }
+    public void finishStatusJob(String id) {
+        finishStatusJob(id, null);
+    }
+    public void finishStatusJob(String id, String err) {
+        final var success = err == null;
+        if (!Objects.equals(statusID, id)) return;
+        Platform.runLater(() -> {
+            displayedStatus.set(I18N.getString(
+                success ? "status.done" : "status.error",
+                status,
+                System.currentTimeMillis() - statusStart,
+                success ? null : err
+            ));
+            statusID = status = null;
+        });
     }
 
     public static void addCachedPassword(String clusterID, String pw) {

@@ -1,9 +1,9 @@
 package com.cryptoalgo.oursql;
 
 import com.cryptoalgo.oursql.support.I18N;
+import com.cryptoalgo.oursql.support.UIUtils;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
@@ -13,9 +13,7 @@ import javax.imageio.ImageIO;
 import java.awt.Taskbar;
 
 import java.io.IOException;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 /**
  * Main application entrypoint
@@ -45,12 +43,8 @@ public class OurSQL extends Application {
             Objects.requireNonNull(OurSQL.class.getResource("img/appIcon.png")).toExternalForm()
         ));
         new Thread(() -> {
-            FXMLLoader fxmlLoader = new FXMLLoader(
-                OurSQL.class.getResource("view/home.fxml"),
-                ResourceBundle.getBundle("locales/strings", new Locale("en"))
-            );
             Scene scene;
-            try { scene = new Scene(fxmlLoader.load()); } catch (IOException e) {
+            try { scene = new Scene(UIUtils.loadFXML("home")); } catch (IOException e) {
                 e.printStackTrace();
                 return;
             }

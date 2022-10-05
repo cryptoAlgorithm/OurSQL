@@ -7,19 +7,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (ui): display table columns and data">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (ui): revamped status system">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/UIUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/fonts/IBMPlexMono.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img/appicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_zh.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img/splash/bareIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img/splash/hammer.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/fonts/SpaceMono-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_zh.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_zh.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,11 +95,11 @@
       <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/oursql/css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img/splash" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/fonts" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img/db" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql" />
-      <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -247,7 +247,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="90949000" />
+      <workItem from="1664633271631" duration="94588000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -529,7 +529,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664892596817</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="patch (ui): set dock and stage icon, table UI improvements">
+      <created>1664945366392</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1664945366392</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -548,8 +555,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat (AddCluster): validate fields and add test connection&#10;Note: Testing mongoDB connection doesn't work yet" />
-    <MESSAGE value="feat (AddCluster): complete database testing&#10;Works for both PostgreSQL and MySQL (untested)" />
     <MESSAGE value="patch: UI QOL" />
     <MESSAGE value="fix (Cluster): use hex encoding for ID generation to fix preferences issues&#10;/ is a valid char in base64, which sometimes screwed up preferences encoding&#10;&#10;patch (PreferencesCodable): more useful exceptions when a key is not present" />
     <MESSAGE value="patch: sprinkle comments" />
@@ -573,7 +578,9 @@
     <MESSAGE value="feat (ui): fetch table rows when table selected&#10;patch (AddCluster): add new database password to cache so user doesn't have to re-enter it right after adding the cluster" />
     <MESSAGE value="feat (ui): display table columns" />
     <MESSAGE value="feat (ui): display table columns and data" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat (ui): display table columns and data" />
+    <MESSAGE value="patch (ui): set dock and stage icon, table UI improvements" />
+    <MESSAGE value="feat (ui): revamped status system" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat (ui): revamped status system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

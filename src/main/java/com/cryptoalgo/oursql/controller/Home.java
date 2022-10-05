@@ -7,6 +7,7 @@ import com.cryptoalgo.oursql.model.HomeViewModel;
 import com.cryptoalgo.oursql.model.db.data.Container;
 import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.SecretsStore;
+import com.cryptoalgo.oursql.support.UIUtils;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ListChangeListener;
@@ -187,6 +188,7 @@ public class Home {
     }
 
     private void initTableView() {
+        UIUtils.clipToRadius(dbTable, 4);
         dbTable.setItems(viewModel.rows);
         dbTable.setEditable(true);
 
@@ -225,6 +227,6 @@ public class Home {
         mainContentContainer.visibleProperty().bind(viewModel.selectedTableProperty().isEmpty().not());
         mainContentContainer.managedProperty().bind(viewModel.selectedTableProperty().isEmpty().not());
 
-        statusLabel.textProperty().bind(viewModel.statusProperty());
+        statusLabel.textProperty().bind(viewModel.displayedStatusProperty());
     }
 }

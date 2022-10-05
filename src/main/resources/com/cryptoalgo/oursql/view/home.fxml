@@ -75,7 +75,7 @@
         </VBox>
     </left>
     <center>
-        <VBox>
+        <VBox spacing="4">
             <BorderPane.margin><Insets top="8" right="8" bottom="8" /></BorderPane.margin>
             <VBox fx:id="mainContentContainer" visible="false" managed="false" VBox.vgrow="ALWAYS" spacing="4">
                 <HBox styleClass="queryContainer">
@@ -83,9 +83,6 @@
                     <Button text="%action.run" />
                 </HBox>
                 <TableView VBox.vgrow="ALWAYS" styleClass="table" fx:id="dbTable" />
-                <HBox styleClass="statusContainer">
-                    <Label fx:id="statusLabel" />
-                </HBox>
             </VBox>
 
             <VBox fx:id="tableTipContainer" VBox.vgrow="ALWAYS" spacing="8">
@@ -98,6 +95,10 @@
                 <Label text="No table selected" styleClass="h2" />
                 <Label text="Select a table in a cluster from the sidebar or add a cluster!" />
             </VBox>
+
+            <HBox styleClass="statusContainer">
+                <Label fx:id="statusLabel" />
+            </HBox>
         </VBox>
     </center>
 </BorderPane>

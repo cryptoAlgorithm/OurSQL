@@ -11,11 +11,11 @@ import com.cryptoalgo.oursql.component.StyledAlert;
 import com.cryptoalgo.oursql.component.PasswordDialog;
 import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.SecretsStore;
+import com.cryptoalgo.oursql.support.UIUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -32,9 +32,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 /**
@@ -62,10 +59,7 @@ public class AddClusterDialog {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UTILITY);
         stage.setTitle(I18N.getString("action.addCluster"));
-        stage.setScene(new Scene(FXMLLoader.load(
-            Objects.requireNonNull(OurSQL.class.getResource("view/add-cluster.fxml")),
-            ResourceBundle.getBundle("locales/strings", new Locale("en"))
-        )));
+        stage.setScene(new Scene(UIUtils.loadFXML("add-cluster")));
         stage.setMinWidth(640);
         stage.setMinHeight(250);
         stage.show();

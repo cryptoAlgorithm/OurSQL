@@ -69,5 +69,9 @@
 }
 .statusContainer {
     -fx-background-radius: 4 4 12 12;
-    -fx-padding: 6 8;
+    -fx-padding: 10 14;
+}
+
+#tableTipContainer {
+    -fx-background-radius: 12 12 4 4;
 }
