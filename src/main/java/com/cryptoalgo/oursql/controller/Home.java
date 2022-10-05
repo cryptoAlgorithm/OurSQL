@@ -148,7 +148,7 @@ public class Home {
             var p = new TitledPane();
             p.setAnimated(false); // Having no animation is better than a buggy mess
             p.setText(c.getName());
-            p.setContent(new Label("Loading tables..."));
+            p.setContent(new Label(I18N.getString("label.loadTables")));
 
             // Tables are lazy-loaded the first time the titled pane is opened
             p.expandedProperty().addListener((ch, o, newVal) -> {
@@ -174,6 +174,7 @@ public class Home {
             var m = new ContextMenu();
             MenuItem
                 header = new MenuItem(I18N.getString("actions")),
+                newTable = new MenuItem(I18N.getString("action.newTable")),
                 del = new MenuItem(I18N.getString("action.delCluster"));
             header.getStyleClass().add("accentedHeader");
             header.setDisable(true);
@@ -186,7 +187,7 @@ public class Home {
                 }
             });
 
-            m.getItems().addAll(header, del);
+            m.getItems().addAll(header, newTable, del);
             p.setContextMenu(m);
             categoryList.getPanes().add(idx, p);
             showHideAddClusterTip();
@@ -271,8 +272,11 @@ public class Home {
         statusLabel.textProperty().bind(viewModel.displayedStatusProperty());
         curTableLabel.textProperty().bind(
             Bindings.when(viewModel.selectedTableProperty().isNotNull())
-                .then(Bindings.concat("Table: ", viewModel.selectedTableProperty()))
-                .otherwise("No Table Selected")
+                .then(Bindings.concat(
+                    I18N.getString("label.curTable") + " ",
+                    viewModel.selectedTableProperty())
+                )
+                .otherwise(I18N.getString("label.noCurTable"))
         );
 
         // Animate background changes
