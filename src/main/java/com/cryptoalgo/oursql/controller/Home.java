@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 
@@ -187,6 +188,9 @@ public class Home {
 
     private void initTableView() {
         dbTable.setItems(viewModel.rows);
+        dbTable.setEditable(true);
+
+        // Listen and update table when columns change
         viewModel.tableColumns.addListener((ListChangeListener<String>) c -> {
             while (c.next()) {
                 for (int i = c.getFrom(); i < c.getTo(); ++i) {
@@ -194,11 +198,14 @@ public class Home {
                         dbTable.getColumns().get(i).setText(c.getList().get(i));
                     else if (c.wasAdded()) {
                         final int curCol = i;
-                        final TableColumn<ObservableList<Container<?>>, String> col
-                            = new TableColumn<>(c.getList().get(i));
+                        final TableColumn<ObservableList<Container<?>>, String> col =
+                            new TableColumn<>(c.getList().get(i));
                         col.setCellValueFactory(
                             param -> new ReadOnlyObjectWrapper<>(param.getValue().get(curCol).toString())
                         );
+                        col.setCellFactory(TextFieldTableCell.forTableColumn());
+                        col.setPrefWidth(200);
+                        col.setMinWidth(100);
                         dbTable.getColumns().add(col);
                     }
                 }

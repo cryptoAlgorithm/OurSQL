@@ -5,6 +5,7 @@ module com.cryptoalgo.oursql.oursql {
     requires java.logging;
     requires java.sql;
     requires org.jetbrains.annotations;
+    requires java.desktop;
 
     opens com.cryptoalgo.oursql to javafx.fxml;
     exports com.cryptoalgo.oursql;

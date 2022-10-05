@@ -267,4 +267,26 @@
 .table-view {
     -fx-padding: 0;
     -fx-background-insets: 0; /* Get rid of the ugly focus outline */
+    -fx-table-cell-border-color: -fx-outer-border;
+}
+.table-row-cell {
+    -fx-background: #0000;
+    -fx-background-color: -fx-background!important;
+    -fx-background-insets: 0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: -fx-table-cell-border-color;
+}
+.table-row-cell:selected {
+    -fx-background: derive(-fx-accent, -50%);
+}
+
+.table-cell {
+    -fx-padding: 0;
+    -fx-table-cell-border-color: -fx-outer-border;
+    /*-fx-control-inner-background: #0000;*/
+}
+.text-field-table-cell .text-field {
+    -fx-padding: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
 }

@@ -163,7 +163,6 @@ public class HomeViewModel {
             // Then add all
             while (r.next()) {
                 final ObservableList<Container<?>> row = FXCollections.observableArrayList();
-                //meta.getColumnTypeName();
                 for (int c = 1; c <= meta.getColumnCount(); c++) {
                     // TIL var exists
                     final var cont = Container.getInstance(meta.getColumnTypeName(c));

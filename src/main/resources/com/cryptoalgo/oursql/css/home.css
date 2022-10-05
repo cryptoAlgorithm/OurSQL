@@ -51,13 +51,17 @@
     -fx-background-radius: 7 0 0 7;
     -fx-padding: 0 8;
     -fx-font-size: 1.2em;
-    -fx-font-family: 'Space Mono';
     -fx-min-height: 34;
 }
 .queryContainer > .button {
     -fx-background-radius: 0 7 7 0;
     -fx-padding: 8 12 8 10;
     -fx-min-width: 0;
+}
+
+.queryContainer > .text-field, .table-cell, .table-view .column-header-background .label {
+    -fx-font-family: 'IBM Plex Mono';
+    -fx-font-size: 1.1em;
 }
 
 .table {
