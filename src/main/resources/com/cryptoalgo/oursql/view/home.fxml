@@ -97,9 +97,12 @@
                 <Label text="Select a table in a cluster from the sidebar or add a cluster!" />
             </VBox>
 
-            <HBox fx:id="statusContainer">
+            <HBox fx:id="statusContainer" spacing="8">
                 <Rectangle fx:id="statusBgRect" fill="#0000" />
                 <Label fx:id="statusLabel" />
+                <Pane HBox.hgrow="ALWAYS" />
+                <Separator orientation="VERTICAL" />
+                <Label fx:id="curTableLabel" />
             </HBox>
         </VBox>
     </center>

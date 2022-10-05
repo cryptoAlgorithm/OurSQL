@@ -161,12 +161,12 @@ public class HomeViewModel {
         assert requestPassword(cluster);
 
         final var stID = setStatusJob(I18N.getString("status.fetchRows", table));
-        try (var conn = DatabaseUtils.getConnection(
-            cluster,
-            cluster.getUsername() != null ? cachedPasswords.get(cluster.getID()) : null
-        )) {
-            currConn = conn;
-            final ResultSet r = conn.createStatement().executeQuery("select * from " + table);
+        try {
+            currConn = DatabaseUtils.getConnection(
+                cluster,
+                cluster.getUsername() != null ? cachedPasswords.get(cluster.getID()) : null
+            );
+            final ResultSet r = currConn.createStatement().executeQuery("select *, CTID from " + table);
             final ResultSetMetaData meta = r.getMetaData();
 
             // Firstly add column names as first row
@@ -178,6 +178,7 @@ public class HomeViewModel {
                     // TIL var exists
                     final var cont = Container.getInstance(meta.getColumnTypeName(c));
                     if (cont == null) {
+                       // System.out.println(meta.getColumnTypeName(c));
                         row.add(new PlaceholderContainer());
                         continue;
                     }
@@ -198,6 +199,23 @@ public class HomeViewModel {
             log.warning("Failed to fetch rows " + e.getMessage());
             finishStatusJob(stID, e.getLocalizedMessage());
         }
+        System.out.println(tableColumns);
+    }
+
+    public void attemptEdit(String col, String ctid, String nv) throws SQLException {
+        assert currConn != null;
+        currConn.createStatement().execute(
+            String.format("""
+                UPDATE %s
+                SET "%s" = '%s'
+                WHERE ctid = '%s';
+                """,
+                selectedTable.get(),
+                col,
+                nv,
+                ctid
+            )
+        );
     }
 
     /**

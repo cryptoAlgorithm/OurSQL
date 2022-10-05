@@ -9,10 +9,10 @@ public class StringContainer extends Container<String> {
     }
 
     @Override
-    String getValue() { return boxed; }
+    public String getValue() { return boxed; }
 
     @Override
-    boolean isValid(String value) {
+    public boolean isValid(String value) {
         return true; // All strings can be boxed in this container
     }
 

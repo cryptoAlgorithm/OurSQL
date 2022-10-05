@@ -187,6 +187,9 @@
 .separator > .line {
     -fx-border-width: 1 0 0 0;
 }
+.separator:vertical > .line {
+    -fx-border-width: 0 1 0 0;
+}
 
 /* Slider */
 .slider > .track {

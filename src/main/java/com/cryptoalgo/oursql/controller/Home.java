@@ -10,13 +10,13 @@ import com.cryptoalgo.oursql.support.SecretsStore;
 import com.cryptoalgo.oursql.support.ui.UIUtils;
 import javafx.animation.FillTransition;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -50,7 +50,7 @@ public class Home {
     @FXML
     private TableView<ObservableList<Container<?>>> dbTable;
     @FXML
-    private Label statusLabel;
+    private Label statusLabel, curTableLabel;
 
     private Stage statusPopup = null;
 
@@ -198,6 +198,9 @@ public class Home {
         viewModel.loadClusters();
     }
 
+    /**
+     * Inits the tableView and binds the necessary values to those in the ViewModel.
+     */
     private void initTableView() {
         UIUtils.clipToRadius(dbTable, 4);
         dbTable.setItems(viewModel.rows);
@@ -210,19 +213,34 @@ public class Home {
                     if (c.wasPermutated())
                         dbTable.getColumns().get(i).setText(c.getList().get(i));
                     else if (c.wasAdded()) {
-                        final int curCol = i;
-                        final TableColumn<ObservableList<Container<?>>, String> col =
-                            new TableColumn<>(c.getList().get(i));
+                        final var colTitle = c.getList().get(i);
+                        final var curCol = i;
+                        final var col = new TableColumn<ObservableList<Container<?>>, String>(colTitle);
                         col.setCellValueFactory(
                             param -> new ReadOnlyObjectWrapper<>(param.getValue().get(curCol).toString())
                         );
-                        col.setCellFactory(TextFieldTableCell.forTableColumn());
+                        if (colTitle.equals("ctid")) col.setVisible(false); // Skip ctid col
+                        // Handle editing
+                        col.setOnEditCommit(evt -> {
+                            final var row = evt.getRowValue();
+                            System.out.println(evt.getTableColumn().getText());
+                            try {
+                                viewModel.attemptEdit(
+                                    evt.getTableColumn().getText(),
+                                    row.get(row.size()-1).toString(),
+                                    evt.getNewValue()
+                                );
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                        col.setCellFactory(param -> new SQLCellFactory());
                         col.setPrefWidth(200);
                         col.setMinWidth(100);
                         dbTable.getColumns().add(col);
                     }
                 }
-                if (c.wasRemoved()) dbTable.getColumns().remove(c.getFrom());
+                if (c.wasRemoved()) dbTable.getColumns().remove(c.getFrom(), c.getFrom() + c.getRemovedSize());
             }
         });
     }
@@ -248,6 +266,11 @@ public class Home {
         statusBgRect.setArcWidth(14); statusBgRect.setArcHeight(14);
 
         statusLabel.textProperty().bind(viewModel.displayedStatusProperty());
+        curTableLabel.textProperty().bind(
+            Bindings.when(viewModel.selectedTableProperty().isNotNull())
+                .then(Bindings.concat("Table: ", viewModel.selectedTableProperty()))
+                .otherwise("No Table Selected")
+        );
 
         // Animate background changes
         viewModel.statusBgProperty().addListener((ob, ov, nv) -> {

@@ -158,7 +158,7 @@ public class OurSQL extends Application {
         Stage splashStage = createSplash();
 
         new Thread(() -> {
-            try { Thread.sleep(5000); } catch (InterruptedException ignored) {}
+            try { Thread.sleep(4000); } catch (InterruptedException ignored) {}
             Scene scene;
             try { scene = new Scene(UIUtils.loadFXML("home")); } catch (IOException e) {
                 e.printStackTrace();

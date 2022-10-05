@@ -8,7 +8,7 @@ import java.util.HashMap;
  * A "box" for holding different types of data
  */
 public abstract class Container<T> {
-    abstract T getValue();
+    public abstract T getValue();
 
     public Container(String boxValue) {}
 
@@ -16,7 +16,7 @@ public abstract class Container<T> {
      * @param value Value to be checked
      * @return true if <code>value</code> can be cast to the type of this container
      */
-    abstract boolean isValid(String value);
+    public abstract boolean isValid(String value);
 
     public boolean isEditable() { return true; }
 
@@ -29,6 +29,7 @@ public abstract class Container<T> {
         typeLookup.put("nchar", StringContainer.class);
         typeLookup.put("ntext", StringContainer.class);
         typeLookup.put("nvarchar", StringContainer.class);
+        typeLookup.put("tid", TIDContainer.class);
     }
 
     /**
