@@ -9,13 +9,14 @@ import com.cryptoalgo.oursql.component.PasswordDialog;
 import com.cryptoalgo.oursql.model.db.data.Container;
 import com.cryptoalgo.oursql.model.db.data.PlaceholderContainer;
 import com.cryptoalgo.oursql.support.AsyncUtils;
+import com.cryptoalgo.oursql.support.Colors;
 import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.SecretsStore;
 import javafx.application.Platform;
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.*;
 import javafx.collections.*;
 import javafx.scene.control.Alert;
+import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
@@ -54,6 +55,7 @@ public class HomeViewModel {
     private final ReadOnlyStringWrapper
         displayedStatus = new ReadOnlyStringWrapper(I18N.getString("status.ready")),
         selectedTable = new ReadOnlyStringWrapper(null);
+    private final ReadOnlyObjectWrapper<Color> statusBg = new ReadOnlyObjectWrapper<>(Color.TRANSPARENT);
 
     private String status = null, statusID = null;
     private long statusStart = 0;
@@ -63,6 +65,7 @@ public class HomeViewModel {
     // Public getters
     public ReadOnlyStringProperty selectedTableProperty() { return selectedTable.getReadOnlyProperty(); }
     public ReadOnlyStringProperty displayedStatusProperty() { return displayedStatus.getReadOnlyProperty(); }
+    public ReadOnlyObjectProperty<Color> statusBgProperty() { return statusBg.getReadOnlyProperty(); }
 
     /**
      * Request the password of a specific ID from the user
@@ -304,8 +307,17 @@ public class HomeViewModel {
                 System.currentTimeMillis() - statusStart,
                 success ? null : err
             ));
-            statusID = status = null;
+            status = null;
         });
+
+        // Set the status background color and clear it after 3s if there are no further statuses
+        statusBg.set(success ? Colors.SUCCESS : Colors.ERROR);
+        new Thread(() -> {
+            try { Thread.sleep(3000); } catch (InterruptedException ignored) {}
+            if (!Objects.equals(statusID, id)) return;
+            statusBg.set(Color.TRANSPARENT);
+            statusID = null;
+        }).start();
     }
 
     public static void addCachedPassword(String clusterID, String pw) {

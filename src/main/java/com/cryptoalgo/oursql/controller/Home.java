@@ -8,6 +8,7 @@ import com.cryptoalgo.oursql.model.db.data.Container;
 import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.SecretsStore;
 import com.cryptoalgo.oursql.support.UIUtils;
+import javafx.animation.FillTransition;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ListChangeListener;
@@ -16,8 +17,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextFlow;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -38,6 +42,10 @@ public class Home {
     private Accordion categoryList;
     @FXML
     private VBox addClusterTip, tableTipContainer, mainContentContainer;
+    @FXML
+    private HBox statusContainer;
+    @FXML
+    private Rectangle statusBgRect;
     @FXML
     private TableView<ObservableList<Container<?>>> dbTable;
     @FXML
@@ -216,17 +224,33 @@ public class Home {
         });
     }
 
+    void initStatus() {
+        // Bind the size of the background rect to the status container
+        statusBgRect.heightProperty().bind(statusContainer.heightProperty());
+        statusBgRect.widthProperty().bind(statusContainer.widthProperty());
+        statusBgRect.setManaged(false);
+        statusBgRect.setArcWidth(14); statusBgRect.setArcHeight(14);
+
+        statusLabel.textProperty().bind(viewModel.displayedStatusProperty());
+
+        // Animate background changes
+        viewModel.statusBgProperty().addListener((ob, ov, nv) -> {
+            var t = new FillTransition(Duration.millis(250), statusBgRect, ov, nv);
+            t.setCycleCount(1);
+            t.play();
+        });
+    }
+
     @FXML
     private void initialize() {
         initClusterList();
         initTableView();
+        initStatus();
 
         // Bind visible and managed properties of main content and tip
         tableTipContainer.visibleProperty().bind(viewModel.selectedTableProperty().isEmpty());
         tableTipContainer.managedProperty().bind(viewModel.selectedTableProperty().isEmpty());
         mainContentContainer.visibleProperty().bind(viewModel.selectedTableProperty().isEmpty().not());
         mainContentContainer.managedProperty().bind(viewModel.selectedTableProperty().isEmpty().not());
-
-        statusLabel.textProperty().bind(viewModel.displayedStatusProperty());
     }
 }

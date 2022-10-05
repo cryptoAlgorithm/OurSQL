@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TableView?>
 
+<?import javafx.scene.shape.Rectangle?>
 <BorderPane
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
@@ -96,7 +97,8 @@
                 <Label text="Select a table in a cluster from the sidebar or add a cluster!" />
             </VBox>
 
-            <HBox styleClass="statusContainer">
+            <HBox fx:id="statusContainer">
+                <Rectangle fx:id="statusBgRect" fill="#0000" />
                 <Label fx:id="statusLabel" />
             </HBox>
         </VBox>

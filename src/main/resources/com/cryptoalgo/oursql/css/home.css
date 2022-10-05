@@ -1,7 +1,7 @@
 @import "base.css";
 
 /* Common to all sections */
-.sidebar, .appBar, .queryContainer, .statusContainer, .table, #tableTipContainer {
+.sidebar, .appBar, .queryContainer, #statusContainer, .table, #tableTipContainer {
     -fx-background-radius: 12;
     -fx-background-color: -fx-control-inner-background;
 }
@@ -67,9 +67,10 @@
 .table {
     -fx-background-radius: 4;
 }
-.statusContainer {
+#statusContainer {
     -fx-background-radius: 4 4 12 12;
-    -fx-padding: 10 14;
+    -fx-padding: 9 14;
+    -fx-font-size: 1.2em;
 }
 
 #tableTipContainer {
