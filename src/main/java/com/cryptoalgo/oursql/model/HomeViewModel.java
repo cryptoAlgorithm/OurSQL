@@ -43,8 +43,7 @@ public class HomeViewModel {
     private static final Logger log = Logger.getLogger(HomeViewModel.class.getName());
 
     private final ObservableList<Cluster> clusters = FXCollections.observableArrayList();
-    private final ObservableMap<String, ObservableList<String>> tables =
-        FXCollections.observableMap(new HashMap<>());
+    private final HashMap<String, ObservableList<String>> tables = new HashMap<>();
 
     private static final ObservableMap<String, String> cachedPasswords =
         FXCollections.observableMap(new HashMap<>());
@@ -166,7 +165,9 @@ public class HomeViewModel {
                 cluster,
                 cluster.getUsername() != null ? cachedPasswords.get(cluster.getID()) : null
             );
-            final ResultSet r = currConn.createStatement().executeQuery("select *, CTID from " + table);
+            final var r = currConn.createStatement().executeQuery(
+                String.format("select *, CTID from \"%s\"", table)
+            );
             final ResultSetMetaData meta = r.getMetaData();
 
             // Firstly add column names as first row
@@ -195,12 +196,10 @@ public class HomeViewModel {
             r.close();
             finishStatusJob(stID);
         } catch (SQLException | URISyntaxException e) {
-            e.printStackTrace();
             log.warning("Failed to fetch rows " + e.getMessage());
             finishStatusJob(stID, e.getLocalizedMessage());
             selectedTable.set(null);
         }
-        System.out.println(tableColumns);
     }
 
     public void attemptEdit(String col, String ctid, String nv) throws SQLException {
@@ -217,6 +216,24 @@ public class HomeViewModel {
                 ctid
             )
         );
+    }
+
+    public void createTable(@NotNull Cluster cluster, @NotNull String table) {
+        if (!requestPassword(cluster)) return;
+        final var tID = setStatusJob(I18N.getString("status.createTable", table));
+        try (final var conn = DatabaseUtils.getConnection(
+            cluster,
+            cluster.getUsername() != null ? cachedPasswords.get(cluster.getID()) : null
+        )) {
+            conn.createStatement().execute("CREATE TABLE \"" + table + "\" ()");
+        } catch (URISyntaxException | SQLException ex) {
+            ex.printStackTrace();
+            finishStatusJob(tID, ex.getLocalizedMessage());
+        }
+        finishStatusJob(tID);
+        try {
+            requestTables(cluster);
+        } catch (SQLException ignored) {}
     }
 
     /**
@@ -311,6 +328,7 @@ public class HomeViewModel {
         Platform.runLater(() -> displayedStatus.set(I18N.getString("status.progress", status)));
         statusID = UUID.randomUUID().toString();
         statusStart = System.currentTimeMillis();
+        statusBg.set(Colors.LOADING);
         return statusID;
     }
     public void finishStatusJob(String id) {

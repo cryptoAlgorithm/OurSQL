@@ -2,6 +2,7 @@ package com.cryptoalgo.oursql.controller;
 
 import com.cryptoalgo.codable.DecodingException;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
+import com.cryptoalgo.oursql.component.StyledInputDialog;
 import com.cryptoalgo.oursql.model.db.Cluster;
 import com.cryptoalgo.oursql.model.HomeViewModel;
 import com.cryptoalgo.oursql.model.db.data.Container;
@@ -14,7 +15,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -97,7 +97,7 @@ public class Home {
                 if (tables != null) {
                     ListView<String> t = new ListView<>();
                     t.setItems(tables);
-                    t.setPrefHeight(tables.size() * 28);
+                    t.prefHeightProperty().bind(Bindings.multiply(Bindings.size(tables), 28));
                     p.setContent(t);
                     t.getSelectionModel().selectedIndexProperty().addListener((o, ov, nv) -> {
                         if (nv.intValue() < 0) return;
@@ -105,7 +105,7 @@ public class Home {
                             + c.getID()
                             + " and table "
                             + tables.get(nv.intValue()));
-                        viewModel.newTableSelection(c, tables.get(nv.intValue()));
+                        new Thread(() -> viewModel.newTableSelection(c, tables.get(nv.intValue()))).start();
                     });
                     t.getSelectionModel().select(0);
                 } else p.setExpanded(false);
@@ -178,7 +178,16 @@ public class Home {
                 del = new MenuItem(I18N.getString("action.delCluster"));
             header.getStyleClass().add("accentedHeader");
             header.setDisable(true);
-            del.setOnAction((ActionEvent ev) -> {
+            newTable.setOnAction(e -> {
+                String table = new StyledInputDialog(
+                    I18N.getString("dialog.newTable.title"),
+                    I18N.getString("dialog.newTable.title"),
+                    I18N.getString("dialog.newTable.body")
+                ).showAndWait().orElse(null);
+                if (table == null) return;
+                viewModel.createTable(c, table);
+            });
+            del.setOnAction(ev -> {
                 try {
                     c.remove();
                     SecretsStore.remove(c.getID());
@@ -241,10 +250,12 @@ public class Home {
                         col.setCellFactory(param -> new SQLCellFactory());
                         col.setPrefWidth(200);
                         col.setMinWidth(100);
-                        dbTable.getColumns().add(col);
+                        Platform.runLater(() -> dbTable.getColumns().add(col));
                     }
                 }
-                if (c.wasRemoved()) dbTable.getColumns().remove(c.getFrom(), c.getFrom() + c.getRemovedSize());
+                if (c.wasRemoved()) Platform.runLater(() ->
+                    dbTable.getColumns().remove(c.getFrom(), c.getFrom() + c.getRemovedSize())
+                );
             }
         });
     }

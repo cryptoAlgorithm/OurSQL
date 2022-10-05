@@ -1,15 +1,13 @@
 package com.cryptoalgo.oursql.component;
 
-import com.cryptoalgo.oursql.OurSQL;
 import com.cryptoalgo.oursql.support.I18N;
+import com.cryptoalgo.oursql.support.ui.UIUtils;
 import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
 
 public class PasswordDialog extends Dialog<String> {
     private final PasswordField passwordField;
@@ -21,11 +19,7 @@ public class PasswordDialog extends Dialog<String> {
         @Nullable String caption
     ) {
         super();
-        getDialogPane().getStylesheets().add(
-            Objects.requireNonNull(
-                OurSQL.class.getResource("css/dialog.css")
-            ).toExternalForm()
-        );
+        getDialogPane().getStylesheets().add(UIUtils.getResourcePath("css/dialog.css"));
         getDialogPane().getScene().setFill(Color.TRANSPARENT); // Prevents flash of white when opening dialog
         setTitle(title);
         setHeaderText(header);

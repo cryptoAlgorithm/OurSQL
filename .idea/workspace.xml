@@ -7,9 +7,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="fix (ui): better current table handing&#10;clear current table if fetching did not succeed">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="chore (localisation): transfer more strings into the localisation bundle">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledInputDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledAlert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/Colors.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -238,7 +244,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="115505000" />
+      <workItem from="1664633271631" duration="118247000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -576,7 +582,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664976622143</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="chore (localisation): transfer more strings into the localisation bundle">
+      <created>1664976873771</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1664976873771</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -595,7 +608,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="patch (ui): UI refresh before tables implementation" />
     <MESSAGE value="feat (ui): show tip if no clusters are added" />
     <MESSAGE value="feat (ui): add better looking styled alert" />
     <MESSAGE value="feat (AddDialog): persist password and encrypt if requested" />
@@ -620,7 +632,8 @@
     <MESSAGE value="patch (ui): show pop up with status when status text clicked&#10;chore (SpringInterpolator): add JavaDoc comments, remove debugging prints" />
     <MESSAGE value="feat (ui): initial value update support" />
     <MESSAGE value="fix (ui): better current table handing&#10;clear current table if fetching did not succeed" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix (ui): better current table handing&#10;clear current table if fetching did not succeed" />
+    <MESSAGE value="chore (localisation): transfer more strings into the localisation bundle" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore (localisation): transfer more strings into the localisation bundle" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,19 +1,18 @@
 package com.cryptoalgo.oursql.component;
 
 import com.cryptoalgo.oursql.support.ui.UIUtils;
-import javafx.scene.control.Alert;
+import javafx.scene.control.TextInputDialog;
 
-public class StyledAlert extends Alert {
-    public StyledAlert(
-        AlertType type,
+public class StyledInputDialog extends TextInputDialog {
+    public StyledInputDialog(
         String title,
         String header,
         String body
     ) {
-        super(type);
-        getDialogPane().getStylesheets().add(UIUtils.getResourcePath("css/dialog.css"));
+        super();
         setTitle(title);
         setHeaderText(header);
         setContentText(body);
+        getDialogPane().getStylesheets().add(UIUtils.getResourcePath("css/dialog.css"));
     }
 }

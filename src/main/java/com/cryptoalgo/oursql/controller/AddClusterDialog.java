@@ -12,6 +12,7 @@ import com.cryptoalgo.oursql.component.PasswordDialog;
 import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.SecretsStore;
 import com.cryptoalgo.oursql.support.ui.UIUtils;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -277,45 +278,47 @@ public class AddClusterDialog {
     @FXML
     private void testConn() {
         testButton.setDisable(true);
-        String dbName, dbVer, driverName, driverVer, driverSpec;
-        try {
-            DatabaseMetaData dbMeta = DatabaseUtils
+        new Thread(() -> {
+            String dbName, dbVer, driverName, driverVer, driverSpec;
+            try (final var conn = DatabaseUtils
                 .getConnection(
                     constructCluster(),
                     authPW.getText().isBlank() ? null : authPW.getText()
                 )
-                .getMetaData();
-            // Populate hoisted vars
-            dbName = dbMeta.getDatabaseProductName();
-            dbVer = dbMeta.getDatabaseProductVersion();
-            driverName = dbMeta.getDriverName();
-            driverVer = dbMeta.getDriverVersion();
-            driverSpec = dbMeta.getJDBCMajorVersion() + "." + dbMeta.getJDBCMinorVersion();
-        } catch (URISyntaxException | SQLException ex) {
-            new StyledAlert(
-                Alert.AlertType.ERROR,
-                I18N.getString("dialog.dbTestFail.title"),
-                I18N.getString("dialog.dbTestFail.header"),
-                ex.getLocalizedMessage()
-            ).show();
-            return;
-        } finally {
-            // Always re-enable button
-            testButton.setDisable(false);
-        }
-        // Show db test succeeded alert
-        new StyledAlert(
-            Alert.AlertType.INFORMATION,
-            I18N.getString("dialog.dbTestOk.title"),
-            I18N.getString("dialog.dbTestOk.header"),
-            I18N.getString(
-                "dialog.dbTestOk.body",
-                dbName,
-                dbVer,
-                driverName,
-                driverVer,
-                driverSpec
-            )
-        ).show();
+            ) {
+                DatabaseMetaData dbMeta = conn.getMetaData();
+                // Populate hoisted vars
+                dbName = dbMeta.getDatabaseProductName();
+                dbVer = dbMeta.getDatabaseProductVersion();
+                driverName = dbMeta.getDriverName();
+                driverVer = dbMeta.getDriverVersion();
+                driverSpec = dbMeta.getJDBCMajorVersion() + "." + dbMeta.getJDBCMinorVersion();
+            } catch (URISyntaxException | SQLException ex) {
+                Platform.runLater(() -> new StyledAlert(
+                    Alert.AlertType.ERROR,
+                    I18N.getString("dialog.dbTestFail.title"),
+                    I18N.getString("dialog.dbTestFail.header"),
+                    ex.getLocalizedMessage()
+                ).show());
+                return;
+            } finally {
+                // Always re-enable button
+                Platform.runLater(() -> testButton.setDisable(false));
+            }
+            // Show db test succeeded alert
+            Platform.runLater(() -> new StyledAlert(
+                Alert.AlertType.INFORMATION,
+                I18N.getString("dialog.dbTestOk.title"),
+                I18N.getString("dialog.dbTestOk.header"),
+                I18N.getString(
+                    "dialog.dbTestOk.body",
+                    dbName,
+                    dbVer,
+                    driverName,
+                    driverVer,
+                    driverSpec
+                )
+            ).show());
+        }).start();
     }
 }
