@@ -166,6 +166,7 @@ public class OurSQL extends Application {
             }
             scene.setFill(Color.TRANSPARENT);
             stage.setTitle(I18N.getString("app.title"));
+            stage.setWidth(850); stage.setHeight(520);
 
             // Fade out old stage
             final var fade = new FadeTransition(Duration.millis(400), splashStage.getScene().getRoot());

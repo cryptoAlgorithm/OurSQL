@@ -7,9 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (splash): beautiful animated splash screen complete">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (ui): show pop up with status when status text clicked&#10;chore (SpringInterpolator): add JavaDoc comments, remove debugging prints">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/SpringInterpolator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/SpringInterpolator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/UIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/UIUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,7 +241,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="104459000" />
+      <workItem from="1664633271631" duration="108180000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -547,7 +551,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664963017201</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="patch (ui): set all scenes to have transparent fill to prevent a flash of white before the content loads">
+      <created>1664963246816</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1664963246816</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -566,8 +577,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="patch: sprinkle more comments" />
-    <MESSAGE value="patch (build): downgrade build target to Java 17" />
     <MESSAGE value="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage" />
     <MESSAGE value="feat: allow removing clusters by right-clicking" />
     <MESSAGE value="patch (ui): UI refresh before tables implementation" />
@@ -591,7 +600,9 @@
     <MESSAGE value="patch (ui): revamped status system" />
     <MESSAGE value="feat (ui): background color and transitions for status" />
     <MESSAGE value="feat (splash): beautiful animated splash screen complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat (splash): beautiful animated splash screen complete" />
+    <MESSAGE value="patch (ui): set all scenes to have transparent fill to prevent a flash of white before the content loads" />
+    <MESSAGE value="patch (ui): show pop up with status when status text clicked&#10;chore (SpringInterpolator): add JavaDoc comments, remove debugging prints" />
+    <option name="LAST_COMMIT_MESSAGE" value="patch (ui): show pop up with status when status text clicked&#10;chore (SpringInterpolator): add JavaDoc comments, remove debugging prints" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

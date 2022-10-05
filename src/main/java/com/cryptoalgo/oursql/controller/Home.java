@@ -21,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -50,6 +51,8 @@ public class Home {
     private TableView<ObservableList<Container<?>>> dbTable;
     @FXML
     private Label statusLabel;
+
+    private Stage statusPopup = null;
 
     @FXML
     private void addCluster() {
@@ -225,6 +228,19 @@ public class Home {
     }
 
     void initStatus() {
+        statusContainer.setOnMouseClicked(e -> {
+            if (statusPopup != null) statusPopup.close();
+            final var status = new Label();
+            status.setWrapText(true);
+            status.textProperty().bind(viewModel.displayedStatusProperty());
+            status.setStyle("-fx-font-size: 1.2em");
+            statusPopup = UIUtils.createUtilityStage(
+                I18N.getString("popup.viewStatus.title"),
+                status
+            );
+            statusPopup.show();
+        });
+
         // Bind the size of the background rect to the status container
         statusBgRect.heightProperty().bind(statusContainer.heightProperty());
         statusBgRect.widthProperty().bind(statusContainer.widthProperty());

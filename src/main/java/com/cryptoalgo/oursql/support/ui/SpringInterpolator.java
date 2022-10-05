@@ -4,6 +4,9 @@ import javafx.animation.Interpolator;
 
 import java.util.ArrayList;
 
+/**
+ * An interpolate that simulates interpolation with spring physics.
+ */
 public class SpringInterpolator extends Interpolator {
     private final ArrayList<Double> values = new ArrayList<>();
 
@@ -11,6 +14,13 @@ public class SpringInterpolator extends Interpolator {
         this(stiffness, mass, damping, 0.05);
     }
 
+    /**
+     * Create a spring interpolator with custom values
+     * @param stiffness Stiffness of spring in simulation
+     * @param mass Mass of object to simulate
+     * @param damping Dampening to use for simulation
+     * @param precision Stop simulation when (x-target) and v are both less than this value
+     */
     public SpringInterpolator(
         double stiffness,
         double mass,
@@ -44,9 +54,7 @@ public class SpringInterpolator extends Interpolator {
             x += v * rate;
 
             values.add(x);
-            System.out.println(x);
         }
-        System.out.println(values);
     }
 
     @Override
