@@ -161,6 +161,8 @@ public class HomeViewModel {
 
         final var stID = setStatusJob(I18N.getString("status.fetchRows", table));
         try {
+            // Prevent a build-up of stale connections
+            if (currConn != null) currConn.close();
             currConn = DatabaseUtils.getConnection(
                 cluster,
                 cluster.getUsername() != null ? cachedPasswords.get(cluster.getID()) : null

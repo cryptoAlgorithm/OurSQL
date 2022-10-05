@@ -7,16 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="chore (localisation): transfer more strings into the localisation bundle">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledInputDialog.java" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat: you can now add tables to databases&#10;patch (ui): threading in more places to not block UI thread for long-running operations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledAlert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/Colors.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,14 +237,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="118247000" />
-    </task>
-    <task id="LOCAL-00001" summary="Initial commit">
-      <created>1663733092205</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1663733092205</updated>
+      <workItem from="1664633271631" duration="118608000" />
     </task>
     <task id="LOCAL-00002" summary="feat (codable): partial codable interfaces and implementations">
       <created>1664076451838</created>
@@ -589,7 +575,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664976873771</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="feat: you can now add tables to databases&#10;patch (ui): threading in more places to not block UI thread for long-running operations">
+      <created>1664979708890</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1664979708891</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -608,7 +601,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat (ui): show tip if no clusters are added" />
     <MESSAGE value="feat (ui): add better looking styled alert" />
     <MESSAGE value="feat (AddDialog): persist password and encrypt if requested" />
     <MESSAGE value="feat (AddDialog): persist password and encrypt if requested&#10;feat (PasswordDialog): Custom dialog implementation with password field" />
@@ -633,7 +625,8 @@
     <MESSAGE value="feat (ui): initial value update support" />
     <MESSAGE value="fix (ui): better current table handing&#10;clear current table if fetching did not succeed" />
     <MESSAGE value="chore (localisation): transfer more strings into the localisation bundle" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore (localisation): transfer more strings into the localisation bundle" />
+    <MESSAGE value="feat: you can now add tables to databases&#10;patch (ui): threading in more places to not block UI thread for long-running operations" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: you can now add tables to databases&#10;patch (ui): threading in more places to not block UI thread for long-running operations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
