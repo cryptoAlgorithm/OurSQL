@@ -198,6 +198,7 @@ public class HomeViewModel {
             e.printStackTrace();
             log.warning("Failed to fetch rows " + e.getMessage());
             finishStatusJob(stID, e.getLocalizedMessage());
+            selectedTable.set(null);
         }
         System.out.println(tableColumns);
     }

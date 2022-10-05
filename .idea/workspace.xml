@@ -7,18 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (ui): show pop up with status when status text clicked&#10;chore (SpringInterpolator): add JavaDoc comments, remove debugging prints">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/SQLCellFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/TIDContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (ui): initial value update support">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/PlaceholderContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/PlaceholderContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/StringContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/StringContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -247,7 +237,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="114958000" />
+      <workItem from="1664633271631" duration="115077000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1663733092205</created>
@@ -571,7 +561,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664969446040</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="feat (ui): initial value update support">
+      <created>1664976334250</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1664976334250</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -590,7 +587,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage" />
     <MESSAGE value="feat: allow removing clusters by right-clicking" />
     <MESSAGE value="patch (ui): UI refresh before tables implementation" />
     <MESSAGE value="feat (ui): show tip if no clusters are added" />
@@ -615,7 +611,8 @@
     <MESSAGE value="feat (splash): beautiful animated splash screen complete" />
     <MESSAGE value="patch (ui): set all scenes to have transparent fill to prevent a flash of white before the content loads" />
     <MESSAGE value="patch (ui): show pop up with status when status text clicked&#10;chore (SpringInterpolator): add JavaDoc comments, remove debugging prints" />
-    <option name="LAST_COMMIT_MESSAGE" value="patch (ui): show pop up with status when status text clicked&#10;chore (SpringInterpolator): add JavaDoc comments, remove debugging prints" />
+    <MESSAGE value="feat (ui): initial value update support" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat (ui): initial value update support" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

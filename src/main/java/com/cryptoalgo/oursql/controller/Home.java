@@ -20,6 +20,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -50,7 +51,9 @@ public class Home {
     @FXML
     private TableView<ObservableList<Container<?>>> dbTable;
     @FXML
-    private Label statusLabel, curTableLabel;
+    private Label statusLabel;
+    @FXML
+    private Text curTableLabel;
 
     private Stage statusPopup = null;
 

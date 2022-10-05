@@ -14,6 +14,7 @@
 <?import javafx.scene.control.TableView?>
 
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
 <BorderPane
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
@@ -102,7 +103,7 @@
                 <Label fx:id="statusLabel" />
                 <Pane HBox.hgrow="ALWAYS" />
                 <Separator orientation="VERTICAL" />
-                <Label fx:id="curTableLabel" />
+                <Text fx:id="curTableLabel" />
             </HBox>
         </VBox>
     </center>
