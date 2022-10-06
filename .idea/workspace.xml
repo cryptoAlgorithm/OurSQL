@@ -7,136 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="chore (doc): fully complete JavaDoc&#10;and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc">
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/Codable.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/Decodable.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/Decoder.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/DecodingException.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/Encodable.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/Encoder.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/EncodingException.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/KeyedDecodingContainer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/KeyedEncodingContainer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/preferencesCoder/PreferencesDecoder.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/preferencesCoder/PreferencesEncoder.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/preferencesCoder/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/codable/preferencesCoder/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/Launcher.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/OurSQL.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/component/PasswordDialog.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/component/StyledAlert.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/component/StyledInputDialog.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/component/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/component/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/controller/AddClusterDialog.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/controller/Home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/controller/SQLCellFactory.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/controller/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/controller/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/Context.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/HomeViewModel.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/Cluster.CodingKeys.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/Cluster.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/DBMSUtils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/DatabaseUtils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/data/Container.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/data/IntNumberContainer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/data/NumberContainer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/data/PlaceholderContainer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/data/StringContainer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/data/TIDContainer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/data/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/data/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/impl/BuiltInDBs.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/impl/mysql/Utils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/impl/mysql/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/impl/mysql/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/impl/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/impl/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/impl/postgresql/Utils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/impl/postgresql/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/impl/postgresql/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/db/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/model/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/support/AsyncUtils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/support/HexEncoder.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/support/I18N.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/support/SecretsStore.StoreException.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/support/SecretsStore.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/support/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/support/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/support/ui/Colors.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/support/ui/SpringInterpolator.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/support/ui/UIUtils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/support/ui/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/com/cryptoalgo/oursql/support/ui/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/com.cryptoalgo.oursql.oursql/module-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/constant-values.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/element-list" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/help-doc.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/legal/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/legal/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/legal/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/overview-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/serialized-form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/stylesheet.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/impl/mysql/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/impl/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/impl/postgresql/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/package-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="chore (doc): fully complete JavaDoc&#10;...and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc&#10;chore (doc): Manually build JavaDoc into /docs folder for GitHub pages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/Codable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/Codable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/Encodable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/Encodable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/KeyedDecodingContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/KeyedDecodingContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/KeyedEncodingContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/KeyedEncodingContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/preferencesCoder/PreferencesDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/preferencesCoder/PreferencesDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/preferencesCoder/PreferencesEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/codable/preferencesCoder/PreferencesEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledAlert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledInputDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledInputDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/SQLCellFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/SQLCellFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/Context.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/Context.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/Cluster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/DatabaseUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/DatabaseUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/IntNumberContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/IntNumberContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/NumberContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/NumberContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/PlaceholderContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/PlaceholderContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/StringContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/StringContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/TIDContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/TIDContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/impl/BuiltInDBs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/impl/BuiltInDBs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/impl/mysql/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/impl/mysql/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/impl/postgresql/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/impl/postgresql/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/package-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/AsyncUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/AsyncUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/HexEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/HexEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/I18N.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/I18N.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/SecretsStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/SecretsStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/Colors.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/SpringInterpolator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/SpringInterpolator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/UIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/ui/UIUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -366,14 +240,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="139765000" />
-    </task>
-    <task id="LOCAL-00005" summary="patch (codable): expose no-arg constructor in Decodable">
-      <created>1664085715867</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1664085715867</updated>
+      <workItem from="1664633271631" duration="141388000" />
     </task>
     <task id="LOCAL-00006" summary="feat (home): Read clusters from Preferences in initialization&#10;patch (codable): make constructors and encode/decode methods public">
       <created>1664095122618</created>
@@ -711,7 +578,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665034048109</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="chore (doc): fully complete JavaDoc&#10;...and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc&#10;chore (doc): Manually build JavaDoc into /docs folder for GitHub pages">
+      <created>1665041129486</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1665041129486</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -730,7 +604,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="chore (home): rename viewModel following naming convention" />
     <MESSAGE value="feat (home): bad table lazy-loading working" />
     <MESSAGE value="feat: ask for password and decrypt credentials when attempting db connection" />
     <MESSAGE value="fix: cluster passwords stored in plaintext are now retrieved properly during connection" />
@@ -755,7 +628,8 @@
     <MESSAGE value="feat: greatly improved value editing experience&#10;feat (Container): support integer SQL types&#10;patch (Container): simplified abstraction by moving boilerplate code to parent class" />
     <MESSAGE value="feat: handle invalid input much more gracefully" />
     <MESSAGE value="chore (doc): fully complete JavaDoc&#10;and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore (doc): fully complete JavaDoc&#10;and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc" />
+    <MESSAGE value="chore (doc): fully complete JavaDoc&#10;...and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc&#10;chore (doc): Manually build JavaDoc into /docs folder for GitHub pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore (doc): fully complete JavaDoc&#10;...and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc&#10;chore (doc): Manually build JavaDoc into /docs folder for GitHub pages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

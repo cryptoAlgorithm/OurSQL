@@ -56,7 +56,7 @@ Stable releases will be available soon.
 
 ---
 ### Running
-Requires Java >= 18 installed on your system.
+Requires Java >= 17 installed on your system.
 
 #### Windows
 If a compatible version of Java is installed system-wide, you'll
