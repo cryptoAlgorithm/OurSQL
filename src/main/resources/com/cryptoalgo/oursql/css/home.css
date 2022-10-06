@@ -1,7 +1,7 @@
 @import "base.css";
 
 /* Common to all sections */
-.sidebar, .appBar, .queryContainer, #statusContainer, .table, #tableTipContainer {
+.sidebar, .appBar, .tableHeaderContainer, #statusContainer, .table, #tableTipContainer {
     -fx-background-radius: 12;
     -fx-background-color: -fx-control-inner-background;
 }
@@ -32,7 +32,14 @@
 }
 
 .appBar {
-    -fx-padding: 8 10;
+    -fx-padding: 0 0 0 12;
+}
+.appBar > .button {
+    -fx-background-radius: 0;
+    -fx-padding: 10;
+}
+.appBar > .button.last {
+    -fx-background-radius: 0 12 12 0;
 }
 
 .button.addClusterAction {
@@ -42,20 +49,47 @@
     -fx-max-width: Infinity;
 }
 
-.queryContainer {
+.tableHeaderContainer {
     -fx-background-radius: 12 12 4 4;
     -fx-padding: 8;
 }
+.actionRow {
+    -fx-background-radius: 0 0 4 4;
+    -fx-background-color: derive(-fx-control-inner-background, 10%);
+}
+.actionRow > .button {
+    -fx-min-width: 30;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-color: -fx-outer-border;
+    -fx-border-width: 0 1 0 0;
+    -fx-background-color: #0000;
+}
+.actionRow > .button:hover {
+    -fx-background-color: derive(-fx-control-inner-background, 15%);
+}
+.actionRow > .button:pressed {
+    -fx-background-color: derive(-fx-control-inner-background, 20%)!important;
+}
+/* have to use custom class since :first-child/:last-child don't work in JavaFX CSS */
+.actionRow > .button.first {
+    -fx-background-radius: 0 0 0 2;
+}
+.actionRow > .button.last {
+    -fx-background-radius: 0 0 2 0;
+    -fx-border-width: 0;
+}
 .queryContainer > .text-field {
-    -fx-border-radius: 7 0 0 7;
-    -fx-background-radius: 7 0 0 7;
+    -fx-border-radius: 7 0 0 0;
+    -fx-background-radius: 7 0 0 0;
     -fx-padding: 0 8;
     -fx-font-size: 1.2em;
     -fx-min-height: 34;
 }
 .queryContainer > .button {
-    -fx-background-radius: 0 7 7 0;
-    -fx-padding: 8 12 8 10;
+    -fx-background-radius: 0 7 0 0;
+    -fx-padding: 0 8;
+    -fx-min-height: 34;
     -fx-min-width: 0;
 }
 
