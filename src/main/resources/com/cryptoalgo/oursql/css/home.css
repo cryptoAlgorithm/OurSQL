@@ -28,7 +28,7 @@
     -fx-font-size: 1.25em;
 }
 .accordion > .titled-pane > .content {
-    -fx-padding: 8;
+    -fx-padding: 8 8 4 8; /* For some reason the bottom padding is always larger than the others */
 }
 
 .appBar {

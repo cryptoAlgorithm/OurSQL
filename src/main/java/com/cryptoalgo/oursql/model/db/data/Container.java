@@ -5,12 +5,25 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 
 /**
- * A "box" for holding different types of data
+ * An immutable "box" for holding different types of data
  */
 public abstract class Container<T> {
-    public abstract T getValue();
+    protected final T value;
 
-    public Container(String boxValue) {}
+    public T getValue() { return value; }
+
+    /**
+     * Get the final value from a user input for committing
+     * @param input Raw input
+     * @return Output to be used for the commit operation
+     */
+    public String getFinalValue(String input) {
+        return input;
+    }
+
+    public Container(String val) { value = unbox(val); }
+
+    protected abstract T unbox(String val);
 
     /**
      * @param value Value to be checked
@@ -30,6 +43,10 @@ public abstract class Container<T> {
         typeLookup.put("ntext", StringContainer.class);
         typeLookup.put("nvarchar", StringContainer.class);
         typeLookup.put("tid", TIDContainer.class);
+        // Numerical types
+        typeLookup.put("int", IntNumberContainer.class);
+        typeLookup.put("int4", IntNumberContainer.class);
+        typeLookup.put("integer", IntNumberContainer.class);
     }
 
     /**

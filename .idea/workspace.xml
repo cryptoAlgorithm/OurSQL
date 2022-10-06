@@ -7,9 +7,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat: you can now add tables to databases&#10;patch (ui): threading in more places to not block UI thread for long-running operations">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat: greatly improved value editing experience&#10;feat: support integer SQL types">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/IntNumberContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/NumberContainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/SQLCellFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/SQLCellFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/PlaceholderContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/PlaceholderContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/StringContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/StringContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/TIDContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/TIDContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/db/DatabaseUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/db/DatabaseUtilsTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,6 +149,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DatabaseUtilsTest.numberTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OurSQL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cryptoalgo.db.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.cryptoalgo.db" />
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.db.DatabaseUtilsTest" />
+      <option name="METHOD_NAME" value="numberTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SecretsStoreTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OurSQL" />
       <extension name="coverage">
@@ -168,22 +196,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SecretsStoreTest.cryptRoundTrip" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="OurSQL" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.oursql.support.ui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.support" />
-      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.support.SecretsStoreTest" />
-      <option name="METHOD_NAME" value="cryptRoundTrip" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SecretsStoreTest.plainTextStore" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OurSQL" />
       <extension name="coverage">
@@ -202,18 +214,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.OurSQL" />
+      <item itemvalue="JUnit.DatabaseUtilsTest.numberTests" />
       <item itemvalue="JUnit.SecretsStoreTest" />
       <item itemvalue="JUnit.SecretsStoreTest.cipherKitchenSink" />
-      <item itemvalue="JUnit.SecretsStoreTest.cryptRoundTrip" />
       <item itemvalue="JUnit.SecretsStoreTest.plainTextStore" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.OurSQL" />
+        <item itemvalue="JUnit.DatabaseUtilsTest.numberTests" />
         <item itemvalue="JUnit.SecretsStoreTest" />
         <item itemvalue="JUnit.SecretsStoreTest.plainTextStore" />
         <item itemvalue="JUnit.SecretsStoreTest.cipherKitchenSink" />
-        <item itemvalue="JUnit.SecretsStoreTest.cryptRoundTrip" />
       </list>
     </recent_temporary>
   </component>
@@ -237,14 +249,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="118608000" />
-    </task>
-    <task id="LOCAL-00002" summary="feat (codable): partial codable interfaces and implementations">
-      <created>1664076451838</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1664076451838</updated>
+      <workItem from="1664633271631" duration="129429000" />
     </task>
     <task id="LOCAL-00003" summary="chore (codable): refactor Decodable interface to allow decoding optionals, update and add JavaDoc">
       <created>1664079354006</created>
@@ -582,7 +587,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664979708891</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="fix: close existing connection if one is open to prevent a build up of stale connections">
+      <created>1664980042127</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1664980042127</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,8 +613,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat (ui): add better looking styled alert" />
-    <MESSAGE value="feat (AddDialog): persist password and encrypt if requested" />
     <MESSAGE value="feat (AddDialog): persist password and encrypt if requested&#10;feat (PasswordDialog): Custom dialog implementation with password field" />
     <MESSAGE value="patch (AddCluster): localise dialogs" />
     <MESSAGE value="patch (home): re-architect Home controller to use ViewModel&#10;Controller was getting a little too large for my liking, moving logic to a separate class helped shrink the controller considerably" />
@@ -626,7 +636,9 @@
     <MESSAGE value="fix (ui): better current table handing&#10;clear current table if fetching did not succeed" />
     <MESSAGE value="chore (localisation): transfer more strings into the localisation bundle" />
     <MESSAGE value="feat: you can now add tables to databases&#10;patch (ui): threading in more places to not block UI thread for long-running operations" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: you can now add tables to databases&#10;patch (ui): threading in more places to not block UI thread for long-running operations" />
+    <MESSAGE value="fix: close existing connection if one is open to prevent a build up of stale connections" />
+    <MESSAGE value="feat: greatly improved value editing experience&#10;feat: support integer SQL types" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: greatly improved value editing experience&#10;feat: support integer SQL types" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -6,19 +6,16 @@ import java.util.Arrays;
  * Container for the "tid" (tuple id) SQL type
  */
 public class TIDContainer extends Container<int[]> {
-    private final int[] ids;
-
     public TIDContainer(String boxValue) {
         super(boxValue);
-        // It is assumed the db will never send malformed TIDs
-        ids = Arrays.stream(boxValue.substring(1, boxValue.length()-1).split(","))
-            .mapToInt(Integer::parseInt)
-            .toArray();
     }
 
     @Override
-    public int[] getValue() {
-        return ids;
+    protected int[] unbox(String val) {
+        // It is assumed the db will never send malformed TIDs
+        return Arrays.stream(val.substring(1, val.length()-1).split(","))
+            .mapToInt(Integer::parseInt)
+            .toArray();
     }
 
     @Override
@@ -30,7 +27,7 @@ public class TIDContainer extends Container<int[]> {
     public String toString() {
         return "("
             + Arrays
-                .stream(ids)
+                .stream(value)
                 .mapToObj(String::valueOf)
                 .reduce((a, b) -> a.concat(",").concat(b))
                 .orElse("<null>")

@@ -1,15 +1,10 @@
 package com.cryptoalgo.oursql.model.db.data;
 
 public class StringContainer extends Container<String> {
-    private final String boxed;
-
-    public StringContainer(String boxValue) {
-        super(boxValue);
-        boxed = boxValue;
-    }
+    public StringContainer(String boxValue) { super(boxValue); }
 
     @Override
-    public String getValue() { return boxed; }
+    protected String unbox(String val) { return val; }
 
     @Override
     public boolean isValid(String value) {
@@ -18,6 +13,6 @@ public class StringContainer extends Container<String> {
 
     @Override
     public String toString() {
-        return boxed;
+        return value;
     }
 }

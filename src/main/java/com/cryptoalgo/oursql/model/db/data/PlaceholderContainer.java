@@ -13,10 +13,10 @@ public class PlaceholderContainer extends Container<Void> {
     }
 
     @Override
-    public boolean isEditable() { return false; }
+    protected Void unbox(String val) { return null; }
 
     @Override
-    public Void getValue() { return null; }
+    public boolean isEditable() { return false; }
 
     @Override
     public boolean isValid(String value) {

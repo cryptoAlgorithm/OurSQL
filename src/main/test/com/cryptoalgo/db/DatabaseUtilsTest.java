@@ -20,4 +20,9 @@ class DatabaseUtilsTest {
                 null
             );
     }
+
+    @Test
+    void numberTests() {
+        System.out.println(Integer.parseInt("23234"));
+    }
 }

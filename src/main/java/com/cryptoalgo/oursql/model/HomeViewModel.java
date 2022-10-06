@@ -181,7 +181,7 @@ public class HomeViewModel {
                     // TIL var exists
                     final var cont = Container.getInstance(meta.getColumnTypeName(c));
                     if (cont == null) {
-                       // System.out.println(meta.getColumnTypeName(c));
+                        System.out.println(meta.getColumnTypeName(c));
                         row.add(new PlaceholderContainer());
                         continue;
                     }
@@ -206,18 +206,27 @@ public class HomeViewModel {
 
     public void attemptEdit(String col, String ctid, String nv) throws SQLException {
         assert currConn != null;
-        currConn.createStatement().execute(
-            String.format("""
-                UPDATE %s
-                SET "%s" = '%s'
+        if (nv != null) nv = "'" + nv.replaceAll("'", "''") + "'";
+        log.info("Attempting edit: col=" + col + ", nv=" + nv);
+        final var tID = setStatusJob(I18N.getString("status.commitUpdate"));
+        try {
+            currConn.createStatement().execute(
+                String.format("""
+                UPDATE "%s"
+                SET "%s" = %s
                 WHERE ctid = '%s';
                 """,
-                selectedTable.get(),
-                col,
-                nv,
-                ctid
-            )
-        );
+                    selectedTable.get(),
+                    col,
+                    nv,
+                    ctid
+                )
+            );
+        } catch (SQLException e) {
+            finishStatusJob(tID, e.getLocalizedMessage());
+            throw e;
+        }
+        finishStatusJob(tID);
     }
 
     public void createTable(@NotNull Cluster cluster, @NotNull String table) {

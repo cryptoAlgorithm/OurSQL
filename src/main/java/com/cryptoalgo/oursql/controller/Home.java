@@ -232,11 +232,11 @@ public class Home {
                         col.setCellValueFactory(
                             param -> new ReadOnlyObjectWrapper<>(param.getValue().get(curCol).toString())
                         );
-                        if (colTitle.equals("ctid")) col.setVisible(false); // Skip ctid col
+                        if (colTitle.equals("ctid")) col.setVisible(false); // Hide ctid col
+
                         // Handle editing
                         col.setOnEditCommit(evt -> {
                             final var row = evt.getRowValue();
-                            System.out.println(evt.getTableColumn().getText());
                             try {
                                 viewModel.attemptEdit(
                                     evt.getTableColumn().getText(),
@@ -245,11 +245,16 @@ public class Home {
                                 );
                             } catch (SQLException e) {
                                 e.printStackTrace();
+                                throw new RuntimeException();
                             }
                         });
-                        col.setCellFactory(param -> new SQLCellFactory());
+                        col.setCellFactory(param -> new SQLCellFactory(curCol));
+
+                        // Set resize bounds
                         col.setPrefWidth(200);
                         col.setMinWidth(100);
+
+                        // Add
                         Platform.runLater(() -> dbTable.getColumns().add(col));
                     }
                 }

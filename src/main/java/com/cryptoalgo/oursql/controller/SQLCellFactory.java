@@ -4,29 +4,45 @@ import com.cryptoalgo.oursql.model.db.data.Container;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.input.KeyCode;
 
 public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, String> {
     private TextField textField;
+    private boolean escapePressed = false;
+    private final int col;
 
-    public SQLCellFactory() {
-    }
+    public SQLCellFactory(int col) { this.col = col; }
 
     @Override
     public void startEdit() {
-        if (!isEmpty()) {
+        if (!isEditable()
+            || !getTableView().isEditable()
+            || !getTableColumn().isEditable()
+            || isEmpty()
+            || !getTableRow().getItem().get(col).isEditable()) return;
+        super.startEdit();
+        if (isEditing()) {
             super.startEdit();
             createTextField();
             setText(null);
             setGraphic(textField);
             textField.selectAll();
+            getStyleClass().add("editing");
+            escapePressed = false;
         }
     }
 
     @Override
     public void cancelEdit() {
-        super.cancelEdit();
-
-        setText(getItem());
+        if (escapePressed) {
+            super.cancelEdit();
+            setText(getItem()); // restore the original text in the view
+            getStyleClass().remove("editing");
+        } else {
+            // Interpret this as a commit instead
+            commitEdit(textField.getText());
+        }
         setGraphic(null);
     }
 
@@ -39,30 +55,35 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
             setGraphic(null);
         } else {
             if (isEditing()) {
-                if (textField != null) {
-                    textField.setText(getString());
-                }
+                if (textField != null) textField.setText(getString());
                 setText(null);
                 setGraphic(textField);
             } else {
-                //System.out.println(getString());
                 setText(getString());
                 setGraphic(null);
+                getStyleClass().remove("editing");
             }
         }
     }
 
     private void createTextField() {
+        final var container = getTableRow().getItem().get(col);
         textField = new TextField(getString());
-        textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()* 2);
-        textField.focusedProperty().addListener((arg0, arg1, arg2) -> {
-            if (!arg2) {
-                commitEdit(textField.getText());
-            }
+        textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()*2);
+        textField.setOnAction(e -> this.commitEdit(
+            textField.getText() == null || textField.getText().isEmpty()
+                ? null
+                : textField.getText()
+            )
+        );
+        textField.setOnKeyPressed(t -> {
+            escapePressed = t.getCode() == KeyCode.ESCAPE;
+            if (escapePressed) cancelEdit();
         });
+        textField.setTextFormatter(new TextFormatter<>(f -> container.isValid(f.getText()) ? f: null));
     }
 
     private String getString() {
-        return getItem() == null ? "<null>" : getItem();
+        return getItem();
     }
 }

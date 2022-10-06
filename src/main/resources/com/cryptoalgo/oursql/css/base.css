@@ -284,12 +284,16 @@
 }
 
 .table-cell {
-    -fx-padding: 0;
+    -fx-padding: 2 3;
     -fx-table-cell-border-color: -fx-outer-border;
     /*-fx-control-inner-background: #0000;*/
 }
-.text-field-table-cell .text-field {
-    -fx-padding: 0;
+.table-cell.editing {
+    -fx-padding: -1;
+}
+.table-cell.editing .text-field {
+    -fx-padding: 2;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
+    -fx-border-color: -fx-accent;
 }
