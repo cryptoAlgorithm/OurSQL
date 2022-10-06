@@ -17,6 +17,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -342,6 +343,15 @@ public class Home {
     }
 
     // Button action handlers
+    @FXML
+    private void handleRefreshTable(ActionEvent evt) {
+        ((Button) evt.getSource()).setDisable(true);
+        new Thread(() -> {
+            viewModel.updateTable();
+            ((Button) evt.getSource()).setDisable(false);
+        }).start();
+    }
+
     @FXML
     private void handleDropTable() {
         if (new StyledAlert(

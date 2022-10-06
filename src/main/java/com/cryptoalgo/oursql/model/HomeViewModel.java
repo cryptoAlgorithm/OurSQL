@@ -230,14 +230,11 @@ public class HomeViewModel {
     public void newTableSelection(Cluster cluster, String table) {
         selectedTable.set(table);
         selectedCluster.set(cluster.getID());
-        tableColumns.clear();
-        columnTypes.clear();
-        rows.clear();
 
         // Credentials for cluster should already be populated
         assert requestPassword(cluster);
 
-        final var stID = setStatusJob(I18N.getString("status.fetchRows", table));
+        final var stID = setStatusJob(I18N.getString("status.getConn", cluster.getName()));
         try {
             // Prevent a build-up of stale connections
             if (currConn != null) currConn.close();
@@ -245,10 +242,36 @@ public class HomeViewModel {
                 cluster,
                 cluster.getUsername() != null ? cachedPasswords.get(cluster.getID()) : null
             );
+        } catch (SQLException | URISyntaxException e) {
+            log.warning("Failed to fetch rows " + e.getMessage());
+            finishStatusJob(stID, e.getLocalizedMessage());
+            selectedTable.set(null);
+        }
+        finishStatusJob(stID);
+
+        updateTable();
+    }
+
+    /**
+     * Fetch the columns and rows of the currently selected table
+     */
+    public void updateTable() {
+        // Pre update sanity checks
+        assert currConn != null; // If this is null something is very wrong
+        if (selectedTable.get() == null || selectedCluster.get() == null) return;
+        final var table = selectedTable.get();
+
+        final var stID = setStatusJob(I18N.getString("status.fetchRows", table));
+        try {
             final var r = currConn.createStatement().executeQuery(
-                String.format("select *, CTID from \"%s\"", table)
+                String.format("select *, CTID from \"%s\"", selectedTable.get())
             );
             final ResultSetMetaData meta = r.getMetaData();
+
+            // Clear all table-related values
+            tableColumns.clear();
+            columnTypes.clear();
+            rows.clear();
 
             // Firstly add column names as first row
             for (int i = 1; i <= meta.getColumnCount(); i++) {
@@ -265,12 +288,11 @@ public class HomeViewModel {
                 rows.add(row);
             }
             r.close();
-            finishStatusJob(stID);
-        } catch (SQLException | URISyntaxException e) {
-            log.warning("Failed to fetch rows " + e.getMessage());
+        } catch (SQLException e) {
             finishStatusJob(stID, e.getLocalizedMessage());
-            selectedTable.set(null);
+            return;
         }
+        finishStatusJob(stID);
     }
 
     /**
@@ -513,15 +535,14 @@ public class HomeViewModel {
     public void finishStatusJob(String id, String err) {
         final var success = err == null;
         if (!Objects.equals(statusID, id)) return;
-        Platform.runLater(() -> {
-            displayedStatus.set(I18N.getString(
-                success ? "status.done" : "status.error",
-                status,
-                System.currentTimeMillis() - statusStart,
-                success ? null : err.replaceFirst("\n.*", "")
-            ));
-            status = null;
-        });
+        final var curStatus = status; // Mitigate race condition issues
+        Platform.runLater(() -> displayedStatus.set(I18N.getString(
+            success ? "status.done" : "status.error",
+            curStatus,
+            System.currentTimeMillis() - statusStart,
+            success ? null : err.replaceFirst("\n.*", "")
+        )));
+        status = null;
 
         // Set the status background color and clear it after 3s if there are no further statuses
         statusBg.set(success ? Colors.SUCCESS : Colors.ERROR);

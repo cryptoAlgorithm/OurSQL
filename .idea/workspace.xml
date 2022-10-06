@@ -7,12 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat: reliable dropping of tables&#10;fix: logic error when handling create table exceptions">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (ui): display null values more friendlily">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/SQLCellFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/SQLCellFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -247,14 +246,7 @@
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
       <workItem from="1664633271631" duration="148499000" />
-      <workItem from="1665050486469" duration="14667000" />
-    </task>
-    <task id="LOCAL-00012" summary="patch: update README with new workflow name and download badge">
-      <created>1664240019629</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1664240019629</updated>
+      <workItem from="1665050486469" duration="16180000" />
     </task>
     <task id="LOCAL-00013" summary="chore (db): add Atlas cluster to IntelliJ DB viewer">
       <created>1664255872427</created>
@@ -592,7 +584,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665058760438</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="feat (ui): display null values more friendlily">
+      <created>1665068030878</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1665068030878</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -611,7 +610,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat (ui): display table columns" />
     <MESSAGE value="feat (ui): display table columns and data" />
     <MESSAGE value="patch (ui): set dock and stage icon, table UI improvements" />
     <MESSAGE value="feat (ui): revamped status system" />
@@ -636,7 +634,8 @@
     <MESSAGE value="fix (ui): disable table list while the table is being loaded&#10;quick fix for a threading issue, this is certainly not thread-safe" />
     <MESSAGE value="feat (ui): add actions row below query container for table actions" />
     <MESSAGE value="feat: reliable dropping of tables&#10;fix: logic error when handling create table exceptions" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: reliable dropping of tables&#10;fix: logic error when handling create table exceptions" />
+    <MESSAGE value="feat (ui): display null values more friendlily" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat (ui): display null values more friendlily" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
