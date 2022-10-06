@@ -79,5 +79,7 @@ Untested, but running the same command as macOS should also start
 the app without much fuss.
 
 ## Documentation
-Coming soon! For the time being, you can read the JavaDoc in the
-source code.
+Symbols above or equal to `package` visibility are 100% documented,
+with clear and concise JavaDoc for descriptions, parameters,
+returns and more. The docs are built by GitHub Actions for every
+commit, and [available online](https://cryptoalgorithm.github.io/OurSQL/).
