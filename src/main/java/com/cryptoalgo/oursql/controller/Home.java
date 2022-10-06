@@ -109,7 +109,11 @@ public class Home {
                             + c.getID()
                             + " and table "
                             + tables.get(nv.intValue()));
-                        new Thread(() -> viewModel.newTableSelection(c, tables.get(nv.intValue()))).start();
+                        new Thread(() -> {
+                            Platform.runLater(() -> t.setDisable(true));
+                            viewModel.newTableSelection(c, tables.get(nv.intValue()));
+                            Platform.runLater(() -> t.setDisable(false));
+                        }).start();
                     });
                     t.getSelectionModel().select(0);
                 } else p.setExpanded(false);
