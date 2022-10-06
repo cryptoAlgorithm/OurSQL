@@ -26,4 +26,5 @@ module com.cryptoalgo.oursql.oursql {
     exports com.cryptoalgo.oursql.support;
     exports com.cryptoalgo.oursql.support.ui;
     opens com.cryptoalgo.oursql.controller to javafx.fxml;
+    opens com.cryptoalgo.oursql.component to javafx.fxml;
 }

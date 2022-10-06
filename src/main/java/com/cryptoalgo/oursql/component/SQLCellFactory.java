@@ -1,4 +1,4 @@
-package com.cryptoalgo.oursql.controller;
+package com.cryptoalgo.oursql.component;
 
 import com.cryptoalgo.oursql.model.db.data.Container;
 import javafx.collections.ObservableList;
@@ -22,23 +22,23 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
      */
     public SQLCellFactory(int col) { this.col = col; }
 
+    private Container<?> getContainer() { return getTableRow().getItem().get(col); }
+
     @Override
     public void startEdit() {
         if (!isEditable()
             || !getTableView().isEditable()
             || !getTableColumn().isEditable()
             || isEmpty()
-            || !getTableRow().getItem().get(col).isEditable()) return;
+            || !getContainer().isEditable()) return;
         super.startEdit();
-        if (isEditing()) {
-            super.startEdit();
-            createTextField();
-            setText(null);
-            setGraphic(textField);
-            textField.selectAll();
-            getStyleClass().add("editing");
-            escapePressed = false;
-        }
+        createTextField();
+        setText(null);
+        setGraphic(textField);
+        textField.selectAll();
+        textField.requestFocus();
+        getStyleClass().add("editing");
+        escapePressed = false;
     }
 
     @Override
@@ -52,6 +52,22 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
             commitEdit(textField.getText());
         }
         setGraphic(null);
+    }
+
+    @Override
+    public void commitEdit(String newVal) {
+        String commitText;
+        if (textField.getText() == null || textField.getText().isEmpty()) commitText = null;
+        else {
+            commitText = getContainer().getFinalValue(textField.getText());
+            // Invalid input or no change
+            if (commitText == null || commitText.equals(getString())) {
+                escapePressed = true;
+                cancelEdit();
+                return;
+            }
+        }
+        super.commitEdit(commitText);
     }
 
     @Override
@@ -75,27 +91,14 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
     }
 
     private void createTextField() {
-        final var container = getTableRow().getItem().get(col);
         textField = new TextField(getString());
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()*2);
-        textField.setOnAction(e -> {
-            String commitText;
-            if (textField.getText() == null || textField.getText().isEmpty()) commitText = null;
-            else {
-                commitText = container.getFinalValue(textField.getText());
-                if (commitText == null) { // Invalid input
-                    escapePressed = true;
-                    cancelEdit();
-                    return;
-                }
-            }
-            this.commitEdit(commitText);
-        });
+        textField.setOnAction(e -> this.commitEdit(textField.getText()));
         textField.setOnKeyPressed(t -> {
             escapePressed = t.getCode() == KeyCode.ESCAPE;
             if (escapePressed) cancelEdit();
         });
-        textField.setTextFormatter(new TextFormatter<>(f -> container.isValid(f.getText()) ? f: null));
+        textField.setTextFormatter(new TextFormatter<>(f -> getContainer().isValid(f.getText()) ? f: null));
     }
 
     private String getString() {

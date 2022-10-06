@@ -7,9 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="chore (doc): fully complete JavaDoc&#10;...and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc&#10;chore (doc): Manually build JavaDoc into /docs folder for GitHub pages">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (README): lower required Java version to &gt;= 17&#10;patch: export all packages to allow JavaDoc to include them">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/SQLCellFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/SQLCellFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/NumberContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/NumberContainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -240,14 +243,7 @@
       <workItem from="1664255790038" duration="17897000" />
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
-      <workItem from="1664633271631" duration="141388000" />
-    </task>
-    <task id="LOCAL-00006" summary="feat (home): Read clusters from Preferences in initialization&#10;patch (codable): make constructors and encode/decode methods public">
-      <created>1664095122618</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1664095122618</updated>
+      <workItem from="1664633271631" duration="145860000" />
     </task>
     <task id="LOCAL-00007" summary="patch: Update README">
       <created>1664096840387</created>
@@ -585,7 +581,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665041129486</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="patch (README): lower required Java version to &gt;= 17&#10;patch: export all packages to allow JavaDoc to include them">
+      <created>1665042573061</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1665042573061</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -604,7 +607,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat (home): bad table lazy-loading working" />
     <MESSAGE value="feat: ask for password and decrypt credentials when attempting db connection" />
     <MESSAGE value="fix: cluster passwords stored in plaintext are now retrieved properly during connection" />
     <MESSAGE value="patch: use expanded property to handle collapsing/expanding of titledPanes" />
@@ -629,7 +631,8 @@
     <MESSAGE value="feat: handle invalid input much more gracefully" />
     <MESSAGE value="chore (doc): fully complete JavaDoc&#10;and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc" />
     <MESSAGE value="chore (doc): fully complete JavaDoc&#10;...and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc&#10;chore (doc): Manually build JavaDoc into /docs folder for GitHub pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore (doc): fully complete JavaDoc&#10;...and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc&#10;chore (doc): Manually build JavaDoc into /docs folder for GitHub pages" />
+    <MESSAGE value="patch (README): lower required Java version to &gt;= 17&#10;patch: export all packages to allow JavaDoc to include them" />
+    <option name="LAST_COMMIT_MESSAGE" value="patch (README): lower required Java version to &gt;= 17&#10;patch: export all packages to allow JavaDoc to include them" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

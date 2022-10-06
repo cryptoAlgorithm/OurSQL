@@ -50,7 +50,7 @@ public abstract class NumberContainer<T extends Number> extends Container<T> {
             if (bigDecVal.compareTo(getMin()) < 0) return getMin().toString();
             if (bigDecVal.compareTo(getMax()) > 0) return getMax().toString();
         } catch (NumberFormatException e) { return null; }
-        return input;
+        return unbox(input).toString(); // To ensure the number is free of leading/trailing zeros
     }
 
     @Override

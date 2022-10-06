@@ -2,6 +2,7 @@ package com.cryptoalgo.oursql.controller;
 
 import com.cryptoalgo.codable.DecodingException;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
+import com.cryptoalgo.oursql.component.SQLCellFactory;
 import com.cryptoalgo.oursql.component.StyledInputDialog;
 import com.cryptoalgo.oursql.model.db.Cluster;
 import com.cryptoalgo.oursql.model.HomeViewModel;

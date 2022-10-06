@@ -52,7 +52,9 @@ public class HomeViewModel {
     /**
      * Columns of the current selected table
      */
-    public final ObservableList<String> tableColumns = FXCollections.observableArrayList();
+    public final ObservableList<String>
+        tableColumns = FXCollections.observableArrayList(),
+        columnTypes = FXCollections.observableArrayList();
     /**
      * Rows of the current selected table
      */
@@ -196,6 +198,21 @@ public class HomeViewModel {
     }
 
     /**
+     * Get a container to store the specified SQL value. Creates
+     * the required instance of {@link Container} via reflection.
+     */
+    @NotNull
+    private Container<?> getSQLContainer(String type, String data) {
+        final var cont = Container.getInstance(type);
+        if (cont == null) return new PlaceholderContainer();
+        try {
+            return Objects.requireNonNull(cont.getConstructor(String.class)).newInstance(data);
+        } catch (Exception e) {
+            log.severe("Failed to init an instance of container for type " + type + ", failed with ");
+            return new PlaceholderContainer(); }
+    }
+
+    /**
      * Select and load a new table
      * @param cluster Cluster to load table from
      * @param table Table name to load
@@ -222,25 +239,16 @@ public class HomeViewModel {
             final ResultSetMetaData meta = r.getMetaData();
 
             // Firstly add column names as first row
-            for (int i = 1; i <= meta.getColumnCount(); i++) tableColumns.add(meta.getColumnName(i));
+            for (int i = 1; i <= meta.getColumnCount(); i++) {
+                tableColumns.add(meta.getColumnName(i));
+                columnTypes.add(meta.getColumnTypeName(i));
+            }
             // Then add all
             while (r.next()) {
                 final ObservableList<Container<?>> row = FXCollections.observableArrayList();
-                for (int c = 1; c <= meta.getColumnCount(); c++) {
-                    // TIL var exists
-                    final var cont = Container.getInstance(meta.getColumnTypeName(c));
-                    if (cont == null) {
-                        System.out.println(meta.getColumnTypeName(c));
-                        row.add(new PlaceholderContainer());
-                        continue;
-                    }
-                    try {
-                        row.add(
-                            Objects.requireNonNull(cont.getConstructor(String.class))
-                                .newInstance(r.getString(c))
-                        );
-                    } catch (Exception ignored) { row.add(new PlaceholderContainer()); }
-                }
+                // TIL var exists
+                for (var c = 1; c <= meta.getColumnCount(); c++)
+                    row.add(getSQLContainer(columnTypes.get(c-1), r.getString(c)));
 
                 rows.add(row);
             }
@@ -251,6 +259,17 @@ public class HomeViewModel {
             finishStatusJob(stID, e.getLocalizedMessage());
             selectedTable.set(null);
         }
+    }
+
+    /**
+     * Run a SQL query and return the resultSet
+     * @param query SQL query to run
+     * @return The ResultSet of the query
+     * @throws SQLException If the query failed
+     */
+    private ResultSet runQuery(String query) throws SQLException {
+        assert currConn != null;
+        return currConn.createStatement().executeQuery(query);
     }
 
     /**
@@ -267,7 +286,16 @@ public class HomeViewModel {
         @Nullable String nv
     ) throws SQLException {
         assert currConn != null;
+
+        // Find the row that was updated by CTID
+        final var colIdx = tableColumns.indexOf(col);
+        // Get a new container for the new value and update the db with the
+        // string representation of the new value. We do this to ensure the value
+        // in the table after updating is actually what was added to the database.
+        final var newContainer = getSQLContainer(columnTypes.get(colIdx), nv);
+        nv = newContainer.toString();
         if (nv != null) nv = "'" + nv.replaceAll("'", "''") + "'";
+
         log.info("Attempting edit: col=" + col + ", nv=" + nv);
         final var tID = setStatusJob(I18N.getString("status.commitUpdate"));
         try {
@@ -283,6 +311,12 @@ public class HomeViewModel {
                     ctid
                 )
             );
+            // Then (attempt to) update the corresponding row that was modified
+            for (final var row : rows) if (row.get(row.size()-1).toString().equals(ctid)) {
+                // That's the row we want!
+                row.set(colIdx, newContainer);
+                break;
+            }
         } catch (SQLException e) {
             finishStatusJob(tID, e.getLocalizedMessage());
             throw e;
