@@ -70,12 +70,19 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
         final var container = getTableRow().getItem().get(col);
         textField = new TextField(getString());
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()*2);
-        textField.setOnAction(e -> this.commitEdit(
-            textField.getText() == null || textField.getText().isEmpty()
-                ? null
-                : textField.getText()
-            )
-        );
+        textField.setOnAction(e -> {
+            String commitText;
+            if (textField.getText() == null || textField.getText().isEmpty()) commitText = null;
+            else {
+                commitText = container.getFinalValue(textField.getText());
+                if (commitText == null) { // Invalid input
+                    escapePressed = true;
+                    cancelEdit();
+                    return;
+                }
+            }
+            this.commitEdit(commitText);
+        });
         textField.setOnKeyPressed(t -> {
             escapePressed = t.getCode() == KeyCode.ESCAPE;
             if (escapePressed) cancelEdit();

@@ -17,9 +17,7 @@ public abstract class Container<T> {
      * @param input Raw input
      * @return Output to be used for the commit operation
      */
-    public String getFinalValue(String input) {
-        return input;
-    }
+    public String getFinalValue(String input) { return input; }
 
     public Container(String val) { value = unbox(val); }
 
