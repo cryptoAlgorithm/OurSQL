@@ -207,6 +207,13 @@ public class Home {
                 new Thread(() -> viewModel.createTable(c, table)).start();
             });
             del.setOnAction(ev -> {
+                // Show confirmation before removing
+                if (new StyledAlert(
+                    Alert.AlertType.CONFIRMATION,
+                    I18N.getString("dialog.removeCluster.title"),
+                    I18N.getString("dialog.removeCluster.title"),
+                    I18N.getString("dialog.removeCluster.body", c.getName())
+                ).showAndWait().orElse(ButtonType.CANCEL) == ButtonType.CANCEL) return;
                 try {
                     c.remove();
                     SecretsStore.remove(c.getID());
@@ -230,7 +237,7 @@ public class Home {
      * Inits the tableView and binds the necessary values to those in the ViewModel.
      */
     private void initTableView() {
-        UIUtils.clipToRadius(dbTable, 4);
+        UIUtils.clipToRadius(dbTable, 8);
         dbTable.setItems(viewModel.rows);
         dbTable.setEditable(true);
 
@@ -244,9 +251,7 @@ public class Home {
                         final var colTitle = c.getList().get(i);
                         final var curCol = i;
                         final var col = new TableColumn<ObservableList<Container<?>>, String>(colTitle);
-                        col.setCellValueFactory(
-                            param -> new ReadOnlyObjectWrapper<>(param.getValue().get(curCol).toString())
-                        );
+                        col.setCellValueFactory(r -> new ReadOnlyObjectWrapper<>(r.getValue().get(curCol).toString()));
                         if (colTitle.equals("ctid")) col.setVisible(false); // Hide ctid col
 
                         // Handle editing

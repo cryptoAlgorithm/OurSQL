@@ -285,6 +285,14 @@
 .table-row-cell:selected {
     -fx-background: derive(-fx-accent, -50%);
 }
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler  {
+    -fx-background-color: derive(-fx-base, 10%);
+    -fx-background-insets: 0;
+    -fx-border-color: -fx-outer-border;
+    -fx-border-width: 0 1 0 0;
+}
 
 .table-cell {
     -fx-padding: 2 3;
@@ -300,3 +308,5 @@
     -fx-background-radius: 0;
     -fx-border-color: -fx-accent;
 }
+.table-cell.null { -fx-opacity: 0.5; }
+.table-cell.editing.null { -fx-opacity: 1; }

@@ -45,8 +45,7 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
     public void cancelEdit() {
         if (escapePressed) {
             super.cancelEdit();
-            setText(getItem()); // restore the original text in the view
-            getStyleClass().remove("editing");
+            setOriginalText(); // Restore the original text in the view
         } else {
             // Interpret this as a commit instead
             commitEdit(textField.getText());
@@ -57,13 +56,18 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
     @Override
     public void commitEdit(String newVal) {
         String commitText;
-        if (textField.getText() == null || textField.getText().isEmpty()) commitText = null;
-        else {
+        if (textField.getText() == null || textField.getText().isEmpty()) {
+            if (getString() != null) commitText = null;
+            else { // Value is the same
+                escapePressed = true; cancelEdit();
+                return;
+            }
+        } else {
             commitText = getContainer().getFinalValue(textField.getText());
+            System.out.println(commitText);
             // Invalid input or no change
             if (commitText == null || commitText.equals(getString())) {
-                escapePressed = true;
-                cancelEdit();
+                escapePressed = true; cancelEdit();
                 return;
             }
         }
@@ -82,11 +86,7 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
                 if (textField != null) textField.setText(getString());
                 setText(null);
                 setGraphic(textField);
-            } else {
-                setText(getString());
-                setGraphic(null);
-                getStyleClass().remove("editing");
-            }
+            } else setOriginalText();
         }
     }
 
@@ -101,6 +101,15 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
         textField.setTextFormatter(new TextFormatter<>(f -> getContainer().isValid(f.getText()) ? f: null));
     }
 
+    private void setOriginalText() {
+        setText(getUserFacingString());
+        if (getString() == null) getStyleClass().add("null");
+        else getStyleClass().remove("null");
+        setGraphic(null);
+        getStyleClass().remove("editing");
+    }
+
+    private String getUserFacingString() { return getItem() == null ? "<null>" : getItem(); }
     private String getString() {
         return getItem();
     }

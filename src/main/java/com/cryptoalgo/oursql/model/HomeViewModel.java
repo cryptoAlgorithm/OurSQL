@@ -218,7 +218,8 @@ public class HomeViewModel {
         } catch (Exception e) {
             e.printStackTrace();
             log.severe("Failed to init an instance of container for type " + type);
-            return new PlaceholderContainer(); }
+            return new PlaceholderContainer();
+        }
     }
 
     /**
