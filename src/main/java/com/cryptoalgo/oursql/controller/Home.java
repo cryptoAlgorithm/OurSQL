@@ -3,6 +3,7 @@ package com.cryptoalgo.oursql.controller;
 import com.cryptoalgo.codable.DecodingException;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
 import com.cryptoalgo.oursql.component.SQLCellFactory;
+import com.cryptoalgo.oursql.component.StyledAlert;
 import com.cryptoalgo.oursql.component.StyledInputDialog;
 import com.cryptoalgo.oursql.model.db.Cluster;
 import com.cryptoalgo.oursql.model.HomeViewModel;
@@ -101,8 +102,13 @@ public class Home {
                 if (tables != null) {
                     ListView<String> t = new ListView<>();
                     t.setItems(tables);
-                    t.prefHeightProperty().bind(Bindings.multiply(Bindings.size(tables), 28));
-                    p.setContent(t);
+
+                    // Listen for changes to tables
+                    tables.addListener((ListChangeListener<String>) ch -> {
+                        if (ch.getList().size() == 0) t.setPlaceholder(new Label("No tables"));
+                        while (ch.next()) if (ch.wasRemoved()) t.getSelectionModel().clearSelection();
+                    });
+                    // Listen for changes to selection
                     t.getSelectionModel().selectedIndexProperty().addListener((o, ov, nv) -> {
                         if (nv.intValue() < 0) return;
                         log.info("navigating to cluster ID "
@@ -116,6 +122,11 @@ public class Home {
                         }).start();
                     });
                     t.getSelectionModel().select(0);
+
+                    // hack to fix height of list
+                    t.prefHeightProperty().bind(Bindings.multiply(Bindings.size(tables), 28));
+
+                    p.setContent(t);
                 } else p.setExpanded(false);
             });
         });
@@ -193,7 +204,7 @@ public class Home {
                     I18N.getString("dialog.newTable.body")
                 ).showAndWait().orElse(null);
                 if (table == null) return;
-                viewModel.createTable(c, table);
+                new Thread(() -> viewModel.createTable(c, table)).start();
             });
             del.setOnAction(ev -> {
                 try {
@@ -323,5 +334,18 @@ public class Home {
         tableTipContainer.managedProperty().bind(viewModel.selectedTableProperty().isEmpty());
         mainContentContainer.visibleProperty().bind(viewModel.selectedTableProperty().isEmpty().not());
         mainContentContainer.managedProperty().bind(viewModel.selectedTableProperty().isEmpty().not());
+    }
+
+    // Button action handlers
+    @FXML
+    private void handleDropTable() {
+        if (new StyledAlert(
+            Alert.AlertType.CONFIRMATION,
+            I18N.getString("dialog.dropTable.title"),
+            I18N.getString("dialog.dropTable.title"),
+            I18N.getString("dialog.dropTable.body", viewModel.selectedTableProperty().get())
+        ).showAndWait().orElse(ButtonType.CANCEL) == ButtonType.CANCEL) return;
+        viewModel.dropTable();
+        // Another quick hack to remove current table selection highlight
     }
 }

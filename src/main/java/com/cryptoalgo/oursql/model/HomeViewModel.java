@@ -68,7 +68,11 @@ public class HomeViewModel {
     /**
      * The currently-selected table
      */
-        selectedTable = new ReadOnlyStringWrapper(null);
+        selectedTable = new ReadOnlyStringWrapper(null),
+    /**
+     * The ID of the currently-selected cluster
+     */
+        selectedCluster = new ReadOnlyStringWrapper(null);
 
     /**
      * The background of the status area.
@@ -173,9 +177,13 @@ public class HomeViewModel {
             ResultSet r = conn
                 .getMetaData()
                 .getTables(null, null, "%", new String[]{"TABLE"});
-            if (!tables.containsKey(id)) tables.put(id, FXCollections.observableArrayList());
-            else tables.get(id).clear();
-            while (r.next()) tables.get(id).add(r.getString(3));
+            if (!tables.containsKey(id)) // If a cache entry for this cluster ID doesn't exist, create it
+                Platform.runLater(() -> tables.put(id, FXCollections.observableArrayList()));
+            else Platform.runLater(() -> tables.get(id).clear());
+            while (r.next()) {
+                final var table = r.getString(3);
+                Platform.runLater(() -> tables.get(id).add(table));
+            }
             r.close();
             finishStatusJob(st);
         }
@@ -208,7 +216,8 @@ public class HomeViewModel {
         try {
             return Objects.requireNonNull(cont.getConstructor(String.class)).newInstance(data);
         } catch (Exception e) {
-            log.severe("Failed to init an instance of container for type " + type + ", failed with ");
+            e.printStackTrace();
+            log.severe("Failed to init an instance of container for type " + type);
             return new PlaceholderContainer(); }
     }
 
@@ -219,7 +228,9 @@ public class HomeViewModel {
      */
     public void newTableSelection(Cluster cluster, String table) {
         selectedTable.set(table);
+        selectedCluster.set(cluster.getID());
         tableColumns.clear();
+        columnTypes.clear();
         rows.clear();
 
         // Credentials for cluster should already be populated
@@ -331,20 +342,38 @@ public class HomeViewModel {
      */
     public void createTable(@NotNull Cluster cluster, @NotNull String table) {
         if (!requestPassword(cluster)) return;
+        System.out.println(I18N.getString("status.createTable", table));
         final var tID = setStatusJob(I18N.getString("status.createTable", table));
         try (final var conn = DatabaseUtils.getConnection(
             cluster,
             cluster.getUsername() != null ? cachedPasswords.get(cluster.getID()) : null
         )) {
-            conn.createStatement().execute("CREATE TABLE \"" + table + "\" ()");
+            conn.createStatement().execute("create table \"" + table + "\" ()");
         } catch (URISyntaxException | SQLException ex) {
-            ex.printStackTrace();
             finishStatusJob(tID, ex.getLocalizedMessage());
+            return;
         }
         finishStatusJob(tID);
         try {
             requestTables(cluster);
         } catch (SQLException ignored) {}
+    }
+
+    /**
+     * Delete a table from a cluster
+     */
+    public void dropTable() {
+        assert currConn != null;
+        final var tID = setStatusJob(I18N.getString("status.dropTable", selectedTable.get()));
+        try {
+            currConn.createStatement().execute(String.format("drop table \"%s\"", selectedTable.get()));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            finishStatusJob(tID, ex.getLocalizedMessage());
+        }
+        finishStatusJob(tID);
+        tables.get(selectedCluster.get()).remove(selectedTable.get());
+        selectedTable.set(null);
     }
 
     /**
@@ -488,7 +517,7 @@ public class HomeViewModel {
                 success ? "status.done" : "status.error",
                 status,
                 System.currentTimeMillis() - statusStart,
-                success ? null : err
+                success ? null : err.replaceFirst("\n.*", "")
             ));
             status = null;
         });
