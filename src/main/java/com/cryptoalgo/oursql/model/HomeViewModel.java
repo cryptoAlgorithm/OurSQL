@@ -18,6 +18,7 @@ import javafx.collections.*;
 import javafx.scene.control.Alert;
 import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
@@ -48,12 +49,28 @@ public class HomeViewModel {
     private static final ObservableMap<String, String> cachedPasswords =
         FXCollections.observableMap(new HashMap<>());
 
+    /**
+     * Columns of the current selected table
+     */
     public final ObservableList<String> tableColumns = FXCollections.observableArrayList();
+    /**
+     * Rows of the current selected table
+     */
     public final ObservableList<ObservableList<Container<?>>> rows = FXCollections.observableArrayList();
 
+    /**
+     * Current status to be displayed in the status area/dialogs
+     */
     private final ReadOnlyStringWrapper
         displayedStatus = new ReadOnlyStringWrapper(I18N.getString("status.ready")),
+    /**
+     * The currently-selected table
+     */
         selectedTable = new ReadOnlyStringWrapper(null);
+
+    /**
+     * The background of the status area.
+     */
     private final ReadOnlyObjectWrapper<Color> statusBg = new ReadOnlyObjectWrapper<>(Color.TRANSPARENT);
 
     private String status = null, statusID = null;
@@ -62,8 +79,24 @@ public class HomeViewModel {
     private Connection currConn = null;
 
     // Public getters
+    /**
+     * Get an observable <code>ReadOnlyStringProperty</code> for the selected table.
+     * @return Read only observable property for the selected table.
+     *         Might be <code>null</code> if no table is selected.
+     */
     public ReadOnlyStringProperty selectedTableProperty() { return selectedTable.getReadOnlyProperty(); }
+
+    /**
+     * Get an observable <code>ReadOnlyStringProperty</code> for the current status.
+     * @return Read only observable property for the current status.
+     */
     public ReadOnlyStringProperty displayedStatusProperty() { return displayedStatus.getReadOnlyProperty(); }
+
+    /**
+     * Get an observable <code>ReadOnlyStringProperty</code> for the current status background.
+     * Implementations might choose to transition changes in this property.
+     * @return Read only observable property for the requested status background.
+     */
     public ReadOnlyObjectProperty<Color> statusBgProperty() { return statusBg.getReadOnlyProperty(); }
 
     /**
@@ -112,10 +145,16 @@ public class HomeViewModel {
 
     /**
      * Request to load the tables of a particular database cluster.
-     * Call again with the same cluster ID to refresh clusters
+     * Call again with the same cluster ID to refresh clusters.
      * @param cluster Cluster to fetch tables of
      * @throws NoSuchElementException If the cluster ID doesn't exist
+     * @throws SQLException If the underlying JDBC driver threw an exception during the
+     *                      creation of a connection or during a query.
+     * @return An ObservableList of tables for this cluster. Implementations can bind to this
+     *         ObservableList to be notified of modifications to tables in this cluster (currently
+     *         only occurs when this method is called again to refresh tables).
      */
+    @Nullable
     public ObservableList<String> requestTables(Cluster cluster) throws NoSuchElementException, SQLException {
         String id = cluster.getID(); // Shorter code since id is used in many places
         int idx = clusters.indexOf(cluster);
@@ -147,10 +186,20 @@ public class HomeViewModel {
         return tables.get(id);
     }
 
+    /**
+     * Check if the tables for a particular cluster are present in the table cache.
+     * @param forCluster Cluster ID to check for cached tables
+     * @return true if tables of the cluster are already present in the cache
+     */
     public boolean tablesCached(String forCluster) {
         return tables.containsKey(forCluster);
     }
 
+    /**
+     * Select and load a new table
+     * @param cluster Cluster to load table from
+     * @param table Table name to load
+     */
     public void newTableSelection(Cluster cluster, String table) {
         selectedTable.set(table);
         tableColumns.clear();
@@ -204,7 +253,19 @@ public class HomeViewModel {
         }
     }
 
-    public void attemptEdit(String col, String ctid, String nv) throws SQLException {
+    /**
+     * Attempt to edit a field in a table
+     * @param col Column name of field to edit
+     * @param ctid TID of row to edit
+     * @param nv New value to update field with (could be null)
+     * @throws SQLException If editing failed (JDBC driver threw an exception
+     *                      while executing update statement)
+     */
+    public void attemptEdit(
+        @NotNull String col,
+        @NotNull String ctid,
+        @Nullable String nv
+    ) throws SQLException {
         assert currConn != null;
         if (nv != null) nv = "'" + nv.replaceAll("'", "''") + "'";
         log.info("Attempting edit: col=" + col + ", nv=" + nv);
@@ -229,6 +290,11 @@ public class HomeViewModel {
         finishStatusJob(tID);
     }
 
+    /**
+     * Create a table in a cluster
+     * @param cluster Cluster to create table in
+     * @param table Name of new table to create
+     */
     public void createTable(@NotNull Cluster cluster, @NotNull String table) {
         if (!requestPassword(cluster)) return;
         final var tID = setStatusJob(I18N.getString("status.createTable", table));
@@ -253,7 +319,7 @@ public class HomeViewModel {
      * clusters were loaded.
      */
     public void loadClusters() {
-        if (hasClusters()) return; // Clusters were already loaded
+        if (!clusters.isEmpty()) return; // Clusters were already loaded
         String[] clusterIDs;
         try {
             clusterIDs = PreferencesEncoder.rootNode.node("clusters").childrenNames();
@@ -286,6 +352,10 @@ public class HomeViewModel {
         }
     }
 
+    /**
+     * Register a new listener to be called when cluster(s) are added
+     * @param cb Consumer callback to be call when a new cluster is added
+     */
     public void setOnNewCluster(BiConsumer<Cluster, Integer> cb) {
         clusters.addListener((ListChangeListener<Cluster>) ch -> {
             while (ch.next()) if (ch.wasAdded())
@@ -293,6 +363,10 @@ public class HomeViewModel {
         });
     }
 
+    /**
+     * Register a new listener to be called when cluster(s) are removed
+     * @param cb Consumer callback to be called when a cluster is removed
+     */
     public void setOnRemoveCluster(Consumer<Integer> cb) {
         clusters.addListener((ListChangeListener<Cluster>) ch -> {
             while (ch.next()) if (ch.wasRemoved()) cb.accept(ch.getFrom());
@@ -310,6 +384,10 @@ public class HomeViewModel {
         return -1;
     }
 
+    /**
+     * Add a specified cluster, will fire listeners if any are registered
+     * @param c Cluster to add
+     */
     public void addCluster(@NotNull Cluster c) {
         clusters.add(c);
     }
@@ -318,22 +396,30 @@ public class HomeViewModel {
      * Remove the cluster with the specified ID
      * @param clusterID ID of cluster to remove
      * @throws NoSuchElementException If no cluster with specified ID exists
+     * @see #removeCluster(Integer idx)
      */
     public void removeCluster(@NotNull String clusterID) throws NoSuchElementException {
         int idx = indexOf(clusterID);
         if (idx < 0) throw new NoSuchElementException("No cluster with requested ID exists");
         removeCluster(idx);
     }
+    /**
+     * Remove a cluster at the specified index
+     * @param idx Index to remove cluster at
+     */
     public void removeCluster(@NotNull Integer idx) {
         Cluster removed = clusters.remove(idx.intValue());
         tables.remove(removed.getID());
     }
 
-    public boolean hasClusters() {
-        return !clusters.isEmpty();
-    }
-
     // Status methods
+
+    /**
+     * Create a job to display its status
+     * @param newStatus Name or description of new job
+     * @return ID of job, can be passed to {@link #finishStatusJob(String id)} or
+     *         {@link #finishStatusJob(String id, String err)} upon job completion
+     */
     public String setStatusJob(String newStatus) {
         status = newStatus;
         Platform.runLater(() -> displayedStatus.set(I18N.getString("status.progress", status)));
@@ -342,9 +428,24 @@ public class HomeViewModel {
         statusBg.set(Colors.LOADING);
         return statusID;
     }
+
+    /**
+     * Convenience method to mark a job started by calling {@link #setStatusJob(String status)}
+     * as successfully completed
+     * @param id ID of job, returned by {@link #setStatusJob(String status)}
+     * @see #finishStatusJob(String id, String err)
+     */
     public void finishStatusJob(String id) {
         finishStatusJob(id, null);
     }
+
+    /**
+     * Mark a job started by calling {@link #setStatusJob(String status)}
+     * as completed.
+     * @param id ID of job, returned by {@link #setStatusJob(String status)}
+     * @param err If the job failed, the exception string to display (null if no exception)
+     * @see #finishStatusJob(String id)
+     */
     public void finishStatusJob(String id, String err) {
         final var success = err == null;
         if (!Objects.equals(statusID, id)) return;
@@ -368,6 +469,15 @@ public class HomeViewModel {
         }).start();
     }
 
+    /**
+     * Add a password to the cache manually, for example right after a cluster is created.
+     * <p>
+     *     <b>Note:</b>
+     *     No validation is done to ensure the password is valid etc.
+     * </p>
+     * @param clusterID ID of cluster this password is for
+     * @param pw Password to add to cache
+     */
     public static void addCachedPassword(String clusterID, String pw) {
         cachedPasswords.put(clusterID, pw);
     }

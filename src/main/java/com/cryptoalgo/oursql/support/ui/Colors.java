@@ -2,6 +2,9 @@ package com.cryptoalgo.oursql.support.ui;
 
 import javafx.scene.paint.Color;
 
+/**
+ * Central class for providing color constants for various purposes.
+ */
 public class Colors {
     /**
      * A background color to be used for indicating a success

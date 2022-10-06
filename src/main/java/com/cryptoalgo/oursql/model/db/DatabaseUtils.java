@@ -11,11 +11,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Various utilities for working with JDBC databases.
+ */
 public class DatabaseUtils {
     /**
      * Generates a database connection URI given a {@link Cluster} and a password.
-     * @implNote Calls {@link #getConnectionURI(Integer, String, String, DBMSUtils, boolean)}
-     * internally.
+     * <p>
+     *     <b>Implementation Note:</b>
+     *     Calls {@link #getConnectionURI(Integer, String, String, DBMSUtils, boolean)}
+     *     internally.
+     * </p>
      * @param cluster Cluster to get connection URI from
      * @return A connection URI for the provided {@link Cluster}, not valid for
      *         connection if <code>password</code> is <code>null</code> and
@@ -48,8 +54,10 @@ public class DatabaseUtils {
      * @param includeJDBC If jdbc: should be appended before the scheme.
      *                    Set to false for user-facing UIs
      * @return A connection URI for the provided connection params, not valid for
-     * connection if <code>password</code> is <code>null</code> and
-     * {@link Cluster#getUsername()} is not null.
+     *         connection if <code>password</code> is <code>null</code> and
+     *         {@link Cluster#getUsername()} is not null.
+     * @throws URISyntaxException If construction of the connection URI failed due to
+     *                            invalid characters/syntax
      */
     public static URI getConnectionURI(
         @NotNull Integer port,
@@ -71,6 +79,17 @@ public class DatabaseUtils {
         );
     }
 
+    /**
+     * Convenience method to get a JDBC connection from a cluster and password.
+     * @param cluster Cluster to get connection of
+     * @param password Connection password, if applicable
+     * @return The database connection object
+     * @throws URISyntaxException If construction of the connection URI failed due to
+     *                            invalid characters/syntax
+     * @throws SQLException If the underlying JDBC driver threw an exception while
+     *                      a connection was attempted
+     * @see #getConnection(URI connURI, Cluster cluster, String password)
+     */
     public static Connection getConnection(
         @NotNull Cluster cluster,
         @Nullable String password
@@ -84,7 +103,12 @@ public class DatabaseUtils {
 
     /**
      * Get a database connection
+     * @param connURI Connection URI
+     * @param cluster Cluster to get connection of
+     * @param password Connection password, if applicable
      * @return The database connection object
+     * @throws SQLException If the underlying JDBC driver threw an exception while
+     *                      a connection was attempted
      */
     public static Connection getConnection(
         @NotNull URI connURI,

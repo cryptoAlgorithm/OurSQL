@@ -56,6 +56,10 @@ public class AddClusterDialog {
 
     private static final Logger log = Logger.getLogger(AddClusterDialog.class.getName());
 
+    /**
+     * Create a stage and show an add cluster dialog
+     * @throws IOException If loading of the dialog FXML failed
+     */
     public static void show() throws IOException {
         final var stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);

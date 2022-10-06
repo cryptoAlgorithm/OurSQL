@@ -10,8 +10,18 @@ package com.cryptoalgo.codable;
  * </p>
  */
 public abstract class Codable<T extends Enum<T>> extends Decodable<T> implements Encodable<T> {
+    /**
+     * Decoding constructor, may be called via reflection by {@link Decoder}s.
+     * @param decoder Instance of {@link Decoder} to be used for decoding
+     * @throws DecodingException If decoding fails for whatever reason
+     */
     protected Codable(Decoder<T> decoder) throws DecodingException {
         super(decoder);
     }
+
+    /**
+     * Protected no-arg constructor to force inheriting classes to implement their
+     * own constructor.
+     */
     protected Codable() {}
 }

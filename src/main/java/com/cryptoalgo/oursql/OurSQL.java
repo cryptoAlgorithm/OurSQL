@@ -180,6 +180,10 @@ public class OurSQL extends Application {
         }).start();
     }
 
+    /**
+     * Main application entrypoint
+     * @param args Commandline args
+     */
     public static void main(String[] args) {
         launch();
     }

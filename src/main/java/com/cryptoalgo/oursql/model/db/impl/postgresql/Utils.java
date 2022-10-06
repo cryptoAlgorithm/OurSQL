@@ -4,6 +4,9 @@ import com.cryptoalgo.oursql.model.db.DBMSUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Utils specific to the PostgreSQL DBMS.
+ */
 public class Utils implements DBMSUtils {
     public @NotNull String scheme() { return "postgresql"; }
 

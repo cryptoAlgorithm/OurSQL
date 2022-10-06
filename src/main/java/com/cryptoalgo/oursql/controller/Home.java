@@ -41,7 +41,7 @@ public class Home {
     private static final HomeViewModel viewModel = new HomeViewModel();
 
     @FXML
-    private Accordion categoryList;
+    private Accordion clusterList;
     @FXML
     private VBox addClusterTip, tableTipContainer, mainContentContainer;
     @FXML
@@ -71,9 +71,12 @@ public class Home {
      *
      ===================================================*/
 
-    private void showHideAddClusterTip() {
-        addClusterTip.setVisible(!viewModel.hasClusters());
-        addClusterTip.setManaged(!viewModel.hasClusters());
+    /**
+     * Bind visible and managed properties to show tip when cluster list is empty
+     */
+    private void initClusterTip() {
+        addClusterTip.visibleProperty().bind(Bindings.size(clusterList.getPanes()).isEqualTo(0));
+        addClusterTip.managedProperty().bind(Bindings.size(clusterList.getPanes()).isEqualTo(0));
     }
 
     private void loadTables(Cluster c, TitledPane p) {
@@ -154,7 +157,7 @@ public class Home {
             p.expandedProperty().addListener((ch, o, newVal) -> {
                 // If titledPane is collapsed, clear table selection
                 if (!newVal) {
-                    if (categoryList.getExpandedPane() != null && p.getContent() instanceof ListView<?>)
+                    if (clusterList.getExpandedPane() != null && p.getContent() instanceof ListView<?>)
                         ((ListView<?>) p.getContent()).getSelectionModel().clearSelection();
                     return;
                 }
@@ -198,14 +201,10 @@ public class Home {
 
             m.getItems().addAll(header, newTable, del);
             p.setContextMenu(m);
-            categoryList.getPanes().add(idx, p);
-            showHideAddClusterTip();
+            clusterList.getPanes().add(idx, p);
         });
 
-        viewModel.setOnRemoveCluster(i -> Platform.runLater(() -> {
-            categoryList.getPanes().remove(i.intValue());
-            showHideAddClusterTip();
-        }));
+        viewModel.setOnRemoveCluster(i -> Platform.runLater(() -> clusterList.getPanes().remove(i.intValue())));
 
         // Populate clusters map
         viewModel.loadClusters();
@@ -265,6 +264,10 @@ public class Home {
         });
     }
 
+    /**
+     * Init status area of home page. Responsible for binding values and animating
+     * the status background, among others.
+     */
     void initStatus() {
         statusContainer.setOnMouseClicked(e -> {
             if (statusPopup != null) statusPopup.close();
@@ -306,6 +309,7 @@ public class Home {
     @FXML
     private void initialize() {
         initClusterList();
+        initClusterTip();
         initTableView();
         initStatus();
 

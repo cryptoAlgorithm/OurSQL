@@ -12,7 +12,7 @@ import java.util.Optional;
  *     in their decoding constructor.
  * </p>
  * @see Decoder#container()
- * @param <T>
+ * @param <T> The type of the codingKeys enum used for decoding
  */
 public interface KeyedDecodingContainer<T extends Enum<T>> {
     // Java be insisting on "type erasure" to not break legacy code,

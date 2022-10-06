@@ -9,9 +9,21 @@ import java.util.prefs.Preferences;
  */
 public class Context {
     private static final Context singleton = new Context();
-    public static Context getInstance() { return singleton; } // To conform to the singleton pattern
 
+    /**
+     * Get a shared context instance. This method is present to conform
+     * to the singleton pattern.
+     * @return An instance of {@link Context}
+     */
+    public static Context getInstance() { return singleton; }
+
+    /**
+     * A shared preferences node for general application pref storage
+     */
     public Preferences prefs = Preferences.userRoot().node(Context.class.getPackageName());
+    /**
+     * A shared SHA-256 hashing instance to be used throughout the application
+     */
     public MessageDigest hashInstance;
     { // To catch exception in creating
         try {

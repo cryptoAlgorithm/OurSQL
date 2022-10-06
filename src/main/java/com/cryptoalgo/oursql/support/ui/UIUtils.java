@@ -38,6 +38,13 @@ public class UIUtils {
         targetPane.setClip(c);
     }
 
+    /**
+     * Load and return a requested FXML.
+     * @param name Name of FXML to load, relative to <code>view/</code> (do not add file extension)
+     * @return Loaded root pane from the requested FXML
+     * @param <T> Type of root pane
+     * @throws IOException If loading from the requested FXML file failed
+     */
     public static <T extends Pane> T loadFXML(String name) throws IOException {
         return new FXMLLoader(
             OurSQL.class.getResource("view/" + name + ".fxml"),
@@ -45,6 +52,12 @@ public class UIUtils {
         ).load();
     }
 
+    /**
+     * Create a stage for utility windows. Pre-styled with the model css.
+     * @param title Title of stage
+     * @param nodes Nodes to add to root {@link VBox}
+     * @return Created stage ({@link Stage#show()} not called)
+     */
     public static Stage createUtilityStage(String title, Node... nodes) {
         final var utilStage = new Stage();
         utilStage.initStyle(StageStyle.UTILITY);
@@ -60,9 +73,20 @@ public class UIUtils {
         return utilStage;
     }
 
+    /**
+     * Get non-null URL of a resource.
+     * @param res Resource string
+     * @return URL of requested resource
+     */
     public static URL getResourceURL(String res) {
         return Objects.requireNonNull(OurSQL.class.getResource(res));
     }
+    /**
+     * Get non-null URL string of a resource. For those APIs that for some reason
+     * have a parameter named "url" with the String type.
+     * @param res Resource string
+     * @return External string form of URL of requested resource
+     */
     public static String getResourcePath(String res) {
         return getResourceURL(res).toExternalForm();
     }

@@ -1,3 +1,6 @@
+/**
+ * Main module of the OurSQL application.
+ */
 module com.cryptoalgo.oursql.oursql {
     requires javafx.controls;
     requires javafx.fxml;

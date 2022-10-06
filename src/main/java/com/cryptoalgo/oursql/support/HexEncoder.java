@@ -2,8 +2,17 @@ package com.cryptoalgo.oursql.support;
 
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Utility class to encode byte arrays into hex strings
+ */
 public class HexEncoder {
     private static final byte[] HEX_ARRAY = "0123456789ABCDEF".getBytes(StandardCharsets.US_ASCII);
+
+    /**
+     * Encode a byte array into a hex string
+     * @param bytes Byte array to encode
+     * @return Hex representation of byte array
+     */
     public static String bytesToHex(byte[] bytes) {
         byte[] hexChars = new byte[bytes.length * 2];
         for (int j = 0; j < bytes.length; j++) {

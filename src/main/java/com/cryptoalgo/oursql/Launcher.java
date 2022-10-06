@@ -7,6 +7,10 @@ package com.cryptoalgo.oursql;
  * distribution?
  */
 public class Launcher {
+    /**
+     * Launcher entrypoint, calls {@link OurSQL#main(String[] args)}
+     * @param args Commandline args
+     */
     public static void main(String[] args) {
         OurSQL.main(args);
     }

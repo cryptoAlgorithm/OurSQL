@@ -56,7 +56,7 @@
             <Separator />
             <!-- DB/cluster list -->
             <ScrollPane maxHeight="Infinity" VBox.vgrow="ALWAYS" fitToWidth="true">
-                <Accordion fx:id="categoryList" />
+                <Accordion fx:id="clusterList" />
             </ScrollPane>
             <VBox spacing="6" fx:id="addClusterTip">
                 <Label text="%tip.addCluster.title" styleClass="h3" wrapText="true" />

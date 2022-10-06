@@ -7,11 +7,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
 
+/**
+ * A {@link javafx.scene.control.TableView TableView} cell factory for SQL tables.
+ */
 public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, String> {
     private TextField textField;
     private boolean escapePressed = false;
     private final int col;
 
+    /**
+     * Create an instance of a <code>SQLCellFactory</code>, providing
+     * the column the factory is in.
+     * @param col Column this cell factory is in
+     */
     public SQLCellFactory(int col) { this.col = col; }
 
     @Override

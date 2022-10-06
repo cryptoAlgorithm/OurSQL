@@ -10,6 +10,9 @@ import java.util.NoSuchElementException;
  * Metadata for built-in database implementations
  */
 public class BuiltInDBs {
+    /**
+     * Array of instances of built-in DBMS utils.
+     */
     static public final DBMSUtils[] impls = {
         new Utils(),
         new com.cryptoalgo.oursql.model.db.impl.mysql.Utils()
@@ -23,6 +26,13 @@ public class BuiltInDBs {
         "mysql"
     };
 
+    /**
+     * Get an instance of implementations of {@link DBMSUtils} for a certain DBMS.
+     * @param id DBMS ID to lookup
+     * @return Instance of {@link DBMSUtils} specific to the requested DBMS
+     * @throws NoSuchElementException If an implementation for the DBMS of the provided ID
+     *                                was not found
+     */
     static public DBMSUtils lookupImpl(String id) throws NoSuchElementException {
         // To serve as a reminder
         // assert impls.length == dbmsIDs.length;

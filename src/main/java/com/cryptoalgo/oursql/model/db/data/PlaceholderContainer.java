@@ -8,6 +8,11 @@ public class PlaceholderContainer extends Container<Void> {
      * Dummy constructor for maximum placeholder-ness
      */
     public PlaceholderContainer() { this(null); }
+
+    /**
+     * Create an instance of <code>PlaceholderContainer</code>.
+     * @param boxValue Value to box, unused
+     */
     public PlaceholderContainer(String boxValue) {
         super(boxValue);
     }

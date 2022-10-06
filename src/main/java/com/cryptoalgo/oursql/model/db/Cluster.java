@@ -13,6 +13,9 @@ import java.util.NoSuchElementException;
 import java.util.prefs.BackingStoreException;
 import java.util.regex.Pattern;
 
+/**
+ * A class to represent a cluster.
+ */
 public final class Cluster extends Codable<Cluster.CodingKeys> {
     @NotNull
     private final String dbms, host, database, id;
@@ -49,6 +52,13 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
         );
     }
 
+    /**
+     * Decoding constructor.
+     * @param decoder Decoder to be used for decoding
+     * @throws DecodingException If decoding methods threw during decoding
+     * @throws NoSuchElementException If some parameters are not found
+     * @see Codable#Codable(Decoder)
+     */
     public Cluster(Decoder<CodingKeys> decoder) throws DecodingException, NoSuchElementException {
         super(decoder);
         KeyedDecodingContainer<CodingKeys> container = decoder.container();
@@ -61,6 +71,15 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
         id = computeID(host, database, username, port);
     }
 
+    /**
+     * Create a cluster from cluster parameters
+     * @param dbms Identifier of the cluster's DBMS
+     * @param host Connection host
+     * @param database Database path
+     * @param username Connection username for authentication, if applicable
+     * @param port Connection port
+     * @param name Cluster name
+     */
     public Cluster(
         @NotNull String dbms,
         @NotNull String host,
@@ -126,14 +145,45 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
     public void setName(@NotNull String newName) { name = newName; }
 
     // Codable conformance
+    /**
+     * Keys for encoding/decoding
+     */
     public enum CodingKeys {
-        host, database, port, name, username, dbms
+        /**
+         * CodingKey for the connection host
+         */
+        host,
+        /**
+         * CodingKey for the database path
+         */
+        database,
+        /**
+         * CodingKey for the connection port
+         */
+        port,
+        /**
+         * CodingKey for the cluster name
+         */
+        name,
+        /**
+         * CodingKey for the authentication username
+         */
+        username,
+        /**
+         * CodingKey for an identifier of the DBMS of this cluster
+         */
+        dbms
     }
 
     /**
      * Convenience method that wraps {@link Decoder}, allows
      * deserializing the cluster with the requested ID from
      * {@link java.util.prefs.Preferences Preferences}
+     * @param ofID Requested clusterID to use for retrieval from Preferences
+     * @return Decoded cluster of requested ID
+     * @throws DecodingException If decoding failed for whatever reason
+     *                           (use printStackTrace for more info)
+     * @throws InvocationTargetException If the decoding constructor threw an exception
      */
     public static Cluster decode(String ofID) throws DecodingException, InvocationTargetException {
         return new PreferencesDecoder<CodingKeys>("clusters/" + ofID).decode(Cluster.class);
@@ -147,6 +197,7 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
      *     Uses {@link Encodable} under the hood to serialize and
      *     store the object in {@link java.util.prefs.Preferences Preferences}.
      * </p>
+     * @throws EncodingException If encoding failed for whatever reason.
      */
     public void persist() throws EncodingException {
         new PreferencesEncoder<CodingKeys>("clusters/" + id).encode(this);
@@ -154,6 +205,7 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
 
     /**
      * Removes a cluster from non-volatile storage.
+     * @throws BackingStoreException If the underlying Preferences driver threw an exception
      */
     public void remove() throws BackingStoreException {
         PreferencesEncoder.rootNode.node("clusters/" + id).removeNode();
@@ -161,8 +213,11 @@ public final class Cluster extends Codable<Cluster.CodingKeys> {
 
     /**
      * Check if a cluster with the same ID was already persisted
+     * <p>
+     *     <b>Note:</b>
+     *     Does not validate if persisted cluster is actually valid
+     * </p>
      * @return <code>true</code> if the node with this cluster's ID already exists
-     * @implNote Does not validate if persisted cluster is actually valid
      */
     public boolean alreadyExists() {
         try {

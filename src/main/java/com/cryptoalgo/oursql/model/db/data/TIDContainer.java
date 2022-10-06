@@ -6,9 +6,11 @@ import java.util.Arrays;
  * Container for the "tid" (tuple id) SQL type
  */
 public class TIDContainer extends Container<int[]> {
-    public TIDContainer(String boxValue) {
-        super(boxValue);
-    }
+    /**
+     * Create an instance of a TID container with a raw string
+     * @param boxValue Raw string to unbox into this container
+     */
+    public TIDContainer(String boxValue) { super(boxValue); }
 
     @Override
     protected int[] unbox(String val) {

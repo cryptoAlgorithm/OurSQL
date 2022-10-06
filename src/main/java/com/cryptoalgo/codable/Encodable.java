@@ -7,5 +7,10 @@ package com.cryptoalgo.codable;
  * @see Decodable
  */
 public interface Encodable<T extends Enum<T>> {
+    /**
+     * Encodes the fields in this class with an encoder.
+     * @param encoder Encoder to be used for encoding
+     * @throws EncodingException If the encoder threw an exception
+     */
     void encode(Encoder<T> encoder) throws EncodingException;
 }

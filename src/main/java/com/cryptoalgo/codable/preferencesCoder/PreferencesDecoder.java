@@ -38,6 +38,11 @@ public final class PreferencesDecoder<T extends Enum<T>> implements Decoder<T>, 
     /**
      * Create an instance of a {@link com.cryptoalgo.codable.Decodable Decodable}
      * class by decoding values from Preferences
+     * @param decoding <code>.class</code> of class to decode
+     * @param <D> Type of class to decode
+     * @return Instance of the requested class, populated with decoded data
+     * @throws DecodingException If decoding failed for whatever reason (use .printStackTrace() to find out more)
+     * @throws InvocationTargetException If the decoding constructor of the class to be decoded threw an exception
      */
     public <D extends Decodable<T>> D decode(Class<D> decoding) throws DecodingException, InvocationTargetException {
         try {

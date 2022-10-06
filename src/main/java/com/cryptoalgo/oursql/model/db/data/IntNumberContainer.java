@@ -5,10 +5,16 @@ import org.jetbrains.annotations.Nullable;
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
+/**
+ * A container for int-based SQL types
+ */
 public class IntNumberContainer extends NumberContainer<Integer> {
-    public IntNumberContainer(String boxValue) {
-        super(boxValue);
-    }
+    /**
+     * Create an instance of this container with a string to decode and unbox.
+     * Construction will fail if the provided raw string cannot be parsed as an int.
+     * @param boxValue Raw string to decode and unbox into this container
+     */
+    public IntNumberContainer(String boxValue) { super(boxValue); }
 
     @Override
     public Integer unbox(String val) {

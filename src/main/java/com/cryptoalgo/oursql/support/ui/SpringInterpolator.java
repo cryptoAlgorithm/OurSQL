@@ -5,11 +5,20 @@ import javafx.animation.Interpolator;
 import java.util.ArrayList;
 
 /**
- * An interpolate that simulates interpolation with spring physics.
+ * An interpolator that simulates interpolation with spring physics.
  */
 public class SpringInterpolator extends Interpolator {
     private final ArrayList<Double> values = new ArrayList<>();
 
+    /**
+     * Convenience constructor that specifies a default precision value of 0.05.
+     * All other parameters are passed as-is to
+     * {@link #SpringInterpolator(double stiffness, double mass, double damping, double precision)}
+     * @param stiffness Stiffness of spring in simulation
+     * @param mass Mass of object to simulate
+     * @param damping Dampening to use for simulation
+     * @see #SpringInterpolator(double stiffness, double mass, double damping, double precision)
+     */
     public SpringInterpolator(double stiffness, double mass, double damping) {
         this(stiffness, mass, damping, 0.05);
     }
@@ -20,6 +29,7 @@ public class SpringInterpolator extends Interpolator {
      * @param mass Mass of object to simulate
      * @param damping Dampening to use for simulation
      * @param precision Stop simulation when (x-target) and v are both less than this value
+     * @see #SpringInterpolator(double stiffness, double mass, double damping)
      */
     public SpringInterpolator(
         double stiffness,

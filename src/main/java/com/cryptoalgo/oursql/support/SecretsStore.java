@@ -20,7 +20,14 @@ public class SecretsStore {
     private static final Preferences prefsRoot = Preferences.userNodeForPackage(SecretsStore.class);
     private static final String algo = "AES/GCM/NoPadding";
 
+    /**
+     * An exception for various failures during storage/retrieval of secrets
+     */
     public static class StoreException extends Exception {
+        /**
+         * Create an instance of the exception with a reason
+         * @param reason Reason of exception
+         */
         public StoreException(String reason) { super(reason); }
     }
 
@@ -120,6 +127,8 @@ public class SecretsStore {
      * Retrieve encrypted data in plaintext form
      * @param password Encryption password
      * @param storeKey Preferences key to retrieve secret from
+     * @throws StoreException If decryption failed for whatever reason (e.g. wrong password)
+     * @return Decrypted secret
      */
     public static String decrypt(String password, String storeKey) throws StoreException {
         // Firstly ensure data is encrypted
@@ -143,7 +152,8 @@ public class SecretsStore {
     /**
      * Retrieves data stored in plaintext form
      * @param storeKey Preferences key to retrieve secret from
-     * @return Retrieved data
+     * @return Retrieved secret
+     * @throws StoreException If decryption failed for whatever reason (e.g. the secret is encrypted)
      */
     public static String decrypt(String storeKey) throws StoreException {
         if (isEncrypted(storeKey)) throw new StoreException(
@@ -155,8 +165,9 @@ public class SecretsStore {
     /**
      * Check if stored data at a particular key is stored in encrypted form.
      * Does extensive sanity checking to ensure all required keys are present.
-     * @param storeKey Key to check encryption status of
+     * @param storeKey Key of secret to check encryption status of
      * @return True if data is stored in encrypted form, false if it's stored in plaintext
+     * @throws StoreException If the secret could not be retrieved or expected values were missing
      */
     public static boolean isEncrypted(String storeKey) throws StoreException {
         try {
@@ -185,16 +196,24 @@ public class SecretsStore {
             return true;
         }
     }
+
+    /**
+     * Convenience method to check if a particular secret is encrypted.
+     * Catches exceptions and returns a default value instead.
+     * @param storeKey Key of secret to check encryption status of
+     * @param def Value to return if an exception occurred while checking if the secret is encrypted
+     * @return True if the secret at <code>storeKey</code> is encrypted,
+     * @see #isEncrypted(String storeKey)
+     */
     public static boolean isEncrypted(String storeKey, boolean def) {
         try { return isEncrypted(storeKey); }
-        catch (StoreException e) {
-            e.printStackTrace();
-            return def; }
+        catch (StoreException e) { return def; }
     }
 
     /**
      * Deletes a secret stored at a specified storeKey
      * @param storeKey Key of secret to delete
+     * @throws BackingStoreException If the underlying Preferences storage driver threw an exception
      */
     public static void remove(String storeKey) throws BackingStoreException {
         try { prefsRoot.node(storeKey).removeNode(); }

@@ -6,10 +6,27 @@ import org.jetbrains.annotations.Nullable;
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
+/**
+ * An abstract container to store various numerical SQL types
+ * @param <T> Numerical type for the container.
+ */
 public abstract class NumberContainer<T extends Number> extends Container<T> {
+    /**
+     * Create an instance of a <code>NumberContainer</code> with a raw value.
+     * @param boxValue Raw value to unbox into container
+     */
     public NumberContainer(String boxValue) { super(boxValue); }
 
+    /**
+     * Get the minimum allowable value that can be represented by this numerical type
+     * @return Minimum value that can be represented by this numerical type
+     */
     protected abstract BigDecimal getMin();
+
+    /**
+     * Get the maximum allowable value that can be represented by this numerical type
+     * @return Maximum value that can be represented by this numerical type
+     */
     protected abstract BigDecimal getMax();
 
     /**

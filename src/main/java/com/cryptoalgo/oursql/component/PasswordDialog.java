@@ -9,9 +9,24 @@ import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * A custom dialog with a {@link PasswordField}, to make up for the lack of a
+ * <code>PasswordInputDialog</code> or similar in JavaFX. Of course, styles
+ * are added to allow the dialog to fit in well with the application's theme.
+ */
 public class PasswordDialog extends Dialog<String> {
     private final PasswordField passwordField;
 
+    /**
+     * Create an instance of <code>PasswordDialog</code> with parameters
+     * to populate the dialog.
+     * @param title Title of dialog
+     * @param header Header of dialog
+     * @param body Body text, displayed right above the {@link PasswordField}
+     * @param caption Caption text, displayed right below the {@link PasswordField}
+     *                with a smaller font size. Can be <code>null</code> if no
+     *                caption is required.
+     */
     public PasswordDialog(
         @NotNull String title,
         @NotNull String header,

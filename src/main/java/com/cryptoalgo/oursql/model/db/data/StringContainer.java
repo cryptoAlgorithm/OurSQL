@@ -1,6 +1,13 @@
 package com.cryptoalgo.oursql.model.db.data;
 
+/**
+ * A container for various text SQL types
+ */
 public class StringContainer extends Container<String> {
+    /**
+     * Create an instance of the container with raw content.
+     * @param boxValue Raw content to unbox into this container
+     */
     public StringContainer(String boxValue) { super(boxValue); }
 
     @Override

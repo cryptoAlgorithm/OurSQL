@@ -8,8 +8,15 @@ import java.util.HashMap;
  * An immutable "box" for holding different types of data
  */
 public abstract class Container<T> {
+    /**
+     * Value stored in container
+     */
     protected final T value;
 
+    /**
+     * Get the stored value in this container
+     * @return The stored value in this container
+     */
     public T getValue() { return value; }
 
     /**
@@ -19,8 +26,17 @@ public abstract class Container<T> {
      */
     public String getFinalValue(String input) { return input; }
 
+    /**
+     * Default constructor that unboxes a raw string value into the container
+     * @param val Raw string value to unbox
+     */
     public Container(String val) { value = unbox(val); }
 
+    /**
+     * "Unbox" a raw string to the boxed type
+     * @param val Raw string for unboxing
+     * @return Boxed type representing the string
+     */
     protected abstract T unbox(String val);
 
     /**
@@ -29,6 +45,9 @@ public abstract class Container<T> {
      */
     public abstract boolean isValid(String value);
 
+    /**
+     * @return True if editing fields of this container type should be allowed
+     */
     public boolean isEditable() { return true; }
 
     // Fast lookup for the corresponding container classes for a certain SQL type

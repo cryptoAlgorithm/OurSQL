@@ -21,7 +21,14 @@ import java.util.prefs.Preferences;
  * @param <T> Type of enum of codingKeys to be used during encoding
  */
 public final class PreferencesEncoder<T extends Enum<T>> implements Encoder<T>, KeyedEncodingContainer<T> {
+    /**
+     * Preference node for this instance of <code>PreferencesEncoder</code>,
+     * to write values into.
+     */
     private final Preferences prefsNode;
+    /**
+     * Root preference node for use by <code>PreferenceCoder</code>.
+     */
     public static final Preferences rootNode = Preferences.userNodeForPackage(PreferencesEncoder.class);
 
     /**
@@ -33,6 +40,12 @@ public final class PreferencesEncoder<T extends Enum<T>> implements Encoder<T>, 
         prefsNode = rootNode.node(node);
     }
 
+    /**
+     * Encode the provided instance of an {@link Encodable} class.
+     * @param encoding Instance of an {@link Encodable} class
+     * @param <E> Type of the {@link Encodable} class
+     * @throws EncodingException If encoding failed for whatever reason
+     */
     public <E extends Encodable<T>> void encode(E encoding) throws EncodingException {
         encoding.encode(this);
     }
