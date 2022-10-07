@@ -297,7 +297,6 @@
 .table-cell {
     -fx-padding: 2 3;
     -fx-table-cell-border-color: -fx-outer-border;
-    /*-fx-control-inner-background: #0000;*/
 }
 .table-cell.editing {
     -fx-padding: -1;
@@ -308,5 +307,3 @@
     -fx-background-radius: 0;
     -fx-border-color: -fx-accent;
 }
-.table-cell.null { -fx-opacity: 0.5; }
-.table-cell.editing.null { -fx-opacity: 1; }

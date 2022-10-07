@@ -7,13 +7,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (ui): handle refresh button">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/BitContainer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/BooleanContainer.java" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (SQLCellFactory): further streamline editing experience&#10;feat: supports boolean SQL type">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/TableDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/SQLCellFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/SQLCellFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledAlert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledInputDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledInputDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,10 +33,10 @@
         <option value="Interface" />
         <option value="JUnit5 Test Class" />
         <option value="CSS File" />
-        <option value="Class" />
         <option value="FxmlFile" />
         <option value="JavaFXApplication" />
         <option value="package-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -248,14 +254,7 @@
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
       <workItem from="1664633271631" duration="148499000" />
-      <workItem from="1665050486469" duration="20887000" />
-    </task>
-    <task id="LOCAL-00014" summary="patch (db): re-architect project to use JDBC instead of reinventing the wheel">
-      <created>1664265018191</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1664265018191</updated>
+      <workItem from="1665050486469" duration="25023000" />
     </task>
     <task id="LOCAL-00015" summary="patch (db): fix jdbc connection URI construction">
       <created>1664332459654</created>
@@ -593,7 +592,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665069657758</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="patch (SQLCellFactory): further streamline editing experience&#10;feat: supports boolean SQL type">
+      <created>1665109298539</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1665109298539</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -612,7 +618,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="patch (ui): set dock and stage icon, table UI improvements" />
     <MESSAGE value="feat (ui): revamped status system" />
     <MESSAGE value="patch (ui): revamped status system" />
     <MESSAGE value="feat (ui): background color and transitions for status" />
@@ -637,7 +642,8 @@
     <MESSAGE value="feat: reliable dropping of tables&#10;fix: logic error when handling create table exceptions" />
     <MESSAGE value="feat (ui): display null values more friendlily" />
     <MESSAGE value="feat (ui): handle refresh button" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat (ui): handle refresh button" />
+    <MESSAGE value="patch (SQLCellFactory): further streamline editing experience&#10;feat: supports boolean SQL type" />
+    <option name="LAST_COMMIT_MESSAGE" value="patch (SQLCellFactory): further streamline editing experience&#10;feat: supports boolean SQL type" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

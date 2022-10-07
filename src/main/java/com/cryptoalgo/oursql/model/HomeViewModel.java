@@ -213,7 +213,7 @@ public class HomeViewModel {
     private Container<?> getSQLContainer(String type, String data) {
         final var cont = Container.getInstance(type);
         if (cont == null) {
-            System.out.println(type);
+            log.warning("Unsupported SQL type: " + type);
             return new PlaceholderContainer();
         }
         try {
@@ -306,6 +306,9 @@ public class HomeViewModel {
      */
     private ResultSet runQuery(String query) throws SQLException {
         assert currConn != null;
+        final var statement = currConn.createStatement();
+        statement.execute(query);
+        statement.closeOnCompletion();
         return currConn.createStatement().executeQuery(query);
     }
 
@@ -358,6 +361,24 @@ public class HomeViewModel {
             throw e;
         }
         finishStatusJob(tID);
+    }
+
+    /**
+     * Inserts a new row into the current table with null values for each column
+     */
+    public void insertRow() {
+        assert currConn != null;
+        final var tID = setStatusJob(I18N.getString("status.insertRow", selectedTable.get()));
+        try {
+            currConn.createStatement().execute(
+                String.format("insert into \"%s\" default values", selectedTable.get())
+            );
+        } catch (SQLException e) {
+            finishStatusJob(tID, e.getLocalizedMessage());
+            return;
+        }
+        finishStatusJob(tID);
+        updateTable();
     }
 
     /**

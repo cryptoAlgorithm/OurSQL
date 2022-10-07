@@ -87,7 +87,7 @@
     -fx-background-radius: 0 7 0 0;
     -fx-padding: 0 8;
     -fx-min-height: 34;
-    -fx-min-width: 0;
+    -fx-min-width: 34;
 }
 
 .queryContainer > .text-field, .table-cell, .table-view .column-header-background .label {

@@ -2,6 +2,7 @@ package com.cryptoalgo.oursql.component;
 
 import com.cryptoalgo.oursql.support.ui.UIUtils;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.paint.Color;
 
 /**
  * A styled {@link TextInputDialog} with styles that fit in with the
@@ -24,5 +25,6 @@ public class StyledInputDialog extends TextInputDialog {
         setHeaderText(header);
         setContentText(body);
         getDialogPane().getStylesheets().add(UIUtils.getResourcePath("css/dialog.css"));
+        getDialogPane().getScene().setFill(Color.TRANSPARENT); // Prevents flash of white when opening dialog
     }
 }

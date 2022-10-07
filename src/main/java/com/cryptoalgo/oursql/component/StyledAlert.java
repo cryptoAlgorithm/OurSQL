@@ -2,6 +2,7 @@ package com.cryptoalgo.oursql.component;
 
 import com.cryptoalgo.oursql.support.ui.UIUtils;
 import javafx.scene.control.Alert;
+import javafx.scene.paint.Color;
 
 /**
  * A styled ${@link Alert} dialog with styles to better fit in with
@@ -23,6 +24,7 @@ public class StyledAlert extends Alert {
     ) {
         super(type);
         getDialogPane().getStylesheets().add(UIUtils.getResourcePath("css/dialog.css"));
+        getDialogPane().getScene().setFill(Color.TRANSPARENT); // Prevents flash of white when opening dialog
         setTitle(title);
         setHeaderText(header);
         setContentText(body);

@@ -363,4 +363,13 @@ public class Home {
         viewModel.dropTable();
         // Another quick hack to remove current table selection highlight
     }
+
+    @FXML
+    private void handleAddRow(ActionEvent evt) {
+        ((Button) evt.getSource()).setDisable(true);
+        new Thread(() -> {
+            viewModel.insertRow();
+            ((Button) evt.getSource()).setDisable(false);
+        }).start();
+    }
 }

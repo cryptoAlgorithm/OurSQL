@@ -89,7 +89,6 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
                 setText(null);
                 setGraphic(textField);
             } else {
-                System.out.println("here " + getString());
                 setFieldText(getString());
             }
         }
@@ -110,16 +109,10 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
 
     private void setFieldText(String text) {
         if (text == null) {
-            //getStyleClass().add("null");
             text = "<null>";
             setTextFill(Color.grayRgb(255, 0.5));
-            System.out.println("is null");
         }
-        else {
-            setTextFill(initialCol);
-            System.out.println("not null");
-            //getStyleClass().remove("null");
-        }
+        else setTextFill(initialCol);
         setText(text);
         setGraphic(null);
         getStyleClass().remove("editing");

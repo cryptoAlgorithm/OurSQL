@@ -61,9 +61,7 @@ public class PasswordDialog extends Dialog<String> {
         Platform.runLater(passwordField::requestFocus);
 
         setResultConverter(dialogButton -> {
-            if (dialogButton == passwordButtonType) {
-                return passwordField.getText();
-            }
+            if (dialogButton == passwordButtonType) return passwordField.getText();
             return null;
         });
     }
