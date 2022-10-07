@@ -415,6 +415,26 @@ public class HomeViewModel {
     }
 
     /**
+     * Remove a row in the current table given a ctid
+     * @param ctid CTID of row to remove
+     */
+    public void deleteRow(String ctid) {
+        assert currConn != null;
+        final var tID = setStatusJob(I18N.getString("status.deleteRow", selectedTable.get()));
+        try {
+            currConn.createStatement().execute(
+                String.format("delete from \"%s\" where ctid = '%s'", selectedTable.get(), ctid)
+            );
+        } catch (SQLException e) {
+            finishStatusJob(tID, e.getLocalizedMessage());
+            return;
+        }
+        finishStatusJob(tID);
+        // Remove the removed row from the table without refreshing the whole table
+        rows.removeIf(r -> r.get(r.size() - 1).toString().equals(ctid));
+    }
+
+    /**
      * Create a table in a cluster
      * @param cluster Cluster to create table in
      * @param table Name of new table to create

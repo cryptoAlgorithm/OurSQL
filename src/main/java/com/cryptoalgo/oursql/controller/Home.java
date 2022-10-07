@@ -49,7 +49,7 @@ public class Home {
     @FXML
     private TextField statementField;
     @FXML
-    private Button execStatementButton;
+    private Button execStatementButton, delRowButton;
     @FXML
     private Accordion clusterList;
     @FXML
@@ -77,6 +77,7 @@ public class Home {
 
     private void execStatement(String statement) {
         execStatementButton.setDisable(true);
+        statementField.setDisable(true);
         new Thread(() -> {
             final Pair<Pair<List<String>, ObservableList<ObservableList<Container<?>>>>, Integer> res;
             try {
@@ -90,7 +91,10 @@ public class Home {
                 ).show());
                 return;
             } finally {
-                Platform.runLater(() -> execStatementButton.setDisable(false));
+                Platform.runLater(() -> {
+                    execStatementButton.setDisable(false);
+                    statementField.setDisable(false);
+                });
             }
             final var hasRes = res.getKey() != null;
             Platform.runLater(() -> new TableDialog(
@@ -280,6 +284,15 @@ public class Home {
         dbTable.setItems(viewModel.rows);
         dbTable.setEditable(true);
 
+        // Listen to the selected row
+        dbTable.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
+            if (nv == null) {
+                delRowButton.setDisable(true);
+                return;
+            } else delRowButton.setDisable(false);
+            System.out.println(nv.get(nv.size()-1).toString());
+        });
+
         // Listen and update table when columns change
         viewModel.tableColumns.addListener((ListChangeListener<String>) c -> {
             while (c.next()) {
@@ -408,7 +421,6 @@ public class Home {
             I18N.getString("dialog.dropTable.body", viewModel.selectedTableProperty().get())
         ).showAndWait().orElse(ButtonType.CANCEL) == ButtonType.CANCEL) return;
         viewModel.dropTable();
-        // Another quick hack to remove current table selection highlight
     }
 
     @FXML
@@ -417,6 +429,22 @@ public class Home {
         new Thread(() -> {
             viewModel.insertRow();
             ((Button) evt.getSource()).setDisable(false);
+        }).start();
+    }
+
+    @FXML
+    private void handleDeleteRow() {
+        if (dbTable.getSelectionModel().isEmpty()) return;
+        if (new StyledAlert(
+            Alert.AlertType.CONFIRMATION,
+            I18N.getString("dialog.deleteRow.title"),
+            I18N.getString("dialog.deleteRow.title"),
+            I18N.getString("dialog.deleteRow.body")
+        ).showAndWait().orElse(ButtonType.CANCEL) == ButtonType.CANCEL) return;
+        new Thread(() -> {
+            delRowButton.setDisable(true);
+            final var row = dbTable.getSelectionModel().getSelectedItem();
+            viewModel.deleteRow(row.get(row.size()-1).toString());
         }).start();
     }
 }

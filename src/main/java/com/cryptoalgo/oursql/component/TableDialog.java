@@ -37,6 +37,9 @@ public class TableDialog extends Dialog<String> {
             final var t = new TableView<ObservableList<Container<?>>>();
             getDialogPane().setExpanded(true);
             getDialogPane().setExpandableContent(t);
+            // Yet another hack to get rid of the collapse button
+            // No time to debug why the collapse button causes broken sizing
+            getDialogPane().getStyleClass().add("hidden-expand");
             t.setItems(data);
             for (var i = 0; i < col.size(); i++) {
                 final var curIdx = i;

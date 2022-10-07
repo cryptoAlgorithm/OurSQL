@@ -66,6 +66,7 @@ public abstract class Container<T> {
         typeLookup.put("integer", IntNumberContainer.class);
         // True-or-false types
         typeLookup.put("bool", BooleanContainer.class);
+        typeLookup.put("bit", BitContainer.class);
     }
 
     /**

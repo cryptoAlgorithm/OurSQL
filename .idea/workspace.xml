@@ -7,9 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="fix: proper wording in dialog for updates">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat: added bit container type&#10;feat: add and handle row remove button">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/TableDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/TableDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/BitContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/BitContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/dialog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/dialog.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,14 +265,7 @@
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
       <workItem from="1664633271631" duration="148499000" />
-      <workItem from="1665050486469" duration="38137000" />
-    </task>
-    <task id="LOCAL-00023" summary="patch: sprinkle more comments">
-      <created>1664676226379</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1664676226379</updated>
+      <workItem from="1665050486469" duration="41234000" />
     </task>
     <task id="LOCAL-00024" summary="patch (build): downgrade build target to Java 17">
       <created>1664690576617</created>
@@ -603,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665126894114</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="fix (TableDialog): constrain table dialog window properly">
+      <created>1665128066082</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1665128066082</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -622,8 +629,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="chore (localisation): transfer more strings into the localisation bundle" />
-    <MESSAGE value="feat: you can now add tables to databases&#10;patch (ui): threading in more places to not block UI thread for long-running operations" />
     <MESSAGE value="fix: close existing connection if one is open to prevent a build up of stale connections" />
     <MESSAGE value="feat: greatly improved value editing experience&#10;feat: support integer SQL types" />
     <MESSAGE value="feat: greatly improved value editing experience&#10;feat (Container): support integer SQL types&#10;patch (Container): simplified abstraction by moving boilerplate code to parent class" />
@@ -647,7 +652,9 @@
     <MESSAGE value="fix (tests): use @Disabled instead of @Ignore annotation" />
     <MESSAGE value="feat: handle running SQL statements" />
     <MESSAGE value="fix: proper wording in dialog for updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: proper wording in dialog for updates" />
+    <MESSAGE value="fix (TableDialog): constrain table dialog window properly" />
+    <MESSAGE value="feat: added bit container type&#10;feat: add and handle row remove button" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: added bit container type&#10;feat: add and handle row remove button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

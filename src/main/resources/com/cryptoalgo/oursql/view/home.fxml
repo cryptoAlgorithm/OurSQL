@@ -79,7 +79,7 @@
             <VBox fx:id="mainContentContainer" visible="false" managed="false" VBox.vgrow="ALWAYS" spacing="4">
                 <VBox styleClass="tableHeaderContainer">
                     <HBox styleClass="queryContainer">
-                        <TextField fx:id="statementField" promptText="%prompt.query" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="statementField" promptText="SQL>" HBox.hgrow="ALWAYS" />
                         <Button styleClass="icon" fx:id="execStatementButton">
                             <graphic>
                                 <SVGPath styleClass="svgIcon"
@@ -105,6 +105,14 @@
                                 />
                             </graphic>
                             <tooltip><Tooltip showDelay="200ms" text="%action.addRow" /></tooltip>
+                        </Button>
+                        <Button styleClass="icon" onAction="#handleDeleteRow" fx:id="delRowButton" disable="true">
+                            <graphic>
+                                <SVGPath styleClass="svgIcon"
+                                         content="M5.042 10.417q-.188 0-.323-.146-.136-.146-.136-.313 0-.187.136-.323.135-.135.323-.135h9.916q.188 0 .323.146.136.146.136.312 0 .188-.136.323-.135.136-.323.136Z"
+                                />
+                            </graphic>
+                            <tooltip><Tooltip showDelay="200ms" text="%action.delRow" /></tooltip>
                         </Button>
                         <Separator orientation="VERTICAL" />
                         <Button styleClass="icon" onAction="#handleRefreshTable">
