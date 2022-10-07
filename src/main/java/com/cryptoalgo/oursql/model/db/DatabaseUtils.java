@@ -6,7 +6,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -71,9 +70,7 @@ public class DatabaseUtils {
             null,
             host,
             port,
-            // Combine host and database into a path without double slashes and similar issues
-            // that naive string concatenation could cause
-            Paths.get("/", path).toString(),
+            "/" + path,
             null,
             null
         );
