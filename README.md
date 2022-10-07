@@ -1,4 +1,5 @@
-# OurSQL
+# OurSQL • ![Test status](https://img.shields.io/github/workflow/status/cryptoAlgorithm/OurSQL/test?label=test&style=for-the-badge) ![Build status](https://img.shields.io/github/workflow/status/cryptoAlgorithm/OurSQL/build?style=for-the-badge)
+
 
 > An extensible graphical frontend to popular databases
 > including MongoDB, MySQL, PostgreSQL and others.
@@ -46,7 +47,7 @@ Want to level up your database experience? Download one of these
 builds now!
 
 ### Bleeding Edge
-[![](https://img.shields.io/github/workflow/status/cryptoAlgorithm/OurSQL/build?style=for-the-badge)](https://nightly.link/cryptoAlgorithm/OurSQL/workflows/build.yaml/main/OurSQL.jar.zip)
+[![Download nightly](https://img.shields.io/badge/download-nightly-blue?style=for-the-badge)](https://nightly.link/cryptoAlgorithm/OurSQL/workflows/build.yaml/main/OurSQL.jar.zip)
 
 These builds are hot from the oven, built from the latest commit on
 the `main` branch.
