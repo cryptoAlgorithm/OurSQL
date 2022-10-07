@@ -98,7 +98,10 @@ public class Home {
                 hasRes ? res.getKey().getValue() : null,
                 I18N.getString("dialog.execResult.title"),
                 I18N.getString("dialog.execResult.title"),
-                I18N.getString("dialog.execResult.body", res.getValue())
+                I18N.getString(hasRes
+                    ? "dialog.execResult.query.body"
+                    : "dialog.execResult.update.body", res.getValue()
+                )
             ).show());
         }).start();
     }
