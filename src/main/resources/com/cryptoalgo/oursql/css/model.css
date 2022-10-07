@@ -19,12 +19,6 @@ Text.header {
     -fx-padding: 0 -12;
 }
 
-.text-field {
-    -fx-padding: 4;
-}
-
 .text-field, .combo-box {
     -fx-max-width: Infinity;
-    -fx-background-radius: 4;
-    -fx-border-radius: 4;
 }

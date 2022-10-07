@@ -2,13 +2,16 @@
 
 .dialog-pane {
     -fx-background-color: -fx-control-inner-background;
+    -fx-min-width: 320;
 }
 
+/*noinspection CssInvalidPseudoSelector*/
 .dialog-pane:header .header-panel, .dialog-pane > .button-bar > .container {
     -fx-background-color: -fx-background;
     -fx-background-insets: 0;
 }
 
+/*noinspection CssInvalidPseudoSelector*/
 .dialog-pane:header .header-panel {
     -fx-border-width: 0 0 1 0;
     -fx-border-color: -fx-outer-border;
@@ -31,4 +34,8 @@
     -fx-min-width: 0;
     -fx-max-width: 0;
     -fx-graphic: none!important;
+}
+
+.text-field, .combo-box {
+    -fx-max-width: Infinity;
 }

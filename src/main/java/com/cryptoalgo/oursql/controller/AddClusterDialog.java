@@ -131,13 +131,13 @@ public class AddClusterDialog {
     private Cluster constructCluster() {
         return new Cluster(
             getDBUtils().scheme(),
-            host.getText(),
+            host.getText().trim(),
             database.getText(),
             authUser.getText().isBlank() ? null : authUser.getText(),
             port.getText().isEmpty()
                 ? getDBUtils().defaultPort()
                 : Integer.parseInt(port.getText()),
-            name.getText()
+            name.getText().trim()
         );
     }
 

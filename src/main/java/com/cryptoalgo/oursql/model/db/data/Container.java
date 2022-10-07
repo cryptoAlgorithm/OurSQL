@@ -3,6 +3,7 @@ package com.cryptoalgo.oursql.model.db.data;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * An immutable "box" for holding different types of data
@@ -55,10 +56,6 @@ public abstract class Container<T> {
     static {
         typeLookup.put("char", StringContainer.class);
         typeLookup.put("text", StringContainer.class);
-        typeLookup.put("varchar", StringContainer.class);
-        typeLookup.put("nchar", StringContainer.class);
-        typeLookup.put("ntext", StringContainer.class);
-        typeLookup.put("nvarchar", StringContainer.class);
         typeLookup.put("tid", TIDContainer.class);
         // Numerical types
         typeLookup.put("int", IntNumberContainer.class);
@@ -67,6 +64,19 @@ public abstract class Container<T> {
         // True-or-false types
         typeLookup.put("bool", BooleanContainer.class);
         typeLookup.put("bit", BitContainer.class);
+    }
+    static private final String[] hiddenTypes = new String[] { "tid" };
+
+    /**
+     * Get supported SQL types
+     * @return A string array of supported SQL types
+     */
+    public static String[] getTypes() {
+        // I love Java
+        return typeLookup.keySet()
+            .stream()
+            .filter(type -> !List.of(hiddenTypes).contains(type))
+            .toArray(String[]::new);
     }
 
     /**

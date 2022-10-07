@@ -2,10 +2,7 @@ package com.cryptoalgo.oursql.controller;
 
 import com.cryptoalgo.codable.DecodingException;
 import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
-import com.cryptoalgo.oursql.component.SQLCellFactory;
-import com.cryptoalgo.oursql.component.StyledAlert;
-import com.cryptoalgo.oursql.component.StyledInputDialog;
-import com.cryptoalgo.oursql.component.TableDialog;
+import com.cryptoalgo.oursql.component.*;
 import com.cryptoalgo.oursql.model.db.Cluster;
 import com.cryptoalgo.oursql.model.HomeViewModel;
 import com.cryptoalgo.oursql.model.db.data.Container;
@@ -39,7 +36,10 @@ import java.util.prefs.*;
 
 /**
  * Controller for the homepage of OurSQL. Corresponding
- * view is <code>home.fxml</code>
+ * view is <code>home.fxml</code>. Why is this file so huge?
+ * I have no idea. It shouldn't be, but I guess the lack of
+ * extensions in Java makes it hard to further split up the
+ * file into smaller bits.
  */
 public class Home {
     private static final Logger log = Logger.getLogger(Home.class.getName());
@@ -285,13 +285,9 @@ public class Home {
         dbTable.setEditable(true);
 
         // Listen to the selected row
-        dbTable.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
-            if (nv == null) {
-                delRowButton.setDisable(true);
-                return;
-            } else delRowButton.setDisable(false);
-            System.out.println(nv.get(nv.size()-1).toString());
-        });
+        dbTable.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) ->
+            delRowButton.setDisable(nv == null)
+        );
 
         // Listen and update table when columns change
         viewModel.tableColumns.addListener((ListChangeListener<String>) c -> {
@@ -421,6 +417,17 @@ public class Home {
             I18N.getString("dialog.dropTable.body", viewModel.selectedTableProperty().get())
         ).showAndWait().orElse(ButtonType.CANCEL) == ButtonType.CANCEL) return;
         viewModel.dropTable();
+    }
+
+    @FXML
+    private void handleAddColumn(ActionEvent evt) {
+        final var res = new AddColumnDialog().showAndWait().orElse(null);
+        if (res == null) return;
+        ((Button) evt.getSource()).setDisable(true);
+        new Thread(() -> {
+            viewModel.insertColumn(res.getKey(), res.getValue());
+            ((Button) evt.getSource()).setDisable(false);
+        }).start();
     }
 
     @FXML

@@ -1,6 +1,5 @@
 package com.cryptoalgo.oursql.component;
 
-import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.ui.UIUtils;
 import javafx.application.Platform;
 import javafx.scene.control.*;
@@ -40,11 +39,7 @@ public class PasswordDialog extends Dialog<String> {
         setHeaderText(header);
 
         // Add action buttons
-        ButtonType passwordButtonType = new ButtonType(
-            I18N.getString("action.ok"),
-            ButtonBar.ButtonData.OK_DONE
-        );
-        getDialogPane().getButtonTypes().addAll(passwordButtonType, ButtonType.CANCEL);
+        getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
         // Populate content
         passwordField = new PasswordField();
@@ -61,7 +56,7 @@ public class PasswordDialog extends Dialog<String> {
         Platform.runLater(passwordField::requestFocus);
 
         setResultConverter(dialogButton -> {
-            if (dialogButton == passwordButtonType) return passwordField.getText();
+            if (dialogButton == ButtonType.OK) return passwordField.getText();
             return null;
         });
     }

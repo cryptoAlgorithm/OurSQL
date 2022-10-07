@@ -435,13 +435,37 @@ public class HomeViewModel {
     }
 
     /**
+     * Inserts a column into the currently selected table.
+     */
+    public void insertColumn(@NotNull String name, @NotNull String type) {
+        assert currConn != null;
+        final var tID = setStatusJob(I18N.getString("status.insertColumn", name, selectedTable.get()));
+        try {
+            currConn.createStatement().execute(
+                String.format("""
+                    ALTER TABLE "%s"
+                    ADD COLUMN "%s" %s;
+                    """,
+                    selectedTable.get(),
+                    name,
+                    type
+                )
+            );
+        } catch (SQLException e) {
+            finishStatusJob(tID, e.getLocalizedMessage());
+            return;
+        }
+        finishStatusJob(tID);
+        updateTable(); // There's probably a better way to do this
+    }
+
+    /**
      * Create a table in a cluster
      * @param cluster Cluster to create table in
      * @param table Name of new table to create
      */
     public void createTable(@NotNull Cluster cluster, @NotNull String table) {
         if (!requestPassword(cluster)) return;
-        System.out.println(I18N.getString("status.createTable", table));
         final var tID = setStatusJob(I18N.getString("status.createTable", table));
         try (final var conn = DatabaseUtils.getConnection(
             cluster,

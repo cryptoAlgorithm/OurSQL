@@ -7,14 +7,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat: added bit container type&#10;feat: add and handle row remove button">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat: add column implemented&#10;fix: remove untested types, better to have less supported types than have random bugs">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/AddColumnDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/TableDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/TableDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/BitContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/BitContainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/dialog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/dialog.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/model.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/model.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
@@ -265,14 +268,7 @@
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
       <workItem from="1664633271631" duration="148499000" />
-      <workItem from="1665050486469" duration="41234000" />
-    </task>
-    <task id="LOCAL-00024" summary="patch (build): downgrade build target to Java 17">
-      <created>1664690576617</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1664690576617</updated>
+      <workItem from="1665050486469" duration="46687000" />
     </task>
     <task id="LOCAL-00025" summary="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage">
       <created>1664694691207</created>
@@ -610,7 +606,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665128066082</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="feat: added bit container type&#10;feat: add and handle row remove button&#10;fix (TableDialog): silly hack to get rid of expand button since that causes sizing issues">
+      <created>1665130988836</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1665130988836</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -629,8 +632,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix: close existing connection if one is open to prevent a build up of stale connections" />
-    <MESSAGE value="feat: greatly improved value editing experience&#10;feat: support integer SQL types" />
     <MESSAGE value="feat: greatly improved value editing experience&#10;feat (Container): support integer SQL types&#10;patch (Container): simplified abstraction by moving boilerplate code to parent class" />
     <MESSAGE value="feat: handle invalid input much more gracefully" />
     <MESSAGE value="chore (doc): fully complete JavaDoc&#10;and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc" />
@@ -654,7 +655,9 @@
     <MESSAGE value="fix: proper wording in dialog for updates" />
     <MESSAGE value="fix (TableDialog): constrain table dialog window properly" />
     <MESSAGE value="feat: added bit container type&#10;feat: add and handle row remove button" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: added bit container type&#10;feat: add and handle row remove button" />
+    <MESSAGE value="feat: added bit container type&#10;feat: add and handle row remove button&#10;fix (TableDialog): silly hack to get rid of expand button since that causes sizing issues" />
+    <MESSAGE value="feat: add column implemented&#10;fix: remove untested types, better to have less supported types than have random bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add column implemented&#10;fix: remove untested types, better to have less supported types than have random bugs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
