@@ -1,5 +1,7 @@
 package com.cryptoalgo.oursql.model.db.data;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * A container for the <code>boolean</code> SQL type.
  */
@@ -12,7 +14,17 @@ public class BooleanContainer extends Container<Boolean> {
     public BooleanContainer(String boxValue) { super(boxValue); }
 
     @Override
-    protected Boolean unbox(String val) { return val == null ? null : Boolean.valueOf(val); }
+    protected Boolean unbox(String val) {
+        // Manually parse the string to strictly only allow true or false values
+        return val == null ? null : val.equals("true") ? Boolean.TRUE : val.equals("false") ? false : null;
+    }
+
+    @Override
+    public String getFinalValue(@NotNull String input) {
+        if (!isValid(input)) return null;
+        if (!input.equals("true") && !input.equals("false")) return null;
+        else return input;
+    }
 
     @Override
     public boolean isValid(String value) {

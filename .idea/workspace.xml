@@ -7,19 +7,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch (SQLCellFactory): further streamline editing experience&#10;feat: supports boolean SQL type">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat: handle add row button&#10;patch: remove erroneous print statements&#10;patch: remove redundant CSS rules">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/test.yaml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/TableDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/oursql/model/db/data/BooleanContainerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/oursql/model/db/data/IntNumberContainerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/oursql/model/db/data/PlaceholderContainerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/oursql/model/db/data/StringContainerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/SQLCellFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/SQLCellFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledAlert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledInputDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/StyledInputDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/BooleanContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/BooleanContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/db/DatabaseUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/db/DatabaseUtilsTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,12 +29,12 @@
       <list>
         <option value="Record" />
         <option value="Interface" />
-        <option value="JUnit5 Test Class" />
         <option value="CSS File" />
         <option value="FxmlFile" />
         <option value="JavaFXApplication" />
         <option value="package-info" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -68,7 +66,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
-    "last_opened_file_path": "/Users/vinkwok/IdeaProjects/ourSQL/OurSQL/src/main/java/com/cryptoalgo/oursql/model/db/impl/mysql",
+    "last_opened_file_path": "/Users/vinkwok/IdeaProjects/ourSQL/OurSQL/.github/workflows",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -93,11 +91,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.github/workflows" />
       <recent name="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/impl/mysql" />
       <recent name="$PROJECT_DIR$/src/main/resources/locales" />
       <recent name="$PROJECT_DIR$/src/main/java/com/cryptoalgo/dal/mongoDB" />
       <recent name="$PROJECT_DIR$/src/main/resources/fonts" />
-      <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/oursql/css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img/splash" />
@@ -113,6 +111,7 @@
       <recent name="com.cryptoalgo" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.cryptoalgo.oursql.model.db.data" />
       <recent name="com.cryptoalgo.oursql.support" />
       <recent name="com.cryptoalgo.db" />
       <recent name="com.cryptoalgo.codable.preferencesCoder" />
@@ -122,22 +121,7 @@
       <recent name="com.cryptoalgo.oursql.oursql.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.OurSQL">
-    <configuration name="OurSQL" type="Application" factoryName="Application" temporary="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="liberica-18" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.OurSQL" />
-      <module name="OurSQL" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.oursql.oursql.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.PlaceholderContainerTest">
     <configuration name="OurSQL" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="17 (2)" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -153,83 +137,110 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DatabaseUtilsTest.numberTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All Tests" type="JUnit" factoryName="JUnit">
       <module name="OurSQL" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.db.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.cryptoalgo.db" />
-      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.db.DatabaseUtilsTest" />
-      <option name="METHOD_NAME" value="numberTests" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SecretsStoreTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PlaceholderContainerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OurSQL" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.oursql.support.ui.*" />
+          <option name="PATTERN" value="com.cryptoalgo.oursql.model.db.data.PlaceholderContainer" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.support" />
-      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.support.SecretsStoreTest" />
+      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.model.db.data" />
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.model.db.data.PlaceholderContainerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SecretsStoreTest.cipherKitchenSink" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PlaceholderContainerTest.isValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OurSQL" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.oursql.support.ui.*" />
+          <option name="PATTERN" value="com.cryptoalgo.oursql.model.db.data.PlaceholderContainer" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.support" />
-      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.support.SecretsStoreTest" />
-      <option name="METHOD_NAME" value="cipherKitchenSink" />
+      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.model.db.data" />
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.model.db.data.PlaceholderContainerTest" />
+      <option name="METHOD_NAME" value="isValid" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SecretsStoreTest.plainTextStore" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PlaceholderContainerTest.testToString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OurSQL" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.oursql.support.ui.*" />
+          <option name="PATTERN" value="com.cryptoalgo.oursql.model.db.data.PlaceholderContainer" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.support" />
-      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.support.SecretsStoreTest" />
-      <option name="METHOD_NAME" value="plainTextStore" />
+      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.model.db.data" />
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.model.db.data.PlaceholderContainerTest" />
+      <option name="METHOD_NAME" value="testToString" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlaceholderContainerTest.unbox" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OurSQL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cryptoalgo.oursql.model.db.data.PlaceholderContainer" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.model.db.data" />
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.model.db.data.PlaceholderContainerTest" />
+      <option name="METHOD_NAME" value="unbox" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StringContainerTest.testToSQLString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OurSQL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cryptoalgo.oursql.model.db.data.PlaceholderContainer" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.model.db.data" />
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.model.db.data.StringContainerTest" />
+      <option name="METHOD_NAME" value="testToSQLString" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.OurSQL" />
-      <item itemvalue="JUnit.DatabaseUtilsTest.numberTests" />
-      <item itemvalue="JUnit.SecretsStoreTest" />
-      <item itemvalue="JUnit.SecretsStoreTest.cipherKitchenSink" />
-      <item itemvalue="JUnit.SecretsStoreTest.plainTextStore" />
+      <item itemvalue="JUnit.All Tests" />
+      <item itemvalue="JUnit.PlaceholderContainerTest" />
+      <item itemvalue="JUnit.PlaceholderContainerTest.isValid" />
+      <item itemvalue="JUnit.PlaceholderContainerTest.testToString" />
+      <item itemvalue="JUnit.PlaceholderContainerTest.unbox" />
+      <item itemvalue="JUnit.StringContainerTest.testToSQLString" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.OurSQL" />
-        <item itemvalue="JUnit.DatabaseUtilsTest.numberTests" />
-        <item itemvalue="JUnit.SecretsStoreTest" />
-        <item itemvalue="JUnit.SecretsStoreTest.plainTextStore" />
-        <item itemvalue="JUnit.SecretsStoreTest.cipherKitchenSink" />
+        <item itemvalue="JUnit.PlaceholderContainerTest" />
+        <item itemvalue="JUnit.PlaceholderContainerTest.testToString" />
+        <item itemvalue="JUnit.PlaceholderContainerTest.isValid" />
+        <item itemvalue="JUnit.PlaceholderContainerTest.unbox" />
+        <item itemvalue="JUnit.StringContainerTest.testToSQLString" />
       </list>
     </recent_temporary>
   </component>
@@ -254,14 +265,7 @@
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
       <workItem from="1664633271631" duration="148499000" />
-      <workItem from="1665050486469" duration="25023000" />
-    </task>
-    <task id="LOCAL-00015" summary="patch (db): fix jdbc connection URI construction">
-      <created>1664332459654</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1664332459654</updated>
+      <workItem from="1665050486469" duration="28845000" />
     </task>
     <task id="LOCAL-00016" summary="feat (AddCluster): use new stage instead of TextInputDialog for add cluster dialog">
       <created>1664333634498</created>
@@ -599,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665109298539</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="feat: handle add row button&#10;patch: remove erroneous print statements&#10;patch: remove redundant CSS rules">
+      <created>1665114688476</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1665114688476</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,7 +629,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat (ui): revamped status system" />
     <MESSAGE value="patch (ui): revamped status system" />
     <MESSAGE value="feat (ui): background color and transitions for status" />
     <MESSAGE value="feat (splash): beautiful animated splash screen complete" />
@@ -643,7 +653,8 @@
     <MESSAGE value="feat (ui): display null values more friendlily" />
     <MESSAGE value="feat (ui): handle refresh button" />
     <MESSAGE value="patch (SQLCellFactory): further streamline editing experience&#10;feat: supports boolean SQL type" />
-    <option name="LAST_COMMIT_MESSAGE" value="patch (SQLCellFactory): further streamline editing experience&#10;feat: supports boolean SQL type" />
+    <MESSAGE value="feat: handle add row button&#10;patch: remove erroneous print statements&#10;patch: remove redundant CSS rules" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: handle add row button&#10;patch: remove erroneous print statements&#10;patch: remove redundant CSS rules" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

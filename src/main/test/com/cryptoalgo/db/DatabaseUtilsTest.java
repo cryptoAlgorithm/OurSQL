@@ -11,7 +11,7 @@ class DatabaseUtilsTest {
             .getConnection(
                 new Cluster(
                     "postgresql",
-                    "postgres",
+                    "localhost",
                     "postgres",
                     null,
                     5432,
@@ -19,10 +19,5 @@ class DatabaseUtilsTest {
                 ),
                 null
             );
-    }
-
-    @Test
-    void numberTests() {
-        System.out.println(Integer.parseInt("23234"));
     }
 }
