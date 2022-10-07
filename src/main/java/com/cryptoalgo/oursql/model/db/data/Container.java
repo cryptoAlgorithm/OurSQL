@@ -64,6 +64,8 @@ public abstract class Container<T> {
         typeLookup.put("int", IntNumberContainer.class);
         typeLookup.put("int4", IntNumberContainer.class);
         typeLookup.put("integer", IntNumberContainer.class);
+        // True-or-false types
+        typeLookup.put("bool", BooleanContainer.class);
     }
 
     /**
@@ -78,4 +80,14 @@ public abstract class Container<T> {
 
     @Override
     public abstract String toString();
+
+    /**
+     * Get an escaped string representation of the value in this container.
+     * Value contained should be escaped and ready for insertion into a SQL query.
+     * @return Escaped string representation of the value in this container
+     */
+    public String toSQLString() {
+        if (toString() == null) return "null";
+        return "'" + toString().replaceAll("'", "''") + "'";
+    }
 }

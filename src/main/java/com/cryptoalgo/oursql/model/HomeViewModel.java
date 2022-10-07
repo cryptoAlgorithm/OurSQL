@@ -212,7 +212,10 @@ public class HomeViewModel {
     @NotNull
     private Container<?> getSQLContainer(String type, String data) {
         final var cont = Container.getInstance(type);
-        if (cont == null) return new PlaceholderContainer();
+        if (cont == null) {
+            System.out.println(type);
+            return new PlaceholderContainer();
+        }
         try {
             return Objects.requireNonNull(cont.getConstructor(String.class)).newInstance(data);
         } catch (Exception e) {
@@ -327,8 +330,7 @@ public class HomeViewModel {
         // string representation of the new value. We do this to ensure the value
         // in the table after updating is actually what was added to the database.
         final var newContainer = getSQLContainer(columnTypes.get(colIdx), nv);
-        nv = newContainer.toString();
-        if (nv != null) nv = "'" + nv.replaceAll("'", "''") + "'";
+        nv = newContainer.toSQLString();
 
         log.info("Attempting edit: col=" + col + ", nv=" + nv);
         final var tID = setStatusJob(I18N.getString("status.commitUpdate"));

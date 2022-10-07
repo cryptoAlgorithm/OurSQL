@@ -6,6 +6,8 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
  * A {@link javafx.scene.control.TableView TableView} cell factory for SQL tables.
@@ -14,6 +16,7 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
     private TextField textField;
     private boolean escapePressed = false;
     private final int col;
+    private static final Paint initialCol = Color.grayRgb(255, 0.85);
 
     /**
      * Create an instance of a <code>SQLCellFactory</code>, providing
@@ -45,7 +48,7 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
     public void cancelEdit() {
         if (escapePressed) {
             super.cancelEdit();
-            setOriginalText(); // Restore the original text in the view
+            setFieldText(getString()); // Restore the original text in the view
         } else {
             // Interpret this as a commit instead
             commitEdit(textField.getText());
@@ -64,7 +67,6 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
             }
         } else {
             commitText = getContainer().getFinalValue(textField.getText());
-            System.out.println(commitText);
             // Invalid input or no change
             if (commitText == null || commitText.equals(getString())) {
                 escapePressed = true; cancelEdit();
@@ -86,7 +88,10 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
                 if (textField != null) textField.setText(getString());
                 setText(null);
                 setGraphic(textField);
-            } else setOriginalText();
+            } else {
+                System.out.println("here " + getString());
+                setFieldText(getString());
+            }
         }
     }
 
@@ -98,19 +103,27 @@ public class SQLCellFactory extends TableCell<ObservableList<Container<?>>, Stri
             escapePressed = t.getCode() == KeyCode.ESCAPE;
             if (escapePressed) cancelEdit();
         });
-        textField.setTextFormatter(new TextFormatter<>(f -> getContainer().isValid(f.getText()) ? f: null));
+        textField.setTextFormatter(new TextFormatter<>(f ->
+             !f.isAdded() || getContainer().isValid(f.getControlNewText()) ? f: null
+        ));
     }
 
-    private void setOriginalText() {
-        setText(getUserFacingString());
-        if (getString() == null) getStyleClass().add("null");
-        else getStyleClass().remove("null");
+    private void setFieldText(String text) {
+        if (text == null) {
+            //getStyleClass().add("null");
+            text = "<null>";
+            setTextFill(Color.grayRgb(255, 0.5));
+            System.out.println("is null");
+        }
+        else {
+            setTextFill(initialCol);
+            System.out.println("not null");
+            //getStyleClass().remove("null");
+        }
+        setText(text);
         setGraphic(null);
         getStyleClass().remove("editing");
     }
 
-    private String getUserFacingString() { return getItem() == null ? "<null>" : getItem(); }
-    private String getString() {
-        return getItem();
-    }
+    private String getString() { return getItem(); }
 }
