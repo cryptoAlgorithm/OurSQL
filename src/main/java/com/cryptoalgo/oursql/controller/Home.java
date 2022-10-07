@@ -5,6 +5,7 @@ import com.cryptoalgo.codable.preferencesCoder.PreferencesEncoder;
 import com.cryptoalgo.oursql.component.SQLCellFactory;
 import com.cryptoalgo.oursql.component.StyledAlert;
 import com.cryptoalgo.oursql.component.StyledInputDialog;
+import com.cryptoalgo.oursql.component.TableDialog;
 import com.cryptoalgo.oursql.model.db.Cluster;
 import com.cryptoalgo.oursql.model.HomeViewModel;
 import com.cryptoalgo.oursql.model.db.data.Container;
@@ -27,10 +28,12 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.prefs.*;
 
@@ -43,6 +46,10 @@ public class Home {
 
     private static final HomeViewModel viewModel = new HomeViewModel();
 
+    @FXML
+    private TextField statementField;
+    @FXML
+    private Button execStatementButton;
     @FXML
     private Accordion clusterList;
     @FXML
@@ -66,6 +73,34 @@ public class Home {
             log.severe("IOException when showing add cluster dialog: " + e.getLocalizedMessage());
             e.printStackTrace();
         }
+    }
+
+    private void execStatement(String statement) {
+        execStatementButton.setDisable(true);
+        new Thread(() -> {
+            final Pair<Pair<List<String>, ObservableList<ObservableList<Container<?>>>>, Integer> res;
+            try {
+                res = viewModel.runQuery(statement);
+            } catch (SQLException e) {
+                Platform.runLater(() -> new StyledAlert(
+                    Alert.AlertType.ERROR,
+                    I18N.getString("dialog.execFail.title"),
+                    I18N.getString("dialog.execFail.header"),
+                    e.getLocalizedMessage()
+                ).show());
+                return;
+            } finally {
+                Platform.runLater(() -> execStatementButton.setDisable(false));
+            }
+            final var hasRes = res.getKey() != null;
+            Platform.runLater(() -> new TableDialog(
+                hasRes ? res.getKey().getKey() : null,
+                hasRes ? res.getKey().getValue() : null,
+                I18N.getString("dialog.execResult.title"),
+                I18N.getString("dialog.execResult.title"),
+                I18N.getString("dialog.execResult.body", res.getValue())
+            ).show());
+        }).start();
     }
 
     /*==================================================
@@ -328,11 +363,20 @@ public class Home {
         });
     }
 
+    /**
+     * Inits the query field and handles button and field actions
+     */
+    private void initQuery() {
+        statementField.setOnAction(ev -> execStatement(statementField.getText()));
+        execStatementButton.setOnAction(ev -> execStatement(statementField.getText()));
+    }
+
     @FXML
     private void initialize() {
         initClusterList();
         initClusterTip();
         initTableView();
+        initQuery();
         initStatus();
 
         // Bind visible and managed properties of main content and tip

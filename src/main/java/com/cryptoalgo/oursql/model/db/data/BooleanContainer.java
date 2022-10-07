@@ -16,7 +16,14 @@ public class BooleanContainer extends Container<Boolean> {
     @Override
     protected Boolean unbox(String val) {
         // Manually parse the string to strictly only allow true or false values
-        return val == null ? null : val.equals("true") ? Boolean.TRUE : val.equals("false") ? false : null;
+        // for some reason the database randomly decided to return "t" and "f" instead of "true" and "false"
+        return val == null
+            ? null
+            : (val.equalsIgnoreCase("true") || val.equalsIgnoreCase("t"))
+            ? Boolean.TRUE
+            : (val.equalsIgnoreCase("false") || val.equalsIgnoreCase("f"))
+            ? false
+            : null;
     }
 
     @Override

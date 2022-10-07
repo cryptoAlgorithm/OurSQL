@@ -79,8 +79,8 @@
             <VBox fx:id="mainContentContainer" visible="false" managed="false" VBox.vgrow="ALWAYS" spacing="4">
                 <VBox styleClass="tableHeaderContainer">
                     <HBox styleClass="queryContainer">
-                        <TextField fx:id="queryField" promptText="%prompt.query" HBox.hgrow="ALWAYS" />
-                        <Button styleClass="icon">
+                        <TextField fx:id="statementField" promptText="%prompt.query" HBox.hgrow="ALWAYS" />
+                        <Button styleClass="icon" fx:id="execStatementButton">
                             <graphic>
                                 <SVGPath styleClass="svgIcon"
                                          content="M16.875 27.417q-.625.416-1.25.062T15 26.375V13.542q0-.75.625-1.104.625-.355 1.25.062l10.083 6.458q.542.375.542 1t-.542 1Zm-.458-7.459Zm0 6.042L26 19.958l-9.583-6.041Z"

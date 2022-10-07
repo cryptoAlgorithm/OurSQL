@@ -17,6 +17,7 @@ import javafx.beans.property.*;
 import javafx.collections.*;
 import javafx.scene.control.Alert;
 import javafx.scene.paint.Color;
+import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,10 +27,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
@@ -256,6 +254,25 @@ public class HomeViewModel {
     }
 
     /**
+     * Add rows from a ResultSet to a 2D observable list
+     * @param r Reference to the observable list of rows to add to
+     * @param rs Result set to read from
+     * @throws SQLException If retrieving values from the ResultSet failed
+     */
+    private void addRowsFromResult(
+        ObservableList<ObservableList<Container<?>>> r,
+        ResultSet rs
+    ) throws SQLException {
+        final var meta = rs.getMetaData();
+        while (rs.next()) {
+            final ObservableList<Container<?>> row = FXCollections.observableArrayList();
+            for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++)
+                row.add(getSQLContainer(meta.getColumnTypeName(i), rs.getString(i)));
+            r.add(row);
+        }
+    }
+
+    /**
      * Fetch the columns and rows of the currently selected table
      */
     public void updateTable() {
@@ -276,20 +293,13 @@ public class HomeViewModel {
             columnTypes.clear();
             rows.clear();
 
-            // Firstly add column names as first row
+            // Add column names and types to their respective arrays
             for (int i = 1; i <= meta.getColumnCount(); i++) {
                 tableColumns.add(meta.getColumnName(i));
                 columnTypes.add(meta.getColumnTypeName(i));
             }
-            // Then add all
-            while (r.next()) {
-                final ObservableList<Container<?>> row = FXCollections.observableArrayList();
-                // TIL var exists
-                for (var c = 1; c <= meta.getColumnCount(); c++)
-                    row.add(getSQLContainer(columnTypes.get(c-1), r.getString(c)));
-
-                rows.add(row);
-            }
+            // Then add all the rows
+            addRowsFromResult(rows, r);
             r.close();
         } catch (SQLException e) {
             finishStatusJob(stID, e.getLocalizedMessage());
@@ -301,15 +311,38 @@ public class HomeViewModel {
     /**
      * Run a SQL query and return the resultSet
      * @param query SQL query to run
-     * @return The ResultSet of the query
-     * @throws SQLException If the query failed
+     * @return A pair containing a pair of the column names and types and a list of rows,
+     *         and the number of results updated if the operation was an update operation
+     *         or the length of the result set if the statement returned one
+     * @throws SQLException If the statement failed to execute
      */
-    private ResultSet runQuery(String query) throws SQLException {
+    public Pair<Pair<List<String>, ObservableList<ObservableList<Container<?>>>>, Integer> runQuery(
+        String query
+    ) throws SQLException {
         assert currConn != null;
-        final var statement = currConn.createStatement();
-        statement.execute(query);
-        statement.closeOnCompletion();
-        return currConn.createStatement().executeQuery(query);
+        final var tID = setStatusJob(I18N.getString("status.runQuery"));
+        try (final var statement = currConn.createStatement()) {
+            if (statement.execute(query)) {
+                final var r = statement.getResultSet();
+                final var meta = r.getMetaData();
+                final var cols = new ArrayList<String>();
+                final ObservableList<ObservableList<Container<?>>> resultRows
+                    = FXCollections.observableArrayList();
+                // Add column names to an array
+                for (int i = 1; i <= meta.getColumnCount(); i++) cols.add(meta.getColumnName(i));
+                // Then add the rows
+                addRowsFromResult(resultRows, r);
+                r.close();
+                finishStatusJob(tID);
+                return new Pair<>(new Pair<>(cols, resultRows), resultRows.size());
+            } else {
+                updateTable(); // The statement might have updated something
+                return new Pair<>(null, statement.getUpdateCount());
+            }
+        } catch (SQLException e) {
+            finishStatusJob(tID, e.getLocalizedMessage());
+            throw e;
+        }
     }
 
     /**
