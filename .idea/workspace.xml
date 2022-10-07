@@ -7,8 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="fix (tests): @Ignore connection test&#10;The test only works when localhost instance of PostgreSQL is running.">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/build.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build.yaml" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch: do not run tests during build action">
+      <change beforePath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/db/DatabaseUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/db/DatabaseUtilsTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +112,7 @@
       <recent name="com.cryptoalgo.oursql.oursql.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DatabaseUtilsTest.testGetConnectionURI">
+  <component name="RunManager" selected="JUnit.DatabaseUtilsTest.testPostgreSQL">
     <configuration name="OurSQL" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="17 (2)" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -149,6 +149,22 @@
       <option name="PACKAGE_NAME" value="com.cryptoalgo.db" />
       <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.db.DatabaseUtilsTest" />
       <option name="METHOD_NAME" value="testGetConnectionURI" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DatabaseUtilsTest.testPostgreSQL" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OurSQL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cryptoalgo.db.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.cryptoalgo.db" />
+      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.db.DatabaseUtilsTest" />
+      <option name="METHOD_NAME" value="testPostgreSQL" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -201,37 +217,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlaceholderContainerTest.unbox" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="OurSQL" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cryptoalgo.oursql.model.db.data.PlaceholderContainer" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.cryptoalgo.oursql.model.db.data" />
-      <option name="MAIN_CLASS_NAME" value="com.cryptoalgo.oursql.model.db.data.PlaceholderContainerTest" />
-      <option name="METHOD_NAME" value="unbox" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="JUnit.All Tests" />
       <item itemvalue="JUnit.DatabaseUtilsTest.testGetConnectionURI" />
+      <item itemvalue="JUnit.DatabaseUtilsTest.testPostgreSQL" />
       <item itemvalue="JUnit.PlaceholderContainerTest" />
       <item itemvalue="JUnit.PlaceholderContainerTest.isValid" />
       <item itemvalue="JUnit.PlaceholderContainerTest.testToString" />
-      <item itemvalue="JUnit.PlaceholderContainerTest.unbox" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DatabaseUtilsTest.testPostgreSQL" />
         <item itemvalue="JUnit.DatabaseUtilsTest.testGetConnectionURI" />
         <item itemvalue="JUnit.PlaceholderContainerTest" />
         <item itemvalue="JUnit.PlaceholderContainerTest.testToString" />
         <item itemvalue="JUnit.PlaceholderContainerTest.isValid" />
-        <item itemvalue="JUnit.PlaceholderContainerTest.unbox" />
       </list>
     </recent_temporary>
   </component>
@@ -256,21 +256,7 @@
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
       <workItem from="1664633271631" duration="148499000" />
-      <workItem from="1665050486469" duration="29538000" />
-    </task>
-    <task id="LOCAL-00018" summary="feat (AddCluster): validate fields and add test connection&#10;Note: Testing mongoDB connection doesn't work yet">
-      <created>1664591208022</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1664591208022</updated>
-    </task>
-    <task id="LOCAL-00019" summary="feat (AddCluster): complete database testing&#10;Works for both PostgreSQL and MySQL (untested)">
-      <created>1664631888244</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1664631888244</updated>
+      <workItem from="1665050486469" duration="29728000" />
     </task>
     <task id="LOCAL-00020" summary="patch: UI QOL">
       <created>1664632517237</created>
@@ -601,7 +587,21 @@
       <option name="project" value="LOCAL" />
       <updated>1665118945736</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="patch (build): do not run tests during build">
+      <created>1665118999786</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1665118999786</updated>
+    </task>
+    <task id="LOCAL-00068" summary="patch: do not run tests during build action">
+      <created>1665119011523</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1665119011523</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -620,8 +620,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat (splash): beautiful animated splash screen complete" />
-    <MESSAGE value="patch (ui): set all scenes to have transparent fill to prevent a flash of white before the content loads" />
     <MESSAGE value="patch (ui): show pop up with status when status text clicked&#10;chore (SpringInterpolator): add JavaDoc comments, remove debugging prints" />
     <MESSAGE value="feat (ui): initial value update support" />
     <MESSAGE value="fix (ui): better current table handing&#10;clear current table if fetching did not succeed" />
@@ -645,7 +643,9 @@
     <MESSAGE value="feat: handle add row button&#10;patch: remove erroneous print statements&#10;patch: remove redundant CSS rules" />
     <MESSAGE value="chore (tests): write tests for all non-abstract containers&#10;&#10;patch: update plugin versions, add maven surefire plugin for running JUnit tests&#10;chore (test): add tests GitHub action" />
     <MESSAGE value="fix (tests): @Ignore connection test&#10;The test only works when localhost instance of PostgreSQL is running." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix (tests): @Ignore connection test&#10;The test only works when localhost instance of PostgreSQL is running." />
+    <MESSAGE value="patch (build): do not run tests during build" />
+    <MESSAGE value="patch: do not run tests during build action" />
+    <option name="LAST_COMMIT_MESSAGE" value="patch: do not run tests during build action" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

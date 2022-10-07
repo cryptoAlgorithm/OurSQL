@@ -2,13 +2,13 @@ package com.cryptoalgo.db;
 
 import com.cryptoalgo.oursql.model.db.Cluster;
 import com.cryptoalgo.oursql.model.db.DatabaseUtils;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseUtilsTest {
-    @Ignore("Only works when localhost instance of PostgreSQL is running")
+    @Disabled("Only works when localhost instance of PostgreSQL is running")
     @Test
     void testPostgreSQL() {
         assertDoesNotThrow(() -> DatabaseUtils
