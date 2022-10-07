@@ -1,17 +1,46 @@
+/* Custom fonts */
+/* IBM Plex Mono */
+@font-face {
+    -fx-font-family: "IBM Plex Mono";
+    src: url(../fonts/IBMPlexMono.ttf);
+}
+/* IBM Plex Sans */
+@font-face {
+    -fx-font-family: "IBM Plex Sans";
+    -fx-font-weight: 700;
+    src: url(../fonts/IBMPlexSans-Bold.ttf);
+}
+@font-face {
+    /* Change the name for the medium weight font
+       because for some silly reason font-weights between
+       400 adn 700 are simply ignored */
+    -fx-font-family: "IBM Plex Sans Medium";
+    src: url(../fonts/IBMPlexSans-Medium.ttf);
+}
+@font-face {
+    -fx-font-family: "IBM Plex Sans";
+    -fx-font-weight: 400;
+    src: url(../fonts/IBMPlexSans-Regular.ttf);
+}
+
 .label.h1 {
     -fx-font-size: 32;
     -fx-text-fill: -fx-text-contrast-color;
+    -fx-font-weight: 700;
 }
 .label.h2 {
     -fx-font-size: 24;
     -fx-text-fill: -fx-text-contrast-color;
+    -fx-font-weight: 700;
 }
 .label.h3 {
     -fx-font-size: 20;
     -fx-text-fill: -fx-text-contrast-color;
+    -fx-font-weight: 700;
 }
 .label.h4 {
     -fx-font-size: 16;
+    -fx-font-family: "IBM Plex Sans Medium";
 }
 .label.h5 {
     -fx-font-size: 14;

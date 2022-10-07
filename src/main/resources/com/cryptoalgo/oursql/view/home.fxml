@@ -47,7 +47,7 @@
                 </graphic>
                 <tooltip><Tooltip text="%label.help" /></tooltip>
             </Button>
-            <Button minWidth="-Infinity" styleClass="icon, outlined, last">
+            <Button minWidth="-Infinity" styleClass="icon, outlined, last" onAction="#handleOpenSettings">
                 <graphic>
                     <SVGPath
                         styleClass="svgIcon"

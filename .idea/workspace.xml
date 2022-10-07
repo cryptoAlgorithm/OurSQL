@@ -7,17 +7,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat: add column implemented&#10;fix: remove untested types, better to have less supported types than have random bugs">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/AddColumnDialog.java" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (settings): implement settings&#10;feat (ui): use IBM Plex Sans font">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/About.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/SettingsDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/SettingsViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/FloatNumberContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/fonts/IBMPlexSans-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/fonts/IBMPlexSans-Medium.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/fonts/IBMPlexSans-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/about.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/settings.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/db/data/Container.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/I18N.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/support/I18N.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/dialog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/dialog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/model.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/model.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/typography.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/css/typography.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/home.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
     </list>
@@ -32,10 +37,10 @@
         <option value="Record" />
         <option value="Interface" />
         <option value="CSS File" />
-        <option value="FxmlFile" />
         <option value="JavaFXApplication" />
         <option value="package-info" />
         <option value="JUnit5 Test Class" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -103,9 +108,9 @@
       <recent name="$PROJECT_DIR$/src/main/resources/fonts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/fonts" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img/splash" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img" />
-      <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/fonts" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/img/db" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql" />
     </key>
@@ -122,6 +127,7 @@
       <recent name="com.cryptoalgo.codable.preferencesCoder" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.cryptoalgo.oursql.controller" />
       <recent name="com.cryptoalgo.oursql.model.db.data" />
       <recent name="com.cryptoalgo.oursql.oursql.controller" />
     </key>
@@ -268,14 +274,7 @@
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
       <workItem from="1664633271631" duration="148499000" />
-      <workItem from="1665050486469" duration="46687000" />
-    </task>
-    <task id="LOCAL-00025" summary="feat (SecretsStore): added utility class for encrypted/plaintext secrets storage">
-      <created>1664694691207</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1664694691207</updated>
+      <workItem from="1665050486469" duration="58389000" />
     </task>
     <task id="LOCAL-00026" summary="feat: allow removing clusters by right-clicking">
       <created>1664695907371</created>
@@ -613,7 +612,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665130988836</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="feat: add column implemented&#10;fix: remove untested types, better to have less supported types than have random bugs">
+      <created>1665137575328</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1665137575328</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -632,7 +638,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat: greatly improved value editing experience&#10;feat (Container): support integer SQL types&#10;patch (Container): simplified abstraction by moving boilerplate code to parent class" />
     <MESSAGE value="feat: handle invalid input much more gracefully" />
     <MESSAGE value="chore (doc): fully complete JavaDoc&#10;and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc" />
     <MESSAGE value="chore (doc): fully complete JavaDoc&#10;...and by fully complete I mean it - every single method/property/class &gt;= package visibility has concise JavaDoc&#10;chore (doc): Manually build JavaDoc into /docs folder for GitHub pages" />
@@ -657,7 +662,8 @@
     <MESSAGE value="feat: added bit container type&#10;feat: add and handle row remove button" />
     <MESSAGE value="feat: added bit container type&#10;feat: add and handle row remove button&#10;fix (TableDialog): silly hack to get rid of expand button since that causes sizing issues" />
     <MESSAGE value="feat: add column implemented&#10;fix: remove untested types, better to have less supported types than have random bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add column implemented&#10;fix: remove untested types, better to have less supported types than have random bugs" />
+    <MESSAGE value="feat (settings): implement settings&#10;feat (ui): use IBM Plex Sans font" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat (settings): implement settings&#10;feat (ui): use IBM Plex Sans font" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

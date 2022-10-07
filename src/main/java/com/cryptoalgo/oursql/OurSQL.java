@@ -1,5 +1,6 @@
 package com.cryptoalgo.oursql;
 
+import com.cryptoalgo.oursql.model.SettingsViewModel;
 import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.ui.Colors;
 import com.cryptoalgo.oursql.support.ui.SpringInterpolator;
@@ -38,11 +39,6 @@ import java.io.IOException;
  * files contained herein were created and edited fully by hand.
  */
 public class OurSQL extends Application {
-    @Override
-    public void init() {
-        Font.loadFont(OurSQL.class.getResourceAsStream("fonts/IBMPlexMono.ttf"), 12);
-    }
-
     private static final int SPLASH_WIDTH = 575;
     private static final int SPLASH_HEIGHT = 320;
 
@@ -154,11 +150,15 @@ public class OurSQL extends Application {
     public void start(Stage stage) {
         setIcons(stage);
 
-        // Show splash screen first
-        Stage splashStage = createSplash();
+        // Show splash screen first (if enabled)
+        final var showSplash = SettingsViewModel.splashEnabledProperty().get();
+        final Stage splashStage;
+        if (showSplash) splashStage = createSplash();
+        else splashStage = null;
 
         new Thread(() -> {
-            try { Thread.sleep(4000); } catch (InterruptedException ignored) {}
+            // Probably not the most ideal way to skip the splash screen but this works
+            try { Thread.sleep(showSplash ? 4000 : 0); } catch (InterruptedException ignored) {}
             Scene scene;
             try { scene = new Scene(UIUtils.loadFXML("home")); } catch (IOException e) {
                 e.printStackTrace();
@@ -167,16 +167,15 @@ public class OurSQL extends Application {
             scene.setFill(Color.TRANSPARENT);
             stage.setTitle(I18N.getString("app.title"));
             stage.setWidth(850); stage.setHeight(520);
+            Platform.runLater(() -> stage.setScene(scene)); // top 10 efficient code of all time /s
 
             // Fade out old stage
-            final var fade = new FadeTransition(Duration.millis(400), splashStage.getScene().getRoot());
-            fade.setToValue(0);
-            fade.play();
-            fade.setOnFinished(e -> Platform.runLater(() -> {
-                stage.setScene(scene);
-                stage.show();
-                splashStage.close();
-            }));
+            if (showSplash) {
+                final var fade = new FadeTransition(Duration.millis(400), splashStage.getScene().getRoot());
+                fade.setToValue(0);
+                fade.play();
+                fade.setOnFinished(e -> Platform.runLater(stage::show));
+            } else Platform.runLater(stage::show);
         }).start();
     }
 

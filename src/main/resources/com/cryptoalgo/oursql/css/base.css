@@ -32,7 +32,7 @@
 .button:hover, .menu-button:hover, .toggle-button:selected:hover { -fx-background-color: derive(-fx-accent, -10%) }
 .button.outlined, .menu-button.outlined, .toggle-button {
     -fx-border-width: 1;
-    -fx-border-radius: 7;
+    -fx-border-radius: 4;
     -fx-background-color: #0000;
     -fx-border-color: derive(-fx-accent, -10%);
     -fx-text-fill: #fff;
@@ -78,6 +78,8 @@
 }
 
 .root {
+    -fx-font-family: "IBM Plex Sans";
+
     -fx-background: #262626;
     -fx-base: -fx-control-inner-background;
 
@@ -127,7 +129,7 @@
 }
 .label.accentedHeader {
     -fx-padding: 8 12;
-    -fx-font-weight: 700;
+    -fx-font-family: "IBM Plex Sans Medium";
 }
 .svgIcon {
     -fx-fill: -fx-text-contrast-color;
@@ -272,6 +274,9 @@
 .check-box > .box { -fx-background-color: #171717 }
 .check-box > .box > .mark {
     -fx-shape: "M9 16.17L5.53 12.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L9 16.17z"
+}
+.check-box:selected > .box > .mark {
+    -fx-background-color: -fx-accent-bright;
 }
 
 /*******************************************************************************

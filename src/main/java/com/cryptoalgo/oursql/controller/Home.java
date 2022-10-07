@@ -167,7 +167,7 @@ public class Home {
                     t.getSelectionModel().select(0);
 
                     // hack to fix height of list
-                    t.prefHeightProperty().bind(Bindings.multiply(Bindings.size(tables), 28));
+                    t.prefHeightProperty().bind(Bindings.multiply(Bindings.size(tables), 30));
 
                     p.setContent(t);
                 } else p.setExpanded(false);
@@ -453,5 +453,13 @@ public class Home {
             final var row = dbTable.getSelectionModel().getSelectedItem();
             viewModel.deleteRow(row.get(row.size()-1).toString());
         }).start();
+    }
+
+    @FXML
+    private void handleOpenSettings() {
+        try { SettingsDialog.show(); } catch (IOException e) {
+            log.severe("IOException when showing settings dialog: " + e.getLocalizedMessage());
+            e.printStackTrace();
+        }
     }
 }

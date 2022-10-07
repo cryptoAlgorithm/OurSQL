@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Button?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.cryptoalgo.oursql.controller.About"
+      alignment="CENTER" spacing="12" stylesheets="@../css/base.css">
+    <padding><Insets topRightBottomLeft="20" /></padding>
+    <ImageView fitHeight="128" fitWidth="128" preserveRatio="true">
+        <VBox.margin><Insets top="14" /></VBox.margin>
+        <Image url="@../img/appIcon.png"/>
+    </ImageView>
+    <Label text="%app.title" styleClass="h3" />
+    <Label text="%app.desc" />
+
+    <!-- About container -->
+    <VBox spacing="2" alignment="CENTER">
+        <Label text="%label.aboutProgrammer" styleClass="h4" />
+        <!-- Hardcoding the wrapping width to 300 - 20*2, no time to find a better solution -->
+        <Text wrappingWidth="260" text="%aboutProgrammer" textAlignment="CENTER" />
+    </VBox>
+
+    <Button styleClass="outlined" text="%aboutProgrammer.swiftcordCTA" maxWidth="Infinity"
+            onAction="#handleSwiftcordCTA" />
+</VBox>

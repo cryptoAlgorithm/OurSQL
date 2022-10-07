@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          stylesheets="@../css/model.css"
+          fx:controller="com.cryptoalgo.oursql.controller.SettingsDialog"
+          prefHeight="200.0" prefWidth="450.0" hgap="16" vgap="10">
+    <padding><Insets topRightBottomLeft="16" /></padding>
+    <Label text="%label.settings" styleClass="h2" />
+    <Label text="%label.lang" GridPane.rowIndex="1" />
+    <ComboBox fx:id="langCombo" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="ALWAYS" />
+    <Label text="%label.showSplash" GridPane.rowIndex="2" />
+    <CheckBox fx:id="showSplashCheckbox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+    <!-- Act as a filler to take up remaining v space -->
+    <Pane GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+
+    <Button text="%label.about" styleClass="outlined" onAction="#showAbout"
+            GridPane.rowIndex="4" />
+    <Button text="%action.ok" onAction="#handleClose"
+            GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.halignment="RIGHT" />
+</GridPane>
