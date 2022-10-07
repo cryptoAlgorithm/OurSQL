@@ -23,7 +23,7 @@ jobs:
         distribution: 'liberica'
         cache: maven
     - name: Build and package with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -DskipTests -B package --file pom.xml
       
     - name: Upload JAR to build artifacts
       uses: actions/upload-artifact@v3.1.0

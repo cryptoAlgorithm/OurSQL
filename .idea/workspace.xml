@@ -7,10 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="chore (tests): write tests for all non-abstract containers&#10;&#10;patch: update plugin versions, add maven surefire plugin for running JUnit tests&#10;chore (test): add tests GitHub action">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/db/DatabaseUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/cryptoalgo/db/DatabaseUtilsTest.java" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="fix (tests): @Ignore connection test&#10;The test only works when localhost instance of PostgreSQL is running.">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/build.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,14 +256,7 @@
       <workItem from="1664351636325" duration="21985000" />
       <workItem from="1664507113433" duration="30254000" />
       <workItem from="1664633271631" duration="148499000" />
-      <workItem from="1665050486469" duration="29457000" />
-    </task>
-    <task id="LOCAL-00017" summary="feat (AddCluster): partial Controller implementation">
-      <created>1664452310085</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1664452310085</updated>
+      <workItem from="1665050486469" duration="29538000" />
     </task>
     <task id="LOCAL-00018" summary="feat (AddCluster): validate fields and add test connection&#10;Note: Testing mongoDB connection doesn't work yet">
       <created>1664591208022</created>
@@ -603,7 +594,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665118353451</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="fix (tests): @Ignore connection test&#10;The test only works when localhost instance of PostgreSQL is running.">
+      <created>1665118945736</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1665118945736</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -622,7 +620,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat (ui): background color and transitions for status" />
     <MESSAGE value="feat (splash): beautiful animated splash screen complete" />
     <MESSAGE value="patch (ui): set all scenes to have transparent fill to prevent a flash of white before the content loads" />
     <MESSAGE value="patch (ui): show pop up with status when status text clicked&#10;chore (SpringInterpolator): add JavaDoc comments, remove debugging prints" />
@@ -647,7 +644,8 @@
     <MESSAGE value="patch (SQLCellFactory): further streamline editing experience&#10;feat: supports boolean SQL type" />
     <MESSAGE value="feat: handle add row button&#10;patch: remove erroneous print statements&#10;patch: remove redundant CSS rules" />
     <MESSAGE value="chore (tests): write tests for all non-abstract containers&#10;&#10;patch: update plugin versions, add maven surefire plugin for running JUnit tests&#10;chore (test): add tests GitHub action" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore (tests): write tests for all non-abstract containers&#10;&#10;patch: update plugin versions, add maven surefire plugin for running JUnit tests&#10;chore (test): add tests GitHub action" />
+    <MESSAGE value="fix (tests): @Ignore connection test&#10;The test only works when localhost instance of PostgreSQL is running." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix (tests): @Ignore connection test&#10;The test only works when localhost instance of PostgreSQL is running." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
