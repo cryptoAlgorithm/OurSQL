@@ -9,6 +9,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -45,7 +46,10 @@ public class TableDialog extends Dialog<String> {
                 t.getColumns().add(cl);
             }
             setResizable(true);
-            getDialogPane().setMinWidth(400); getDialogPane().setMinHeight(300);
+            final Stage s = (Stage) getDialogPane().getScene().getWindow();
+            s.setMinWidth(400); s.setMinHeight(300);
+            getDialogPane().setMinWidth(400);
+            getDialogPane().setPrefWidth(600); getDialogPane().setPrefHeight(400);
         }
         setTitle(title);
         setHeaderText(header);
