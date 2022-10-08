@@ -166,8 +166,8 @@
                     content="M39.15 39.15V31.6H8.85v7.55h30.3Zm0-11.2V20H8.85v7.95h30.3Zm0-11.6v-7.5H8.85v7.5h30.3ZM8.85
                     42.8q-1.45 0-2.55-1.1-1.1-1.1-1.1-2.55V8.85q0-1.45 1.1-2.55 1.1-1.1 2.55-1.1h30.3q1.45 0 2.55 1.1
                     1.1 1.1 1.1 2.55v30.3q0 1.45-1.1 2.55-1.1 1.1-2.55 1.1Z" />
-                <Label text="No table selected" styleClass="h2" />
-                <Label text="Select a table in a cluster from the sidebar or add a cluster!" />
+                <Label text="%label.noCurTable" styleClass="h2" />
+                <Label text="%label.noCurTable.hint" />
             </VBox>
 
             <HBox fx:id="statusContainer" spacing="8">

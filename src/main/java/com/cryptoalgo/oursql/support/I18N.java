@@ -1,9 +1,11 @@
 package com.cryptoalgo.oursql.support;
 
+import com.cryptoalgo.oursql.model.SettingsViewModel;
 import org.jetbrains.annotations.Nullable;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -18,7 +20,7 @@ public final class I18N {
     /**
      * The current resource bundle
      */
-    private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
+    private static ResourceBundle RESOURCE_BUNDLE;
 
     /**
      * Supported languages and their locale codes
@@ -28,6 +30,11 @@ public final class I18N {
         // The human-readable names are not localised for a reason
         languages.put("en", "English");
         languages.put("zh", "中文");
+        SettingsViewModel.langProperty().addListener((c, ov, nv) -> {
+            if (languages.containsKey(nv))
+                RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME, new Locale(nv));
+        });
+        RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME, new Locale(SettingsViewModel.langProperty().get()));
     }
 
     /**

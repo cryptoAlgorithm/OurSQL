@@ -146,9 +146,10 @@ public class Home {
                     ListView<String> t = new ListView<>();
                     t.setItems(tables);
 
+                    // Set empty placeholder
+                    t.setPlaceholder(new Label(I18N.getString("label.noTables")));
                     // Listen for changes to tables
                     tables.addListener((ListChangeListener<String>) ch -> {
-                        if (ch.getList().size() == 0) t.setPlaceholder(new Label("No tables"));
                         while (ch.next()) if (ch.wasRemoved()) t.getSelectionModel().clearSelection();
                     });
                     // Listen for changes to selection

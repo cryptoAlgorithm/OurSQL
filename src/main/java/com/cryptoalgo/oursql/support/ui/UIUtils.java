@@ -1,6 +1,7 @@
 package com.cryptoalgo.oursql.support.ui;
 
 import com.cryptoalgo.oursql.OurSQL;
+import com.cryptoalgo.oursql.model.SettingsViewModel;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -48,7 +49,10 @@ public class UIUtils {
     public static <T extends Pane> T loadFXML(String name) throws IOException {
         return new FXMLLoader(
             OurSQL.class.getResource("view/" + name + ".fxml"),
-            ResourceBundle.getBundle("locales/strings", new Locale("en"))
+            ResourceBundle.getBundle(
+                "locales/strings",
+                new Locale(SettingsViewModel.langProperty().get())
+            )
         ).load();
     }
 
