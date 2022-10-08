@@ -26,7 +26,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -63,7 +62,6 @@ public class AddClusterDialog {
     public static void show() throws IOException {
         final var stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UTILITY);
         stage.setTitle(I18N.getString("action.addCluster"));
         final var scene = new Scene(UIUtils.loadFXML("add-cluster"));
         scene.setFill(Color.TRANSPARENT);

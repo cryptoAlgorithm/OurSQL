@@ -12,7 +12,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 
 import java.io.IOException;
@@ -33,7 +32,6 @@ public class SettingsDialog {
     public static void show() throws IOException {
         final var stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UTILITY);
         stage.setTitle(I18N.getString("app.title") + " " + I18N.getString("label.settings"));
         final var scene = new Scene(UIUtils.loadFXML("settings"));
         scene.setFill(Color.TRANSPARENT);
