@@ -1,8 +1,9 @@
 # OurSQL • ![Test status](https://img.shields.io/github/workflow/status/cryptoAlgorithm/OurSQL/test?label=test&style=for-the-badge) ![Build status](https://img.shields.io/github/workflow/status/cryptoAlgorithm/OurSQL/build?style=for-the-badge)
 
-
 > An extensible graphical frontend to popular databases
 > including MongoDB, MySQL, PostgreSQL and others.
+
+![Main UI](https://user-images.githubusercontent.com/64193267/194707607-b652d30b-9fcf-4971-ad1b-94ba563d7f8e.png)
 
 ## About
 OurSQL - a better database experience for everyone, newcomers
@@ -46,15 +47,21 @@ Java: Develop once, tear out your hair everywhere.
 Want to level up your database experience? Download one of these
 builds now!
 
+### GitHub Releases
+![GitHub release](https://img.shields.io/github/v/release/cryptoAlgorithm/OurSQL?style=for-the-badge)
+
+Click on the badge above to go to the latest release to download a
+prebuilt JAR. These builds are very stable, and the JAR is guranteed
+to work (at least on Windows and macOS `aarch64`). However, releases
+are only made periorically and do not include the latest bleeding-edge
+features.
+
 ### Bleeding Edge
 [![Download nightly](https://img.shields.io/badge/download-nightly-blue?style=for-the-badge)](https://nightly.link/cryptoAlgorithm/OurSQL/workflows/build.yaml/main/OurSQL.jar.zip)
 
 These builds are hot from the oven, built from the latest commit on
 the `main` branch. _**Note**: These builds are completely untested,
 and not guaranteed to even launch properly._
-
-### Releases
-Stable releases will be available soon.
 
 ---
 ### Running
