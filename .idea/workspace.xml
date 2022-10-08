@@ -7,13 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (localisation): restart app when language changed&#10;patch (localisation): add some hardcoded strings to localisation">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/help/shim.js" afterDir="false" />
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="chore: update help pages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/help/OurSQL.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/help/OurSQL.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/help/help.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/help/help.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,14 +262,7 @@
       <workItem from="1665050486469" duration="73258000" />
       <workItem from="1665204311369" duration="10179000" />
       <workItem from="1665216782249" duration="2341000" />
-      <workItem from="1665219872465" duration="5641000" />
-    </task>
-    <task id="LOCAL-00033" summary="patch (home): re-architect Home controller to use ViewModel&#10;Controller was getting a little too large for my liking, moving logic to a separate class helped shrink the controller considerably">
-      <created>1664771532356</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1664771532356</updated>
+      <workItem from="1665219872465" duration="8867000" />
     </task>
     <task id="LOCAL-00034" summary="chore (home): rename viewModel following naming convention">
       <created>1664773591282</created>
@@ -610,7 +600,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665217207979</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="chore: update help pages">
+      <created>1665226341350</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1665226341351</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -629,7 +626,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat (ui): add actions row below query container for table actions" />
     <MESSAGE value="feat: reliable dropping of tables&#10;fix: logic error when handling create table exceptions" />
     <MESSAGE value="feat (ui): display null values more friendlily" />
     <MESSAGE value="feat (ui): handle refresh button" />
@@ -654,7 +650,8 @@
     <MESSAGE value="patch (README): update running instructions" />
     <MESSAGE value="feat (localisation): full Chinese localisations" />
     <MESSAGE value="feat (localisation): restart app when language changed&#10;patch (localisation): add some hardcoded strings to localisation" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat (localisation): restart app when language changed&#10;patch (localisation): add some hardcoded strings to localisation" />
+    <MESSAGE value="chore: update help pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: update help pages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

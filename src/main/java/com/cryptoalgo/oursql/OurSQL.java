@@ -200,6 +200,7 @@ public class OurSQL extends Application {
                 if (o != null) {
                     // .hide() immediately removes the window from the getWindows() list
                     // so looping over it will lead to index out of bounds exceptions
+                    Platform.setImplicitExit(false);
                     while (!Window.getWindows().isEmpty()) Window.getWindows().get(0).hide();
                     try { start(new Stage()); } catch (Exception e) { e.printStackTrace(); }
                     SettingsViewModel.langProperty().removeListener(this);

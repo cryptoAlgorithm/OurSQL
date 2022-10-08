@@ -8,6 +8,7 @@ import com.cryptoalgo.oursql.model.db.DatabaseUtils;
 import com.cryptoalgo.oursql.component.PasswordDialog;
 import com.cryptoalgo.oursql.model.db.data.Container;
 import com.cryptoalgo.oursql.model.db.data.PlaceholderContainer;
+import com.cryptoalgo.oursql.model.db.data.TIDContainer;
 import com.cryptoalgo.oursql.support.AsyncUtils;
 import com.cryptoalgo.oursql.support.ui.Colors;
 import com.cryptoalgo.oursql.support.I18N;
@@ -345,6 +346,23 @@ public class HomeViewModel {
         }
     }
 
+    private String buildWhere(ObservableList<Container<?>> r, boolean includeCTID) {
+        final var sb = new StringBuilder();
+        for (var i = 0; i < r.size(); i++) {
+            final var c = r.get(i);
+            if (c instanceof PlaceholderContainer) continue;
+            if (!includeCTID && tableColumns.get(i).equals("ctid")) continue;
+            sb
+                .append("\"")
+                .append(tableColumns.get(i))
+                .append("\"")
+                .append(c.toString() == null ? " is " : " = ")
+                .append(c.toSQLString());
+            if (i != r.size() - (includeCTID ? 1 : 2)) sb.append(" AND ");
+        }
+        return sb.toString();
+    }
+
     /**
      * Attempt to edit a field in a table
      * @param col Column name of field to edit
@@ -368,27 +386,46 @@ public class HomeViewModel {
         final var newContainer = getSQLContainer(columnTypes.get(colIdx), nv);
         nv = newContainer.toSQLString();
 
-        log.info("Attempting edit: col=" + col + ", nv=" + nv);
+        // Find the row by ctid
+        ObservableList<Container<?>> updateRow = null;
+        for (final var row : rows) if (row.get(row.size()-1).toString().equals(ctid)) {
+            // That's the row we want!
+            updateRow = row;
+            break;
+        }
+        if (updateRow == null) throw new SQLException("Row not found");
+
+        log.info("Attempting edit: col=" + col + ", nv=" + nv + ", ctid=" + ctid);
         final var tID = setStatusJob(I18N.getString("status.commitUpdate"));
         try {
-            currConn.createStatement().execute(
+            final var statement = currConn.createStatement();
+            statement.execute(
                 String.format("""
                 UPDATE "%s"
                 SET "%s" = %s
-                WHERE ctid = '%s';
+                WHERE %s;
                 """,
                     selectedTable.get(),
                     col,
                     nv,
-                    ctid
+                    buildWhere(updateRow, true)
                 )
             );
+            if (statement.getUpdateCount() != 1) throw new SQLException("Update failed, no rows updated");
+
             // Then (attempt to) update the corresponding row that was modified
-            for (final var row : rows) if (row.get(row.size()-1).toString().equals(ctid)) {
-                // That's the row we want!
-                row.set(colIdx, newContainer);
-                break;
-            }
+            updateRow.set(colIdx, newContainer);
+            // Ensure the CTID is up-to-date (it has a habit of changing across updates)
+            final var rs = currConn.createStatement().executeQuery(
+                String.format(
+                    "SELECT CTID FROM \"%s\" WHERE %s",
+                    selectedTable.get(),
+                    buildWhere(updateRow, false)
+                )
+            );
+            rs.next();
+            updateRow.set(updateRow.size()-1, new TIDContainer(rs.getString(1)));
+            rs.close();
         } catch (SQLException e) {
             finishStatusJob(tID, e.getLocalizedMessage());
             throw e;
