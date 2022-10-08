@@ -58,6 +58,24 @@
             <artifactId>javafx-web</artifactId>
             <version>${javafxVer}</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>${javafxVer}</version>
+            <classifier>mac-aarch64</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>${javafxVer}</version>
+            <classifier>mac</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>${javafxVer}</version>
+            <classifier>win</classifier>
+        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>

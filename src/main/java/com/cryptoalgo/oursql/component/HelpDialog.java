@@ -19,7 +19,8 @@ public class HelpDialog {
         final var helpStage = new Stage();
         helpStage.initStyle(StageStyle.UTILITY);
         helpStage.setTitle(I18N.getString("dialog.help.title"));
-
+        helpStage.setMinWidth(550); helpStage.setMinHeight(200);
+        helpStage.setWidth(600); helpStage.setHeight(600);
         final var wv = new WebView();
         wv.getEngine().load(UIUtils.getResourcePath("help/OurSQL.html"));
         wv.getEngine().locationProperty().addListener((observable, oldValue, newValue) -> {
