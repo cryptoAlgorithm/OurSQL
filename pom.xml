@@ -12,7 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.9.0</junit.version>
-        <javafxVer>20-ea+3</javafxVer>
+        <javafxVer>19</javafxVer>
         <javaTarget>17</javaTarget>
     </properties>
 
@@ -33,13 +33,6 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>${javafxVer}</version>
-            <classifier>win</classifier>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>${javafxVer}</version>
-            <classifier>linux</classifier>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -52,6 +45,18 @@
             <artifactId>javafx-graphics</artifactId>
             <version>${javafxVer}</version>
             <classifier>mac</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>${javafxVer}</version>
+            <classifier>win</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>${javafxVer}</version>
         </dependency>
 
         <dependency>

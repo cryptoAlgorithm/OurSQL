@@ -9,6 +9,7 @@ module com.cryptoalgo.oursql.oursql {
     requires java.sql;
     requires org.jetbrains.annotations;
     requires java.desktop;
+    requires javafx.web;
 
     opens com.cryptoalgo.oursql to javafx.fxml;
     // Literally export everything to appease JavaDoc

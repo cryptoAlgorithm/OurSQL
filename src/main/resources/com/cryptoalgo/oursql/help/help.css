@@ -1,0 +1,53 @@
+/* Quickly-written reusable style */
+@media only screen {
+    body {
+        color: rgba(255, 255, 255, .81);
+    }
+    html {
+        background-color: #191919;
+    }
+}
+article {
+    padding: 0 2em;
+}
+
+img {
+    border-radius: 4px;
+}
+
+.block-color-gray {
+    color: rgb(155, 155, 155);
+    fill: rgb(155, 155, 155);
+}
+
+.callout {
+    border-radius: 7px;
+    background-color: #222;
+    padding: 1rem .65em;
+}
+
+.bookmark-info {
+    width: 100%;
+}
+.bookmark-description {
+    color: rgba(255, 255, 255, 0.443);
+}
+.bookmark-href {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.source {
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 7px;
+}
+
+.simple-table-header-color {
+    background: rgba(255, 255, 255, .03);
+    color: inherit;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}

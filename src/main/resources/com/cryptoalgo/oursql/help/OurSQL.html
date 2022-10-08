@@ -1,0 +1,692 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script>
+    window.onload = () => {
+        document.querySelectorAll('a').forEach(l => {
+            if (l.getAttribute('href').startsWith('#')) return;
+            l.style.cursor = 'default';
+            l.onclick = e => e.preventDefault();
+        });
+        document.querySelectorAll('img').forEach(i => {
+            i.ondragstart = () => false;
+        })
+    }
+</script>
+    <title>OurSQL</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="./help.css"></head><body><article id="42df9ac0-0687-4945-b758-f85a0f4bf785" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/oursql.png"/></div><h1 class="page-title">OurSQL</h1></header><div class="page-body"><p id="92d36826-f7e7-4712-9689-c5c0de6d474c" class="">Thanks for choosing OurSQL! Welcome to a database experience like never before.</p><hr id="526ac154-197f-4dd1-9841-1cde3c113839"/><h3 id="94d4230e-befc-4720-90b2-5be952fbbcd8" class=""><strong>Contents</strong></h3><p id="2117c463-d921-46f4-b239-8ff17f7fac58" class="">Click on any heading below to quickly jump to that section.</p><nav id="e711f30a-d1a3-411c-a59d-6aef7608cb6e" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#94d4230e-befc-4720-90b2-5be952fbbcd8"><strong>Contents</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7aa40e6c-26c6-485c-8132-4224fae07050">Overview and Features</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e2dbdc82-4fc8-40cd-8b58-910df064dd92">Beautiful Interface</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f74f4d2e-560a-4c42-a26b-e026afcbbac2">High Performance</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0169372a-297a-4833-915f-2689c88f8d6c">User Guide</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3717b33a-a83c-4cb3-a82b-38715a5db6d8">Splash Screen </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6bf11402-93e9-4b60-831e-44294e54317b">General Layout</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6efcf403-b89e-4dad-9e46-824b24da39c4">Cluster Management</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#eaecab70-e612-49df-9133-8ccb322b33f2">Adding a Cluster</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#ae691c8d-2c3d-4214-9898-355d87bedde6">Removing Clusters</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#96b0c0c7-7265-45da-9eb4-0730996b2b8a">Table Management</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#0d0060c5-cb6e-417b-9b5f-8bafc47dd853">Viewing Cluster Tables</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#27313789-139f-4ac6-a4d2-f74ddd59c3af">Adding Cluster Tables</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f2211868-2194-49f5-b5a2-6bbcde0bc7fb">Table Actions</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#957b7c35-4830-434a-9eef-39a23bd03626">Viewing/Modifying Data</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c83164d1-9b96-41fb-9425-4e374bdbce53">Settings</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#78799307-a237-4c9e-b205-719b5dff9d0f">Advanced Usage</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#bbca4ca0-3acb-4e33-b0d5-8e9fe4086f4e">Queries</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f759ec93-1c4d-4221-bed7-7b013a19e6ba"><strong>Explanation of Code</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f7746691-89a9-4092-b691-5961cb79d944">MVC Model</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2ac8b6ee-c50b-4790-afe3-20b766908aee"><span style="border-bottom:0.05em solid">M</span>odels</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#150cf6de-0789-4eb6-8abd-6a6124475318"><span style="border-bottom:0.05em solid">V</span>iews</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#fe9d4a5c-5359-446b-b4e2-0c713da9d257"><span style="border-bottom:0.05em solid">C</span>ontrollers</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4800c041-9f52-460d-af8e-9458f5263fa5"><mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/tree/main/src/main/java/com/cryptoalgo/codable"><code>Codable</code></a></mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6bdf2a66-98b1-44ce-b5b2-ec31707ed331">Summary</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f4176e82-a384-432e-9a77-beab17e584e3">Implementation (Custom <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Encoder.java"><code>Encoder</code></a></mark>/<mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Decoder.java"><code>Decoder</code></a></mark>s)</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#e8177b83-3d9a-434c-af61-0b44d4bd1258">Implementation ((De)serialisable Classes)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bbb66a0c-1016-46b7-b935-a881498397e0">JDBC Drivers</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#19bd49a8-7a66-460e-88f9-45d0d15cec3b">Testing Methodology</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d955c3ef-50ab-44f2-9902-3fa5fc9480cf">Unit Testing</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1d854139-7fda-44f2-8271-bb1a877e07c4">White-box Testing</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b2a0b297-dbc5-4ac0-b45c-204b8d7935d9">Stress Testing</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#93f36957-4be8-49a5-815f-17932d3a5c17">Black-box Testing</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#165639d6-9374-43c8-89f8-63b3dd1eff8c">Reflection</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#82d421a9-8156-470d-9886-017fb1615cf2">Obstacles Faced</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#24f54861-e556-480d-8443-21d4c65b58fd">Learning Points</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c9c23fc3-e3c6-4902-8338-8bf130dcafd5">Future Works</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3e8f680e-90eb-40ff-9ebc-dd570ffa821d">Appendix</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7791fe05-4104-490a-bb74-097b316399fe">Example Inputs</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#15279aa4-3c9c-4944-b753-1ffa7c1ad5c6">Troubleshooting</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#489f3d12-97e6-4c2c-9009-de60d5ee58d9">Connection Failures</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#53cf561d-efb5-4bcb-9ead-a433e60d9ab9">Row Fetch Failures</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6e50d808-f18c-4dbd-9597-28bf5c411be5">Common SQL Errors</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4ac7476a-1ce7-4166-afa5-84624fd4bd32">Credits</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#08fe4790-31ae-4fa9-beed-9f7293a01cb9">License</a></div></nav><hr id="d141b059-ef19-4f73-9cf2-5821ece2fe03"/><h1 id="7aa40e6c-26c6-485c-8132-4224fae07050" class="">Overview and Features</h1><p id="ac519824-3889-4023-8065-fd71e51f6123" class="">Learning databases can be daunting, especially non-intuitive SQL queries and concepts. Confusing and unintuitive database frontends just make matters worse, and are not helpful for beginners. These factors cause many to be put off when faced with the task of learning and implementing a <em>Database Management System</em> (DBMS) such as MySQL, PostgreSQL or MariaDB, instead falling back to non-ideal data storage methods like JSON or CSV files.</p><p id="74faeb7a-acdf-4148-9c12-b9c1ac2d92b0" class="">OurSQL changes the status quo. Databases are no longer humongous monsters that are tough to learn and keep up with, instead they are tools which provide powerful data handling methods which aid in and support your application. With an interface that is self-explanatory and beautiful to look at as well as features that cater to both the power user and beginner, integrating with DBMSs are no longer a chore, but a pleasure. </p><h2 id="e2dbdc82-4fc8-40cd-8b58-910df064dd92" class="">Beautiful Interface</h2><p id="01331936-7d49-4c54-9b30-8f1b7e62ec4c" class="">Other graphical database frontends are a pain to look at, and often have an unintuitive and messy interface. One of the main selling points of OurSQL is its beautiful and intuitive interface, which makes working with your database a breeze.</p><h2 id="f74f4d2e-560a-4c42-a26b-e026afcbbac2" class="">High Performance</h2><p id="f09e201d-6811-4173-9c66-8045b9c19efc" class="">Database software should accelerate your database experience, and not slow you down. Many other database frontends (<em>glances at MongoDB Compass</em>) have unacceptably slow performance, with the UI lagging even during simple operations like connecting to a database. OurSQL uses threads and loading statuses effectively to keep the user interface smooth at all times, and keep the user updated with the progress of tasks.</p><h1 id="0169372a-297a-4833-915f-2689c88f8d6c" class="">User Guide</h1><p id="bf5ecd1d-ac75-466b-b402-3e0db6efce0c" class="">Here you will learn everything you need to get started and scale with OurSQL. This guide is written to be both informative for the experienced user, and provide step-by-step instructions for the novice. Although OurSQL’s interface is highly self-explanatory, this section is here for completeness.</p><h2 id="3717b33a-a83c-4cb3-a82b-38715a5db6d8" class="">Splash Screen </h2><div id="18c88d87-a400-41bb-8eaf-5ee3012fc944" class="column-list"><div id="8bebf1a0-d5cd-4ab5-8304-096f98bd0847" style="width:62.5%" class="column"><figure id="9fb5aa46-67c6-4862-9126-54cdc38f89c0" class="image" style="text-align:left"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Untitled.png"><img style="width:480px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Untitled.png"/></a></figure></div><div id="ff129ce6-3897-4855-af85-13ca34aeb0f5" style="width:37.5%" class="column"><p id="95227b86-1dcb-4d2d-bfb9-6852079424bf" class="">A splash screen, animated with spring interpolations, displays the app’s icon, title, description and author on launch. The beautiful animations are short yet beautiful, and will set you in the right mood for using SQL databases every time you launch OurSQL.</p></div></div><h2 id="6bf11402-93e9-4b60-831e-44294e54317b" class="">General Layout</h2><p id="8d5ae2d9-05bd-469b-9d8a-40c85b9c87ca" class="">The screenshot below shows the window of the app when it is launched, before a table is selected. The table and action area is hidden </p><figure id="22ead5b2-39d0-45bf-89dd-2c7368e53683" class="image"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_11.04.54_AM.png"><img style="width:1924px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_11.04.54_AM.png"/></a></figure><p id="c0512c30-1ee8-4251-89f0-d43ca3c87019" class="">After selecting a table, the interface will look like the screenshot below. There are 4 major sections </p><figure id="3456b58e-6125-4898-9e85-9801635f3e1e" class="image"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_11.03.33_AM.png"><img style="width:1946px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_11.03.33_AM.png"/></a></figure><h2 id="6efcf403-b89e-4dad-9e46-824b24da39c4" class="">Cluster Management</h2><h3 id="eaecab70-e612-49df-9133-8ccb322b33f2" class="">Adding a Cluster</h3><figure id="e7ce4390-6a5a-43a4-8dac-2231fa415017" class="image"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_11.19.32_AM.png"><img style="width:1692px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_11.19.32_AM.png"/></a><figcaption>Add cluster dialog</figcaption></figure><p id="418e27d9-9781-415b-b556-2e28e1d637a0" class="">Firstly, you’ll need to add a <em>database cluster</em>, which defines a connection to a DBMS. To do so, simply click on the “Add Cluster” button below the cluster list, which summons a dialog where you’ll find:</p><ol type="1" id="6dfbcf82-8c8a-42f2-8e91-7ee85b3e6d04" class="numbered-list" start="1"><li>A sidebar to specify your DBMS type (support subject to change)</li></ol><ol type="1" id="4de5a104-1899-4c2e-8cd5-0ae8c216e640" class="numbered-list" start="2"><li>Connection parameter fields</li></ol><ol type="1" id="64934aa3-90bf-4a62-864a-2a5d1639e84a" class="numbered-list" start="3"><li>Authentication options: <ol type="a" id="2132ff56-5c5c-441e-a525-a12876ba55d2" class="numbered-list" start="1"><li>User &amp; Password - Use specified username and password credentials to authenticate</li></ol><ol type="a" id="e55cb4a4-1b9a-41ee-8e3b-b19def57c8ef" class="numbered-list" start="2"><li>No auth - Connect without any authentication</li></ol></li></ol><ol type="1" id="c2d207e8-0736-416b-a2ed-0984dd1d1893" class="numbered-list" start="4"><li>Credential storage options: (only applicable if user &amp; password authentication is selected)<ol type="a" id="287acac8-cc0a-4a7e-a014-fcac202b5c9a" class="numbered-list" start="1"><li>Encrypted - Encrypt database credentials with a specified password</li></ol><ol type="a" id="805517a9-c04b-4a0e-9508-052448eb0819" class="numbered-list" start="2"><li>Plaintext - Store database credentials as plaintext (<em>not recommended</em>)</li></ol><ol type="a" id="b9d92566-33a8-45de-b24a-1590b62050ad" class="numbered-list" start="3"><li>Don’t store - Prompt for credentials every connection (password is never persisted)</li></ol></li></ol><ol type="1" id="2003ae0b-9563-4df4-b40b-8fa52bd6e038" class="numbered-list" start="5"><li>Constructed URI - Actual URI used for connection</li></ol><ol type="1" id="bfbd0f37-14d5-4d62-82d5-a02ef09bcc6c" class="numbered-list" start="6"><li>Test Connection button - Open a test connection to verify if all parameters and credentials are valid</li></ol><ol type="1" id="73d5d49f-7e4b-4869-bc52-2c2f4d8042e3" class="numbered-list" start="7"><li>OK button - Adds and persists this cluster’s configuration</li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0716ceed-d91c-4f17-8449-40a56da51fbd"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/warning_yellow.svg"/></div><div style="width:100%"><mark class="highlight-yellow"><strong>Important</strong></mark>
+Buttons will be disabled if required fields aren’t filled up</div></figure><p id="3b0ac235-b897-452c-82c8-9af9179b1a65" class="">Once you’re done configuring the connection parameters, use the “Test Connection” button to check that a database connection can be successfully established. If you see the<mark class="highlight-yellow"> </mark>dialog similar to the one on the left, all is good, go ahead and hit the “OK” button to add the cluster. If you encounter an error, you’re not alone! Refer to the <strong>Appendix</strong> for in-depth troubleshooting steps.</p><div id="daf6b286-ff8b-403a-b5e7-efe9613df42f" class="column-list"><div id="749bb78e-0689-4ce8-a588-9b931f318d5f" style="width:50%" class="column"><figure id="40ea6ad3-167c-403c-9a2b-7606d6712030" class="image"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot202022-10-0320at209.09.4420AM.png"><img style="width:722px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot202022-10-0320at209.09.4420AM.png"/></a><figcaption>Successful connection test</figcaption></figure></div><div id="66926f5c-b3ec-4642-819a-6f5372a21e02" style="width:50%" class="column"><figure id="465a164e-d26e-4c62-bc8d-0e98933021f5" class="image"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot202022-10-0320at209.12.1620AM.png"><img style="width:722px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot202022-10-0320at209.12.1620AM.png"/></a><figcaption>Unsuccessful connection test</figcaption></figure></div></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f8ac91a0-0405-4bf9-9f31-e006f5a9061b"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/bookmark_green.svg"/></div><div style="width:100%"><mark class="highlight-teal"><strong>Note</strong></mark>
+Parameters for an example (operational) hosted PostgreSQL cluster is available in the appendix for your testing convenience.</div></figure><h3 id="ae691c8d-2c3d-4214-9898-355d87bedde6" class="">Removing Clusters</h3><div id="e939b36a-8a77-49ec-85ab-ef1eacf890cf" class="column-list"><div id="4f2de807-233d-45d0-b6c7-945848d9f88c" style="width:25%" class="column"><figure id="95fd5f4d-7d77-403f-a7a5-b9c0e0fd6951" class="image" style="text-align:right"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-03_at_10.42.13_AM.png"><img style="width:494px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-03_at_10.42.13_AM.png"/></a></figure></div><div id="dfb5bf4c-ba94-452d-801c-06fe162862ee" style="width:75%" class="column"><p id="ee6d905d-a0b0-4e7b-86b6-9b05f526da0f" class="">Made a mistake or no longer need a cluster? Simply right-click any cluster in the sidebar to reveal a menu allowing you to remove it, among other actions.</p></div></div><h2 id="96b0c0c7-7265-45da-9eb4-0730996b2b8a" class="">Table Management</h2><h3 id="0d0060c5-cb6e-417b-9b5f-8bafc47dd853" class="">Viewing Cluster Tables</h3><p id="9a9ea68d-7ce9-4ceb-a1cd-ced181eccb9f" class="">Click on any cluster on the sidebar to view a list of tables in that database. A password dialog (shown below) would appear if a password is required to retrieve connection credentials.</p><figure id="dd13d3f3-c945-4b77-8333-5a4ac805041c" class="image"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-05_at_12.51.56_PM.png"><img style="width:384px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-05_at_12.51.56_PM.png"/></a></figure><p id="7a16fd8c-1596-4fcb-8b69-da7b1b1f78ee" class="">Tables are lazy-loaded on demand, and any errors that may occur during fetching is displayed in the status area of the app</p><h3 id="27313789-139f-4ac6-a4d2-f74ddd59c3af" class="">Adding Cluster Tables</h3><div id="87792efa-7160-4cb0-8d64-4515373dbade" class="column-list"><div id="3d342443-4a33-4591-bea1-434132fe4108" style="width:25%" class="column"><figure id="48874583-46b5-4c28-a78d-c5388fc2180f" class="image"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-05_at_10.31.28_PM.png"><img style="width:426px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-05_at_10.31.28_PM.png"/></a></figure></div><div id="e50d2596-8eb2-4cf8-95f5-28016a1a29ea" style="width:75%" class="column"><p id="e5e077e1-1ade-4d93-b7dc-9c6821da34bd" class="">By right-clicking a cluster, a context menu will appear, where an option to create a table in the database is available. Clicking on it presents a dialog where the name of the table to be created can be specified. As with all operations, the status of the table creation </p></div></div><h3 id="f2211868-2194-49f5-b5a2-6bbcde0bc7fb" class="">Table Actions</h3><figure id="460032e5-9c2a-4ed2-99d1-2ac3d845aa8e" class="image"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_11.01.13_AM.png"><img style="width:1114px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_11.01.13_AM.png"/></a></figure><p id="b84bba1c-b273-48e9-8b4b-403f135b515d" class="">Above the </p><h3 id="957b7c35-4830-434a-9eef-39a23bd03626" class="">Viewing/Modifying Data</h3><p id="a68e1455-809a-4716-b5f3-a8cad0e3045c" class="">The rows in the selected table are displayed neatly in a table as shown below. </p><figure id="f2f76da7-91d5-4107-aeb9-ba23ef7988fa" class="image"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_11.56.14_AM.png"><img style="width:1120px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_11.56.14_AM.png"/></a></figure><h2 id="c83164d1-9b96-41fb-9425-4e374bdbce53" class="">Settings</h2><p id="cd2fd3fc-0995-41ac-aed2-1a4be87102b2" class="">
+</p><h2 id="78799307-a237-4c9e-b205-719b5dff9d0f" class="">Advanced Usage</h2><h3 id="bbca4ca0-3acb-4e33-b0d5-8e9fe4086f4e" class="">Queries</h3><p id="23fd3cba-6182-43e8-b14e-a3b288022dc2" class="">
+</p><h1 id="f759ec93-1c4d-4221-bed7-7b013a19e6ba" class=""><strong>Explanation of Code</strong></h1><p id="54cb65ab-751d-4590-87cd-1aa1561206d6" class="">OOP concepts such as abstract classes, interfaces and inheritance were implemented extensively throughout the whole app, from a Codable class to allow encoding and decoding of </p><div id="0fcc1d71-157f-4f33-adbe-54586a256667" class="column-list"><div id="32c12384-469e-4ac0-94d1-634016f1bb74" style="width:56.25%" class="column"><p id="8f544004-9210-4d23-956a-600902931d1a" class="">To facilitate easy maintenance, bug fixes and future feature additions, the code is fully (all exposed methods, properties etc. have concise JavaDoc) documented with JavaDoc. A copy of the JavaDoc is <a href="https://cryptoalgorithm.github.io/OurSQL/com.cryptoalgo.oursql.oursql/module-summary.html">available online</a> on the right.</p></div><div id="2ffad3e8-a737-4fc6-95f2-c0ec60a42c99" style="width:43.75%" class="column"><figure id="9df1984c-d07c-474b-9af8-f9a0653d4f79"><a href="https://cryptoalgorithm.github.io/OurSQL/com.cryptoalgo.oursql.oursql/module-summary.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">com.cryptoalgo.oursql.oursql (OurSQL 0.1.0-SNAPSHOT API)</div><div class="bookmark-description">declaration: module: com.cryptoalgo.oursql.oursql</div></div><div class="bookmark-href">https://cryptoalgorithm.github.io/OurSQL/com.cryptoalgo.oursql.oursql/module-summary.html</div></div></a></figure></div></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5db0fbc7-15fe-442a-8aa9-5cfa014bd02b"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/light-bulb_blue.svg"/></div><div style="width:100%"><mark class="highlight-blue"><strong>Tip</strong></mark>
+(Most) Classes/packages/directories are clickable. Click on them to jump to the respective file/package/folder on GitHub.</div></figure><h2 id="f7746691-89a9-4092-b691-5961cb79d944" class="">MVC Model</h2><h3 id="2ac8b6ee-c50b-4790-afe3-20b766908aee" class=""><span style="border-bottom:0.05em solid">M</span>odels</h3><p id="7836da65-a5cb-45f4-87c6-7504b648f6d2" class=""><strong><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/db/Cluster.java"><mark class="highlight-teal"><code>Cluster</code></mark></a></strong></p><p id="7aee733f-d870-4d4f-8d81-684ebc977e56" class="">A class to represent a cluster, stores connection parameters for a single database. Decodable and encodable to facilitate persistence in Java Preferences.</p><h3 id="150cf6de-0789-4eb6-8abd-6a6124475318" class=""><span style="border-bottom:0.05em solid">V</span>iews</h3><p id="f290b8fa-05a5-414e-863f-68693869bae3" class="">FXML files were used as views in complex windows, while pure-code was used where it was determined its additional flexibility was beneficial to the component (such as in Dialogs, Alerts etc.). FXML views are found under the <a href="https://github.com/cryptoAlgorithm/OurSQL/tree/main/src/main/resources/com/cryptoalgo/oursql/view"><mark class="highlight-blue"><code>./view/</code></mark></a> directory in resources, while smaller pure-code components are found in the <code>com.cryptoalgo.oursql.component</code> package.</p><h3 id="fe9d4a5c-5359-446b-b4e2-0c713da9d257" class=""><span style="border-bottom:0.05em solid">C</span>ontrollers</h3><blockquote id="f02716bc-3294-4d07-b95f-038a513c8158" class=""><em>The backbone of OurSQL, the V in the MVC</em></blockquote><p id="39831620-dbc0-4ef7-aa88-9fe2c7dcca21" class=""><strong><mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/oursql/controller/Home.java"><code>Home</code></a></mark></strong><strong><mark class="highlight-teal"> </mark></strong><strong>- Main home screen controller</strong></p><p id="9d13bd2f-c8c0-48cc-857b-9afc3925fdc4" class="">A variation of the MVVM model is employed, with a view model (<mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java"><code>HomeViewModel</code></a></mark>) to offload some logic-heavy operations from the controller. This helps keep the controller from becoming a <strong><em>M</em></strong><em>assive </em><strong><em>V</em></strong><em>iew </em><strong><em>C</em></strong><em>ontroller</em>. Threading was heavily employed to ensure longer-running operations like SQL statement execution do not block the UI thread.</p><p id="8d8c19b0-8f21-47f7-8a4d-5cd1171c8ed7" class=""><strong><mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/oursql/controller/AddClusterDialog.java"><code>AddClusterDialog</code></a></mark></strong><strong> - Add Cluster flow controller</strong></p><p id="1461f481-f1d8-4901-979d-552a17d9a6af" class="">Validates cluster parameters and handles adding clusters. Allows creating a test connection to check for validity of connection parameters (threaded, of course). The connection password is stored encrypted or in plaintext, or not stored at all depending on the user’s choice.</p><h2 id="4800c041-9f52-460d-af8e-9458f5263fa5" class=""><mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/tree/main/src/main/java/com/cryptoalgo/codable"><code>Codable</code></a></mark></h2><div id="38bb21c7-48ba-48cd-825a-b5730cb8634b" class="column-list"><div id="01be40ac-d64d-4f91-a334-c1a41a6547d0" style="width:68.75%" class="column"><h3 id="6bdf2a66-98b1-44ce-b5b2-ec31707ed331" class="">Summary</h3><blockquote id="d792f41d-4176-4149-b817-9dca76e34f20" class=""><em>Interfaces which allow serialisation and deserialisation of classes. Classes contained herein are completely self-sufficient and can be simply copied into your project to be used. Heavily inspired by Swift’s </em><mark class="highlight-teal"><em><a href="https://developer.apple.com/documentation/swift/codable"><code>Codable</code></a></em></mark><em> interfaces, but unfortunately slightly crippled by the lack of Java equivalents for certain Swift features.</em></blockquote><p id="988ccdb6-3da8-4b11-bda9-de4ca9596a5b" class="">Classes that conform to <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Decodable.java"><code>Decodable</code></a></mark> and <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Encodable.java"><code>Encodable</code></a></mark> can be serialised and deserialised by any <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Encoder.java"><code>Encoder</code></a></mark> and <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Decoder.java"><code>Decoder</code></a></mark>s.</p><p id="1ce1dfdc-ef6e-40e9-beaf-03dc0ae6ff7e" class="">This class was necessary as many </p><p id="7ef63497-64dd-4439-8bed-d776225d8a59" class="">A <a href="https://github.com/cryptoAlgorithm/OurSQL/tree/main/src/main/java/com/cryptoalgo/codable/preferencesCoder">built-in implementation</a> that de/serialises values through Java’s <mark class="highlight-teal"><code>Preferences</code></mark> class is available for persisting Clusters to storage in OurSQL.</p></div><div id="f3b4aafd-19f5-47f0-b735-260ed6c51d7b" style="width:31.25%" class="column"><figure id="04185071-aa7b-48a4-a20f-ec866dad3649" class="image" style="text-align:right"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-05_at_12.54.27_PM.png"><img style="width:442px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-05_at_12.54.27_PM.png"/></a><figcaption><code>Codable</code> file tree</figcaption></figure></div></div><h3 id="f4176e82-a384-432e-9a77-beab17e584e3" class="">Implementation (Custom <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Encoder.java"><code>Encoder</code></a></mark>/<mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Decoder.java"><code>Decoder</code></a></mark>s)</h3><p id="d765a21f-6b4b-4513-9505-611a2c1b88e7" class=""><mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Encoder.java"><code><strong>Encoder</strong></code></a></mark><strong>/</strong><mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Decoder.java"><code><strong>Decoder</strong></code></a></mark><strong>  (</strong><mark class="highlight-yellow"><strong>Interface</strong></mark><strong>, </strong><mark class="highlight-blue"><strong>Generics</strong></mark><strong>)</strong></p><ul id="2ea8460b-ba8a-4c80-a8da-37299ee28dc2" class="bulleted-list"><li style="list-style-type:disc"></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cf40f248-b7fd-4369-8d0a-cbe203189766"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_blue.svg"/></div><div style="width:100%"><mark class="highlight-blue"><strong>Tip</strong></mark>
+See <a href="https://github.com/cryptoAlgorithm/OurSQL/tree/main/src/main/java/com/cryptoalgo/codable/preferencesCoder"><mark class="highlight-teal"><code>PreferencesCoder</code></mark></a> for a complete implementation example</div></figure><p id="f1d54db3-695c-4906-ae98-d60098b30814" class=""><mark class="highlight-teal"><strong><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/KeyedEncodingContainer.java"><code>KeyedEncodingContainer</code></a></strong></mark><strong>/</strong><mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/KeyedDecodingContainer.java"><code><strong>KeyedDecodingContainer</strong></code></a></mark><strong> (</strong><mark class="highlight-yellow"><strong>Interface</strong></mark><strong>)</strong></p><ul id="2efa3c49-b0ed-40c4-8ff8-86ea61623676" class="bulleted-list"><li style="list-style-type:disc">Provides methods for encoding/decoding various types (currently supports <code>String</code>, <code>Integer</code> and <code>Boolean</code>) of data, to be provided by an <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Encoder.java"><code>Encoder</code></a></mark>/<mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Decoder.java"><code>Decoder</code></a></mark><mark class="highlight-teal"> </mark>when requested by the object being encoded/decoded</li></ul><ul id="aa4ddcf6-12dc-44c3-b519-4bde54431fee" class="bulleted-list"><li style="list-style-type:disc">Interfaces were used to allow implementations to provide </li></ul><p id="bcbbf851-6fd9-4933-9698-9f95c13ebeb9" class="">More types of containers (e.g. <code>SingleValueContainer</code>, <code>UnkeyedContainer</code>) can be implemented in the future to increase the versatility of this system.</p><h3 id="e8177b83-3d9a-434c-af61-0b44d4bd1258" class="">Implementation ((De)serialisable Classes)</h3><p id="889d8f22-8eb8-48c5-8843-582c4e4db572" class="">Classes that would like to be deserialised/serialised can extend/implement <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Decodable.java"><code>Decodable</code></a></mark> and <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Encodable.java"><code>Encodable</code></a></mark> respectively. Any Decoder can decode and create an instance of a <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Decodable.java"><code>Decodable</code></a></mark><mark class="highlight-teal"> </mark>class and the contents of an Encodable class can be encoded by any Encoder, which is the beauty of the <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/tree/main/src/main/java/com/cryptoalgo/codable"><code>Codable</code></a></mark><mark class="highlight-teal"> </mark>system.</p><p id="46792574-1fb9-4e79-b6d2-33545c330d63" class=""><mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Encodable.java"><code>Encodable</code></a></mark> is an interface to allow any class to implement it and use the Codable system.</p><p id="e93f5bd7-d224-4698-acaa-8a05cc145dae" class="">Due to limitations in Java’s interfaces, namely that interfaces cannot specify mandatory constructors, <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Decodable.java"><code>Decodable</code></a></mark><mark class="highlight-teal"> </mark>is an abstract class although an interface would very much fit its use case better. <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Decodable.java"><code>Decodable</code></a></mark><mark class="highlight-teal"> </mark>classes are required to have a constructor that only takes a <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Decoder.java"><code>Decoder</code></a></mark><mark class="highlight-teal"> </mark>as an argument, which initialises all required fields via <mark class="highlight-teal"><a href="https://github.com/cryptoAlgorithm/OurSQL/blob/main/src/main/java/com/cryptoalgo/codable/Decoder.java"><code>Decoder</code></a></mark><mark class="highlight-teal"> </mark>methods. </p><h2 id="bbb66a0c-1016-46b7-b935-a881498397e0" class="">JDBC Drivers</h2><blockquote id="89cfcef6-b442-46dd-9e96-638d29a10c53" class=""><em>Drivers conforming to the JDBC standard provide a unified interface for SQL-based DBMSs, allowing operations to be carried out with a single JDBC API regardless of the DBMS in use.</em></blockquote><p id="88b839de-ee0e-40d5-9cea-5c48fd9d65c0" class="">JDBC drivers were crucial in the architecture of OurSQL, providing the backbone for interfacing with various SQL databases with a single codebase. Currently, only MySQL and PostgreSQL JDBC drivers are linked into the application, but adding another driver down the road is as simple as adding a dependancy. Drivers allow execution of </p><h1 id="19bd49a8-7a66-460e-88f9-45d0d15cec3b" class="">Testing Methodology</h1><p id="77a11b48-7f75-47f4-a9d3-ebc8e0af38fe" class="">Testing methods detailed below are stated in (mainly) chronological order.</p><h2 id="d955c3ef-50ab-44f2-9902-3fa5fc9480cf" class="">Unit Testing</h2><p id="b1594f48-592b-4886-af6f-f571a762a32e" class="">Tests of crucial components were written using the JUnit test framework. The unit test files are present in the <a href="https://github.com/cryptoAlgorithm/OurSQL/tree/main/src/main/test"><mark class="highlight-blue"><code>./src/main/test</code></mark></a> directory. During development and after every large change, the tests are run to ensure no existing functionality was broken. They also allow isolated debugging of issues pertaining to those components, without interference by UI code. I attempted to write test cases that covered every possible corner case. A badge displays the latest test status, run by GitHub actions on every commit.</p><figure id="3798b7e1-8196-4caf-8e35-3240c087c988" class="image"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_1.13.11_PM.png"><img style="width:2710px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_1.13.11_PM.png"/></a><figcaption>README status badges</figcaption></figure><p id="d0611427-f186-453e-9500-05b4691252ad" class="">Screenshots of some tests are included for reference below.</p><div id="5f44ec99-a366-4fa9-80c8-a9fbd52f8373" class="column-list"><div id="a70bead5-cac9-4ad3-b074-6d541ba26bc8" style="width:50%" class="column"><figure id="c24b551c-27ea-4d61-bbec-01478341283f" class="image"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_1.17.39_PM.png"><img style="width:384px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_1.17.39_PM.png"/></a></figure></div><div id="bfb3a6a6-02f6-4634-8565-8617ec469fc9" style="width:50%" class="column"><figure id="1d4b575c-fb53-4410-8990-1957b31587da" class="image"><a href="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_1.17.59_PM.png"><img style="width:550px" src="OurSQL%2042df9ac006874945b758f85a0f4bf785/Screenshot_2022-10-07_at_1.17.59_PM.png"/></a></figure></div></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b00b76ec-3fe3-4db0-beff-79576392a113"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/bookmark_green.svg"/></div><div style="width:100%"><mark class="highlight-teal"><strong>Note</strong></mark>
+The <code>testPostgreSQL</code> test will not pass since it tests for connection to a localhost-ed instance of PostgreSQL, and I wasn&#x27;t comfortable with adding the credentials of the test instance to the publicly-available source code.</div></figure><h2 id="1d854139-7fda-44f2-8271-bb1a877e07c4" class="">White-box Testing</h2><p id="93278fa9-6c50-4094-ab08-a6a15d314252" class="">The application was subject to rigorous manual testing during development to weed out UI bugs. Multiple instances of databases were tested to ensure compatibility with all possible combination of DBMS types. This form of testing took place every run to test a subset of features that were being worked on.</p><h2 id="b2a0b297-dbc5-4ac0-b45c-204b8d7935d9" class="">Stress Testing</h2><p id="76462221-4903-4018-8f11-1231d2a4faab" class="">After major features were completed (such as loading of tables/rows, adding clusters, adding rows/columns and adding rows), they were subject to random invalid input and stress tested with unforgiving behaviour. A few bugs, mainly pertaining to race conditions, were found through this method. For example, a race condition when setting statuses caused “null” to be displayed as the completed task when statuses are changed quickly (such as on a localhost database where latency is close to zero). Another example is a bug that caused connections not to be closed immediately after they are not needed, leading to a build-up of stale connections when new tables are selected in quick succession that eventually caused further connections to the database to fail with a “too many open connections” error.</p><h2 id="93f36957-4be8-49a5-815f-17932d3a5c17" class="">Black-box Testing</h2><p id="66101764-8c0b-4328-aac2-036377bb6f34" class="">The application was demonstrated to classmates at various stages of development to simulate a normal use case scenario. Any bugs were then found and weeded out. Fortunately, no bugs were found at this stage.</p><h1 id="165639d6-9374-43c8-89f8-63b3dd1eff8c" class="">Reflection</h1><h2 id="82d421a9-8156-470d-9886-017fb1615cf2" class="">Obstacles Faced</h2><p id="0bfd9a0e-b4d3-4d90-95fe-bdd1c82bbef5" class="">Suffice to say, my experience with JavaFX and Java was a far cry from enjoyable. I had to reengineer code multiple times to work around problems I had not anticipated, and make do with producing a less </p><p id="85e9047d-0c95-425d-be0c-c2e85e79741d" class="">Although I strive to ship a quality product with high standards of code, I had to reduce my expectations as the deadline approached. This has unfortunately led to some compromises, in the form of janky bug fixes and a departure from the beautiful and maintainable code I was used to working with in other projects. Features such as MongoDB support was removed after they were deemed too ambitious, and animations were notoriously tough to work with in JavaFX, so I had to make do with a less animation-heavy experience. </p><p id="7e18623f-0f3f-46d2-b25e-a61e66b0066f" class="">Another obstacle faced was targeting lower Java versions when building the JAR, and bundling in the correct libraries that would truly make it cross platform. By default, only the JavaFX graphics pipeline for the current platform (and arch) would be linked into and included with the compiled product. As I primarily develop on a Mac (an Apple Silicon one in fact), the JAR compiled on that platform would only be able to run on macOS and the <code>aarch64</code> architecture. It took longer than it should have to fix this problem, but in the end, I could produce a JAR that was truly “cross platform” that ran on Windows (x64), macOS (<code>aarch64</code> and x64) and Linux (x64). </p><p id="39046395-3f6a-44c7-bda0-2594b66cbcd4" class="">Finally, prior to this project, I had absolutely zero SQL experience. All my database experience was in using NoSQL databases, such as MongoDB, which have a completely different API. I had to juggle between learning the syntax of SQL statements and writing code that interfaced with the database with those statements, which was no easy task. Fortunately, learning SQL statements was not as daunting of a task as I had anticipated, and I wrote abstractions to make database logic separate from UI management to reduce the time I had to spend working with raw SQL statements.</p><h2 id="24f54861-e556-480d-8443-21d4c65b58fd" class="">Learning Points</h2><p id="78ace74d-dfb4-4aea-886b-1d6d10378579" class="">Although developing with JavaFX wasn’t desirable, it gave me the valuable experience of native cross platform development. I have also learnt how to curb my expectations of the standard of my product, allowing me to ship an acceptable product within the stipulated time, which is very important in a working environment. Since I have a habit of seeking perfection in my projects, it was a rather difficult lesson to learn. </p><h2 id="c9c23fc3-e3c6-4902-8338-8bf130dcafd5" class="">Future Works</h2><p id="293a1f7e-08e4-4d7a-bc12-b858598469ce" class="">Due to limited time, a few features had to be scaled down. Namely, the help feature, that was initially planned to show interactive SQL statement tutorials with blanks that could be filled in by the user to construct an SQL statement, was omitted due to a lack of development time. </p><p id="7c3168e9-ced1-4c44-af88-521c2af3ee50" class="">A bulk data import feature from CSV files was also planned, but ultimately wasn’t implemented due to the lack of time.</p><p id="84fb2467-5272-4265-b4fd-b76f596e8255" class="">Lastly, a very minimal set of SQL types are supported due to the </p><h1 id="3e8f680e-90eb-40ff-9ebc-dd570ffa821d" class="">Appendix</h1><h2 id="7791fe05-4104-490a-bb74-097b316399fe" class="">Example Inputs</h2><p id="47e21bd5-6094-4766-b4c6-636d2508f54d" class="">A remote database instance has been created for your testing convenience. The connection parameters are as follows:</p><table id="03e331bb-d6e7-4067-9091-4798801acbfb" class="simple-table"><tbody><tr id="c47151c1-1b8e-4e8c-9a39-af8274e96526"><th id="|^mK" class="simple-table-header-color simple-table-header" style="width:349px">DBMS</th><td id="GlT@" class="" style="width:349px">PostgreSQL</td></tr><tr id="c9176384-2122-4018-9dbe-f1ae392d8b3a"><th id="|^mK" class="simple-table-header-color simple-table-header" style="width:349px">Host</th><td id="GlT@" class="" style="width:349px"><code>tiny.db.elephantsql.com</code></td></tr><tr id="1b3fe51f-c9dc-4b60-8336-6afa97d523e5"><th id="|^mK" class="simple-table-header-color simple-table-header" style="width:349px">User</th><td id="GlT@" class="" style="width:349px"><code>tfhejrxi</code></td></tr><tr id="916e94d6-9107-498c-bd01-44522844f43e"><th id="|^mK" class="simple-table-header-color simple-table-header" style="width:349px">Password</th><td id="GlT@" class="" style="width:349px"><i>Redacted</i></td></tr><tr id="babee9db-967b-42fe-91cf-188a46cddd3e"><th id="|^mK" class="simple-table-header-color simple-table-header" style="width:349px">Database Path (Path)</th><td id="GlT@" class="" style="width:349px"><code>tfhejrxi</code></td></tr></tbody></table><h2 id="15279aa4-3c9c-4944-b753-1ffa7c1ad5c6" class="">Troubleshooting</h2><p id="74188fa8-a4d0-41ce-8624-237804c0c2ab" class="">Some common errors are stated below for quick reference during troubleshooting. Do note that not every possible error message is stated due to the nature of SQL exceptions.</p><h3 id="489f3d12-97e6-4c2c-9009-de60d5ee58d9" class="">Connection Failures</h3><table id="25a55c44-909e-4971-a806-9ddd8adb4257" class="simple-table"><thead class="simple-table-header"><tr id="d3a880b7-1354-4f43-902e-cd83baf972a4"><th id="STc@" class="simple-table-header-color simple-table-header" style="width:232.66666666666666px">Error Message</th><th id="EugM" class="simple-table-header-color simple-table-header" style="width:232.66666666666666px">Possible Reason</th><th id="\UpS" class="simple-table-header-color simple-table-header" style="width:232.66666666666666px">Field(s) to Check</th></tr></thead><tbody><tr id="1e547aec-bd16-43c0-bd98-e2f5ddaac67f"><td id="STc@" class="" style="width:232.66666666666666px">The connection attempt failed.</td><td id="EugM" class="" style="width:232.66666666666666px">- Host is incorrect
+- No internet connection</td><td id="\UpS" class="" style="width:232.66666666666666px">Host, Port</td></tr><tr id="5890224b-9ce2-4221-8a44-21e3c4de694f"><td id="STc@" class="" style="width:232.66666666666666px">Connection to &lt;host&gt;:&lt;port&gt; refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.</td><td id="EugM" class="" style="width:232.66666666666666px">- Incorrect port
+- Port is not open (blocked by firewall)
+- Incorrect host</td><td id="\UpS" class="" style="width:232.66666666666666px">Port, Host</td></tr><tr id="040596b6-9be6-40b0-b5a7-9f03db58777e"><td id="STc@" class="" style="width:232.66666666666666px">FATAL: role “&lt;user&gt;” does not exist</td><td id="EugM" class="" style="width:232.66666666666666px">User specified in authentication doesn’t exist</td><td id="\UpS" class="" style="width:232.66666666666666px">Authentication, User</td></tr></tbody></table><h3 id="53cf561d-efb5-4bcb-9ead-a433e60d9ab9" class="">Row Fetch Failures</h3><table id="b85074f7-9653-4868-a115-fd0d4924cbd4" class="simple-table"><thead class="simple-table-header"><tr id="4f03d86d-a77d-41ea-8637-09302ef53266"><th id="~HpC" class="simple-table-header-color simple-table-header" style="width:349px">Error Message</th><th id="ut;@" class="simple-table-header-color simple-table-header" style="width:349px">Possible Cause(s)</th></tr></thead><tbody><tr id="1d25d307-4b99-41f5-a17c-245555213ac0"><td id="~HpC" class="" style="width:349px">ERROR: permission denied for table test</td><td id="ut;@" class="" style="width:349px">The database user used for authentication has insufficient access privileges</td></tr></tbody></table><h3 id="6e50d808-f18c-4dbd-9597-28bf5c411be5" class="">Common SQL Errors</h3><table id="26e1bdbd-f328-4c63-84f9-a8f600a49d3a" class="simple-table"><thead class="simple-table-header"><tr id="b0d6ce8a-787e-467b-83d1-03afc8530700"><th id="DeVs" class="simple-table-header-color simple-table-header" style="width:349px">Error Message</th><th id="BGQ_" class="simple-table-header-color simple-table-header" style="width:349px">Possible Cause(s)</th></tr></thead><tbody><tr id="a1009987-04e1-404d-bc04-f45f0b3cd1aa"><td id="DeVs" class="" style="width:349px">ERROR: relation “&lt;tableName&gt;” does not exist</td><td id="BGQ_" class="" style="width:349px">The table requested doesn’t exist</td></tr><tr id="39f875a3-6207-47ec-ab7c-d3a7aeaf009a"><td id="DeVs" class="" style="width:349px">ERROR: relation “&lt;tableName&gt;” already exists</td><td id="BGQ_" class="" style="width:349px">A table with the same name as the table to be created already exists</td></tr></tbody></table><h2 id="4ac7476a-1ce7-4166-afa5-84624fd4bd32" class="">Credits</h2><ul id="c930d2ef-3031-4118-bdb3-757ff3741b7f" class="bulleted-list"><li style="list-style-type:disc">Icons: <a href="https://fonts.google.com/icons">Google Material Symbols</a>, Apache license</li></ul><ul id="11799053-f1af-46e8-a645-5d1d8b732d9f" class="bulleted-list"><li style="list-style-type:disc">App Icon/Splash Screen: Own work</li></ul><ul id="0bb8dc6b-6465-4204-8262-408a7567d9a5" class="bulleted-list"><li style="list-style-type:disc">Monospace font: IBM Plex Mono (from <a href="https://fonts.google.com/specimen/IBM+Plex+Mono">Google Fonts</a>), <a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=OFL">Open Font License</a></li></ul><h2 id="08fe4790-31ae-4fa9-beed-9f7293a01cb9" class="">License</h2><p id="a55f364a-4faa-4dc4-b9f8-4790bd135d80" class="">OurSQL is open-source software and licensed under the GPL-v3 license. For more information, refer to the LICENSE file in the GitHub repository.</p><p id="3af12b12-9e07-49f3-b52a-f93216b1feca" class="">I ❤️ Open Source</p></div></article></body></html>

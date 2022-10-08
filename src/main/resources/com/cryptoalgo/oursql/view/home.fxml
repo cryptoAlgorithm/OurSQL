@@ -27,7 +27,7 @@
             <BorderPane.margin><Insets top="8" left="8" right="8" /></BorderPane.margin>
             <Label text="%app.title" styleClass="h2"/>
             <Pane HBox.hgrow="ALWAYS" />
-            <Button minWidth="-Infinity" styleClass="icon, outlined">
+            <Button minWidth="-Infinity" styleClass="icon, outlined" onAction="#handleShowHelp">
                 <graphic>
                     <SVGPath
                             styleClass="svgIcon"

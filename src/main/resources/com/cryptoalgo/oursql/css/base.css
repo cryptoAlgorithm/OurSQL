@@ -77,10 +77,11 @@
     -fx-background-color: #0000!important;
 }
 
+/* A light mode was planned but ultimately not implemented due to a lack of time */
 .root {
     -fx-font-family: "IBM Plex Sans";
 
-    -fx-background: #262626;
+    -fx-background: derive(-fx-control-inner-background, 8%);
     -fx-base: -fx-control-inner-background;
 
     -fx-accent-bright: rgb(0, 163, 92);
@@ -88,8 +89,8 @@
     -fx-selection-bar: -fx-accent;
     -fx-control-inner-background: #1E1E1E;
     -fx-selection-bar-non-focused: derive(-fx-control-inner-background, 30%);
-    -fx-text-base-color: #eee;
-    -fx-text-contrast-color: #fff;
+    -fx-text-base-color: ladder(-fx-control-inner-background, #eee 49%, #151515 50%);
+    -fx-text-contrast-color: ladder(-fx-control-inner-background, #fff 49%, #000 50%);
     -fx-mark-highlight-color: #000;
     -fx-mark-color: -fx-accent;
     -fx-focus-color: #0000;

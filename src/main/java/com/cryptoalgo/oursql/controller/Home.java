@@ -167,7 +167,7 @@ public class Home {
                     t.getSelectionModel().select(0);
 
                     // hack to fix height of list
-                    t.prefHeightProperty().bind(Bindings.multiply(Bindings.size(tables), 30));
+                    t.prefHeightProperty().bind(Bindings.multiply(Bindings.size(tables), 29));
 
                     p.setContent(t);
                 } else p.setExpanded(false);
@@ -461,5 +461,10 @@ public class Home {
             log.severe("IOException when showing settings dialog: " + e.getLocalizedMessage());
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleShowHelp() {
+        HelpDialog.show();
     }
 }
