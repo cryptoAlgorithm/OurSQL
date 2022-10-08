@@ -7,15 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (localisation): full Chinese localisations">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (localisation): restart app when language changed&#10;patch (localisation): add some hardcoded strings to localisation">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/help/shim.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/OurSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/PasswordDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/SettingsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/SettingsViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/view/settings.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/strings_zh.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/strings_zh.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/model/HomeViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/help/OurSQL.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/help/OurSQL.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/help/help.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/cryptoalgo/oursql/help/help.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,39 +52,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/vinkwok/IdeaProjects/ourSQL/OurSQL/.github/workflows&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.47931033&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "last_opened_file_path": "/Users/vinkwok/IdeaProjects/ourSQL/OurSQL/.github/workflows",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.47931033",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;,
-      &quot;mysql&quot;,
-      &quot;mongo&quot;,
-      &quot;hive&quot;,
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite",
+      "mysql",
+      "mongo",
+      "hive",
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.cryptoalgo.oursql.model" />
@@ -236,10 +234,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.OurSQL" />
-        <item itemvalue="JUnit.BooleanContainerTest" />
+        <item itemvalue="JUnit.PlaceholderContainerTest" />
         <item itemvalue="JUnit.DatabaseUtilsTest.testPostgreSQL" />
         <item itemvalue="JUnit.DatabaseUtilsTest.testGetConnectionURI" />
-        <item itemvalue="JUnit.PlaceholderContainerTest" />
+        <item itemvalue="JUnit.BooleanContainerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -266,14 +264,8 @@
       <workItem from="1664633271631" duration="148499000" />
       <workItem from="1665050486469" duration="73258000" />
       <workItem from="1665204311369" duration="10179000" />
-      <workItem from="1665216782249" duration="327000" />
-    </task>
-    <task id="LOCAL-00032" summary="patch (AddCluster): localise dialogs">
-      <created>1664719295266</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1664719295266</updated>
+      <workItem from="1665216782249" duration="2341000" />
+      <workItem from="1665219872465" duration="5641000" />
     </task>
     <task id="LOCAL-00033" summary="patch (home): re-architect Home controller to use ViewModel&#10;Controller was getting a little too large for my liking, moving logic to a separate class helped shrink the controller considerably">
       <created>1664771532356</created>
@@ -611,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665214608097</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="feat (localisation): restart app when language changed&#10;patch (localisation): add some hardcoded strings to localisation">
+      <created>1665217207978</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1665217207979</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -630,7 +629,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix (ui): disable table list while the table is being loaded&#10;quick fix for a threading issue, this is certainly not thread-safe" />
     <MESSAGE value="feat (ui): add actions row below query container for table actions" />
     <MESSAGE value="feat: reliable dropping of tables&#10;fix: logic error when handling create table exceptions" />
     <MESSAGE value="feat (ui): display null values more friendlily" />
@@ -655,7 +653,8 @@
     <MESSAGE value="patch: add dep on javafx web for windows" />
     <MESSAGE value="patch (README): update running instructions" />
     <MESSAGE value="feat (localisation): full Chinese localisations" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat (localisation): full Chinese localisations" />
+    <MESSAGE value="feat (localisation): restart app when language changed&#10;patch (localisation): add some hardcoded strings to localisation" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat (localisation): restart app when language changed&#10;patch (localisation): add some hardcoded strings to localisation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

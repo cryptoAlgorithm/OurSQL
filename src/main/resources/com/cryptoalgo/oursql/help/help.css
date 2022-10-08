@@ -48,6 +48,19 @@ img {
     color: inherit;
 }
 
+table, th, td {
+    border: 1px solid rgb(47, 47, 47);
+}
+/* Center horizontally */
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 ::-webkit-scrollbar {
     width: 0;
+}
+
+::selection {
+    background: rgba(0, 104, 74, 0.6);
 }
