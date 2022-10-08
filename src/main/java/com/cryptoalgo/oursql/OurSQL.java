@@ -19,8 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -49,6 +47,7 @@ public class OurSQL extends Application {
      */
     private Stage createSplash() {
         final var loadStage = new Stage();
+        loadStage.getIcons().add(new Image(UIUtils.getResourcePath("img/appIcon.png")));
         loadStage.initStyle(StageStyle.TRANSPARENT);
         loadStage.setWidth(SPLASH_WIDTH);
         loadStage.setHeight(SPLASH_HEIGHT);
@@ -59,30 +58,33 @@ public class OurSQL extends Application {
         splashContainer.setAlignment(Pos.CENTER);
         final var icnStack = new StackPane();
 
+        // Icon elements
         icnStack.setAlignment(Pos.CENTER);
         final var bgCircle = new Circle();
         bgCircle.setScaleX(0); bgCircle.setScaleY(0);
         bgCircle.setFill(Colors.SPLASH_BG);
         bgCircle.setRadius(Math.sqrt(Math.pow(SPLASH_WIDTH, 2) + Math.pow(SPLASH_HEIGHT, 2)));
-        final var icn = new ImageView(UIUtils.getResourcePath("img/splash/bareIcon.png"));
+        final var icn = new ImageView(new Image(
+                UIUtils.getResourcePath("img/splash/bareIcon.png"),
+                256, 256, true, true
+        ));
         icn.setScaleX(0); icn.setScaleY(0);
-        icn.setFitWidth(256);
-        icn.setPreserveRatio(true);
-        final var hammer = new ImageView(UIUtils.getResourcePath("img/splash/hammer.png"));
+        final var hammer = new ImageView(new Image(
+                UIUtils.getResourcePath("img/splash/hammer.png"),
+                175, 175, true, true
+        ));
         hammer.setScaleX(0); hammer.setScaleY(0);
-        hammer.setFitWidth(175);
-        hammer.setPreserveRatio(true);
         hammer.setTranslateX(60);
         hammer.setTranslateY(60);
         icnStack.getChildren().addAll(icn, hammer);
 
+        // Text elements
         final Text
             title = new Text(I18N.getString("app.title")),
             desc = new Text(I18N.getString("app.desc")),
             author = new Text(I18N.getString("app.author"));
-        title.setFont(Font.font(null, FontWeight.BLACK, 56));
-        title.setStyle("-fx-fill: #fff");
-        desc.setStyle("-fx-font-size: 1.5em; -fx-fill: #fff;");
+        title.setStyle("-fx-font-size: 4.5em; -fx-font-weight: 700");
+        desc.setStyle("-fx-font-size: 1.5em; -fx-font-family: 'IBM Plex Sans Medium'");
         author.setStyle("-fx-font-size: 1.1em; -fx-fill: #FFFFFFC0;");
         title.setOpacity(0); desc.setOpacity(0); author.setOpacity(0);
         final var authorCont = new HBox(author); // Silly trick to right align one node
@@ -92,8 +94,10 @@ public class OurSQL extends Application {
         final var textContainer = new VBox(8, title, desc, spacer, authorCont);
         HBox.setMargin(textContainer, new Insets(60, 0, 60, 0));
 
+        // Container setup
         splashContainer.getChildren().addAll(icnStack, textContainer);
         splashStack.getChildren().addAll(bgCircle, splashContainer);
+        splashStack.getStylesheets().add(UIUtils.getResourcePath("css/base.css"));
         UIUtils.clipToRadius(splashStack, 24);
 
         final var scene = new Scene(splashStack);
@@ -158,7 +162,7 @@ public class OurSQL extends Application {
 
         new Thread(() -> {
             // Probably not the most ideal way to skip the splash screen but this works
-            try { Thread.sleep(showSplash ? 4000 : 0); } catch (InterruptedException ignored) {}
+            try { Thread.sleep(showSplash ? 5000 : 0); } catch (InterruptedException ignored) {}
             Scene scene;
             try { scene = new Scene(UIUtils.loadFXML("home")); } catch (IOException e) {
                 e.printStackTrace();
@@ -174,7 +178,10 @@ public class OurSQL extends Application {
                 final var fade = new FadeTransition(Duration.millis(400), splashStage.getScene().getRoot());
                 fade.setToValue(0);
                 fade.play();
-                fade.setOnFinished(e -> Platform.runLater(stage::show));
+                fade.setOnFinished(e -> Platform.runLater(() -> {
+                    stage.show();
+                    splashStage.close();
+                }));
             } else Platform.runLater(stage::show);
         }).start();
     }
