@@ -36,7 +36,7 @@ public class SettingsDialog {
         final var scene = new Scene(UIUtils.loadFXML("settings"));
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        stage.setMinWidth(400);
+        stage.setMinWidth(460);
         stage.setMinHeight(200);
         stage.show();
     }

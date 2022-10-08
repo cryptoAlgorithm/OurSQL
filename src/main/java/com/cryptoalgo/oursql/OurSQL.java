@@ -11,6 +11,8 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -22,6 +24,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 import javax.imageio.ImageIO;
@@ -39,6 +42,8 @@ import java.io.IOException;
 public class OurSQL extends Application {
     private static final int SPLASH_WIDTH = 575;
     private static final int SPLASH_HEIGHT = 320;
+
+    private Stage mainStage = null;
 
     /**
      * Creates and animates the splash screen.
@@ -98,6 +103,7 @@ public class OurSQL extends Application {
         splashContainer.getChildren().addAll(icnStack, textContainer);
         splashStack.getChildren().addAll(bgCircle, splashContainer);
         splashStack.getStylesheets().add(UIUtils.getResourcePath("css/base.css"));
+        splashStack.setStyle("-fx-background-color: transparent");
         UIUtils.clipToRadius(splashStack, 24);
 
         final var scene = new Scene(splashStack);
@@ -153,6 +159,8 @@ public class OurSQL extends Application {
     @Override
     public void start(Stage stage) {
         setIcons(stage);
+        if (mainStage != null) mainStage.close();
+        mainStage = stage;
 
         // Show splash screen first (if enabled)
         final var showSplash = SettingsViewModel.splashEnabledProperty().get();
@@ -184,6 +192,21 @@ public class OurSQL extends Application {
                 }));
             } else Platform.runLater(stage::show);
         }).start();
+
+        // Reopen the main stage when the selected language changes
+        ChangeListener<String> langChangeListener = new ChangeListener<>() {
+            @Override
+            public void changed(ObservableValue<? extends String> obs, String o, String n)  {
+                if (o != null) {
+                    // .hide() immediately removes the window from the getWindows() list
+                    // so looping over it will lead to index out of bounds exceptions
+                    while (!Window.getWindows().isEmpty()) Window.getWindows().get(0).hide();
+                    try { start(new Stage()); } catch (Exception e) { e.printStackTrace(); }
+                    SettingsViewModel.langProperty().removeListener(this);
+                }
+            }
+        };
+        SettingsViewModel.langProperty().addListener(langChangeListener);
     }
 
     /**

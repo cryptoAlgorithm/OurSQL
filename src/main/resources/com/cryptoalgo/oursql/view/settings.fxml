@@ -15,7 +15,10 @@
     <padding><Insets topRightBottomLeft="16" /></padding>
     <Label text="%label.settings" styleClass="h2" />
     <Label text="%label.lang" GridPane.rowIndex="1" />
-    <ComboBox fx:id="langCombo" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="ALWAYS" />
+    <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="ALWAYS">
+        <ComboBox fx:id="langCombo" />
+        <Label text="%label.warnLangChange" styleClass="h6" />
+    </VBox>
     <Label text="%label.showSplash" GridPane.rowIndex="2" />
     <CheckBox fx:id="showSplashCheckbox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 

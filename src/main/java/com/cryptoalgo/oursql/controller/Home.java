@@ -44,7 +44,7 @@ import java.util.prefs.*;
 public class Home {
     private static final Logger log = Logger.getLogger(Home.class.getName());
 
-    private static final HomeViewModel viewModel = new HomeViewModel();
+    private final HomeViewModel viewModel = new HomeViewModel();
 
     @FXML
     private TextField statementField;
@@ -300,7 +300,9 @@ public class Home {
                         final var colTitle = c.getList().get(i);
                         final var curCol = i;
                         final var col = new TableColumn<ObservableList<Container<?>>, String>(colTitle);
-                        col.setCellValueFactory(r -> new ReadOnlyObjectWrapper<>(r.getValue().get(curCol).toString()));
+                        col.setCellValueFactory(r ->
+                            new ReadOnlyObjectWrapper<>(r.getValue().get(curCol).toString())
+                        );
                         if (colTitle.equals("ctid")) col.setVisible(false); // Hide ctid col
 
                         // Handle editing

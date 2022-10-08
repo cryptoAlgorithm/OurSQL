@@ -21,8 +21,8 @@ public class SettingsViewModel {
         SPLASH_ENABLED_KEY = "showSplash",
         LANG_KEY = "lang";
 
-    private static final SimpleBooleanProperty splashEnabled = new ReadOnlyBooleanWrapper();
-    private static final SimpleStringProperty lang = new SimpleStringProperty();
+    private static final SimpleBooleanProperty splashEnabled = new ReadOnlyBooleanWrapper(true);
+    private static final SimpleStringProperty lang = new SimpleStringProperty(null);
 
     static {
         // Manually update all properties first

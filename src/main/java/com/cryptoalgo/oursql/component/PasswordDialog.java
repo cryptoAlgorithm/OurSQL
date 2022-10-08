@@ -1,5 +1,6 @@
 package com.cryptoalgo.oursql.component;
 
+import com.cryptoalgo.oursql.support.I18N;
 import com.cryptoalgo.oursql.support.ui.UIUtils;
 import javafx.application.Platform;
 import javafx.scene.control.*;
@@ -43,7 +44,7 @@ public class PasswordDialog extends Dialog<String> {
 
         // Populate content
         passwordField = new PasswordField();
-        passwordField.setPromptText("Password");
+        passwordField.setPromptText(I18N.getString("dialog.password"));
         VBox c = new VBox(8);
         Label b = new Label(body);
         b.getStyleClass().add("h5");
