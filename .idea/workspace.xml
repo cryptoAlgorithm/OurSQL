@@ -7,10 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="feat (ui): add help window">
+    <list default="true" id="d8a4ed5e-4170-471a-bebc-9c09b3909e62" name="Changes" comment="patch: add dep on javafx web for windows">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/HelpDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cryptoalgo/oursql/component/HelpDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,14 +259,7 @@
       <workItem from="1664507113433" duration="30254000" />
       <workItem from="1664633271631" duration="148499000" />
       <workItem from="1665050486469" duration="73258000" />
-      <workItem from="1665204311369" duration="1759000" />
-    </task>
-    <task id="LOCAL-00029" summary="feat (ui): add better looking styled alert">
-      <created>1664707488684</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1664707488684</updated>
+      <workItem from="1665204311369" duration="2949000" />
     </task>
     <task id="LOCAL-00030" summary="feat (AddDialog): persist password and encrypt if requested">
       <created>1664717814550</created>
@@ -605,7 +597,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665205067974</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="patch: add dep on javafx web for windows">
+      <created>1665206795997</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1665206795998</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -624,7 +623,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="patch (README): lower required Java version to &gt;= 17&#10;patch: export all packages to allow JavaDoc to include them" />
     <MESSAGE value="patch: update value in table data array after committing update&#10;fix: commit correct value when editing TextField loses focus" />
     <MESSAGE value="chore (docs): remove docs folder, docs are now dynamically built by actions" />
     <MESSAGE value="fix (ui): disable table list while the table is being loaded&#10;quick fix for a threading issue, this is certainly not thread-safe" />
@@ -649,7 +647,8 @@
     <MESSAGE value="patch (ui): do not use Utility init style for settings and add cluster models" />
     <MESSAGE value="feat (ui): add" />
     <MESSAGE value="feat (ui): add help window" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat (ui): add help window" />
+    <MESSAGE value="patch: add dep on javafx web for windows" />
+    <option name="LAST_COMMIT_MESSAGE" value="patch: add dep on javafx web for windows" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

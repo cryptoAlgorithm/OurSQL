@@ -50,7 +50,8 @@ builds now!
 [![Download nightly](https://img.shields.io/badge/download-nightly-blue?style=for-the-badge)](https://nightly.link/cryptoAlgorithm/OurSQL/workflows/build.yaml/main/OurSQL.jar.zip)
 
 These builds are hot from the oven, built from the latest commit on
-the `main` branch.
+the `main` branch. _**Note**: These builds are completely untested,
+and not guaranteed to even launch properly._
 
 ### Releases
 Stable releases will be available soon.
@@ -61,23 +62,31 @@ Requires Java >= 17 installed on your system.
 
 #### Windows
 If a compatible version of Java is installed system-wide, you'll
-simply need to double-click the downloaded JAR to open it.
+simply need to double-click the downloaded JAR to open it. If that
+doesn't work, follow [troubleshooting](#troubleshooting) steps
+below.
 
 #### macOS
-Due to licencing issues, macOS will launch the JAR with Java 8
-or earlier when double-clicked. Instead, run the command below
-in Terminal.app to launch the JAR: 
-```zsh
-java -jar "[path to downloaded JAR]"
-```
-_Substitute the actual path of the JAR in the command_
-
-Check your installed Java version with `java --version` - Only
-Java 17 and above is supported.
+By default, macOS comes preinstalled with Java 8 (or earlier), which
+is not compatible with OurSQL. You'll need to install a newer version
+of Java, preferably Java 17 (or later), following the instructions
+above. Once you've installed a compatible version of Java, you'll
+be able to simply double-click the JAR to start OurSQL. If that
+doesn't 
 
 #### Linux
-Untested, but running the same command as macOS should also start
-the app without much fuss.
+Running the JAR on Linux is unsupported at the moment due to the
+additional libraries required.
+
+### Troubleshooting
+OurSQL not starting? Try these steps in order:
+1. Open a terminal and run `java -version`. If you see a version
+   number above Java 17, you're good to go. If not, you'll need
+   to install Java 17 (or later) on your system. Remember to reboot
+   after installing Java for good measure.
+2. Run `java -jar <path to OurSQL.jar>` in the terminal. If you
+   see an error message, please open an issue on GitHub and
+   include the error message. If OurSQL launches, congratulations!
 
 ## Documentation
 Symbols above or equal to `package` visibility are 100% documented,
